@@ -22,8 +22,44 @@ function inicia_sistema(){
 	
 	
 			
-	
-	$("#conteudo_geral").load('mobile/tela_aguarde.php');					
+	var mobile = 0;
+	if($('.is_mobile').is(":visible") == true) {
+		mobile = 1;       
+	}
+
+	carregando();
+	//$("#conteudo_geral").load('menu_pedidos/telas/novo_pedido.php');
+	$.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {		
+		
+		//TUDO OK PARA INICIAR VENDAS
+		if(resposta==1){
+
+			if(mobile==1){
+				$("#conteudo_geral").load('mobile/tela_aguarde.php');			
+			} else {
+				$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php', function(){				
+					vendas_internet();
+				});			
+			}
+
+			
+		//NAO TEM CAIXA ABERTO
+		} else {
+
+			if(mobile==1){
+				$("#conteudo_geral").load('erros/mobile_aguarda_caixa.php');		
+			} else {
+				$("#conteudo_geral").load('menu_caixa/telas/abre_caixa.php', function(){
+					$("#troco").focus();				
+				});			
+			}
+
+				
+		}		
+
+
+	});
+							
 
 	
 }
