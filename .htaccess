@@ -1,0 +1,35 @@
+<IfModule mod_rewrite.c>
+    
+	#Bloquear listagem
+	Options -Indexes
+
+	Options +FollowSymLinks
+	RewriteEngine on
+
+	DefaultLanguage pt-BR
+	AddDefaultCharset UTF-8
+
+	
+
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
+
+	#Errors
+	ErrorDocument 404 http://127.0.0.1/sistema/erros/erro.php
+
+
+	#PAGES**************************************************************
+
+	
+	RewriteRule ^home?$ administracao.php [L,QSA]
+	RewriteRule ^logout?$ login/logout.php [L,QSA]	
+	RewriteRule ^acesso?$ index.php?logout=1 [L,QSA]
+	RewriteRule ^atualiza?$ atualizacao.php [L,QSA]
+	RewriteRule ^entregas?$ entregas.php [L,QSA]
+
+	
+
+		
+
+
+</IfModule>

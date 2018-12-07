@@ -1,0 +1,17 @@
+html{height:100%; width: 100%}
+body{height:100%; width: 100%; background-position: center center; background-size: cover; background-attachment: fixed;}
+.alerta-index{position: fixed;; top: 0; width: 100%; background-color:#ACE1C1; color:#3C763D; border-top: 0; border-left: 0; border-bottom: 0; border-right: 0; display: none;}
+.alerta-index_erro{position: fixed;; top: 0; width: 100%;  border-top: 0; border-left: 0; border-right: 0; border-bottom:0;  display: none;}
+.upper{text-transform: uppercase;}
+.thin{font-weight: 300}
+.slim-mainpanel{margin-bottom: 50px}
+
+.avisos-loja{border-radius:0; background-color:#ACE1C1; color:#3C763D; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}
+.avisos-desenvolvedor{border-radius:0; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}
+
+
+.mascara{position: absolute;; top: 0; width: 100%; height: 100vh; background-color: #000; opacity: .7}
+.top10{margin-top: 10px}
+.bottom10{margin-bottom: 10px}
+.top20{margin-top: 20px}
+.bottom20{margin-bottom: 20px}

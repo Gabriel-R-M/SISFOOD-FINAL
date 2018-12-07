@@ -1,0 +1,123 @@
+<IfModule mod_rewrite.c>
+    
+	#Bloquear listagem
+	Options -Indexes
+
+	Options +FollowSymLinks
+	RewriteEngine on
+
+	DefaultLanguage pt-BR
+	AddDefaultCharset UTF-8
+
+	
+
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
+
+	#Errors
+	ErrorDocument 404 http://localhost/sistema/admin/
+
+
+	#VIEWS**************************************************************
+
+	RewriteRule ^home?$ views/menu_vendas/administracao.php [L,QSA]
+	RewriteRule ^acesso?$ index.php?logout=1 [L,QSA]
+	RewriteRule ^logout?$ controlers/login/logout.php [L,QSA]
+
+	RewriteRule ^formas-pagamento?$ views/menu_configuracoes/formas-pagamento.php [L,QSA]
+	
+
+	RewriteRule ^produtos?$ views/menu_cadastros/produtos.php [L,QSA]
+	RewriteRule ^produtos-categoria/(.*)?$ views/menu_cadastros/produtos-categoria.php?id=$1 [L,QSA]	
+	
+	RewriteRule ^atendentes?$ views/menu_cadastros/atendentes.php [L,QSA]
+	RewriteRule ^adicionais?$ views/menu_cadastros/adicionais.php [L,QSA]
+	RewriteRule ^clientes?$ views/menu_cadastros/clientes.php [L,QSA]
+	RewriteRule ^categorias?$ views/menu_cadastros/categorias.php [L,QSA]
+	RewriteRule ^entregadores?$ views/menu_cadastros/entregadores.php [L,QSA]
+	RewriteRule ^variacoes?$ views/menu_cadastros/variacoes.php [L,QSA]
+	RewriteRule ^taxas?$ views/menu_cadastros/taxas.php [L,QSA]
+	RewriteRule ^clientes?$ views/menu_cadastros/clientes.php [L,QSA]
+	RewriteRule ^opcoes?$ views/menu_cadastros/opcoes.php [L,QSA]
+	RewriteRule ^pontuacao-trocas?$ views/menu_cadastros/pontuacao-trocas.php [L,QSA]
+
+	RewriteRule ^novo-atendente?$ views/menu_cadastros/novo-atendente.php [L,QSA]
+	RewriteRule ^atendentes/edit/(.*)?$ views/menu_cadastros/novo-atendente.php?id=$1 [L,QSA]	
+
+	RewriteRule ^nova-taxa?$ views/menu_cadastros/nova-taxa.php [L,QSA]
+	RewriteRule ^taxas/edit/(.*)?$ views/menu_cadastros/nova-taxa.php?id=$1 [L,QSA]	
+
+	RewriteRule ^nova-categoria?$ views/menu_cadastros/nova-categoria.php [L,QSA]
+	RewriteRule ^categorias/edit/(.*)?$ views/menu_cadastros/nova-categoria.php?id=$1 [L,QSA]	
+
+	RewriteRule ^novo-adicional?$ views/menu_cadastros/novo-adicional.php [L,QSA]
+	RewriteRule ^adicionais/edit/(.*)?$ views/menu_cadastros/novo-adicional.php?id=$1 [L,QSA]	
+
+	RewriteRule ^nova-opcao?$ views/menu_cadastros/nova-opcao.php [L,QSA]
+	RewriteRule ^opcoes/edit/(.*)?$ views/menu_cadastros/nova-opcao.php?id=$1 [L,QSA]	
+
+	RewriteRule ^novo-entregador?$ views/menu_cadastros/novo-entregador.php [L,QSA]
+	RewriteRule ^entregadores/edit/(.*)?$ views/menu_cadastros/novo-entregador.php?id=$1 [L,QSA]	
+
+	RewriteRule ^nova-variacao?$ views/menu_cadastros/nova-variacao.php [L,QSA]
+	RewriteRule ^variacoes/edit/(.*)?$ views/menu_cadastros/nova-variacao.php?id=$1 [L,QSA]	
+
+	RewriteRule ^novo-cliente?$ views/menu_cadastros/novo-cliente.php [L,QSA]
+	RewriteRule ^clientes/edit/(.*)?$ views/menu_cadastros/novo-cliente.php?id=$1 [L,QSA]	
+
+	RewriteRule ^novo-produto?$ views/menu_cadastros/novo-produto.php [L,QSA]
+	RewriteRule ^produtos/edit/(.*)?$ views/menu_cadastros/novo-produto.php?id=$1 [L,QSA]	
+
+	RewriteRule ^modulos?$ views/menu_configuracoes/modulos.php [L,QSA]
+	RewriteRule ^impressao?$ views/menu_configuracoes/impressao.php [L,QSA]
+	RewriteRule ^gerais?$ views/menu_configuracoes/gerais.php [L,QSA]
+	RewriteRule ^config-sistema-pontos?$ views/menu_configuracoes/config-sistema-pontos.php [L,QSA]
+	
+
+	RewriteRule ^relatorio-clientes?$ views/menu_relatorios/pdf/clientes.php [L,QSA]
+	RewriteRule ^relatorio-produtos-vendidos?$ views/menu_relatorios/produtos-vendidos.php [L,QSA]
+	RewriteRule ^relatorio-vendas-consolidadas?$ views/menu_relatorios/vendas-consolidadas.php [L,QSA]
+	RewriteRule ^caixa-detalhes/(.*)?$ views/menu_relatorios/pdf/caixa-detalhes.php?id=$1 [L,QSA]
+
+	RewriteRule ^profile?$ views/menu_usuarios/profile.php [L,QSA]
+	RewriteRule ^mensagens?$ views/menu_usuarios/mensagens.php [L,QSA]
+
+	
+	
+
+	#CONTROLERS**************************************************************
+
+	RewriteRule ^produtos/apagar/(.*)/(.*)?$ controlers/cadastros/apaga_produtos.php?id=$1&id2=$2 [L,QSA]
+	RewriteRule ^produtos/delete/(.*)?$ controlers/cadastros/apaga_produtos.php?id=$1 [L,QSA]
+	RewriteRule ^taxas/delete/(.*)?$ controlers/cadastros/apaga_taxas.php?id=$1 [L,QSA]
+	RewriteRule ^clientes/delete/(.*)?$ controlers/cadastros/apaga_clientes.php?id=$1 [L,QSA]
+	RewriteRule ^entregadores/delete/(.*)?$ controlers/cadastros/apaga_entregadores.php?id=$1 [L,QSA]
+	RewriteRule ^atendentes/delete/(.*)?$ controlers/cadastros/apaga_atendentes.php?id=$1 [L,QSA]
+	RewriteRule ^categorias/delete/(.*)?$ controlers/cadastros/apaga_categorias.php?id=$1 [L,QSA]
+	RewriteRule ^variacoes/delete/(.*)?$ controlers/cadastros/apaga_variacoes.php?id=$1 [L,QSA]
+	RewriteRule ^adicionais/delete/(.*)?$ controlers/cadastros/apaga_adicionais.php?id=$1 [L,QSA]
+	RewriteRule ^opcoes/delete/(.*)?$ controlers/cadastros/apaga_opcoes.php?id=$1 [L,QSA]
+
+
+	RewriteRule ^atendentes/save?$ controlers/cadastros/salva_atendente.php [L,QSA]
+	RewriteRule ^taxas/save?$ controlers/cadastros/salva_taxa.php [L,QSA]
+	RewriteRule ^categorias/save?$ controlers/cadastros/salva_categoria.php [L,QSA]
+	RewriteRule ^adicionais/save?$ controlers/cadastros/salva_adicional.php [L,QSA]
+	RewriteRule ^entregadores/save?$ controlers/cadastros/salva_entregador.php [L,QSA]	
+	RewriteRule ^variacoes/save?$ controlers/cadastros/salva_variacao.php [L,QSA]	
+	RewriteRule ^clientes/save?$ controlers/cadastros/salva_cliente.php [L,QSA]	
+	RewriteRule ^produtos/save?$ controlers/cadastros/salva_produto.php [L,QSA]	
+	RewriteRule ^opcoes/save?$ controlers/cadastros/salva_opcao.php [L,QSA]
+
+
+	RewriteRule ^usuario-retaguarda/save?$ controlers/usuarios/salva_usuario_retaguarda.php [L,QSA]	
+	
+
+	RewriteRule ^modulos/save?$ controlers/configuracoes/salva_modulo.php [L,QSA]	
+	RewriteRule ^impressao/save?$ controlers/configuracoes/salva_impressao.php [L,QSA]	
+	RewriteRule ^gerais/save?$ controlers/configuracoes/salva_geral.php [L,QSA]	
+	RewriteRule ^formas-pgto/save?$ controlers/configuracoes/salva_formas_pagamento.php [L,QSA]	
+	RewriteRule ^sistema-pontuacao/save?$ controlers/configuracoes/salva_pontuacao.php [L,QSA]
+
+
+</IfModule>

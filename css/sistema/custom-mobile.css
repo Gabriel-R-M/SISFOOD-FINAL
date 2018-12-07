@@ -1,0 +1,57 @@
+@media (max-width: 768px) {  
+
+
+html{overflow-y: hidden;}
+body{overflow-y: hidden; }
+.pricing-icon {
+  position: inherit; right:inherit; bottom: inherit;
+}
+
+#input_busca_produto input{font-weight: 300; max-width: inherit; margin-bottom: 10px; max-width: 70%}
+
+.pedidos-gerais-aguardando{ height: calc(100vh - 180px); max-height: calc(100vh - 180px);}
+#lateral-pedido{height: calc(100vh - 150px); max-height: calc(100vh - 150px); display: none;}
+#resumo-pedido-comanda{height: calc(100vh - 353px); max-height: calc(100vh - 353px); }
+
+
+#tudo_conteudo{height: calc(100vh - 100px); }
+.exibicao_produtos_pedido{position: relative; overflow-x: hidden; height: calc(100vh - 120px);}
+.margin30{margin-top: 80px; height: calc(100vh - 200px);}
+.tamanho_exibicao_produtos_pedido{height: calc(100vh - 200px);}
+
+#quantidade-produto{width: 20%}
+.botoes-insercao-itens-pedido{  width: 100%; position: fixed; padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid #e1e1e1; background-color: #FFF; top: 0; z-index: 999; right: 0 }
+#campo_para_variacao_produto{margin-top: 5px;  }
+.box-nome-cliente{}
+#campo_para_variacao_produto select{max-width: 79%; width: 79%; margin-bottom: 5px; border-radius: 0}
+.botao-adicao-produto{height: 52px; line-height: 18px; padding-top: 5px; }
+
+span.destaca{font-weight: 400; font-size: 14px; border-radius: 4px; color: #B92A25;}
+.produto-round{height: 95px; max-height: 95px; overflow-y: hidden;}
+.btn-confere{width: 29%; height: 42px}
+#campo_para_variacao_produto i{right: 45px;  opacity: 1; position: absolute; top: 70px}
+
+.campo-6{width: 49.5%}
+#campo_para_pesquisa_produto{max-width: 70%; position: relative;}
+#input_busca_produto input{font-weight: 300; max-width: 100%}
+#campo_para_pesquisa_produto i{z-index: 99; position: absolute; right: 10px}
+
+
+span.qtd_itens_grande{font-weight: 700; font-size: 90px; line-height: 80px}
+span.texto_itens_grande{font-weight: 700; font-size: 30px;}
+span.texto_peq_itens_grande{font-weight: 700; font-size: 30px; color:#C9403C }
+
+.metade_tamanho{width: 50%}
+.um_terco_tamanho{width: 33.33%}
+
+
+.mesas-exibicao{position: relative; height: calc(100vh - 105px); max-height: calc(100vh - 105px)}
+#rola_mobile{height: calc(100vh - 105px); max-height: calc(100vh - 105px);}
+
+
+.icone_deleta_item_pedido{display: none;}
+.icone_deleta_item_pedido_mobile{display: block;}
+
+.hide_mobile{display: none;}
+
+}

@@ -1,0 +1,6 @@
+.is_mobile{position: absolute; z-index: -999;  }
+.carousel-inner{min-height: 100vh; }
+.carousel-item{min-height: 100vh; background-size: cover;}
+.avisos_index_topo{position: absolute; top: 0; border-top:0; width: 100%; border-left: 0; border-right: 0; text-transform: uppercase; display: none;}
+.logo-desenvolvedor-home{position: absolute; bottom: 20px; left: calc((100% / 2) - 40px);}
+
