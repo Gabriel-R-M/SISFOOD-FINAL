@@ -47,12 +47,12 @@ if($total_categorias<2){
 	if($dados_venda['finalizada']==1){
 	?>
 
-		<button class="btn btn-danger top10 botao_pedido_grande" id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:cancela_venda(<?php echo $id_venda; ?>);">
+		<button class="btn btn-danger top10 " id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:cancela_venda(<?php echo $id_venda; ?>);">
 			<i class="icofont-ui-close"></i>
 			&nbsp;CANCELAR (F4)
 		</button>	
  
-		<button class="btn btn-danger top10 botao_pedido_grande" style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
+		<button class="btn btn-danger top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
 			<i class="icofont-printer"></i>
 			&nbsp;REIIMPRIMIR (F3)
 		</button>	

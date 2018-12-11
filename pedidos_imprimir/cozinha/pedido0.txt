@@ -1,22 +1,21 @@
        SHEIK ESFIHARIA E PIZZARIA
    DR. ANTONIO TEDESCO, 822 - CENTRO
           FONE: (14) 3264-3494
-              PEDIDO: #41
-          07/12/2018 AS 17:02
+              PEDIDO: #11
+          10/12/2018 AS 15:35
 ----------------------------------------
-                 MESA 3
+             RETIRA/BALCAO
 ----------------------------------------
 Qtd COD/Produto             V. UN  Total
 ----------------------------------------
-01  (12) - PIZZAS           17,50  17,50
-    (BROTO)                             
-    FRANGO COM CATUPIRY                 
+01  LANCHES                 11,90  11,90
+    X BACON                             
 ----------------------------------------
             DADOS DO CLIENTE
 ----------------------------------------
-VB
+CLIENTE AVULSO
 ----------------------------------------
-TOTAL DE ITENS DO PEDIDO: 2
+TOTAL DE ITENS DO PEDIDO: 1
 ----------------------------------------
 PEDIDO CONTENDO:
-PIZZAS/LANCHES
+LANCHES

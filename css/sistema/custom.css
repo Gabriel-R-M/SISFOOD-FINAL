@@ -1,5 +1,6 @@
 body{overflow-y: hidden;}
 
+
 .botao_pedido_grande{height: 60px; font-size: 18px; font-weight: 300}
 .select_pedido_grande{background-color: #B72925; color: #FFF; font-size: 18px; font-weight: 300}
 .select_pedido_grande:focus{background-color: #B72925; color: #FFF;}
@@ -72,7 +73,7 @@ body{overflow-y: hidden;}
 .listagem-pagamentos-recebidos{max-height: 450px; position: relative;}
 .mesas-exibicao{position: relative; height: calc(100vh - 45px); max-height: calc(100vh - 45px)}
 #lista_pedidos_finalizados{position: relative; height: calc(100vh - 90px); max-height: calc(100vh - 90px);}
-.pedidos-gerais-aguardando{position: relative; height: calc(100vh - 40px); max-height: calc(100vh - 40px);}
+.pedidos-gerais-aguardando{position: relative; height: calc(100vh - 90px); max-height: calc(100vh - 90px); }
 
 
 
@@ -243,3 +244,5 @@ color:#FFF;
 .icone_deleta_item_pedido_mobile{display: none;}
 
 .hide_grande{display: none;}
+
+.icone-busca-pedido{position: absolute; right: 20px; top:15px;}

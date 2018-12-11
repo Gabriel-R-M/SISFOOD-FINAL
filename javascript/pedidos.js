@@ -187,6 +187,14 @@ $(document).ready(function(){
 
 
 
+function procura_pedido(busca){
+	$("#reload").html('<div class="col-md-12"><h5><center><br>PROCURANDO...</center></h5></div>');
+	$.post('menu_pedidos/listagem/listagem_pedidos_aguardando.php', {busca:busca}, function(resposta){		
+		$("#reload").html(resposta);	
+	});
+}
+
+
 function mais_item_pedido(){
 	
 	var tela_mobile = $("#tela-mobile").val();
@@ -1467,6 +1475,19 @@ function finaliza_pedido2(imprime=0, reload=0){
 			}
 
 		}
+
+
+		//É RETIRADA NO BALCÃO
+		if(entrega==0){
+			
+			if(nome_cliente_mobile=='' || nome_cliente_mobile=='CLIENTE AVULSO'){
+				exibe_erros_gerais('Informe o nome do cliente para retirada!');
+				return;	
+			}
+
+		}	
+
+
 
 	}
 	

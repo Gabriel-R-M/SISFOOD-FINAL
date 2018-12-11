@@ -16,7 +16,7 @@ include_once("../../includes/verifica_session.php");
 				 }		
 
 				$sel = $db->select("SELECT * FROM clientes					      
-					      WHERE id!='0' AND nome!='CLIENTE AVULSO' AND nome!=''  $busca
+					      WHERE id!='0' AND nome!='CLIENTE AVULSO' AND nome!='' AND telefone!=''  $busca
 					      ORDER BY id DESC
 					      LIMIT 40
 					      ");

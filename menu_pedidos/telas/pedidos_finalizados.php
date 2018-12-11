@@ -12,6 +12,8 @@ require("../../includes/verifica_caixa_aberto.php");
 		<h20>Pedidos finalizados para o caixa atual</h20>							
 	</div>
 </div>
+
+
 	
 <div class="col-md-12" id="lista_pedidos_finalizados">
 	

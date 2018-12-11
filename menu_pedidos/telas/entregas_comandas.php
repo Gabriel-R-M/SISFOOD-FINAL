@@ -6,10 +6,13 @@ require("../../includes/verifica_venda_aberta.php");
 ?>
 
 
+<div class="col-md-12" >
+	<input type="text" class="form-control thin" name="" placeholder="BUSCAR POR NOME" onkeyup="javascript:procura_pedido(this.value);">
+	<i class="icofont-search icone-busca-pedido"></i>
+</div>	
 
-
-<div class="col-md-12 pedidos-gerais-aguardando">	
-<div class="row row-xs"> 
+<div class="col-md-12 pedidos-gerais-aguardando top10">	
+<div class="row row-xs" id="reload"> 
 	<?php require("../listagem/listagem_pedidos_aguardando.php"); ?>
 </div>
 </div>

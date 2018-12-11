@@ -89,7 +89,6 @@ function marca_pedido_entregue(entregador, pedido, tipo){
 		$("#seleciona_entregador"+pedido).hide();	
 		$("#marca_ok_entrega"+pedido).show();	
 	} else {
-		location.reload();
 
 		//$("#nome_entregador"+pedido).prepend(new Option("--- ESCOLHA ---", ""));
 		//.html('<option value="">--- ESCOLHA ---</option>');	
@@ -98,6 +97,6 @@ function marca_pedido_entregue(entregador, pedido, tipo){
 	}
 	
 	$.post('menu_pedidos/actions/marca_entrega.php',{entregador:entregador, pedido:pedido, tipo:tipo}, function(resposta){		
-		
+			location.reload();		
 	});
 }

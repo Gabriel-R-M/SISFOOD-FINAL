@@ -27,9 +27,10 @@
 
 	          <li class="nav-item">
 	            <a href="javascript:void(0);" onclick="javascript:entregas_comandas(0);" class="nav-link">
-	              <i class="icon icofont-motor-biker"></i>           
+	              <i class="icon icofont-restaurant"></i>          
 	            </a>            
 	          </li>
+	          
 
 	          <li class="nav-item">
 	            <a href="logout" class="nav-link">

@@ -24,23 +24,25 @@ require("../../includes/verifica_venda_aberta.php");
 			$classe_mesa_ocupada='';			
 			$classe_mesa_ocupada2 = 'color-black';
 			
-			$sol = $db->select("SELECT id, valor_final_venda, id_cliente, pedido_inicio FROM aguarda_venda WHERE id_mesa='$conta' LIMIT 1");
+			$sol = $db->select("SELECT id, valor_final_venda, id_cliente, pedido_inicio, nome_cliente FROM aguarda_venda WHERE id_mesa='$conta' LIMIT 1");
 			if($db->rows($sol)){
 				$mesa_dados = $db->expand($sol);
 				$valor_mesa= $mesa_dados['valor_final_venda'];		
 				$classe_mesa_ocupada = 'mesa-ocupada';
 				$classe_mesa_ocupada2 = 'color-vermelho';
 
-				$id_cli = $mesa_dados['id_cliente'];
-				$wow = $db->select("SELECT nome FROM clientes WHERE id='$id_cli' LIMIT 1");	
-				$dados_cli = $db->expand($wow);
-				$nome_cliente=$dados_cli['nome'];
+				
 				$hora_pedido=substr($mesa_dados['pedido_inicio'],0,5);
 
 				$id_pedido=$mesa_dados['id'];
 
+				$nome_cliente = $mesa_dados['nome_cliente'];
+				
 				if(empty($nome_cliente)){
-					$nome_cliente = 'CLIENTE AVULSO';
+					$id_cli = $mesa_dados['id_cliente'];
+					$wow = $db->select("SELECT nome FROM clientes WHERE id='$id_cli' LIMIT 1");	
+					$dados_cli = $db->expand($wow);
+					$nome_cliente=$dados_cli['nome'];
 				}
 
 			} 

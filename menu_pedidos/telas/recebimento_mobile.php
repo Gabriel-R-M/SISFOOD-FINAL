@@ -82,7 +82,7 @@ if($total_recebido_venda!=0){
         	</div>    
         	</div>
 
-        	<div class="col-12 bottom15 hide">
+        	<div class="col-12 bottom15">
         	<div class="col-12">	
         		<a href="javascript:void(0)" class="qdx">EMBALAR PEDIDO PARA VIAGEM</a><br>
         			<select class="form-control top2" id="embala_viagem">										

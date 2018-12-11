@@ -9,13 +9,23 @@ include_once("../../diversos/funcoes_diversas.php");
 ?>
 
 
-      <?php      
+
+
+      <?php 
+
+        if(isset($busca) && $busca!=''){
+          $busca = " AND (aguarda_venda.nome_cliente LIKE '%$busca%' OR clientes.nome LIKE '%$busca%' )";
+        }
+
 	      $sel = $db->select("SELECT aguarda_venda.*, clientes.nome FROM aguarda_venda 	      	
 	      LEFT JOIN clientes ON aguarda_venda.id_cliente=clientes.id
 	      WHERE aguarda_venda.finalizada='0' AND aguarda_venda.aguarde='1' 
-	      AND aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.id_mesa='0'
-	      ORDER BY aguarda_venda.pedido_inicio DESC
+	      AND aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.id_mesa='0' $busca
+	      ORDER BY 
+        aguarda_venda.pedido_entregue ASC,
+        aguarda_venda.pedido_inicio DESC
 	      ");
+
 		if($db->rows($sel)){
 			
 			while($dados = $db->expand($sel)){
@@ -65,7 +75,15 @@ include_once("../../diversos/funcoes_diversas.php");
 
                  
 
-              		<h5 onclick="javascript:edita_pedido(<?php echo ($dados['id']); ?>);" class="prod-name upper corta_texto"><a href="javascript:void(0);"><?php echo ($dados['nome']); ?></a></h5>
+              		<h5 onclick="javascript:edita_pedido(<?php echo ($dados['id']); ?>);" class="prod-name upper corta_texto"><a href="javascript:void(0);">
+                      <?php 
+                        if(!empty($dados['nome_cliente'])){
+                            echo $dados['nome_cliente'];
+                        } else {
+                             echo $dados['nome'];
+                        }
+                      ?>
+                    </a></h5>
               		<p onclick="javascript:edita_pedido(<?php echo ($dados['id']); ?>);" class="prod-by"><?php echo data_mysql_para_user($dados['data_pedido']); ?> ás <?php echo substr($dados['pedido_inicio'],0,5).'hs'; ?></p>
               			<div onclick="javascript:edita_pedido(<?php echo ($dados['id']); ?>);" class="row" style="padding-bottom: 0; margin-bottom: 0">
                 			<div class="col-12" style="margin-top: -12px; padding-bottom: 0; margin-bottom: 0">

@@ -65,6 +65,13 @@ function inicia_sistema(){
 }
 
 
+
+function menu_configuracoes(){
+	carregando();
+	$("#conteudo_geral").load('menu_configuracoes/telas/configuracoes.php');
+}
+
+
 function entregas_comandas(){
 	carregando();
 	abre_menu('menu_pedidos/telas/entregas_comandas.php');	

@@ -12,8 +12,11 @@
 	$sql = $db->select("ALTER TABLE configuracoes ADD dias_expira_pontos INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD escolhe_motoqueiro INT(10) NOT NULL");
 
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD nome_cliente VARCHAR(100) NOT NULL");
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_entregue TIME NOT NULL");
+	
 	$sql = $db->select("ALTER TABLE tamanhos ADD opcao_obrigatoria INT(1) NOT NULL");
+
 
 	
 
@@ -28,8 +31,8 @@
 		foreach($sql as $v) $db->select($v);
 		
 		//RENOMEIA PARA NAO FAZER DENOVO//
-		//$renomeia = 'atualizacoes/ANTIGO_'.date('d-m-y').'_atualizacoes.sql';
-		//rename($nome_do_arquivo, $renomeia);
+		$renomeia = 'atualizacoes/ANTIGO_'.date('d-m-y').'_atualizacoes.sql';
+		rename($nome_do_arquivo, $renomeia);
 	}
 	
 

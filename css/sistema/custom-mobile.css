@@ -15,7 +15,7 @@ body{overflow-y: hidden; }
 
 
 #tudo_conteudo{height: calc(100vh - 100px); }
-.exibicao_produtos_pedido{position: relative; overflow-x: hidden; height: calc(100vh - 120px);}
+.exibicao_produtos_pedido{position: relative; overflow-x: hidden; height: calc(100vh - 180px); }
 .margin30{margin-top: 80px; height: calc(100vh - 200px);}
 .tamanho_exibicao_produtos_pedido{height: calc(100vh - 200px);}
 
@@ -54,4 +54,6 @@ span.texto_peq_itens_grande{font-weight: 700; font-size: 30px; color:#C9403C }
 
 .hide_mobile{display: none;}
 
+.pedidos-gerais-aguardando{position: relative; height: calc(100vh - 220px); max-height: calc(100vh - 220px);}
+.mesas-exibicao{position: relative; height: calc(100vh - 135px); max-height: calc(100vh - 135px); }
 }

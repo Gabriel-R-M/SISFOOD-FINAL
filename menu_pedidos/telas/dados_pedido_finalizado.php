@@ -8,7 +8,15 @@
                   <div class="col-md">
                     <label class="section-label-sm tx-gray-500">CLIENTE</label>
                     <div class="billed-to">
-                      <h6 class="tx-gray-800"><?php echo $dados_cliente['nome']; ?></h6>
+                      <h6 class="tx-gray-800">
+                      <?php 
+                        if(!empty($dados_venda['nome_cliente'])){
+                            echo $dados_venda['nome_cliente'];
+                        } else {
+                             echo $dados_cliente['nome'];
+                        }
+                      ?>
+                      </h6>
                       <p class="upper thin">
                         <?php if(!empty($dados_cliente['endereco'])){echo $dados_cliente['endereco'].', '.$dados_cliente['numero'].' - ';} ?>
                         <?php if(!empty($dados_cliente['bairro'])){echo $dados_cliente['bairro'].'<br>';} ?>

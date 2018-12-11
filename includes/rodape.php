@@ -65,6 +65,7 @@
 <script src="javascript/teclas_atalho.js"></script>
 <script src="javascript/mobile.js"></script>
 <script src="javascript/entregas.js"></script>
+<script src="javascript/configuracoes.js"></script>
 
 
 </html>

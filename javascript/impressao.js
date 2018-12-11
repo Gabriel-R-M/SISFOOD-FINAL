@@ -180,3 +180,6 @@ function imprime_fechamento_caixa(id){
 		});
 	});	
 }
+
+
+

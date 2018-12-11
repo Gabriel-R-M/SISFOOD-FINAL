@@ -46,6 +46,13 @@
             </a>
           </li>
 
+
+          <li class="sidebar-nav-item">
+            <a href="javascript:void(0);" onclick="javascript:menu_configuracoes();"  class="sidebar-nav-link">
+              <i class="icofont-settings-alt"></i>
+            </a>
+          </li>
+
           <li class="sidebar-nav-item">
             <a href="javascript:void(0);" id="menu_caixa" onclick="javascript:manutencao_caixa();"  class="sidebar-nav-link" data-toggle="tooltip-danger" data-placement="right" title="" data-original-title="CAIXA ABERTO EM: <?php echo data_mysql_para_user($dados_caixa['data_abertura']).' ÀS '.substr($dados_caixa['hora_abertura'],0,5); ?>h">
               <i class="icofont-money-bag"></i>

@@ -37,7 +37,15 @@
 		      <tr class="cursor thin upper" onclick="javascript:edita_pedido(<?php echo ($dados['id']); ?>);">
 		        <td><?php echo ($dados['id']); ?></td>
 		        <td><?php echo data_mysql_para_user($dados['data_pedido']); ?> ás <?php echo substr($dados['pedido_inicio'],0,5);?>hs</td>
-		        <td><?php echo ($dados['nome']); ?></td>
+		        <td>
+		        	<?php 
+                        if(!empty($dados['nome_cliente'])){
+                            echo $dados['nome_cliente'];
+                        } else {
+                             echo $dados['nome'];
+                        }
+                    ?>
+                </td>
 		        <td><?php echo ($dados['atendente']); ?></td>
 		        <td>R$ <?php echo number_format($dados['valor_final_venda'],2,".",","); ?></td>
 		        <td><?php echo $entrega; ?></td>

@@ -26,6 +26,7 @@
 	RewriteRule ^acesso?$ index.php?logout=1 [L,QSA]
 	RewriteRule ^atualiza?$ atualizacao.php [L,QSA]
 	RewriteRule ^entregas?$ entregas.php [L,QSA]
+	RewriteRule ^retaguarda?$ admin/index.php [L,QSA]
 
 	
 

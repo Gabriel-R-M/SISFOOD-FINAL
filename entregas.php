@@ -69,7 +69,7 @@ include("includes/verifica_caixa_aberto.php");
 
         <?php  
         $p=1;    
-        $sel = $db->select("SELECT aguarda_venda.*, clientes.* FROM aguarda_venda          
+        $sel = $db->select("SELECT aguarda_venda.*, clientes.*, aguarda_venda.id AS id_venda FROM aguarda_venda          
         LEFT JOIN clientes ON aguarda_venda.id_cliente=clientes.id
         WHERE aguarda_venda.finalizada='0' AND aguarda_venda.aguarde='1' 
         AND aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.entrega!='0'
@@ -83,7 +83,7 @@ include("includes/verifica_caixa_aberto.php");
             $entrega = '<i class="fa fa-motorcycle" aria-hidden="true"></i> SAIU P/ ENTREGA';
             $entrega2 = 'tx-danger';
             $entrega3 = '#B92A25';
-            $id = $dados['id'];
+            $id = $dados['id_venda'];
        
     ?>
         
@@ -91,7 +91,7 @@ include("includes/verifica_caixa_aberto.php");
               <div class="card card-popular-product" style="border-left-color: <?php echo $entrega3; ?>">
                 
             
-                  <label class="prod-id thin">PEDIDO: <?php echo ($dados['id']); ?></label>
+                  <label class="prod-id thin">PEDIDO: <?php echo ($id); ?></label>
                   <h5 class="prod-name upper corta_texto"><a href="javascript:void(0);"><?php echo ($dados['nome']); ?></a></h5>
                   <p class="prod-by"><?php echo data_mysql_para_user($dados['data_pedido']); ?> ás <?php echo substr($dados['pedido_inicio'],0,5).'hs'; ?></p>
                     <div class="row" style="padding-bottom: 0; margin-bottom: 0">
