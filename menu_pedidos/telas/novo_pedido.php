@@ -58,11 +58,36 @@ if($total_categorias<2){
 		</button>	
 
 	<?php } else { ?>	
-		
-		<button class="btn btn-success btn-block top10 botao_pedido_grande" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">
-			<i class="icofont-calculator-alt-2"></i>
-			FINALIZAR PEDIDO (F2)
-		</button>	
+
+
+		<?php if($dados_venda['aguarde']==0) { ?>		
+
+			<button class="btn btn-success btn-block top10 botao_pedido_grande" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">
+				<i class="icofont-calculator-alt-2"></i>
+				FINALIZAR PEDIDO (F2)
+			</button>	
+
+		<?php } else { ?>			
+			
+			<div class="row row-xs">
+				
+				<div class="col-md-5">
+					<button class="btn btn-primary btn-block top10 botao_pedido_grande" style="font-weight: 300;" onclick="javascript:apenas_salva_pedido();">
+						
+						SALVAR
+					</button>
+				</div>	
+
+				<div class="col-md-7">
+					<button class="btn btn-success btn-block top10 botao_pedido_grande" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">						
+						RECEBER (F2)
+					</button>	
+				</div>	
+
+			</div>	
+
+		<?php } ?>		
+
 
 	<?php } ?>		
 	
@@ -106,7 +131,7 @@ if($total_categorias<2){
 		<div class="col-md-7" id="input_busca_produto">
 			
 			<div id="campo_para_pesquisa_produto">
-				<input type="text" class="form-control pull-right" placeholder="CÓDIGO OU PRODUTO (F10)" onkeyup="javascript:pesquisa_produtos_venda(this.value);" id="input_pesquisa_produto" readonly>
+				<input type="text" class="form-control pull-right" placeholder="CÓDIGO OU PRODUTO (F10)" onkeyup="javascript:pesquisa_produtos_venda(this.value);" id="input_pesquisa_produto">
 				<i class="icofont-barcode"></i>
 			</div>
 
@@ -251,11 +276,13 @@ if($total_categorias<2){
 
 				  	}
 				 ?>			
-		</select>
+			</select>
 
-</div>	
+		</div>	
 
 
+
+<input type="hidden" id="impressao_item_avulso" value="<?php echo $dados_configuracoes['impressao_avulsa_item']; ?>">
 <input type="hidden" id="tela-mobile" value="0">
 <input type="hidden" id="pedido_aguarda_venda" value="<?php echo $dados_venda['aguarde']; ?>">
 <input type="hidden" id="avanca-pedido-enter" value="1">

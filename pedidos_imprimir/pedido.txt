@@ -1,22 +1,28 @@
        SHEIK ESFIHARIA E PIZZARIA
    DR. ANTONIO TEDESCO, 822 - CENTRO
           FONE: (14) 3264-3494
+              PEDIDO: #23
+          12/12/2018 AS 12:48
 ----------------------------------------
-          FECHAMENTO DE CAIXA
+                 MESA 1
 ----------------------------------------
-DINHEIRO:                    R$ 0.00 (+)
+Qtd COD/Produto             V. UN  Total
 ----------------------------------------
-CARTAO:                     R$ 66.00 (+)
+01  SUCOS                    4,80   4,80
+    (C/ LEITE)                          
+    LARANJA                             
 ----------------------------------------
-CONVENIO:                    R$ 0.00 (+)
+01  LANCHES                 14,90  14,90
+    X TUDO                              
 ----------------------------------------
-SUBTOTAL:                       R$ 66.00
+SUBTOTAL                        R$ 19,70
+TOTAL A RECEBER (=)             R$ 19,70
 ----------------------------------------
-TROCO INICIAL:             R$ 100.00 (+)
+            DADOS DO CLIENTE
 ----------------------------------------
-SAIDAS DE CAIXA:             R$ 0.00 (-)
+CLIENTE AVULSO
 ----------------------------------------
-TOTAL DO CAIXA:            R$ 166.00 (=)
+TOTAL DE ITENS DO PEDIDO: 2
 ----------------------------------------
-QTD ENTREGAS:                         03
-----------------------------------------
+PEDIDO CONTENDO:
+SUCOS/LANCHES

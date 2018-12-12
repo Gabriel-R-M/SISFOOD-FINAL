@@ -11,6 +11,7 @@ $total_final_pedido =0;
 $total_adicionais = 0;
 $total_opcoes = 0;
 $qtd_itens_pedido=0;
+$itens_nao_impressos=0;
 
 $sql = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
 $qtd_produtos_carrinho = $db->rows($sql);
@@ -206,6 +207,13 @@ if($db->rows($sql)){
         echo '<hr>';
 
 
+
+        if($row['impresso']==0){
+        	$itens_nao_impressos++;
+        }
+
+
+
 	}
 
 	
@@ -219,8 +227,12 @@ if($db->rows($sql)){
 
 
 ?>
+
+<input type="text" value="<?php echo $itens_nao_impressos; ?>" id="itens_nao_impressos">
 </div>
+
 <input type="hidden" value="<?php echo $qtd_itens_pedido; ?>" id="totais_itens_pedido">
+
 
 
 <script>

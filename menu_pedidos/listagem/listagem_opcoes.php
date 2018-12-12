@@ -7,7 +7,7 @@ require_once("../../includes/verifica_venda_aberta.php");
 
 <?php
 
-
+$contador_opcoes=0;
 
 $seleciona_produtos = $db->select("SELECT * FROM opcionais2 
 	WHERE ativo='1' AND (id_categoria LIKE '%$categoria%' OR id_produto LIKE '%$produto%') 
@@ -33,7 +33,7 @@ if($db->rows($seleciona_produtos)) {
 			  		
 			  		echo '<span class="destaca cor_branca" id="3destaca_adicionais'.$line['id'].'">OPÇÕES</span>';
 
-					echo '<input  type="checkbox" class="hide" name="opcoes[]" value="'.$line['id'].'"  id="line2_opcao'.$line['id'].'">';
+					echo '<input  type="checkbox" class="hide opcoes_desmarca" name="opcoes[]" value="'.$line['id'].'"  id="line2_opcao'.$line['id'].'">';
 				  	
 				  	echo '<span class="destaca pull-right" id="4destaca_adicionais'.$line['id'].'">R$ '.number_format($line['valor_opcional2'],2,",",".").'</span>';
 			  		
@@ -47,8 +47,8 @@ if($db->rows($seleciona_produtos)) {
 
 		
 		echo '</div>';
-
-
+		
+		$contador_opcoes++;
 	}
 } else {
 	echo '<div class="col-md-12 bottom10 text-center">';
@@ -62,3 +62,5 @@ echo '</div>';
 
 
 ?>	
+
+<input type="hidden" id="contador_opcoes" value="<?php echo $contador_opcoes;  ?>">

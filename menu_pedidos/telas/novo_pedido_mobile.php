@@ -228,7 +228,7 @@ require("../../diversos/funcoes_diversas.php");
 
 
 
-
+<input type="hidden" id="impressao_item_avulso" value="<?php echo $dados_configuracoes['impressao_avulsa_item']; ?>">
 <input type="hidden" id="tela-mobile" value="1">
 <input type="hidden" id="pedido_aguarda_venda" value="<?php echo $dados_venda['aguarde']; ?>">
 <input type="hidden" id="avanca-pedido-enter" value="1">

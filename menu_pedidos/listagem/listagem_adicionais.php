@@ -7,7 +7,7 @@ require_once("../../includes/verifica_venda_aberta.php");
 
 
 <?php
-
+$contador_adicionais=0;
 $seleciona_produtos = $db->select("SELECT adicionais FROM categorias WHERE id='$categoria'LIMIT 1");
 $line = $db->expand($seleciona_produtos);
 if($line['adicionais']==1){
@@ -49,6 +49,8 @@ if($line['adicionais']==1){
 			
 			echo '</div>';
 
+			$contador_adicionais++;
+
 
 		}
 	} else {
@@ -77,3 +79,6 @@ if($line['adicionais']==1){
 }
 
 ?>	
+
+
+<input type="hidden" id="contador_adicionais" value="<?php echo $contador_adicionais;  ?>">

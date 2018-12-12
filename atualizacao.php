@@ -11,13 +11,15 @@
 	$sql = $db->select("ALTER TABLE configuracoes ADD valor_ponto_troca DOUBLE(10,2) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD dias_expira_pontos INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD escolhe_motoqueiro INT(10) NOT NULL");
+	$sql = $db->select("ALTER TABLE configuracoes ADD impressao_avulsa_item VARCHAR(99) NOT NULL");
 
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD nome_cliente VARCHAR(100) NOT NULL");
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_entregue TIME NOT NULL");
+	$sql = $db->select("ALTER TABLE produtos_venda ADD impresso INT(10) NOT NULL");
 	
 	$sql = $db->select("ALTER TABLE tamanhos ADD opcao_obrigatoria INT(1) NOT NULL");
 
-
+	$sql = $db->select("UPDATE produtos_venda SET impresso='1'");
 	
 
 	//RODA O SCRIPT//

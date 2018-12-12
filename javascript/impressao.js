@@ -145,14 +145,34 @@ function reimpressao_completa_pedido(id){
 }
 
 
-function imprime_comanda02(){
+function imprime_comanda02(contador=0){
 	aviso_impressao_sistema();		
 	$("#ModalPerguntaImprime02").modal('hide');
-	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1}, function(resposta){
+
+	//VERIFICA SE IMPRIME APENAS O ULTIMO ITEM, OU TODOS QUE NAO FORAM IMPRESSOS AINDA DO PEDIDO
+	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();	
+
+	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1}, function(resposta){	
+
 		resposta = $.trim(resposta);
-		$.post('menu_pedidos/impressao/imprime.php',{tipo:2,categoria_produto:resposta}, function(resposta){
+
+		var val = resposta.split('&@&');
+		var categoria_produto = val[0];
+		var qtd_categorias_imprime = val[1];
+
+
+		$.post('menu_pedidos/impressao/imprime.php',{tipo:2,categoria_produto:categoria_produto}, function(resposta){
 						
-			aviso_impressao_sistema(1);		
+			aviso_impressao_sistema(1);	
+			if(qtd_categorias_imprime>0){
+				setTimeout(function(){ imprime_comanda02(1);}, 1000);	
+			}
+
+			if(contador==0){
+				if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ'){
+					inicia_sistema();
+				}
+			}
 					
 		});
 	});		

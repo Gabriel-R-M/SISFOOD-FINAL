@@ -648,16 +648,30 @@ function seleciona_produtos(tipo,id,preco_composto,categoria){
 
 	var tela_mobile = $("#tela-mobile").val();
 
+	//CARREGA OS ADICIONAIS//
 	if(global_pesquisa_adicionais==0 || global_produto_selecionado!=id){
 		$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
 		$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);		
 		global_pesquisa_adicionais=1;	
+	} else {
+		if (!$("#contador_adicionais").length) {  
+			$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+			$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);			
+			global_pesquisa_adicionais=1;	
+		}
 	}
 
+	//CARREGA AS OPCOES DE COMBO//
 	if(global_pesquisa_opcoes==0 || global_produto_selecionado!=id){
 		$("#exibicao_opcoes_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
 		$("#exibicao_opcoes_produto_selecionado").load('menu_pedidos/listagem/listagem_opcoes.php?categoria='+categoria+'&produto='+id);		
 		global_pesquisa_opcoes=1;	
+	} else {
+		if (!$("#contador_opcoes").length) {  
+			$("#exibicao_opcoes_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+			$("#exibicao_opcoes_produto_selecionado").load('menu_pedidos/listagem/listagem_opcoes.php?categoria='+categoria+'&produto='+id);		
+			global_pesquisa_opcoes=1;	
+		}
 	}
 
 	global_produto_selecionado = id;
@@ -863,54 +877,7 @@ function limpa_pesquisa_produtos(){
 }
 
 
-function pesquisa_produtos_venda(pesquisa){
 
-	$("#sucesso_salva_pedido_mobile").hide();
-	
-	var tela_mobile = $("#tela-mobile").val();		
-
-	$(".marca-produtos").each(function () {
-		var id = $(this).val();
-        if($(this).is(':checked')){
-        	$('#prod_name_div'+id).show();
-        } else {
-        	$('#prod_name_div'+id).hide();
-        }        	
-    });
-
-
-	if(tela_mobile==1){
-	
-	    if(pesquisa==''){
-	    	var qtd = 0;
-	    	$(".marca-produtos").each(function () {
-	    		var id = $(this).val();
-	        	if($(this).is(':checked')){
-	    			qtd++; 
-	    		}
-	    	});
-
-	    	if(qtd==0){
-	    		$("#informacao_qtd_itens_pedido").show();	
-	    	} else {
-	    		$("#informacao_qtd_itens_pedido").hide();
-	    	}
-	    	
-	    } else {
-	    	$("#informacao_qtd_itens_pedido").hide();
-	    }
-	
-	} else {
-
-		if(pesquisa==''){
-			var categoria_selecionada = $("#categoria_selecionada").val();				
-			$(".produtos_categoria_selecionada"+categoria_selecionada).show();
-		}
-	}
-
-	var pesquisa = pesquisa.toLowerCase();	
-	$('[data-name*="'+pesquisa+'"]').show();
-}
 
 
 function exclui_opcao_pedido(id){
@@ -1248,6 +1215,73 @@ function atualiza_valor_final_pedido_comanda(){
 	
 }
 
+
+
+
+
+function pesquisa_produtos_venda(pesquisa){
+
+	$("#sucesso_salva_pedido_mobile").hide();
+	
+	var tela_mobile = $("#tela-mobile").val();		
+
+	
+	if(pesquisa!=''){
+		$(".marca-produtos").each(function () {
+			var id = $(this).val();
+	        if($(this).is(':checked')){
+	        	$('#prod_name_div'+id).show();
+	        } else {
+	        	$('#prod_name_div'+id).hide();
+	        }        	
+	    });
+	}
+
+	if(tela_mobile==1){
+	
+	    if(pesquisa==''){
+	    	var qtd = 0;
+	    	$(".marca-produtos").each(function () {
+	    		var id = $(this).val();
+	        	if($(this).is(':checked')){
+	    			qtd++; 
+	    		}
+	    	});
+
+	    	if(qtd==0){
+	    		$("#informacao_qtd_itens_pedido").show();	
+	    	} else {
+	    		$("#informacao_qtd_itens_pedido").hide();
+	    	}
+	    	
+	    } else {
+	    	$("#informacao_qtd_itens_pedido").hide();
+	    }
+	
+	} else {
+		
+		$(".tab-pane").addClass('active');
+		
+		if(pesquisa==''){			
+
+			$(".marca-produtos").each(function () {
+				var id = $(this).val();
+		        $('#prod_name_div'+id).show();		                	
+	    	});
+
+			$(".tab-pane").removeClass('active');
+			var categoria_selecionada = $("#categoria_selecionada").val();				
+			$("#div"+categoria_selecionada).addClass('active');
+		}
+	}
+
+
+	var pesquisa = pesquisa.toLowerCase();	
+	$('[data-name*="'+pesquisa+'"]').show();
+}
+
+
+
 function salva_item_pedido(){
 
 	//VE SE É NO MOBILE
@@ -1328,7 +1362,7 @@ function salva_item_pedido(){
 		$(".prod-meio-meio").prop( "checked", false);	
 		$(".prod-normais").prop( "checked", false);
 		$("#quantidade-produto").val('1');
-		$("#observacoes-produto").val('');		
+		$("#observacoes-produto").val('');			
 
 		//OCULTA CAMPO VARIACOES E BOTOES DE INSERIR
 		$(".box-nome-cliente").hide();
@@ -1341,21 +1375,27 @@ function salva_item_pedido(){
 	    //MOSTRA OS PRODUTOS E CATEGORIAS
 	    $("#exibicao_adicionais_produto_selecionado").hide();
 	    $("#exibicao_opcoes_produto_selecionado").hide();
-		$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+		$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');		
+		
 		$("#exibicao_produtos_pedido, #exibicao_categorias_pedido").show();
 
+		$(".opcoes_desmarca").prop( "checked", false);	
+
+
 		//APENAS PARA MOBILE//						
-		if(tela_mobile==1){
-			pesquisa_produtos_venda('');
+		if(tela_mobile==1){			
 			$("#exibicao_produtos_pedido").removeClass('margin30');
 			$("#input_pesquisa_produto").val('');
 			$("#quantidade-produto").val('');
 			//$("#input_pesquisa_produto").focus();
 		}
 
-	if(tela_mobile==1){	
-		$(".qtd_itens_grande").html('<i class="icofont-restaurant"></i>');	
-	}
+		if(tela_mobile==1){	
+			$(".qtd_itens_grande").html('<i class="icofont-restaurant"></i>');	
+		}
+
+		pesquisa_produtos_venda('');
+		$("#input_pesquisa_produto").val('');
 
 	$.post('menu_pedidos/actions/salva_produto_venda.php?meio_meio='+meio_meio+'&opcionais='+camposMarcados+'&opcoes_produto='+opcoes_produto, {normal:normal, tamanho:tamanho, qtd:qtd, observacoes:observacoes, nome_cliente:nome_cliente}, function(resposta){
 
@@ -1379,8 +1419,11 @@ function salva_item_pedido(){
 
 		//PERGUNTA SE IMPRIME O ÍTEM UNICO	
 		if(venda_aguarde!=0){
-			sim_imprime_item_pedido = 1;
-			$("#ModalPerguntaImprime02").modal();
+			var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
+			if(tipo_impressao_item_avulso=='' || tipo_impressao_item_avulso=='ITEM A ITEM'){
+				sim_imprime_item_pedido = 1;
+				$("#ModalPerguntaImprime02").modal();
+			}
 		}
 
 		
@@ -1389,6 +1432,28 @@ function salva_item_pedido(){
 }
 
 
+
+function apenas_salva_pedido(){
+
+	//VERIFICA SE A VENDA JÁ ESTA EM AGUARDE
+	var venda_aguarde = $("#pedido_aguarda_venda").val();
+
+	//VERIFICA SE TEM ITENS QUE AINDA NAO FORAM IMPRESSOS
+	var itens_nao_impressos = $("#itens_nao_impressos").val();
+
+	//PERGUNTA SE IMPRIME OS ÍTENS 	
+	if(venda_aguarde!=0){
+		var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
+		if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ' && itens_nao_impressos>0){
+			sim_imprime_item_pedido = 1;
+			$("#ModalPerguntaImprime02").modal();
+		} else {
+			inicia_sistema();
+		}
+	}
+
+
+}
 
 
 function finaliza_pedido(){
@@ -1480,11 +1545,12 @@ function finaliza_pedido2(imprime=0, reload=0){
 		//É RETIRADA NO BALCÃO
 		if(entrega==0){
 			
-			if(nome_cliente_mobile=='' || nome_cliente_mobile=='CLIENTE AVULSO'){
-				exibe_erros_gerais('Informe o nome do cliente para retirada!');
-				return;	
-			}
-
+			if(mesa==0){
+				if(nome_cliente_mobile=='' || nome_cliente_mobile=='CLIENTE AVULSO'){
+					exibe_erros_gerais('Informe o nome do cliente para retirada!');
+					return;	
+				}
+			}	
 		}	
 
 
@@ -1694,8 +1760,8 @@ function resgate_pontos(){
 
 
 function exibe_produtos_categorias_pedido(categoria){
-	$(".tab-pane").hide();
-	$("#div"+categoria).show();
+	$(".tab-pane").removeClass('active');
+	$("#div"+categoria).addClass('active');
 }
 
 

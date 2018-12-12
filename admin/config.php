@@ -3,8 +3,8 @@ ob_start();
 @session_start();
 
 define('ROOT_DIR', dirname(__FILE__).'/' );
-define('SISTEMA_DIR', 'http://'.$_SERVER['HTTP_HOST'].'/sheik/');
-define("ADMIN_DIR", 'http://'.$_SERVER['HTTP_HOST'].'/sheik/admin/');
+define('SISTEMA_DIR', 'http://'.$_SERVER['HTTP_HOST'].'/efood/SISFOOD-FINAL/');
+define("ADMIN_DIR", 'http://'.$_SERVER['HTTP_HOST'].'/efood/SISFOOD-FINAL/admin/');
 	
 
 //CLASSES DE USO

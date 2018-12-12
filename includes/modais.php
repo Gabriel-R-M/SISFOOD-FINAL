@@ -633,7 +633,7 @@
     <div class="modal-content">
       
       <div class="modal-header">        
-        <h4 class="modal-title"><center>Imprimir Ítem?</center></h4>
+        <h4 class="modal-title"><center>Imprimir Ítem(s) ?</center></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       

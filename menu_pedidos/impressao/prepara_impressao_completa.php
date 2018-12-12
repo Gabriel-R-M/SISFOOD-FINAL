@@ -69,6 +69,8 @@ require("../../diversos/funcoes_impressao.php");
 
 				$total_itens_pedido = ($total_itens_pedido+$row['quantidade']);
 
+
+				$id_selecionado = $row['id'];
 				$nome_tamanho='';
 				$total_prod = 0;
 				$id_produto	= $row['id_produtos'];
@@ -164,10 +166,14 @@ require("../../diversos/funcoes_impressao.php");
 
 
 
-				
+				$pg = $db->select("UPDATE produtos_venda SET impresso='1' WHERE id='$id_selecionado' LIMIT 1");	
 				
 
 			}
+
+
+			
+
 		}
 
 

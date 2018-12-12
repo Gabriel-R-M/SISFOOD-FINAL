@@ -65,15 +65,35 @@ if($db->rows($sel_total_itens)){
     $txt_itens_cabecalho[] = array('Qtd ', 'COD/Produto', 'V. UN', 'Total');
 	$txt_itens_cabecalho[] = array('----', '------------------------------', '-------', '-------');	
 
-	
-	
 		
+
+		//VERIFICA COMO QUE É PRA IMPRIMIR ITEM A ITEM OU TODOS OS QUE AINDA NAO FORAM IMPRESSOS
+		if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
+			
+			$group = "AND impresso='0' GROUP BY categoria_produto ORDER BY id DESC LIMIT 1";	
+			$tipo_query = "AND impresso='0' ORDER BY id DESC";
+
+		} else {
+
+			$group = "ORDER BY id DESC LIMIT 1";	
+			$tipo_query = 'ORDER BY id DESC LIMIT 1';			
+		}
 		
-		$sel = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC LIMIT 1");	
+	
+
+$sel_group = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' $group");	
+if($db->rows($sel_group)){
+while($cat_pesq = $db->expand($sel_group)){
+
+
+	$categoria_pesquisa = $cat_pesq['categoria_produto'];
+
+	$sel = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' AND categoria_produto='$categoria_pesquisa' $tipo_query");	
 
 		if($db->rows($sel)){
 			while($row = $db->expand($sel)){
 
+				$id_selecionado = $row['id'];
 				$nome_tamanho='';
 				$total_prod = 0;
 				$id_produto	= $row['id_produtos'];
@@ -165,10 +185,22 @@ if($db->rows($sel_total_itens)){
 				$txt_itens[] = array($row['quantidade'], ''.($prod_cod).''.retira_acentos($nome_categoria).'', ''.number_format($row['valor'],2,",",".").'', ''.number_format($total_prod,2,",",".").'', ''.retira_acentos($nome_produto).'', ''.retira_acentos($nome_tamanho).'', $id_controle, ''.$row['observacoes'].'',''.retira_acentos($row['nome_cliente_divisao']).'');
 
 
-			}
-		}
+				$pg = $db->select("UPDATE produtos_venda SET impresso='1' WHERE id='$id_selecionado' LIMIT 1");
 
-	
+			}			
+
+
+	}
+
+
+
+}
+}	
+
+
+
+
+
 
 
 	foreach ($txt_itens as $item) {
@@ -372,9 +404,21 @@ if($db->rows($sel_total_itens)){
    fclose($_file);
 
 
+   		//VERIFICA COMO QUE É PRA IMPRIMIR ITEM A ITEM OU TODOS OS QUE AINDA NAO FORAM IMPRESSOS
+		if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
+						
+
+			$sel_categorias = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' AND impresso='0' GROUP BY categoria_produto");		
+			$qtd_categorias_imprime = $db->rows($sel_categorias);
+
+		} else {
+			
+			$qtd_categorias_imprime=0;
+		}
 
 
 
-echo $categoria_produto;
+
+echo $categoria_pesquisa.'&@&'.$qtd_categorias_imprime;
 
 ?>

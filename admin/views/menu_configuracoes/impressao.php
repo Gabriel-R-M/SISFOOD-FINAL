@@ -84,6 +84,7 @@
                 </select>  
            </div>
         </div>
+        
 
         <div class="col-md-4">
            <div class="form-group">
@@ -96,6 +97,24 @@
                       } else {
                         echo '<option value="0" selected>NÃO</option>';
                         echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div>
+
+
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Impressão de Ítem Avulso</label>
+                <select class="form-control select2" name="impressao_avulsa_item" required="required">
+                    <?php
+                      if($ln2['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
+                        echo '<option value="JUNTO APENAS UMA VEZ" selected>JUNTO APENAS UMA VEZ</option>';
+                        echo '<option value="ITEM A ITEM" >ÍTEM A ÍTEM</option>';                                                
+                      } else {
+                        echo '<option value="ITEM A ITEM" selected>SEPARADO ÍTEM A ÍTEM</option>';
+                        echo '<option value="JUNTO APENAS UMA VEZ">JUNTO APENAS UMA VEZ</option>';                       
                       }
                     ?>
                 </select>  
