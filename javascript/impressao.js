@@ -165,7 +165,7 @@ function imprime_comanda02(contador=0){
 						
 			aviso_impressao_sistema(1);	
 			if(qtd_categorias_imprime>0){
-				setTimeout(function(){ imprime_comanda02(1);}, 1000);	
+				setTimeout(function(){ imprime_comanda02(1);}, 2000);	
 			}
 
 			if(contador==0){

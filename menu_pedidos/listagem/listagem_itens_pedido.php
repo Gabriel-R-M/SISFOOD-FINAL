@@ -228,9 +228,10 @@ if($db->rows($sql)){
 
 ?>
 
-<input type="text" value="<?php echo $itens_nao_impressos; ?>" id="itens_nao_impressos">
+
 </div>
 
+<input type="hidden" value="<?php echo $itens_nao_impressos; ?>" id="itens_nao_impressos">
 <input type="hidden" value="<?php echo $qtd_itens_pedido; ?>" id="totais_itens_pedido">
 
 
