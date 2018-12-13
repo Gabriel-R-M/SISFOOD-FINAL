@@ -170,7 +170,12 @@ function imprime_comanda02(contador=0){
 
 			if(contador==0){
 				if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ'){
-					inicia_sistema();
+
+					var tela_mobile = $("#tela-mobile").val();
+					if(tela_mobile!=1){
+						inicia_sistema();	
+					} 
+					
 				}
 			}
 					

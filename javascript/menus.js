@@ -28,7 +28,7 @@ function inicia_sistema(){
 	}
 
 	carregando();
-	$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');
+	$("#conteudo_geral").load('menu_pedidos/telas/novo_pedido.php');
 	
 							
 

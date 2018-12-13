@@ -34,10 +34,22 @@ if($total_recebido_venda!=0){
     <div class="card" style="border-top: 0">
     <div class="row row-xs">
 
+    		<?php 
+    			$nome_cliente='';
+    			if($dados_venda['nome_cliente']!=''){
+    				$nome_cliente = $dados_venda['nome_cliente'];
+
+    			} else if($dados_cliente['nome']!='CLIENTE AVULSO' && $dados_cliente['nome']!=''){
+    				$nome_cliente = $dados_cliente['nome'];
+    			}	
+    				
+
+    		?>
+
     		<div class="col-12 top10">
         	<div class="col-12">	
         		<a href="javascript:void(0)" class="qdx">NOME CLIENTE</a><br>
-        			<input class="form-control top2" id="nome_cliente_mobile" value="<?php if($dados_cliente['nome']!='CLIENTE AVULSO'){echo $dados_cliente['nome']; } ?>">																
+        			<input class="form-control top2" id="nome_cliente_mobile" value="<?php echo $nome_cliente; ?>">																
         	</div>    
         	</div>	
         

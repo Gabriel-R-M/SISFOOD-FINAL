@@ -39,7 +39,7 @@ include("includes/verifica_caixa_aberto.php");
 
 </head>
 
-<body>
+<body id="body">
 
    <div class="is_mobile d-block d-sm-none"></div> 
 

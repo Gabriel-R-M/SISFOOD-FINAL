@@ -1,22 +1,15 @@
        SHEIK ESFIHARIA E PIZZARIA
    DR. ANTONIO TEDESCO, 822 - CENTRO
           FONE: (14) 3264-3494
-              PEDIDO: #23
-          12/12/2018 AS 12:48
+              PEDIDO: #16
+          12/12/2018 AS 17:08
 ----------------------------------------
                  MESA 1
 ----------------------------------------
 Qtd COD/Produto             V. UN  Total
 ----------------------------------------
-01  SUCOS                    4,80   4,80
-    (C/ LEITE)                          
-    LARANJA                             
-----------------------------------------
 01  LANCHES                 14,90  14,90
     X TUDO                              
-----------------------------------------
-SUBTOTAL                        R$ 19,70
-TOTAL A RECEBER (=)             R$ 19,70
 ----------------------------------------
             DADOS DO CLIENTE
 ----------------------------------------
@@ -25,4 +18,4 @@ CLIENTE AVULSO
 TOTAL DE ITENS DO PEDIDO: 2
 ----------------------------------------
 PEDIDO CONTENDO:
-SUCOS/LANCHES
+LANCHES

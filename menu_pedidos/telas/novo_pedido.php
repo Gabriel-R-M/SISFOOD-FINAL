@@ -80,7 +80,7 @@ if($total_categorias<2){
 
 				<div class="col-md-7">
 					<button class="btn btn-success btn-block top10 botao_pedido_grande" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">						
-						RECEBER (F2)
+						FINALIZAR (F2)
 					</button>	
 				</div>	
 

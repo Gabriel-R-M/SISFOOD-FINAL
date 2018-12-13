@@ -11,6 +11,30 @@ $(document).ready(function(){
 
 	//$('#tudo_conteudo').perfectScrollbar();
 
+
+
+	$('body').on('click', function() {
+
+    	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
+    	alert(tipo_impressao_item_avulso)
+
+		if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ'){
+			//var itens_nao_impressos = $("#itens_nao_impressos").val();
+			//if(itens_nao_impressos>0){
+				//alert(1)			
+				//return;
+			//}
+		}  	
+
+
+	});
+
+
+});
+
+
+document.getElementById("body").addEventListener("click", function(){
+    //alert(4)
 });	
 
 function exibe_erros_gerais(erro){
@@ -61,6 +85,13 @@ function desbloqueia_campos(){
 
 
 function carregando(){
+
+	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
+    if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ'){
+    	alert(3)
+    	return;
+    }
+
 	$("#botoes_rodape").hide();
 	$("#conteudo_geral").html('<div class="col-md-12 text-center"><CENTER><h90>CARREGANDO...</h90></CENTER></div>');		
 }

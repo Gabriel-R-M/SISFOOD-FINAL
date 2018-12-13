@@ -204,7 +204,7 @@ if($db->rows($sql)){
         }
 
 
-        echo '<hr>';
+        echo '<hr style="margin-top:0; padding-top:0">';
 
 
 

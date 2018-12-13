@@ -1225,19 +1225,17 @@ function pesquisa_produtos_venda(pesquisa){
 	
 	var tela_mobile = $("#tela-mobile").val();		
 
-	
-	if(pesquisa!=''){
-		$(".marca-produtos").each(function () {
-			var id = $(this).val();
-	        if($(this).is(':checked')){
-	        	$('#prod_name_div'+id).show();
-	        } else {
-	        	$('#prod_name_div'+id).hide();
-	        }        	
-	    });
-	}
 
 	if(tela_mobile==1){
+
+		$(".marca-produtos").each(function () {
+				var id = $(this).val();
+		        if($(this).is(':checked')){
+		        	$('#prod_name_div'+id).show();
+		        } else {
+		        	$('#prod_name_div'+id).hide();
+		        }        	
+		 });
 	
 	    if(pesquisa==''){
 	    	var qtd = 0;
@@ -1259,6 +1257,18 @@ function pesquisa_produtos_venda(pesquisa){
 	    }
 	
 	} else {
+
+		if(pesquisa!=''){
+			$(".marca-produtos").each(function () {
+				var id = $(this).val();
+		        if($(this).is(':checked')){
+		        	$('#prod_name_div'+id).show();
+		        } else {
+		        	$('#prod_name_div'+id).hide();
+		        }        	
+		    });
+		}
+
 		
 		$(".tab-pane").addClass('active');
 		
@@ -1397,6 +1407,8 @@ function salva_item_pedido(){
 		pesquisa_produtos_venda('');
 		$("#input_pesquisa_produto").val('');
 
+
+
 	$.post('menu_pedidos/actions/salva_produto_venda.php?meio_meio='+meio_meio+'&opcionais='+camposMarcados+'&opcoes_produto='+opcoes_produto, {normal:normal, tamanho:tamanho, qtd:qtd, observacoes:observacoes, nome_cliente:nome_cliente}, function(resposta){
 
 		//PEGA QTD DE ITENS E ATUALIZA NO MOBILE
@@ -1420,9 +1432,17 @@ function salva_item_pedido(){
 		//PERGUNTA SE IMPRIME O ÍTEM UNICO	
 		if(venda_aguarde!=0){
 			var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
+		
 			if(tipo_impressao_item_avulso=='' || tipo_impressao_item_avulso=='ITEM A ITEM'){
 				sim_imprime_item_pedido = 1;
 				$("#ModalPerguntaImprime02").modal();
+		
+			} else {
+
+				if(tela_mobile==1){
+					$("#aviso_salvar_pedido").show();
+				}
+
 			}
 		}
 
@@ -1435,6 +1455,8 @@ function salva_item_pedido(){
 
 function apenas_salva_pedido(){
 
+	var tela_mobile = $("#tela-mobile").val();		
+
 	//VERIFICA SE A VENDA JÁ ESTA EM AGUARDE
 	var venda_aguarde = $("#pedido_aguarda_venda").val();
 
@@ -1445,8 +1467,15 @@ function apenas_salva_pedido(){
 	if(venda_aguarde!=0){
 		var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
 		if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ' && itens_nao_impressos>0){
-			sim_imprime_item_pedido = 1;
-			$("#ModalPerguntaImprime02").modal();
+
+			if(tela_mobile==1){
+				imprime_comanda02();
+				$("#aviso_salvar_pedido").hide();
+			} else {
+				sim_imprime_item_pedido = 1;
+				$("#ModalPerguntaImprime02").modal();	
+			}
+			
 		} else {
 			inicia_sistema();
 		}

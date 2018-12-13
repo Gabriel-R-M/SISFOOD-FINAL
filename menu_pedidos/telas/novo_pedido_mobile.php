@@ -140,11 +140,33 @@ require("../../diversos/funcoes_diversas.php");
 		<span class="texto_peq_itens_grande">PED: <?php echo $id_venda; ?></span>
 	</div>
 
-	<div class="col-md-12 text-center top15 hide" id="sucesso_salva_pedido_mobile">
+	<div class="col-md-12 text-center top15 upper hide" id="sucesso_salva_pedido_mobile">
 		<div  class="alert alert-success thin">
 			<i class="icofont-ui-check"></i>  Pedido atualizado com sucesso.
 		</div>	
 	</div>
+
+	
+
+
+	<?php 
+		$hide_aviso='hide';
+		if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
+			if($itens_nao_impressos>0){
+				$hide_aviso='';	
+			}
+		} 
+	?>
+
+	<div class="col-md-12 text-center <?php echo $hide_aviso; ?> top15" id="aviso_salvar_pedido">
+		<div  class="alert alert-danger thin upper">
+			  EXISTEM ÍTENS PARA IMPRESSÃO
+			<br>
+			<button onclick="javascript:apenas_salva_pedido();" class="btn btn-primary btn-block top10"><i class="icofont-print"></i> IMPRIMIR AGORA</button>
+		</div>	
+		
+	</div>
+
 
 	
 	<div class="row row-xs">
@@ -227,6 +249,7 @@ require("../../diversos/funcoes_diversas.php");
 
 
 
+<input type="hidden" id="impressoras_instaladas" value="<?php echo $dados_configuracoes['impressora_principal'].' '.$dados_configuracoes['impressora_secundaria']; ?>">
 
 <input type="hidden" id="impressao_item_avulso" value="<?php echo $dados_configuracoes['impressao_avulsa_item']; ?>">
 <input type="hidden" id="tela-mobile" value="1">
