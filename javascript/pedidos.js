@@ -18,6 +18,12 @@ $(document).ready(function(){
 	});
 
 
+	$('#ModalPerguntaImprime05').on('hidden.bs.modal', function (){
+	  sim_reimprime_item_pedido=0;
+	});
+
+
+
 	$('#ModalIniciaNovoPedido').on('hidden.bs.modal', function (){
 	  sim_novo_pedido = 0;
 	});
@@ -186,6 +192,24 @@ $(document).ready(function(){
 });	
 
 
+
+function confirma_reimpressao_item_unico(id){
+	$("#id_item_imprimir").val(id);
+	$("#ModalPerguntaImprime05").modal();
+	sim_reimprime_item_pedido=1;
+}
+
+function reimprime_item_avulso(){
+	var id = $("#id_item_imprimir").val();
+	imprime_comanda02(0,id);
+	$("#id_item_imprimir").val('');
+	$("#ModalPerguntaImprime05").modal('hide');
+}
+
+
+function marca_itens_impressos(){
+	$.post('menu_pedidos/actions/marca_itens_impressos.php', {id:1});	
+}
 
 function procura_pedido(busca){
 	$("#reload").html('<div class="col-md-12"><h5><center><br>PROCURANDO...</center></h5></div>');
@@ -617,9 +641,14 @@ function selecao_variacao(valor_recebe='0&@@&0'){
 
 		global_opcao_combo_obrigatoria=1;
 		$("#botao_opcoes_combo").show();
+	
 	} else {
 
+		$(".opcoes_desmarca").prop( "checked", false);
+		$(".opcoes_combo").removeClass('active_opcional');
 		$("#botao_opcoes_combo").hide();
+		$("#exibicao_opcoes_produto_selecionado").hide();
+		$("#exibicao_produtos_pedido").show();
 
 		//APENAS PARA MOBILE	
 		if(tela_mobile==1){
@@ -1067,6 +1096,9 @@ function escolhe_mesa(){
 
 function fazdesconto(tipo){
 
+	$("#valor_recebe").val('');
+	$("#troco_recebe").val('');
+
 	total_pedido = $("#soma_pedido").val();	
 	total_final = $("#soma_final").val();
 	total_entrega  = $("#soma_entrega").val();
@@ -1135,25 +1167,32 @@ function escolhe_forma_pgto(id){
 }
 
 function faz_saldo_restante(valor){
-	
+
+	var real_venda = parseFloat($("#soma_final").val());
+	var desconto = parseFloat($("#soma_desconto").val());	
 	var final = parseFloat($("#restante_receber").val());
-	var desconto = parseFloat($("#soma_desconto").val());
 	var recebe = parseFloat(valor);
 
-	//var final_menos_desconto = (final-desconto);
-	var resta_receber = (final-desconto);
+
+	if(desconto!=0){
+
+		var fim = (real_venda);
+
+		var troco = (valor-fim);
+		if(troco<0){
+			troco=0;
+		}	
+
+	} else {
+
+		var troco = (valor-final);
+		if(troco<0){
+			troco=0;
+		}	
+
+	}
+
 	
-	if(resta_receber<=0){
-		resta_receber=0;	
-	}
-
-	troco = (recebe-resta_receber);
-	if(troco<0){
-		troco=0;
-	}
-
-
-	//$("#valor_geral_final").val('R$ '+resta_receber.toFixed(2));
 	$("#troco_recebe").val('R$ '+troco.toFixed(2));
 
 }
@@ -1585,7 +1624,7 @@ function finaliza_pedido2(imprime=0, reload=0){
 
 
 	}
-	
+
 
 	
 	if(venda_aguarde==0){
@@ -1789,8 +1828,22 @@ function resgate_pontos(){
 
 
 function exibe_produtos_categorias_pedido(categoria){
+
+	$("#input_pesquisa_produto").val('');
+	$(".marca-produtos").each(function () {
+				var id = $(this).val();
+		        $('#prod_name_div'+id).show();		                	
+	    	});
+
+			$(".tab-pane").removeClass('active');
+			var categoria_selecionada = $("#categoria_selecionada").val();				
+			$("#div"+categoria_selecionada).addClass('active');
+
+			
+
 	$(".tab-pane").removeClass('active');
-	$("#div"+categoria).addClass('active');
+	$("#div"+categoria).addClass('active');	
+	$("#categoria_selecionada").blur();
 }
 
 

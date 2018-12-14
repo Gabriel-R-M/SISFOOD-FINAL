@@ -111,7 +111,7 @@ if($total_categorias<2){
 
 			<div class="botoes-insercao-itens-pedido">
 				<div class="input-group ">
-	                <input type="text" onkeypress='return SomenteNumero(event)' class="form-control" id="quantidade-produto" value="1">
+	                <input type="text" tabindex="-1" onkeypress='return SomenteNumero(event)' class="form-control" id="quantidade-produto" value="1">
 	                <span class="input-group-btn">
 	                  <button class="btn bd bd-l-0 btn-danger botao-adicao-produto" type="button" onclick="javascript:exibicao_adicionais_produto_selecionado();">
 	                  	<i class="icofont-ui-add"></i> <br><span>(ADICIONAIS)</span>
@@ -131,7 +131,7 @@ if($total_categorias<2){
 		<div class="col-md-7" id="input_busca_produto">
 			
 			<div id="campo_para_pesquisa_produto">
-				<input type="text" class="form-control pull-right" placeholder="CÓDIGO OU PRODUTO (F10)" onkeyup="javascript:pesquisa_produtos_venda(this.value);" id="input_pesquisa_produto">
+				<input type="text" class="form-control pull-right" placeholder="CÓDIGO OU PRODUTO (F10)" onkeyup="javascript:pesquisa_produtos_venda(this.value);" id="input_pesquisa_produto" tabindex="-1">
 				<i class="icofont-barcode"></i>
 			</div>
 
@@ -177,11 +177,10 @@ if($total_categorias<2){
 			<?php
 		  	$sel = $db->select("SELECT * FROM categorias WHERE ativo='1' ORDER BY ordem");
 		  	$class='';
-		  	$contador=1;
+		  	$contador=1;		  	
 		  	while($row = $db->expand($sel)){
-
 		  		
-		  		if($contador==1){ $class='active';}			
+		  		if($contador==1){ $class='active'; }			
 		  		 	 	  		
 
 		  		echo '<div id="div'.$contador.'" class="tab-pane '.$class.'">';
@@ -191,11 +190,23 @@ if($total_categorias<2){
 		  			$contador_produtos=1;
 		  			$seleciona_produtos = $db->select("SELECT codigo, id, produto, preco_composto FROM lanches 
 		  				WHERE ativo='1' AND categoria='$id_categoria' 
-		  				ORDER BY codigo, produto");
+		  				ORDER BY $ordem_exibicao_produtos");
 
 		  			if($db->rows($seleciona_produtos)) {
 			  			while($line = $db->expand($seleciona_produtos)){
 
+			  				$selected = '';
+			  				if($contador_produtos==1){ $selected='selected'; }	
+
+
+			  				if($contador_produtos==1){
+				  					//echo '
+				  					//<div class="col-md-3 hide">
+				  					//<div class="card '.$classe.' produto-round navegacao'.$contador.' '.$selected.' " id="produtox0" >12
+				  					//</div>
+				  					//</div>';
+				  					//$selected='';
+								}	
 			  				
 
 			  				echo '<div class="col-md-3 bottom10 produtos_categoria_selecionada'.$contador.'" data-name="'.nomes_produtos_busca($line['produto']).' '.nomes_produtos_busca($line['codigo']).'" id="prod_name_div'.$line['id'].'">';
@@ -203,28 +214,28 @@ if($total_categorias<2){
 			  				if($row['meio_meio']!=0){
 			  					$classe = 'pdr1';
 			  					$classe2 = 'pdr1a';
-			  					echo '<a href="javascript:void(0)" onclick="javascript: seleciona_produtos(1,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');">';
+			  					echo '<a tabindex="-1" href="javascript:void(0)" onclick="javascript: seleciona_produtos(1,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');" id="link_selecao'.$line['id'].'">';
 				  			} else {
-				  				echo '<a href="javascript:void(0)" onclick="javascript: seleciona_produtos(2,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');">';
+				  				echo '<a tabindex="-1" href="javascript:void(0)" onclick="javascript: seleciona_produtos(2,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');" id="link_selecao'.$line['id'].'">';
 				  				$classe = 'pdr2';
 				  				$classe2 = 'pdr2a';
 				  			}
 
-
-			  					echo '<div class="card '.$classe.' produto-round" id="produtox'.$line['id'].'" >';
+				  				
+			  					echo '<div class="card '.$classe.' produto-round navegacao'.$contador.' '.$selected.'" data-id="'.$line['id'].'" id="produtox'.$line['id'].'">';
 		
 			  						echo '<div class="col-md-12 detalhes-produtos">';
 			  							
 
 				  								if($row['meio_meio']!=0){
 				  									
-				  									echo '<input name="produto" type="checkbox" class="radio-produtos2 marca-produtos prod-meio-meio" value="'.$line['id'].'" id="check'.$line['id'].'">';
+				  									echo '<input tabindex="-1" name="produto" type="checkbox" class="radio-produtos2 marca-produtos prod-meio-meio" value="'.$line['id'].'" id="check'.$line['id'].'">';
 				  								} else {				  									
-				  									echo '<input name="produto" value="'.$line['id'].'" type="radio" class="radio-produtos2 marca-produtos prod-normais" id="check'.$line['id'].'">';
+				  									echo '<input tabindex="-1" name="produto" value="'.$line['id'].'" type="radio" class="radio-produtos2 marca-produtos prod-normais" id="check'.$line['id'].'">';
 				  								}
 				  							
 			  						
-			  						echo '<input type="text" id="foca_campo'.$line['id'].'" value="['.$row['categoria'].']" class="campo-focus upper '.$classe2.'" readonly>';
+			  						echo '<input tabindex="-1" type="text" id="foca_campo'.$line['id'].'" value="['.$row['categoria'].']" class="campo-focus upper '.$classe2.'" readonly>';
 
 			  						if(!empty($line['codigo'])){	
 			  							echo '<span class="destaca pull-right" id="destaca'.$line['id'].'">('.$line['codigo'].')</span>';

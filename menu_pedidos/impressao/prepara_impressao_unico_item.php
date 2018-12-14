@@ -79,16 +79,23 @@ if($db->rows($sel_total_itens)){
 			$tipo_query = 'ORDER BY id DESC LIMIT 1';			
 		}
 		
-	
+		
+		$query_item='';	
+		if(isset($item) && $item!=0 && $item!=''){
+			$query_item=" AND id='$item'";
+			$group = "ORDER BY id DESC LIMIT 1";
+			$tipo_query = 'ORDER BY id DESC LIMIT 1';		
+		}
 
-$sel_group = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' $group");	
+
+$sel_group = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' $query_item $group");	
 if($db->rows($sel_group)){
 while($cat_pesq = $db->expand($sel_group)){
 
 
 	$categoria_pesquisa = $cat_pesq['categoria_produto'];
 
-	$sel = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' AND categoria_produto='$categoria_pesquisa' $tipo_query");	
+	$sel = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' AND categoria_produto='$categoria_pesquisa' $query_item $tipo_query");	
 
 		if($db->rows($sel)){
 			while($row = $db->expand($sel)){

@@ -27,7 +27,7 @@ $sql = $db->select("UPDATE aguarda_venda SET embala_viagem='$embala_viagem', pre
 
 
 //NOME DO CLIENTE NA VENDA//
-if($dados_venda['nome_cliente']==''){
+if($dados_venda['nome_cliente']=='' || ($dados_venda['nome_cliente'] != $nome_cliente_mobile)){
 	
 	if(isset($nome_cliente_mobile) && !empty($nome_cliente_mobile) && $nome_cliente_mobile!='CLIENTE AVULSO'){		
 		

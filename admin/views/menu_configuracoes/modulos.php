@@ -29,7 +29,7 @@
 
         <div class="col-md-4">
            <div class="form-group">
-                <label for="exampleInputEmail1">Módulo de Internet</label>
+                <label for="exampleInputEmail1">Ativar Módulo de Internet</label>
                 <select class="form-control" name="modulo_internet" required="required">
                     <?php
                       if($ln['modulo_internet']==1){
@@ -47,7 +47,7 @@
 
         <div class="col-md-4">
            <div class="form-group">
-                <label for="exampleInputEmail1">Módulo de Controle de Entregas</label>
+                <label for="exampleInputEmail1">Ativar Módulo de Controle de Entregas</label>
                 <select class="form-control" name="modulo_entregas" required="required">
                     <?php
                       if($ln['modulo_entregas']==1){
@@ -64,7 +64,7 @@
 
         <div class="col-md-4">
            <div class="form-group">
-                <label for="exampleInputEmail1">Módulo de Fiscal</label>
+                <label for="exampleInputEmail1">Ativar Módulo Fiscal</label>
                 <select class="form-control" name="modulo_fiscal" required="required">
                     <?php
                       if($ln['modulo_fiscal']==1){

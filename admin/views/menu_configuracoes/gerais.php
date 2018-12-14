@@ -60,6 +60,23 @@
         </div> 
        
 
+       <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Ordem de exibição dos produtos:</label>
+                <select class="form-control" name="ordem_exibicao_produtos" required="required">
+                    <?php
+                      if($ln['ordem_exibicao_produtos']=='' || $ln['ordem_exibicao_produtos']=='codigo'){
+                        echo '<option value="codigo" selected>CÓDIGO</option>';
+                        echo '<option value="nome">NOME</option>';
+                      } else {
+                        echo '<option value="nome" selected>NOME</option>';
+                        echo '<option value="codigo">CÓDIGO</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div>
+
 
        
 

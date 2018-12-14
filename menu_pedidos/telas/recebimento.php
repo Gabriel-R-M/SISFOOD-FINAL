@@ -50,7 +50,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 	        <div class="row row-xs top15">
 
 	        	<div class="col-6">
-	        		<button class="btn btn-block btn-primary"  onclick="javascript:finaliza_pedido2();" type="button">
+	        		<button class="btn btn-block btn-success"  onclick="javascript:finaliza_pedido2();" type="button">
 	        			<i class="icofont-save"></i>&nbsp;&nbsp;SALVAR (F2)
 	        		</button>
 	        	</div>
@@ -68,7 +68,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 	        	<div class="col-6 top10">
 	        		<button class="btn btn-danger btn-block" id="botao_impressao_pedido" style="font-weight: 300" onclick="javascript:finaliza_pedido2(<?php echo $id_venda; ?>, 1);">
 						<i class="icofont-printer"></i>
-						&nbsp;IMPRIMIR (F3)
+						&nbsp;IMP. CONTA (F3)
 					</button>	
 	        	</div>	
 	        <?php } ?>
@@ -106,7 +106,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 			if($total_recebido_venda!=0){$oculta = '';}
 		?>
 		
-		<a href="javascript:void(0)" onclick="javascript:ve_pagamentos_recebidos();">	
+		<a tabindex="-1  href="javascript:void(0)"  onclick="javascript:ve_pagamentos_recebidos();">	
 		<div id="aviso_pagamentos_existentes" class="alert alert-warning thin top15 <?php echo $oculta; ?>" style="margin-bottom: 0">
 			<i class="icofont-exclamation-tringle"></i> Existem valores recebidos para essa venda.
 			<span class="pull-right">[ver detalhes]</span>			
@@ -120,7 +120,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 			if($db->rows($analiza)){
 		?>
 			
-			<a href="javascript:void(0)" onclick="javascript:ve_compartilhamento_mesa();">
+			<a tabindex="-1  href="javascript:void(0)" onclick="javascript:ve_compartilhamento_mesa();">
 			<div class="alert alert-danger thin top15" style="margin-bottom: 0;">
 				<i class="icofont-exclamation-tringle"></i> Mesa compartilhada entre pessoas.
 				<span class="pull-right">[ver detalhes]</span>						
@@ -163,7 +163,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
     		<div class="col-12 top15">
         	<div class="col-12">
         		ENTREGA/RETIRADA: <br>
-        		<a href="javascript:void(0)" class="qdx">ESCOLHA ENTREGA OU RETIRADA</a><br>
+        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA ENTREGA OU RETIRADA</a><br>
         			<select class="form-control top2" id="taxa_entrega" onchange="javascript:escolhe_taxa_entrega(this.value);">
 						
 						<?php
@@ -217,7 +217,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 " >
         	<div class="col-12">	
         		TROCO/MÁQUINA CARTÃO: <br>
-        		<a href="javascript:void(0)" class="qdx">ESCOLHA EM CASO DE ENTREGA</a><br>
+        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA EM CASO DE ENTREGA</a><br>
         			<div class="input-group">
 							      <div class="input-group-btn">
 							        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" style="height: 42px"> 
@@ -244,8 +244,8 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 							        </button>
 
 							         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									    <a class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(1);">DINHEIRO</a>
-									    <a class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(2);">CARTÃO</a>									    
+									    <a tabindex="-1  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(1);">DINHEIRO</a>
+									    <a tabindex="-1  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(2);">CARTÃO</a>									    
 									  </div>
 							        
 							      </div><!-- /btn-group -->
@@ -263,7 +263,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 <?php if($dados_configuracoes['escolhe_motoqueiro']==0){echo 'hide';} ?>">
         	<div class="col-12">	
         		ENTREGADOR: <br>
-        		<a href="javascript:void(0)" class="qdx">ESCOLHA O ENTREGADOR</a><br>
+        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA O ENTREGADOR</a><br>
         			<select class="form-control top2 upper" id="entregador">
 						<option value="0">-- ESCOLHA --</option>
 						<?php
@@ -290,7 +290,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 bottom25">
         	<div class="col-12">	
         		EMBALAR P/ VIAGEM: <br>
-        		<a href="javascript:void(0)" class="qdx">EMBALAR PEDIDO PARA VIAGEM</a><br>
+        		<a tabindex="-1  href="javascript:void(0)" class="qdx">EMBALAR PEDIDO PARA VIAGEM</a><br>
         			<select class="form-control top2" id="embala_viagem">										
 						<?php
 							if($dados_venda['embala_viagem']==1){
@@ -327,7 +327,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 bottom15">
         	<div class="col-12">	
         		MESAS: <br>
-        		<a href="javascript:void(0)" class="qdx">INFORME A MESA UTILIZADA</a><br>
+        		<a tabindex="-1  href="javascript:void(0)" class="qdx">INFORME A MESA UTILIZADA</a><br>
         			<select class="form-control top2" id="mesa" onchange="javascript:escolhe_mesa(this.value);">
 					<option value="0">--- ESCOLHA A MESA ---</option>
 					<?php
@@ -386,7 +386,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs">
         	<div class="col-5">
             	SUBTOTAL <br>
-                <a href="javascript:void(0)">SUBTOTAL DA COMPRA</a>
+                <a tabindex="-1  href="javascript:void(0)">SUBTOTAL DA COMPRA</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<?php echo number_format(($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos']),2,".",","); ?>
@@ -435,7 +435,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs" style="display: none;">
         	<div class="col-5">
             	SUBTOTAL <br>
-                <a href="javascript:void(0)">DEVIDO PARCIAL</a>
+                <a tabindex="-1  href="javascript:void(0)">DEVIDO PARCIAL</a>
             </div>
         	<div class="col-7 tx-primary"><small>R$</small> 
         		<span id="val_subtotal"><?php echo number_format(($dados_venda['valor_total']-$dados_venda['valor_desconto']),2,".",","); ?></span>
@@ -446,7 +446,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs">
         	<div class="col-5">
             	TAXA DE ENTREGA <br>
-                <a href="javascript:void(0)">SOMADO AO SUBTOTAL</a>
+                <a tabindex="-1  href="javascript:void(0)">SOMADO AO SUBTOTAL</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<span id="val_taxa_entrega"><?php echo $dados_venda['valor_entrega']; ?></div></span>            
@@ -456,7 +456,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs">
         	<div class="col-5">
             	RECEBIDO <br>
-                <a href="javascript:void(0)" onclick="javascript:ve_pagamentos_recebidos();">VALORES RECEBIDOS</a>
+                <a tabindex="-1  href="javascript:void(0)" onclick="javascript:ve_pagamentos_recebidos();">VALORES RECEBIDOS</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<span id="val_recebido_texto"><?php echo number_format($total_recebido_venda,2,".",","); ?></span>
@@ -467,7 +467,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs">
         	<div class="col-5">
             	RESTA A RECEBER <br>
-                <a href="javascript:void(0)">FINAL A RECEBER</a>
+                <a tabindex="-1  href="javascript:void(0)">FINAL A RECEBER</a>
             </div>
         	<div class="col-7 tx-danger"><small>R$</small> 
         		<span id="val_final"><?php echo number_format($valor_final_receber,2,".",","); ?></span>

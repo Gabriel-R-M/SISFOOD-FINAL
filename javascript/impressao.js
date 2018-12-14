@@ -145,31 +145,36 @@ function reimpressao_completa_pedido(id){
 }
 
 
-function imprime_comanda02(contador=0){
+function imprime_comanda02(contador=0,item=0){
 	aviso_impressao_sistema();		
 	$("#ModalPerguntaImprime02").modal('hide');
+
+	if(item!=0){
+		$("#botao_item"+item).removeClass("btn-primary");
+		$("#botao_item"+item).addClass("btn-success");
+	}
 
 	//VERIFICA SE IMPRIME APENAS O ULTIMO ITEM, OU TODOS QUE NAO FORAM IMPRESSOS AINDA DO PEDIDO
 	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();	
 
-	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1}, function(resposta){	
+	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1, item:item}, function(resposta){	
 
 		resposta = $.trim(resposta);
 
 		var val = resposta.split('&@&');
 		var categoria_produto = val[0];
-		var qtd_categorias_imprime = val[1];
+		var qtd_categorias_imprime = val[1];		
 
 
 		$.post('menu_pedidos/impressao/imprime.php',{tipo:2,categoria_produto:categoria_produto}, function(resposta){
 						
 			aviso_impressao_sistema(1);	
 			if(qtd_categorias_imprime>0){
-				setTimeout(function(){ imprime_comanda02(1);}, 2000);	
+				setTimeout(function(){ imprime_comanda02(1,0);}, 2000);	
 			}
 
 			if(contador==0){
-				if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ'){
+				if(tipo_impressao_item_avulso=='JUNTO APENAS UMA VEZ' && item==0){
 
 					var tela_mobile = $("#tela-mobile").val();
 					if(tela_mobile!=1){

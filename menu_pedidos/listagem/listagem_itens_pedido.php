@@ -83,7 +83,7 @@ if($db->rows($sql)){
 
 			echo '<span id="span_edita_nome'.$id_controle.'" '.$link_edita_nome.' class="upper exclui_cor">'.$row['nome_cliente_divisao'].'</span>';
 
-			echo '<input type="text" data-id="'.$id_controle.'" id="campo_edita_nome'.$id_controle.'" value="'.$row['nome_cliente_divisao'].'" class="campo_edita_nome" >';
+			echo '<input tabindex="-1" type="text" data-id="'.$id_controle.'" id="campo_edita_nome'.$id_controle.'" value="'.$row['nome_cliente_divisao'].'" class="campo_edita_nome" >';
 
 			 echo '<br>';
 		}
@@ -93,22 +93,37 @@ if($db->rows($sql)){
 			$link_edita_qtd='ondblclick="javascript:edita_quantidade_item('.$id_controle.');"';
 		}
 
-		echo '<span  style="color:#333" '.$link_edita_qtd.'>';
-			echo '<strong>QUANTIDADE: </strong><span id="span_edita_qtd'.$id_controle.'">'.$row['quantidade'].'</span>';
+		echo '<span  style="color:#333" '.$link_edita_qtd.'>';			
+
+			echo '<strong>QUANTIDADE: </strong><span id="span_edita_qtd'.$id_controle.'">'.$row['quantidade'].'</span>';			
+
 		echo '</span>';
 
-		echo '<input type="text" data-id="'.$id_controle.'" id="campo_edita_qtd'.$id_controle.'" value="'.$row['quantidade'].'" onkeypress="return SomenteNumero(event)" class="campo_edita_qtd" >';
+		echo '<input tabindex="-1" type="text" data-id="'.$id_controle.'" id="campo_edita_qtd'.$id_controle.'" value="'.$row['quantidade'].'" onkeypress="return SomenteNumero(event)" class="campo_edita_qtd" >';
 
 
 		if($dados_venda['finalizada']==0){
-			echo '<a href="javascript:void(0);" onclick="javascript:exlcui_produto_pedido(0,'.$id_controle.');" class="exclui_cor top10 thin pull-right icone_deleta_item_pedido"><i class="icofont-ui-delete"></i></a>';
+			echo '<a tabindex="-1" href="javascript:void(0);" onclick="javascript:exlcui_produto_pedido(0,'.$id_controle.');" class="exclui_cor top10 thin pull-right icone_deleta_item_pedido">
+					<button tabindex="-1" class="btn btn-primary btn-sm"><i class="icofont-ui-close"></i></button></a>';
+
+			$class_impressao='btn-primary';		
+			if($row['impresso']==1){
+				$class_impressao='btn-success';
+			}		
+			
+			if($dados_venda['aguarde']==1){	
+				echo '<a tabindex="-1" href="javascript:void(0);" onclick="javascript:confirma_reimpressao_item_unico('.$id_controle.');" class=" top10 thin pull-right" style="margin-right:2px">
+					<button tabindex="-1" class="btn '.$class_impressao.' btn-sm" id="botao_item'.$id_controle.'"><i class="icofont-print"></i></button></a>';		
+			}
+
+
         }
 
         echo '<br>';
 		echo '<small class="upper" style="color:#333">['.$type['categoria'].']</small>';
 
         echo '<br>';
-        echo '<span class="name_produto_comanda upper">'.$nome_produto.'</span>';
+        echo '<span class="name_produto_comanda upper corta_texto">'.$nome_produto.'</span>';
         echo '<span class="pull-right text-right">R$ '.number_format($row['valor'],2,",",".").'</span>';
         echo '<br><small style="color:#333" class="upper">'.$nome_tamanho.'</small>';
 
@@ -164,7 +179,7 @@ if($db->rows($sql)){
 				echo '<span class="thin upper mleft-opt">';
 				
 				if($dados_venda['finalizada']==0){						
-					echo '<a href="javascript:void(0);" onclick="javascript:exclui_adicional_pedido('.$sib['id'].');" class="exclui_cor"><i class="icofont-ui-delete"></i></a>&nbsp;';
+					echo '<a tabindex="-1" href="javascript:void(0);" onclick="javascript:exclui_adicional_pedido('.$sib['id'].');" class="exclui_cor"><i class="icofont-ui-delete"></i></a>&nbsp;';
 				}
 
 				echo '(<span class="qtd_opcionais'.$id_controle.'">'.$row['quantidade'].'</span>) '.$sib2['opcional'];
@@ -196,7 +211,7 @@ if($db->rows($sql)){
 			
 			echo '<div class="row">';
 			echo '<div class="col-md-12 top10">';
-				echo '<a href="javascript:void(0);" onclick="javascript:exlcui_produto_pedido(0,'.$id_controle.');" class="exclui_cor thin">
+				echo '<a tabindex="-1" href="javascript:void(0);" onclick="javascript:exlcui_produto_pedido(0,'.$id_controle.');" class="exclui_cor thin">
 						<button class="btn btn-md btn-primary btn-block icone_deleta_item_pedido_mobile">EXCLUIR</button>
 				</a>';
 			echo '</div>';

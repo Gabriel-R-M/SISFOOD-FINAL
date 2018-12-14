@@ -12,6 +12,9 @@
 	$sql = $db->select("ALTER TABLE configuracoes ADD dias_expira_pontos INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD escolhe_motoqueiro INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD impressao_avulsa_item VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE configuracoes ADD ordem_exibicao_produtos VARCHAR(20) NOT NULL");
+
+	
 
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD nome_cliente VARCHAR(100) NOT NULL");
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_entregue TIME NOT NULL");
@@ -19,7 +22,9 @@
 	
 	$sql = $db->select("ALTER TABLE tamanhos ADD opcao_obrigatoria INT(1) NOT NULL");
 
+	
 	$sql = $db->select("UPDATE produtos_venda SET impresso='1'");
+	$sql = $db->select("UPDATE configuracoes SET ordem_exibicao_produtos='codigo'");
 	
 
 	//RODA O SCRIPT//

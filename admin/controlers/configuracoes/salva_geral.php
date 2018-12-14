@@ -1,7 +1,7 @@
 <?php
 require("../../config.php");
 
-	$grava = $db->select("UPDATE configuracoes SET  senha_cancelamento='$senha_cancelamento', escolhe_motoqueiro='$escolhe_motoqueiro' ");	
+	$grava = $db->select("UPDATE configuracoes SET  senha_cancelamento='$senha_cancelamento', escolhe_motoqueiro='$escolhe_motoqueiro', ordem_exibicao_produtos='$ordem_exibicao_produtos' ");	
 
     $grava = $db->select("UPDATE mesas SET mesa='$mesa'");
 

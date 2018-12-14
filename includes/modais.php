@@ -645,6 +645,38 @@
             </div> 
 
             <div class="col-md-12 top15">                
+                    <button onclick="javascript:marca_itens_impressos();" data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+            </div> 
+
+          </div>           
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+<div id="ModalPerguntaImprime05" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-header">        
+        <h4 class="modal-title"><center>Imprimir Ítem ?</center></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-12"> 
+                    <input type="hidden" id="id_item_imprimir">              
+                    <button onclick="javascript:reimprime_item_avulso();" class="btn btn-success btn-block  grandao">SIM</button>               
+            </div> 
+
+            <div class="col-md-12 top15">                
                     <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 

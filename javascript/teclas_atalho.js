@@ -5,6 +5,7 @@ $(document).ready(function(){
 	sim_novo_pedido = 0;
 	sim_imprime_pedido_completo = 0;
 	sim_imprime_item_pedido = 0;
+	sim_reimprime_item_pedido=0;
 
 
 	$("body").keydown(function(e) {
@@ -113,8 +114,12 @@ $(document).ready(function(){
     		
     		//ADICIONA ITEM AO PEDIDO NA TELA DE MONTAGEM   			
     		if($('#avanca-pedido-enter').val()){    			    			
-    			if(var_global==0 && sim_novo_pedido==0 && sim_imprime_pedido_completo==0 && sim_imprime_item_pedido==0){
-    				salva_item_pedido();	
+    			if(var_global==0 && sim_novo_pedido==0 && sim_imprime_pedido_completo==0 && sim_imprime_item_pedido==0 && sim_reimprime_item_pedido==0){
+    				
+    				if($('#quantidade-produto').is(":visible") == true) {
+    					salva_item_pedido();	
+    				}	
+    				
     			}    				    		
     		}		
 
@@ -147,7 +152,13 @@ $(document).ready(function(){
     		if(sim_imprime_comp_debito_crediario==1){
     			imprime_ciencia_crediario();
     			sim_imprime_comp_debito_crediario=0;
-    		}    				    		
+    		}  
+
+    		//OK PARA REIMPRIMIR ITEM DO PEDIDO			
+    		if(sim_reimprime_item_pedido==1){
+    			reimprime_item_avulso();
+    			sim_reimprime_item_pedido=0;
+    		}  				    		
     				
 
 

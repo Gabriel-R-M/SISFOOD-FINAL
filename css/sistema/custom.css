@@ -1,6 +1,12 @@
 body{overflow-y: hidden;}
 
 
+
+
+input.form-control:focus{background-color: yellow; }
+select.form-control:focus{background-color: yellow; color: #000; box-shadow:none; outline: none; }
+button:focus{background-color: yellow; color: #000; box-shadow:none; outline: none; }
+
 .botao_pedido_grande{height: 60px; font-size: 18px; font-weight: 300}
 .select_pedido_grande{background-color: #B72925; color: #FFF; font-size: 18px; font-weight: 300}
 .select_pedido_grande:focus{background-color: #B72925; color: #FFF;}
@@ -59,7 +65,7 @@ body{overflow-y: hidden;}
 .error-select-variacao{color:  #B92A25;}
 .ok-select-variacao{display: none; color:#23BF08 }
 .mleft-opt{margin-left: 15px; font-size: 12px}
-.name_produto_comanda{width: 75%;  display: inline-flex;}
+.name_produto_comanda{width: 75%;  display: inline-flex; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;}
 .campo_edita_qtd{width:40px; text-align:center; display: none;}
 .campo_edita_nome{width:180px; display: none; outline: none; text-transform: uppercase;  }
 #valor_final_pedido_comanda{font-size: 20px; }
@@ -95,7 +101,7 @@ h90{font-size: 26px; font-weight: 400; color: #B92A25; }
 .upper{text-transform: uppercase;}
 
 .produto-round{  background-color: #FFF;  padding-top: 10px; padding-bottom: 10px; color:#333; height: 80px}
-.produto-round:hover{border: 1px solid #B92A25;}
+.produto-round:hover{border: 2px solid #B92A25;}
 .produto-round_cor{background-color:#B92A25; color: #FFF}
 
 .border-bottom{border-bottom:1px solid #e1e1e1;}
@@ -115,7 +121,7 @@ img.foto-produto{max-width: 100px;}
 .detalhes-produtos h13{font-size: 14px; padding: 0; margin:0; margin-top: 8px;  font-weight: 400}
 
 .radio-produtos{margin-top: 10px; margin-bottom: 10px}
-.radio-produtos2{display:none}
+.radio-produtos2{display: none;}
 .campo-focus{background-color: transparent; color:#333; border:0; text-align: left; outline: none; font-weight: 400; font-size: 11px; cursor: pointer;}
 
 .exclui_cor{color: #D9534F;}
@@ -246,3 +252,9 @@ color:#FFF;
 .hide_grande{display: none;}
 
 .icone-busca-pedido{position: absolute; right: 20px; top:15px;}
+
+.selected{border:2px solid #B72925; }
+/*************************************
+.selected .destaca{color: #FFF}
+.selected .campo-focus{color: #FFF}
+/*************************************
