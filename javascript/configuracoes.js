@@ -6,7 +6,8 @@ function testa_impressoras(imp){
 			aviso_impressao_sistema(1);
 			$("#botao_teste_impressoras"+imp).html('TESTAR IMPRESSORA 0'+imp);	
 			$("#resposta_teste_impressora").show();
-			setTimeout('$("#resposta_teste_impressora").hide();',3000 );
+			setTimeout('$("#resposta_teste_impressora").hide();',6000 );
+			$("#botao_teste_impressoras"+imp).blur();
 		});	
 
 }

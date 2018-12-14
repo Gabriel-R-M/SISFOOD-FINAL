@@ -7,6 +7,9 @@ $(document).ready(function(){
 	sim_imprime_item_pedido = 0;
 	sim_reimprime_item_pedido=0;
 
+	sim_abre_caixa=0;
+	sim_finaliza_caixa=0;
+
 
 	$("body").keydown(function(e) {
 		
@@ -121,7 +124,21 @@ $(document).ready(function(){
     				}	
     				
     			}    				    		
-    		}		
+    		}	
+
+
+    		//OK PARA ABRIR O CAIXA	
+    		if(sim_abre_caixa==1){
+    			abre_caixa();
+    			sim_abre_caixa=0;
+    		}
+
+
+    		//OK PARA FINALIZAR O CAIXA	
+    		if(sim_finaliza_caixa==1){
+    			finaliza_caixa();    			
+    			sim_finaliza_caixa=0;
+    		}
 
     		//OK PARA INICIAR NOVO PEDIDO   			
     		if(sim_novo_pedido==1){

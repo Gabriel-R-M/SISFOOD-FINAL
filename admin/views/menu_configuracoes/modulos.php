@@ -95,7 +95,10 @@
                     
                     <div class="card-body" style="background-color: #FFF">
                            
-                            
+                          <div class="form-group">
+                              <label for="exampleInputEmail1">Ativar Módulo Fiscal</label>
+                              <textarea class="form-control"></textarea> 
+                          </div>   
 
 
                     </div>

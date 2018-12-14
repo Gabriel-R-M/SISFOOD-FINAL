@@ -1,21 +1,25 @@
        SHEIK ESFIHARIA E PIZZARIA
    DR. ANTONIO TEDESCO, 822 - CENTRO
           FONE: (14) 3264-3494
-              PEDIDO: #31
-          14/12/2018 AS 11:19
+              PEDIDO: #19
+          14/12/2018 AS 16:24
 ----------------------------------------
              RETIRA/BALCAO
+         (EMBALAR PARA VIAGEM)
 ----------------------------------------
 Qtd COD/Produto             V. UN  Total
 ----------------------------------------
-01  LANCHES                 11,90  11,90
-    X BACON                             
+01  LANCHES                  9,50   9,50
+    CACHORRO QUENTE                     
+----------------------------------------
+01  LANCHES                 13,50  13,50
+    BIG SHEIK                           
 ----------------------------------------
             DADOS DO CLIENTE
 ----------------------------------------
-CLIENTE AVULSO
+KAIO
 ----------------------------------------
 TOTAL DE ITENS DO PEDIDO: 3
 ----------------------------------------
 PEDIDO CONTENDO:
-LANCHES/BEBIDAS
+LANCHES

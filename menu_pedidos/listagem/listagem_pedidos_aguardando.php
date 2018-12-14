@@ -68,7 +68,7 @@ include_once("../../diversos/funcoes_diversas.php");
                     PEDIDO: <?php echo ($dados['id']); ?>
             		  <?php
                     if($dados_configuracoes['modulo_entregas']==1){
-                      echo '<input value="'.$dados['id'].'" id="" type="checkbox" class="pull-right top5 marca_pedidos_entrega hide_mobile" onclick="javascript:marca_pedidos_entrega();">';
+                      echo '<input tabindex="-1" value="'.$dados['id'].'" id="" type="checkbox" class="pull-right top5 marca_pedidos_entrega hide_mobile" onclick="javascript:marca_pedidos_entrega();">';
                     }
                   ?>
                   </label>

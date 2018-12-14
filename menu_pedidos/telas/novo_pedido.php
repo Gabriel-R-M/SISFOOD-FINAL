@@ -300,7 +300,7 @@ if($total_categorias<2){
 
 <script>
 	$(document).ready(function(){
-		//$("#quantidade-produto").focus().select();
+		
 		$('#resumo-pedido-comanda, #exibicao_produtos_pedido, #exibicao_categorias_pedido, .listagem-pagamentos-recebidos').perfectScrollbar();
 	});	
 	window.clearTimeout(atualiza_pedidos);	

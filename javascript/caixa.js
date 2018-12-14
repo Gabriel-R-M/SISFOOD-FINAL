@@ -1,5 +1,24 @@
 $(document).ready(function(){
 
+
+	$('#ModalFinalizaCaixa').on('show.bs.modal', function (){
+		sim_finaliza_caixa=1;		
+	});
+	
+	$('#ModalFinalizaCaixa').on('hidden.bs.modal', function (){
+	    sim_finaliza_caixa=0;
+	});
+
+
+	$('#ModalAbreCaixa').on('show.bs.modal', function (){
+		sim_abre_caixa=1;
+	});
+	
+	$('#ModalAbreCaixa').on('hidden.bs.modal', function (){
+	    sim_abre_caixa=0;
+	});
+
+
 	$("#FormSaidaCaixa").submit(function(){
 				
 		$("#botao_saida_caixa").html('AGUARDE...');

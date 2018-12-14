@@ -12,18 +12,18 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 		<ul class="list-group">
             <li class="list-group-item upper">
-            	<a href="javascript:void();"><p class="mg-b-0 thin">            		
+            	<a tabindex="-1" href="javascript:void();"><p class="mg-b-0 thin">            		
             		<i class="icofont-print mg-r-8"></i>	
             		Manutenção de Impressoras</p>
             	</a>
             </li>
-            <li class="list-group-item upper" style="border-top: 0">
+            <li tabindex="-1" class="list-group-item upper" style="border-top: 0">
             	<a href="javascript:void();"><p class="mg-b-0 thin">   
             		<i class="icofont-wifi-router mg-r-8"></i>         		            		
             		CONFIGURAÇÃO SAT</p>
             	</a>
             </li>
-            <li class="list-group-item upper hide" style="border-top: 0">
+            <li tabindex="-1" class="list-group-item upper hide" style="border-top: 0">
             	<a href="retaguarda" ><p class="mg-b-0 thin">            		
             		<i class="icofont-gear mg-r-8"></i>
             		ACESSAR RETAGUARDA ADMINISTRATIVA</p>

@@ -89,6 +89,15 @@ require("../../includes/verifica_session.php");
 		allowZero:true, // Permite que o digito 0 seja o primeiro caractere
 		showSymbol:false // Exibe/Oculta o símbolo
 		});
+
+
+  $("input").keypress(function(event) {
+      if (event.which == 13) {
+          event.preventDefault();
+          confirma_abre_caixa();  
+      }
+  });
+
 </script>
 
 
