@@ -33,7 +33,7 @@ if($db->rows($seleciona_produtos)) {
 			  		
 			  		echo '<span class="destaca cor_branca" id="3destaca_adicionais'.$line['id'].'">OPÇÕES</span>';
 
-					echo '<input  type="checkbox" class="hide opcoes_desmarca" name="opcoes[]" value="'.$line['id'].'"  id="line2_opcao'.$line['id'].'">';
+					echo '<input  type="checkbox" class="hide opcoes_desmarca" name="opcoes[]" value="'.$line['id'].'"  id="line2_opcao_'.$line['id'].'">';
 				  	
 				  	echo '<span class="destaca pull-right" id="4destaca_adicionais'.$line['id'].'">R$ '.number_format($line['valor_opcional2'],2,",",".").'</span>';
 			  		

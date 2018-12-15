@@ -34,7 +34,7 @@ if($line['adicionais']==1){
 				  		
 				  		echo '<span class="destaca cor_branca" id="1destaca_adicionais'.$line['id'].'">ADICIONAIS</span>';
 
-						echo '<input  type="checkbox" class="hide" name="opc[]" value="'.$line['id'].'"  id="line2'.$line['id'].'">';
+						echo '<input  type="checkbox" class="hide" name="opc[]" value="'.$line['id'].'"  id="line2_'.$line['id'].'">';
 					  	
 					  	echo '<span class="destaca pull-right" id="2destaca_adicionais'.$line['id'].'">R$ '.number_format($line['valor'],2,",",".").'</span>';
 				  		

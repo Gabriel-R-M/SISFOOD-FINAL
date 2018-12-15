@@ -99,7 +99,7 @@ if ($("#avanca-pedido-enter").length){
         let left = 37;
         let up = 38;
         let down = 40;
-        let space = 32;    	
+        let enter = 32;    	
         let esc = 27;
 
 
@@ -166,10 +166,12 @@ if ($("#avanca-pedido-enter").length){
         });
 
 
-        if(e.keyCode === space){
-        	if(id_global_item_selecao!=0){
-    			$("#link_selecao"+id_global_item_selecao).click();
-    		}
+        if(e.keyCode === enter){
+            if($('.botoes-insercao-itens-pedido').is(":visible") == false) {          
+            	if(id_global_item_selecao!=0){
+        			$("#link_selecao"+id_global_item_selecao).click();
+        		}
+            }
     	}    
 
         // VERIFICA SE A TECLA QUE ESTÁ SENDO DISPARADA É ALGUMA TECLA QUE QUEREMOS TRABALHAR EM CIMA

@@ -19,6 +19,12 @@
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD nome_cliente VARCHAR(100) NOT NULL");
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_entregue TIME NOT NULL");
 	$sql = $db->select("ALTER TABLE produtos_venda ADD impresso INT(10) NOT NULL");
+
+
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD ocupou_mesa INT(10) NOT NULL");
+
+
+	
 	
 	$sql = $db->select("ALTER TABLE tamanhos ADD opcao_obrigatoria INT(1) NOT NULL");
 

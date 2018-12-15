@@ -237,9 +237,9 @@ function mais_item_pedido(){
 
 
 function marca_opcional(a){
-	
-	if( $("#line2"+a).is(':checked') ){				
-		$("#line2"+a).prop("checked", false)
+
+	if( $("#line2_"+a).is(':checked') ){				
+		$("#line2_"+a).prop("checked", false)
 		$("#line"+a).removeClass('active_opcional');
 		$("#marcado"+a).hide();
 		$("#mais"+a).show();
@@ -247,7 +247,7 @@ function marca_opcional(a){
 		$("#2destaca_adicionais"+a).css('color','#B92A25');
 		
 	} else {		
-		$("#line2"+a).prop("checked", true)		
+		$("#line2_"+a).prop("checked", true)		
 		$("#line"+a).addClass('active_opcional');		
 		$("#mais"+a).hide();
 		$("#marcado"+a).show();
@@ -261,8 +261,8 @@ function marca_opcional(a){
 
 function marca_opcoes(a){
 	
-	if( $("#line2_opcao"+a).is(':checked') ){				
-		$("#line2_opcao"+a).prop("checked", false)
+	if( $("#line2_opcao_"+a).is(':checked') ){				
+		$("#line2_opcao_"+a).prop("checked", false)
 		$("#line_opcao"+a).removeClass('active_opcional');
 		$("#marcado"+a).hide();
 		$("#mais"+a).show();
@@ -270,7 +270,7 @@ function marca_opcoes(a){
 		$("#4destaca_adicionais"+a).css('color','#B92A25');
 		
 	} else {		
-		$("#line2_opcao"+a).prop("checked", true)		
+		$("#line2_opcao_"+a).prop("checked", true)		
 		$("#line_opcao"+a).addClass('active_opcional');		
 		$("#mais"+a).hide();
 		$("#marcado"+a).show();

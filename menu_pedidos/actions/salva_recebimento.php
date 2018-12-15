@@ -67,7 +67,9 @@ if($dados_configuracoes['modulo_pontuacao']==1){
 //FINALIZA A VENDA//
 if($valor_final_receber==0){	
 
-	$sql = $db->select("UPDATE aguarda_venda SET finalizada='1', id_mesa='0', aguarde='0'  WHERE id='$id_venda' LIMIT 1");
+	$id_mesa_ocupou=$dados_venda['id_mesa'];	
+
+	$sql = $db->select("UPDATE aguarda_venda SET finalizada='1', id_mesa='0', aguarde='0', ocupou_mesa='$id_mesa_ocupou'  WHERE id='$id_venda' LIMIT 1");
 
 	@session_start();
 	unset($_SESSION['id_caixa_erp_sis'] );

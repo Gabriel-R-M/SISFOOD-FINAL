@@ -28,7 +28,18 @@ if($total_categorias<2){
 <div class="col-md-4 thin" id="lateral-pedido">
 	
 	<div class="order-top">
-		<h20>PEDIDO: <?php echo $id_venda; ?></h20>		
+		<h20>
+			PEDIDO: <?php echo $id_venda; ?>
+			<?php 
+            	if($dados_venda['id_mesa']!=0){
+            		echo '&nbsp;(MESA '.$dados_venda['id_mesa'].')';	            	
+	            } else {
+	            	if($dados_venda['ocupou_mesa']!=0){
+	                 	echo '&nbsp;(MESA '.$dados_venda['ocupou_mesa'].')';
+	                }
+	            }
+            ?>
+		</h20>		
 		<h20 class="pull-right">
 			<?php echo data_mysql_para_user($dados_venda['data_pedido']); ?>
 			(<?php echo substr($dados_venda['pedido_inicio'],0,5); ?>h)		
