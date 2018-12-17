@@ -40,7 +40,7 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 	$totais_recebimento_convenio=0;
 
 	//DINHEIRO OU CARTAO	
-		$sel = $db->select("SELECT id FROM aguarda_venda WHERE id_caixa='$id_caixa_aberto' ORDER BY id DESC");
+		$sel = $db->select("SELECT id FROM aguarda_venda WHERE id_caixa='$id_caixa_aberto' AND finalizada='1' ORDER BY id DESC");
 		if($db->rows($sel)){
 			while($row = $db->expand($sel)){
 

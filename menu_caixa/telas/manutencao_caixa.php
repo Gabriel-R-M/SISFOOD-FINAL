@@ -105,13 +105,28 @@ require("../actions/totalizadores_caixa.php");
 	
 	<?php 
 	if($dados_caixa_aberto['data_fechamento']=='0000-00-00'){	
+			$disabled='';
+			$sel = $db->select("SELECT id FROM aguarda_venda WHERE id_caixa='$id_caixa_aberto' AND finalizada='0' AND aguarde='1' LIMIT 1");
+			if($db->rows($sel)){
+				$disabled='disabled';
+			}
+
 	?>
 		<div class="col-md-12 top5">
 			
-				<button onclick="javascript:confirma_fecha_caixa();" class="btn btn-danger ">FINALIZAR CAIXA</button>   	
+				<button <?php echo $disabled; ?>  onclick="javascript:confirma_fecha_caixa();" class="btn btn-danger ">FINALIZAR CAIXA</button>   	
 			
 		</div>
 	<?php 	
+
+		if($db->rows($sel)){
+			echo '<div class="col-md-12 top10">';
+				echo '<div class="alert alert-danger">';
+					echo 'NÃO É POSSÍVEL FINALIZAR O CAIXA, POIS EXISTEM VENDAS EM ABERTO. FINALIZE-AS PARA CONTINUAR.';
+				echo '</div>';
+			echo '</div>';	
+		}
+
 	}
 	?>	
 		

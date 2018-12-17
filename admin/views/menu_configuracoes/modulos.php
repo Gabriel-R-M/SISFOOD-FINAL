@@ -27,7 +27,7 @@
 
 
 
-        <div class="col-md-4">
+        <div class="col-md-6">
            <div class="form-group">
                 <label for="exampleInputEmail1">Ativar Módulo de Internet</label>
                 <select class="form-control" name="modulo_internet" required="required">
@@ -45,7 +45,7 @@
         </div> 
 
 
-        <div class="col-md-4">
+        <div class="col-md-6">
            <div class="form-group">
                 <label for="exampleInputEmail1">Ativar Módulo de Controle de Entregas</label>
                 <select class="form-control" name="modulo_entregas" required="required">
@@ -62,7 +62,9 @@
            </div>
         </div> 
 
-        <div class="col-md-4">
+
+
+        <div class="col-md-12">
            <div class="form-group">
                 <label for="exampleInputEmail1">Ativar Módulo Fiscal</label>
                 <select class="form-control" name="modulo_fiscal" required="required">
@@ -96,8 +98,8 @@
                     <div class="card-body" style="background-color: #FFF">
                            
                           <div class="form-group">
-                              <label for="exampleInputEmail1">Ativar Módulo Fiscal</label>
-                              <textarea class="form-control"></textarea> 
+                              <label for="exampleInputEmail1">Chave Software House</label>
+                               
                           </div>   
 
 

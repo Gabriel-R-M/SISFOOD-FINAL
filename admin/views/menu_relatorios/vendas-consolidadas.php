@@ -73,10 +73,13 @@
                   <thead>
                     <tr class="tx-10">
                     	<th class="pd-y-5" width="60">ID</th>
-				        <th class="pd-y-5" width="200">Data/Hora Abertura</th>				        
-				        <th class="pd-y-5" width="200">Data/Hora Final</th>
-				        <th class="pd-y-5" >Responsável</th>
-				        <th class="pd-y-5" >Balanço Final R$</th>				        
+				        <th class="pd-y-5">Abertura</th>				        
+				        <th class="pd-y-5">Final</th>
+				        
+                <th class="pd-y-5" >Troco R$</th>               
+                <th class="pd-y-5" >Vendas R$</th>               
+                <th class="pd-y-5" >Saídas R$</th>               
+				        <th class="pd-y-5" >Balanço Final R$<br><small>(VENDAS+TROCO) - (SAIDAS)</small></th>				        
 				        <th class="pd-y-5" width="60"></th>                    	
                     </tr>
                   </thead>
@@ -109,8 +112,17 @@
 						        <td class="valign-middle upper">#<?php echo ($dados['id']); ?></td>
 						        <td class="valign-middle upper"><?php echo data_mysql_para_user($dados['data_abertura']); ?> ás <?php echo substr($dados['hora_abertura'],0,5);?>hs</td>						        
 						        <td class="valign-middle upper"><?php echo data_mysql_para_user($dados['data_fechamento']); ?> ás <?php echo substr($dados['hora_fechamento'],0,5);?>hs</td>						        
-						        <td class="valign-middle upper"><?php echo ($dados['nome']); ?></td>
-						        <td class="valign-middle upper">R$ <?php echo number_format(devolve_final_caixa($id_caixa_aberto),2,".",","); ?></td>
+						        
+                    
+
+                    <td class="valign-middle upper">R$ <?php echo number_format(devolve_troco_caixa($id_caixa_aberto),2,".",","); ?></td>
+                    
+                    <td class="valign-middle upper">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,0),2,".",","); ?></td>						        
+
+                    <td class="valign-middle upper">R$ <?php echo number_format(devolve_saidas_caixa($id_caixa_aberto),2,".",","); ?></td>
+
+
+                    <td class="valign-middle upper">R$ <?php echo number_format(devolve_final_caixa($id_caixa_aberto),2,".",","); ?></td>
 						        <td class="valign-middle upper">
 						        	<a target="_blank" href="caixa-detalhes/<?php echo $dados['id']; ?>"><button class="btn btn-primary btn-sm">GERAR RELATÓRIO</button></a>	
 						        </td>	
