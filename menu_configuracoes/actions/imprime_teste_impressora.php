@@ -46,7 +46,7 @@ if($impressora==2){
 
 			$file = '../teste_impressora.txt';
 			$_file  = fopen($file,"w");
-			fwrite($_file,'TESTE IMPRESSORA SECUNDARIA - OK');
+			fwrite($_file,"\r\n"."\r\n"."\r\n"."\r\n".'TESTE IMPRESSORA SECUNDARIA - OK'."\r\n"."\r\n"."\r\n"."\r\n"."\r\n"."\r\n");
 			fclose($_file);
 
 			$printer_principal = $dados_configuracoes['impressora_secundaria'];

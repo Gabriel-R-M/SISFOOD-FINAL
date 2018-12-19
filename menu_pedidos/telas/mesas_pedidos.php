@@ -91,7 +91,7 @@ require("../../includes/verifica_venda_aberta.php");
 		$('.mesas-exibicao').perfectScrollbar();
 	});	
 	window.clearTimeout(atualiza_pedidos);	
-	var atualiza_pedidos = setInterval(function(){ atualiza_mesas_automatico() }, 60000);
+	//var atualiza_pedidos = setInterval(function(){ atualiza_mesas_automatico() }, 60000);
 	
 </script>
 
