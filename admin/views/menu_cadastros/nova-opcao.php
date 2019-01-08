@@ -107,7 +107,9 @@ if(isset($id)){
             </div>
 
             <div class="form-layout-footer">
-              <button type="submit" class="btn btn-primary bd-0">SALVAR</button>              
+              <button type="submit" class="btn btn-primary bd-0">SALVAR</button>     
+
+              <button type="submit" onclick="javascript:salva_cadastro_insere();" class="btn btn-primary bd-0 pull-right">SALVAR E INSERIR MAIS</button>           
             </div>
 
           </div>

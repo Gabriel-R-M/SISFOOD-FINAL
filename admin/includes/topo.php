@@ -18,6 +18,7 @@ $MensagensSistema = new MensagensDesenvolvedorSistema();
     <link href="<?php echo ADMIN_DIR; ?>lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="<?php echo ADMIN_DIR; ?>lib/chartist/css/chartist.css" rel="stylesheet">
     <link href="<?php echo ADMIN_DIR; ?>lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
+    <link href="<?php echo SISTEMA_DIR; ?>css/icones/icones01/icofont.min.css" rel="stylesheet">
 
     <!-- Slim CSS -->
     <link rel="stylesheet" href="<?php echo ADMIN_DIR; ?>css/slim.css">

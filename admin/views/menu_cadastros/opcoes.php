@@ -2,10 +2,7 @@
 
 
 <div class="slim-pageheader">
-  <ol class="breadcrumb slim-breadcrumb">
-    <li class="breadcrumb-item"><a href="home">HOME</a></li>
-    <li class="breadcrumb-item active" aria-current="page">OPÇÕES P/ PRODUTOS</li>
-  </ol>
+  <a href="nova-opcao"><button type="button" class="btn btn-primary  pull-right">NOVA OPÇÃO</button></a>
   <h6 class="slim-pagetitle">LISTAGEM DE OPÇÕES</h6>
 </div><!-- slim-pageheader -->
 

@@ -2,10 +2,7 @@
 
 
 <div class="slim-pageheader">
-  <ol class="breadcrumb slim-breadcrumb">
-    <li class="breadcrumb-item"><a href="home">HOME</a></li>
-    <li class="breadcrumb-item active" aria-current="page">TAXAS DE ENTREGA</li>
-  </ol>
+  <a href="nova-taxa"><button type="button" class="btn btn-primary  pull-right">NOVA TAXA</button></a>
   <h6 class="slim-pagetitle">LISTAGEM DE TAXAS DE ENTREGA</h6>
 </div><!-- slim-pageheader -->
 

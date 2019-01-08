@@ -1,5 +1,15 @@
 // JavaScript Document
 
+function salva_cadastro_insere(){	
+	$('<input>').attr({
+	    type: 'hidden',
+	    value: '1',
+	    name: 'retorno'
+	}).appendTo('form');
+
+}
+
+
 $(document).ready(function(){
 
 

@@ -28,7 +28,7 @@ function inicia_sistema(){
 	}
 
 	carregando();
-	//$("#conteudo_geral").load('menu_pedidos/telas/novo_pedido_mobile.php');
+	//$("#conteudo_geral").load('menu_pedidos/telas/recebimento.php');
 	$.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {		
 		
 		//TUDO OK PARA INICIAR VENDAS
@@ -59,7 +59,6 @@ function inicia_sistema(){
 
 
 	});
-	
 							
 
 	

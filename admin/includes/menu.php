@@ -11,6 +11,16 @@
             <div class="sub-item">
               <ul>
                 <li><a href="home">VENDAS ANALÍTICO</a></li>                
+
+                <li class="sub-with-sub">
+                  <a href="javascript:void(0);">DESPESAS</a>
+                  <ul>
+                    <li><a href="despesas-categorias">CATEGORIAS</a></li>
+                    <li><a href="despesas-nova">NOVA DESPESA</a></li>                    
+                    <li><a href="despesas-relatorio">RELATÓRIOS</a></li>                    
+                  </ul>
+                </li> 
+
               </ul>
             </div><!-- dropdown-menu -->
           </li>

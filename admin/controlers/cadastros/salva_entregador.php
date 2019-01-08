@@ -14,7 +14,13 @@ if($id!=0){
 $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Entregador cadastrado com sucesso.';
 
+
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."entregadores");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."novo-entregador");
+} else {
+	header("Location: ".ADMIN_DIR."entregadores");
+}
+
 
 ?>

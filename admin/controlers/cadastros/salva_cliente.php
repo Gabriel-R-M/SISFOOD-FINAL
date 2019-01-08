@@ -17,6 +17,10 @@ $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Cliente cadastrado com sucesso.';
 
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."clientes");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."novo-cliente");
+} else {
+	header("Location: ".ADMIN_DIR."clientes");
+}
 
 ?>

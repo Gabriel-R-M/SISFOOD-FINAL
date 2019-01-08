@@ -2,10 +2,7 @@
 
 
 <div class="slim-pageheader">
-  <ol class="breadcrumb slim-breadcrumb">
-    <li class="breadcrumb-item"><a href="home">HOME</a></li>
-    <li class="breadcrumb-item active" aria-current="page">VARIAÇÕES</li>
-  </ol>
+  <a href="nova-variacao"><button type="button" class="btn btn-primary  pull-right">NOVA VARIAÇÃO</button></a>
   <h6 class="slim-pagetitle">LISTAGEM DE VARIAÇÕES</h6>
 </div><!-- slim-pageheader -->
 

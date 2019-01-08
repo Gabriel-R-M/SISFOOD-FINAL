@@ -6,10 +6,7 @@ $ln = $db->expand($sql);
 ?>
 
 <div class="slim-pageheader">
-  <ol class="breadcrumb slim-breadcrumb">
-    <li class="breadcrumb-item"><a href="home">HOME</a></li>
-    <li class="breadcrumb-item active" aria-current="page">PRODUTOS</li>
-  </ol>
+  <a href="novo-produto"><button type="button" class="btn btn-primary  pull-right">NOVO PRODUTO</button></a>
   <h6 class="slim-pagetitle upper"><?php echo $ln['categoria']; ?></h6>
 </div><!-- slim-pageheader -->
 

@@ -46,7 +46,15 @@ if($id!=0){
 $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Opção cadastrada com sucesso.';
 
+
+
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."opcoes");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."nova-opcao");
+} else {
+	header("Location: ".ADMIN_DIR."opcoes");
+}
+
+
 
 ?>

@@ -186,10 +186,58 @@ if(isset($id)){
                 </div>
               </div><!-- col-4 -->
 
+
+
+              <div class="col-md-12 top10">
+
+              <div id="accordion2" class="accordion-two accordion-two-primary" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingOne2">
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2" class="tx-gray-800 transition">
+                      CONFIGURAÇÕES FISCAIS
+                    </a>
+                  </div><!-- card-header -->
+
+                  <div id="collapseOne2" class="collapse show" role="tabpanel" aria-labelledby="headingOne2">
+                    
+                    <div class="card-body" style="background-color: #FFF">
+                           
+                          <div class="row">  
+
+                           
+
+                            <div class="col-md-3">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">NCM PADRÃO</label>
+                                    <input type="text"  class="form-control" name="" value="<?php echo $ln['']; ?>">  
+                               </div>
+                            </div>
+
+                            <div class="col-md-3">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">CST PADRÃO</label>
+                                    <input type="text"  class="form-control" name="" value="<?php echo $ln['']; ?>">  
+                               </div>
+                            </div>
+
+
+                          </div>    
+
+
+                    </div>
+
+                  </div>
+                </div>
+                
+              </div><!-- accordion -->
+
+          </div>
+
             </div><!-- row -->
 
             <div class="form-layout-footer">
-              <button type="submit" class="btn btn-primary bd-0">SALVAR</button>              
+              <button type="submit" class="btn btn-primary bd-0">SALVAR</button>        
+              <button type="submit" onclick="javascript:salva_cadastro_insere();" class="btn btn-primary bd-0 pull-right">SALVAR E INSERIR MAIS</button>      
             </div><!-- form-layout-footer -->
           </div><!-- form-layout -->
              

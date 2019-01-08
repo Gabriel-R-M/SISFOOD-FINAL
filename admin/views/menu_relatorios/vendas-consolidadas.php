@@ -101,9 +101,18 @@
 						      ");   						     
 							
 									if($db->rows($sel)){
+
+                    $soma_vendas=0;
+                    $soma_saidas=0;
+                    $soma_balanco=0;
+
 										while($dados = $db->expand($sel)){
 
 											$id_caixa_aberto = $dados['id'];	
+
+                      $soma_vendas = ($soma_vendas+devolve_valores_caixa($id_caixa_aberto,0));
+                      $soma_saidas = ($soma_saidas+devolve_saidas_caixa($id_caixa_aberto));
+                      $soma_balanco = ($soma_balanco+devolve_final_caixa($id_caixa_aberto));
 
 					  ?>
 						     
@@ -129,10 +138,22 @@
 						      </tr>
 						      
 				      <?php
-				      			
-				      				
-
 				      		}
+
+
+                  echo '<tr>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                    echo '<td class="valign-middle upper"><h5>R$ '.number_format($soma_vendas,2,".",",").'</h5></td>';
+                    echo '<td class="valign-middle upper"><h5>R$ '.number_format($soma_saidas,2,".",",").'</h5></td>';
+                    echo '<td></td>';
+                    echo '<td></td>';
+                  echo '</tr>';
+
+
+
 					      } else {
 					      	echo '<tr><td  class="valign-middle upper" colspan="10"><center>NENHUM CAIXA ENCONTRADO ENTRE AS DATAS!</center></td></tr>';
 					      }

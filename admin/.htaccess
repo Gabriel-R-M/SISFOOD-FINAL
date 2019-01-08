@@ -82,7 +82,11 @@
 	RewriteRule ^profile?$ views/menu_usuarios/profile.php [L,QSA]
 	RewriteRule ^mensagens?$ views/menu_usuarios/mensagens.php [L,QSA]
 
-	
+
+	RewriteRule ^despesas-categorias?$ views/menu_vendas/despesas-categorias.php [L,QSA]
+	RewriteRule ^despesas-nova?$ views/menu_vendas/despesas-nova.php [L,QSA]
+	RewriteRule ^despesas-relatorio?$ views/menu_vendas/despesas-relatorio.php [L,QSA]
+	RewriteRule ^despesas-categorias-nova?$ views/menu_vendas/despesas-categorias-nova.php [L,QSA]
 	
 
 	#CONTROLERS**************************************************************
@@ -118,6 +122,17 @@
 	RewriteRule ^gerais/save?$ controlers/configuracoes/salva_geral.php [L,QSA]	
 	RewriteRule ^formas-pgto/save?$ controlers/configuracoes/salva_formas_pagamento.php [L,QSA]	
 	RewriteRule ^sistema-pontuacao/save?$ controlers/configuracoes/salva_pontuacao.php [L,QSA]
+
+
+	
+	RewriteRule ^despesas-categorias/save?$ controlers/vendas/salva_categoria_despesa.php [L,QSA]
+	RewriteRule ^despesas-nova/save?$ controlers/vendas/salva_despesa.php [L,QSA]	
+	RewriteRule ^despesas-categorias/delete/(.*)?$ controlers/vendas/apaga_categoria_despesa.php?id=$1 [L,QSA]
+	RewriteRule ^despesas/delete/(.*)?$ controlers/vendas/apaga_despesa.php?id=$1 [L,QSA]
+
+	RewriteRule ^despesas-categorias/edit/(.*)?$ views/menu_vendas/despesas-categorias-nova.php?id=$1 [L,QSA]	
+	RewriteRule ^despesas/edit/(.*)?$ views/menu_vendas/despesas-nova.php?id=$1 [L,QSA]	
+
 
 
 </IfModule>

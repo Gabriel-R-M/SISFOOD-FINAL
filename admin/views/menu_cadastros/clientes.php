@@ -2,10 +2,7 @@
 
 
 <div class="slim-pageheader">
-  <ol class="breadcrumb slim-breadcrumb">
-    <li class="breadcrumb-item"><a href="home">HOME</a></li>
-    <li class="breadcrumb-item active" aria-current="page">CLIENTES</li>
-  </ol>
+  <a href="novo-cliente"><button type="button" class="btn btn-primary  pull-right">NOVO CLIENTE</button></a>
   <h6 class="slim-pagetitle">LISTAGEM DE CLIENTES</h6>
 </div><!-- slim-pageheader -->
 

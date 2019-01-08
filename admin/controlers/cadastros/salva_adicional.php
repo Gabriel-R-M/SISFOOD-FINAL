@@ -12,9 +12,15 @@ if($id!=0){
 
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';
-$_SESSION['avisos-admin-sis-frase'] = 'Adicional cadastrada com sucesso.';
+$_SESSION['avisos-admin-sis-frase'] = 'Adicional cadastrado com sucesso.';
+
 
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."adicionais");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."novo-adicional");
+} else {
+	header("Location: ".ADMIN_DIR."adicionais");
+}
+
 
 ?>

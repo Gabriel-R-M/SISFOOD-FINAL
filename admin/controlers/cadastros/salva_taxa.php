@@ -15,6 +15,14 @@ $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Taxa cadastrada com sucesso.';
 
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."taxas");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."nova-taxa");
+} else {
+	header("Location: ".ADMIN_DIR."taxas");
+}
+
+
+
+
 
 ?>

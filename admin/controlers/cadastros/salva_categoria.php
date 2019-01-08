@@ -14,7 +14,13 @@ if($id!=0){
 $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Categoria cadastrada com sucesso.';
 
+
 //REDIRECIONA PARA A PÁGINA//
-header("Location: ".ADMIN_DIR."categorias");
+if(isset($retorno) && $retorno==1){
+	header("Location: ".ADMIN_DIR."nova-categoria");
+} else {
+	header("Location: ".ADMIN_DIR."categorias");
+}
+
 
 ?>

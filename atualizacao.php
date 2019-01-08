@@ -22,6 +22,8 @@
 	$sql = $db->select("UPDATE configuracoes SET ordem_exibicao_produtos='codigo'");
 
 	$sql = $db->select("ALTER TABLE lanches CHANGE codigo codigo VARCHAR(90) NOT NULL;");
+	$sql = $db->select("ALTER TABLE dados_loja ADD inscricao_estadual VARCHAR(99) NOT NULL");
+
 
 	
 	
@@ -37,8 +39,8 @@
 		foreach($sql as $v) $db->select($v);
 		
 		//RENOMEIA PARA NAO FAZER DENOVO//
-		$renomeia = 'atualizacoes/ANTIGO_'.date('d-m-y').'_atualizacoes.sql';
-		rename($nome_do_arquivo, $renomeia);
+		//$renomeia = 'atualizacoes/ANTIGO_'.date('d-m-y').'_atualizacoes.sql';
+		//rename($nome_do_arquivo, $renomeia);
 	}
 	
 

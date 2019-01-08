@@ -244,8 +244,8 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 							        </button>
 
 							         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									    <a tabindex="-1  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(1);">DINHEIRO</a>
-									    <a tabindex="-1  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(2);">CARTÃO</a>									    
+									    <a tabindex="-1"  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(1);"><i class="icofont-dollar"></i> DINHEIRO</a>
+									    <a tabindex="-1"  class="dropdown-item" href="javascript:void(0);" onclick="javascript:defini_tipo_troco_cartao_entrega(2);"><i class="icofont-credit-card"></i> CARTÃO</a>									    
 									  </div>
 							        
 							      </div><!-- /btn-group -->
