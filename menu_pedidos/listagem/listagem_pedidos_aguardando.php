@@ -36,16 +36,17 @@ include_once("../../diversos/funcoes_diversas.php");
 				$entrega2 = 'tx-danger';
 				$entrega3 = '#B92A25';
 
-            if($dados['pedido_entregue']!='00:00:00'){
-                $entrega = '<i class="fa fa-motorcycle fa-fw" aria-hidden="true"></i> SAIU P/ ENTREGA ÁS '.substr($dados['pedido_entregue'],0,5);
+            if($dados['pedido_saiu_entrega']!='00:00:00'){
+                $entrega = '<i class="fa fa-motorcycle fa-fw" aria-hidden="true"></i>&nbsp; SAIU P/ ENTREGA ÁS '.substr($dados['pedido_saiu_entrega'],0,5);
                 $entrega2 = 'tx-danger';
                 $entrega3 = '#B92A25';  
 
-                $tempo_decorrido = tempo_decorrido_pedido($dados['pedido_entregue'],2);              
-                if($tempo_decorrido>=30){
-                      $entrega = '<i class="fa fa-check fa-fw" aria-hidden="true"></i> ENTREGA REALIZADA';
-                      $entrega2 = 'tx-success';
-                      $entrega3 = '#B92A25';                    
+                //$tempo_decorrido = tempo_decorrido_pedido($dados['pedido_entregue'],2);              
+                //if($tempo_decorrido>=30){
+                if($dados['pedido_entregue']!='00:00:00'){
+                    $entrega = '<i class="fa fa-check fa-fw" aria-hidden="true"></i> ENTREGA REALIZADA';
+                    $entrega2 = 'tx-success';
+                    $entrega3 = '#B92A25';                    
                 } 
 
             }
@@ -64,8 +65,16 @@ include_once("../../diversos/funcoes_diversas.php");
             	<div class="card card-popular-product" style="border-left-color: <?php echo $entrega3; ?>">
             		  
 
-                  <label class="prod-id thin">
-                    PEDIDO: <?php echo ($dados['id']); ?>
+                  <label class="prod-id thin" <?php if($dados['pedido_internet']!=0){ echo 'style="margin-bottom:8px"'; } ?> >
+                    <?php
+                      if($dados['pedido_internet']!=0){
+                        echo '<span class="label-mesa" style="font-size:15px; ">INTERNET: '.$dados['id'].'</span>';
+                      } else {
+                          echo 'PEDIDO: '.($dados['id']);
+                      }
+                    ?>
+
+                    
             		  <?php
                     if($dados_configuracoes['modulo_entregas']==1){
                       echo '<input tabindex="-1" value="'.$dados['id'].'" id="" type="checkbox" class="pull-right top5 marca_pedidos_entrega hide_mobile" onclick="javascript:marca_pedidos_entrega();">';

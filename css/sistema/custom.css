@@ -1,10 +1,20 @@
 body{overflow-y: hidden;}
 
 
+ul li.menu_pisca_internet{animation: fundoVermelho .8s; animation-iteration-count: infinite; }
+@keyframes fundoVermelho {
+  0% { background: transparent; }  
+  100% { background: #333; }
+}
 
 
+.icone_rodando_btn{font-size: 18px}
+#motivo_rejeicao_pedido_internet_conteudo {min-width: 400px}
+#detalhes_pedido_internet_conteudo {min-width: 700px}
+#detalhes_pedido_internet_conteudo h4{color:#B92A25; }
 input.form-control:focus{background-color: yellow; }
 select.form-control:focus{background-color: yellow; color: #000; box-shadow:none; outline: none; }
+textarea.form-control:focus{background-color: yellow; color: #000; box-shadow:none; outline: none; }
 button:focus{background-color: yellow; color: #000; box-shadow:none; outline: none; }
 
 .botao_pedido_grande{height: 60px; font-size: 18px; font-weight: 300}
@@ -143,6 +153,7 @@ span.codigo-grande{font-size: 20px; font-weight: 100}
 
 .tudo{background-color:#FFF; margin-bottom:10px; padding: 10px; border-radius: 0px}
 .tudo2{background-color:#FFF; margin-bottom:10px; padding: 10px; border-radius: 10px; padding-top: 20px}
+.top0{margin-top: 0px}
 .top2{margin-top: 2px}
 .top3{margin-top: 3px}
 .top5{margin-top: 5px}

@@ -36,7 +36,7 @@
                   $x=1; 
                   while($yy = $db->expand($sel)){  
                   
-
+                    $id_opcional = $yy['id'];
                   	$ativo = ativo_produto($yy['ativo']);
 
                 ?>    
@@ -44,12 +44,29 @@
                     <tr>
                      
                       <td class="valign-middle upper"><?php if($yy['id']<10){echo '0';} echo $yy['id']; ?></td>	
-                      <td class="valign-middle upper"><?php echo $yy['opcional']; ?></td>
+                      <td class="valign-middle upper">
+                          <?php echo $yy['opcional']; ?><br>
+                          <?php 
+                            $pega = $db->select("SELECT opcionais_categorias_relacao.id_categoria, categorias.categoria 
+                              FROM opcionais_categorias_relacao 
+                              LEFT JOIN categorias ON opcionais_categorias_relacao.id_categoria=categorias.id
+                              WHERE opcionais_categorias_relacao.id_opcional='$id_opcional'");
+                              if($db->rows($pega)){
+                                echo '<small class="tx-primary upper">[<B>CATEGORIAS LIBERADAS: </B>';
+                                while($line = $db->expand($pega)){
+                                  echo $line['categoria'].', ';
+                                }
+                                echo ']</small>';                              
+                              } else {
+                                  echo '<small class="tx-primary upper">[<B>CATEGORIAS LIBERADAS:</B> TODAS]</small>';
+                              }
+                          ?> 
+                      </td>
                       
                      
                       <td class="valign-middle upper"><?php echo valores($yy['valor']); ?></td>
 
-					<td class="valign-middle">                                              
+					           <td class="valign-middle">                                              
                         	<?php echo $ativo; ?>
                       </td>
 

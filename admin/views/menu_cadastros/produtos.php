@@ -38,6 +38,7 @@
                   $x=1; 
                   while($yy = $db->expand($sel)){  
 
+
                     $foto = foto_produto($yy['foto']);
                     $ativo = ativo_produto($yy['ativo']);
                     $id_produto = $yy['id'];
@@ -56,7 +57,23 @@
                             <small class="upper">[<?php echo $yy['cat']; ?>]</small><br>
                           </span>  
                           <span class="upper"><?php echo $yy['produto']; ?></span></a>
-                        <?php //echo $ativo; ?>  
+                         
+                        <?php 
+                            $pega = $db->select("SELECT ingredientes_lanches.id_ingrediente, ingredientes.ingrediente 
+                              FROM ingredientes_lanches 
+                              LEFT JOIN ingredientes ON ingredientes_lanches.id_ingrediente=ingredientes.id
+                              WHERE ingredientes_lanches.id_produto='$id_produto'");
+                            if($db->rows($pega)){
+                              echo '<small class="tx-primary upper">[<B>INGREDIENTES: </B>';
+                                while($line = $db->expand($pega)){
+                                  echo $line['ingrediente'].', ';
+                                }
+                                echo ']</small>';  
+                            } else {
+                              echo '<small class="tx-primary">[INGREDIENTES NÃO DEFINIDOS]</small>';
+                            }
+                            
+                        ?>  
                       </td>
                       
                       <td class="valign-middle">                                              

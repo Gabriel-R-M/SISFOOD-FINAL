@@ -5,6 +5,7 @@ $Images = new UploadArquivoSis();
 //UPDATE
 if($id!=0){
 	
+	$id_produto = $id;
 	$arquivo = $Images->Upload('../../../imagens/produtos','foto',600);
 
 	$q = '';
@@ -81,6 +82,28 @@ if($id!=0){
 
 
 }
+
+
+
+////INGREDIENTES/////
+$grava = $db->select("DELETE FROM ingredientes_lanches  WHERE id_produto='$id_produto'");	
+if(isset($ingrediente_produto)){
+	
+	foreach($_POST['ingrediente_produto'] as $k => $v){ 
+    	$ingrediente_produto = $v;
+
+		$ins = $db->select("INSERT INTO ingredientes_lanches (id_produto, id_ingrediente) VALUES ('$id_produto', '$ingrediente_produto')");
+
+    }   
+
+}
+
+
+$update = $db->select("UPDATE sistema SET aviso_update_internet='1'");
+
+
+
+
 
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';

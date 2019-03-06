@@ -4,7 +4,7 @@ require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
 
-$tamanho.'sasas';
+
 $preco_produto=0;
 $tam = explode('&@@&', $tamanho);
 $tamanho = $tam[0];

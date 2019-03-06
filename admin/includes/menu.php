@@ -1,3 +1,12 @@
+  <?php
+
+      $avisos = new AvisosLoja();
+
+      $avisos->AvisoUpdateBaseInternet();
+      
+
+?>
+
 <div class="slim-navbar">
       <div class="container">
         <ul class="nav">
@@ -146,6 +155,7 @@
             <div class="sub-item">
               <ul>
                 <li><a href="modulos">MÓDULOS</a></li>                                
+                <li><a href="modulos-internet">MÓDULO PEDIDOS WEB</a></li>                                
                 <li><a href="impressao">IMPRESSÃO</a></li>                                
                 <li><a href="gerais">GERAIS</a></li>                
                 <li><a href="formas-pagamento">FORMAS DE PAGAMENTO</a></li>                
@@ -196,7 +206,9 @@
       } 
     ?>
 
-    <?php 
-      $avisos = new AvisosLoja();
-      $avisos->Avisos();
+
+    <?php
+      
+      $avisos->Avisos(); 
+
     ?>

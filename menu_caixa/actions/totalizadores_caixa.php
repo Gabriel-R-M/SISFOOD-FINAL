@@ -97,6 +97,51 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 }
 
 
+
+
+
+function totais_caixa_separado_entrega_balcao($id_caixa_aberto,$tipo){
+
+	$db=new DB();
+	$totais=0;
+	$busca='';
+
+	//BALCAO E RETIRADA
+	if($tipo==0){
+		$busca = "AND entrega='0'";
+	}
+
+	//ENTREGAS
+	if($tipo==1){
+		$busca = "AND entrega='1'";
+	}
+
+	//DINHEIRO OU CARTAO	
+		$sel = $db->select("SELECT id FROM aguarda_venda WHERE id_caixa='$id_caixa_aberto' AND finalizada='1' $busca ORDER BY id DESC");
+		if($db->rows($sel)){
+			while($row = $db->expand($sel)){
+
+				$id_ven_procura = $row['id'];
+				$sel2 = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_ven_procura' ORDER BY id DESC");
+				while($row2 = $db->expand($sel2)){
+
+						
+						$totais = ($totais+$row2['valor_caixa_real']);
+						
+
+				}
+
+			}
+
+		}	
+
+
+	
+		return $totais;
+		
+}
+
+
 ///SAIDAS DE CAIXA
 function devolve_saidas_caixa($id_caixa_aberto){
 

@@ -1,0 +1,24 @@
+            SHEIK ESFIHARIA
+ANTONIO BIRAL, ESQUINA C/ A 28 DE ABRIL
+       WWW.SHEIKESFIHARIA.COM.BR
+              PEDIDO: #73
+          08/02/2019 AS 17:26
+----------------------------------------
+                 MESA 4
+----------------------------------------
+Qtd COD/Produto             V. UN  Total
+----------------------------------------
+02  SUCOS                    3,90   7,80
+    (NORMAL)                            
+    ACEROLA                             
+----------------------------------------
+            DADOS DO CLIENTE
+----------------------------------------
+CLIENTE AVULSO
+----------------------------------------
+TOTAL DE ITENS DO PEDIDO: 2
+----------------------------------------
+PEDIDO CONTENDO:
+SUCOS
+----------------------------------------
+ATENDENTE: DIOGO

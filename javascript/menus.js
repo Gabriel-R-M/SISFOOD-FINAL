@@ -19,15 +19,6 @@ function inicia_sistema(){
 	}
 
 	carregando();
-	
-	
-			
-	var mobile = 0;
-	if($('.is_mobile').is(":visible") == true) {
-		mobile = 1;       
-	}
-
-	carregando();
 	//$("#conteudo_geral").load('menu_pedidos/telas/recebimento.php');
 	$.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {		
 		
@@ -58,9 +49,11 @@ function inicia_sistema(){
 		}		
 
 
-	});
-							
+	});	
 
+
+
+	
 	
 }
 
@@ -149,6 +142,8 @@ function cadastro_clientes(){
 	carregando();
 	$("#conteudo_geral").load('menu_clientes/telas/clientes.php');	
 }
+
+
 
 
 

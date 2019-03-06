@@ -7,6 +7,7 @@ require("../../includes/verifica_venda_aberta.php");
 require("../../includes/verifica_dados_loja.php");
 require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_impressao.php");
+require("../../diversos/funcoes_diversas.php");
 	
 
 
@@ -42,6 +43,11 @@ require("../../diversos/funcoes_impressao.php");
 				$txt_cabecalho[] = '(EMBALAR PARA VIAGEM)';
 			}
 
+		} 
+
+		//PEDIDO DA INTERNET
+		if($dados_venda['pedido_internet']!=0){
+			$txt_cabecalho[] = '--- PEDIDO VIA INTERNET ---';
 		} 
 	
 
@@ -463,15 +469,30 @@ require("../../diversos/funcoes_impressao.php");
 		$txt_dados_entrega[] = '----------------------------------------';
 		$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
-		$id_cliente = $dados_venda['id_cliente'];
-		$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
-		$dados_cliente = $db->expand($selectx);
+		if(!empty($dados_venda['nome_cliente'])){
+			
+			$id_cliente = $dados_venda['id_cliente'];
+			$dados_entrega = "\r\n".retira_acentos($dados_venda['nome_cliente'])."\r\n";	
+			$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
+			$dados_cliente = $db->expand($selectx);
 
-		$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
-		
-		if(!empty($dados_cliente['telefone'])){					
-			$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+			if(!empty($dados_cliente['telefone'])){					
+				$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+			}
+
+		} else {
+			
+			$id_cliente = $dados_venda['id_cliente'];
+			$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
+			$dados_cliente = $db->expand($selectx);
+			$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
+			
+			if(!empty($dados_cliente['telefone'])){					
+				$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+			}
+
 		}
+		
 		
 	}
 	//SE FOR ENTREGA EXIBE O ENDEREÇO E DADOS DO COMPRADOR//	
@@ -511,6 +532,14 @@ require("../../diversos/funcoes_impressao.php");
 
 	$dados_entrega .= retira_acentos($categorias_pedido_gerais)."\r\n";	
 
+
+	//IMPRIME O NOME DO ATENDENTE NA COMANDA
+	$dados_atendente = $dados_venda['id_usuario'];
+	$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
+	$dados_atendente = $db->expand($dados_atendente);
+
+	$dados_entrega .= '----------------------------------------'."\r\n";
+	$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 
 	///GERA O ARQUIVO	

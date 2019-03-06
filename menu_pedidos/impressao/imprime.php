@@ -25,7 +25,7 @@ if($tipo==1){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 		}
@@ -47,7 +47,7 @@ if($tipo==1){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 		}
@@ -76,7 +76,7 @@ if($tipo==11){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 		}
@@ -105,7 +105,7 @@ if($tipo==12){
 
 				printer_end_page($ph);
 				printer_end_doc($ph); 
-				printer_abort($ph);
+				//printer_abort($ph);
 
 				printer_close($ph);
 			}
@@ -146,7 +146,7 @@ if($tipo==2){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 
@@ -177,7 +177,7 @@ if($tipo==3){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 		}
@@ -204,7 +204,7 @@ if($tipo==4){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 			printer_close($ph);
 		}
@@ -232,7 +232,7 @@ if($tipo==5){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 		   	printer_close($ph);
 
@@ -263,7 +263,7 @@ if($tipo==20){
 
 		   	printer_end_page($ph);
 			printer_end_doc($ph);
-			printer_abort($ph);
+			//printer_abort($ph);
 
 		   	printer_close($ph);
 

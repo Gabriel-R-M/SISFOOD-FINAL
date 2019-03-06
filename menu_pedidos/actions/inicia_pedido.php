@@ -24,7 +24,7 @@ if($id_cliente!='' && $id_cliente!=0){
 
 		if($nome=='CLIENTE AVULSO'){
 
-			$peg = $db->select("SELECT id FROM clientes WHERE nome='CLIENTE AVULSO' ORDER BY id DESC LIMIT 1");
+			$peg = $db->select("SELECT id FROM clientes WHERE nome='CLIENTE AVULSO' AND endereco='' AND numero='' ORDER BY id DESC LIMIT 1");
 			if($db->rows($peg)){
 				$linha = $db->expand($peg);			
 				$id_cliente = $linha['id'];
@@ -77,7 +77,7 @@ if($id_cliente!='' && $id_cliente!=0){
 	} 
 
 	//INICIA PEDIDO
-	$insere = $db->select("INSERT INTO aguarda_venda (id_usuario, id_cliente, id_caixa, pedido_inicio, data_pedido) VALUES ('$id_usuario', '$id_cliente', '$id_caixa_aberto', '$hora', '$dt')");
+	$insere = $db->select("INSERT INTO aguarda_venda (id_usuario, id_cliente, id_caixa, pedido_inicio, data_pedido, md5_usuario) VALUES ('$id_usuario', '$id_cliente', '$id_caixa_aberto', '$hora', '$dt', '$md5_usuario_logado')");
 
 
 

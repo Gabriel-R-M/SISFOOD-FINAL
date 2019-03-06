@@ -9,8 +9,9 @@ require_once("../../includes/verifica_venda_aberta.php");
 
 $contador_opcoes=0;
 
+
 $seleciona_produtos = $db->select("SELECT * FROM opcionais2 
-	WHERE ativo='1' AND (id_categoria LIKE '%$categoria%' OR id_produto LIKE '%$produto%') 
+	WHERE ativo='1' 
 	ORDER BY opcional2");
 $class=''; 
 
@@ -19,7 +20,12 @@ echo '<div class="row row-xs">';
 
 if($db->rows($seleciona_produtos)) {
 	while($line = $db->expand($seleciona_produtos)){
+
+	$teste = $line['id_produto'];
+	$tagsArray = explode(',', $teste);	
 		
+	if (in_array($produto, $tagsArray)) {
+
 		echo '<div class="col-6 col-md-3 bottom10" >';
 
 			if(empty($class)){
@@ -49,6 +55,9 @@ if($db->rows($seleciona_produtos)) {
 		echo '</div>';
 		
 		$contador_opcoes++;
+
+	}
+
 	}
 } else {
 	echo '<div class="col-md-12 bottom10 text-center">';

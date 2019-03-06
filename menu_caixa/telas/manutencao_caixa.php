@@ -58,17 +58,17 @@ require("../actions/totalizadores_caixa.php");
 		<ul class="list-group bottom5" >
         
             <li class="list-group-item" style="border-bottom: 0; border-top: 0">
-            	<a tabindex="-1" href="javascript:vizualiza_vendas(1);">RECEBIMENTOS EM DINHEIRO:</a>
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(1);">RECEBIMENTOS EM DINHEIRO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,1),2,".",","); ?> +</span>
             </li>
 
              <li class="list-group-item" style="border-bottom: 0">
-            	<a tabindex="-1" href="javascript:vizualiza_vendas(2);">RECEBIMENTOS NO CARTÃO:</a>
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(2);">RECEBIMENTOS NO CARTÃO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,2),2,".",","); ?> +</span>
             </li>
            
              <li class="list-group-item" style="border-bottom: 0">
-            	<a tabindex="-1" href="javascript:vizualiza_recebimentos_crediario();">RECEBIMENTOS DE CREDIÁRIO:</a>
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_recebimentos_crediario();">RECEBIMENTOS DE CREDIÁRIO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,3),2,".",","); ?> +</span>
             </li>
 
@@ -84,7 +84,7 @@ require("../actions/totalizadores_caixa.php");
             </li>
 
              <li class="list-group-item">             	
-            	<a tabindex="-1" href="javascript:vizualiza_saidas_caixa(0);">SAÍDAS DE CAIXA:</a>
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_saidas_caixa(0);">SAÍDAS DE CAIXA:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_saidas_caixa($id_caixa_aberto),2,".",","); ?> -</span>
             </li>
 
@@ -93,12 +93,46 @@ require("../actions/totalizadores_caixa.php");
             	<span class="pull-right" id="val_final">R$ <?php echo number_format(devolve_final_caixa($id_caixa_aberto),2,".",","); ?> =</span>
             </li>
 
-             <li class="list-group-item">
-            	<a tabindex="-1" href="javascript:vizualiza_entregas_caixa(0);">QUANTIDADE DE ENTREGAS:</a>
-            	<span class="pull-right"><?php echo totais_entregas_caixa($id_caixa_aberto); ?></span>
-            </li>
+            
             
           </ul>  
+
+
+
+          <div class="col-md-12 card">
+				<div class="row row-xs top15  bottom15">
+
+				<div class="col-md-2">
+					<ul class="list-group">        
+			            <li class="list-group-item">
+			            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_entregas_caixa(0);">QTD ENTREGAS:</A>
+			            	<span class="pull-right"><?php echo totais_entregas_caixa($id_caixa_aberto); ?></span>
+			            </li>	
+			        </ul>    	
+				</div>
+	
+
+				<div class="col-md-5">
+					<ul class="list-group">        
+			            <li class="list-group-item">
+			            	<span class="thin">TOTAL VENDAS BALCÃO/RETIRADA:</span>
+			            	<span class="pull-right">R$ <?php echo number_format(totais_caixa_separado_entrega_balcao($id_caixa_aberto,0),2,".",",");; ?></span>
+			            </li>	
+			        </ul>    	
+				</div>
+
+				<div class="col-md-5">
+					<ul class="list-group">        
+			            <li class="list-group-item">
+			            	<span class="thin">TOTAL VENDAS ENTREGAS:</span>
+			            	<span class="pull-right upper">R$ <?php echo number_format(totais_caixa_separado_entrega_balcao($id_caixa_aberto,1),2,".",",");; ?></span>
+			            </li>	
+			        </ul>    	
+				</div>
+
+	
+			</div>
+			</div>
 
 
 </div>	

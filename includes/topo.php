@@ -41,12 +41,11 @@ include("includes/verifica_caixa_aberto.php");
 
 <body id="body">
 
-   <div class="is_mobile d-block d-sm-none"></div> 
+
+   <div class="is_mobile d-block d-md-none"></div> 
 
 	<?php include("includes/modais.php"); ?>
 	
-	
-
 
 
 	<div class="slim-header with-sidebar" style="display: none;">
@@ -86,4 +85,6 @@ include("includes/verifica_caixa_aberto.php");
 
       <div class="container" id="tudo_conteudo">
       <div class="row row-xs" id="conteudo_geral"  >
+
+        
         

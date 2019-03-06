@@ -78,7 +78,24 @@
         </div>
 
 
-       
+       <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Exibir Combo de Categorias no Mobile?</label>
+                <select class="form-control" name="categorias_mobile" required="required">
+                    <?php
+                      if($ln['categorias_mobile']==1){
+                        echo '<option value="1" selected>SIM</option>';
+                        echo '<option value="0">NÃO</option>';
+                      } else {
+                        echo '<option value="0" selected>NÃO</option>';
+                        echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div> 
+
+
 
 
             </div><!-- row -->

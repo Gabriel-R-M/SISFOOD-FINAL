@@ -739,6 +739,7 @@ pre {
   margin-left: 91.66667%; }
 
 @media (min-width: 576px) {
+
   .col-sm {
     flex-basis: 0;
     flex-grow: 1;
@@ -1315,6 +1316,7 @@ pre {
       border: 0; } }
 
 @media (max-width: 767.98px) {
+  
   .table-responsive-md {
     display: block;
     width: 100%;

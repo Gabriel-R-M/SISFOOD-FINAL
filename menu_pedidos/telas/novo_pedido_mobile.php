@@ -49,14 +49,14 @@ require("../../diversos/funcoes_diversas.php");
 			<div class="row row-xs">
 				
 				<div class="col-6">
-					<button class="btn btn-danger btn-block top10" style="font-weight: 300;" onclick="javascript:voltar_confere_pedido_mobile();">
+					<button class="btn btn-danger btn-block top10 bottom10" style="font-weight: 300;" onclick="javascript:voltar_confere_pedido_mobile();">
 						<i class="icofont-simple-left"></i>
 						VOLTAR
 					</button>	
 				</div>	
 
 				<div class="col-6">
-					<button class="btn btn-success btn-block top10" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">
+					<button class="btn btn-success btn-block top10 bottom10" style="font-weight: 300;" onclick="javascript:finaliza_pedido();">
 						<i class="icofont-verification-check"></i>
 						SALVAR PEDIDO
 					</button>	
@@ -91,7 +91,7 @@ require("../../diversos/funcoes_diversas.php");
 				<div id="campo_para_variacao_produto">
 					<input type="tel" placeholder="QTD" onkeypress='return SomenteNumero(event)' class="form-control pull-left" id="quantidade-produto">
 							
-					<select class="form-control pull-right" id="tamanho" onchange="javascript:selecao_variacao(this.value)"></select>
+					<select class="form-control pull-right upper" id="tamanho" onchange="javascript:selecao_variacao(this.value)"></select>
 						<i class="icofont-exclamation-tringle error-select-variacao"></i>
 						<i class="icofont-verification-check ok-select-variacao"></i>
 				</div>				
@@ -128,16 +128,32 @@ require("../../diversos/funcoes_diversas.php");
 				CONFERIR
 			</button>
 
+			<?php if($dados_configuracoes['categorias_mobile']==1){ ?>
+
+			<select id="categoria_selecionada_mobile" class="form-control upper thin text-center" onchange="javascript:exibe_produtos_atraves_categorias_mobile(this.value)" style="margin-bottom: 20px">
+				<option value="0">ESCOLHA A CATEGORIA</option>
+				<?php
+				  	$sel = $db->select("SELECT * FROM categorias WHERE ativo='1' ORDER BY ordem");				  	
+				  	while($row = $db->expand($sel)){	
+				  						  	
+					  	echo '<option value="'.$row['id'].'">'.$row['categoria'].'</option>';				  			
+					  		
+				  	}
+				 ?>			
+			</select>
+
+			<?php } ?>
+
 		</div>
 	
 	</div>
 
 	
-	<div class="col-md-12 text-center" id="informacao_qtd_itens_pedido">
+	<div class="col-md-12 text-center" id="informacao_qtd_itens_pedido" >
 		<br><br>
 		<span class="qtd_itens_grande"><?php echo $qtd_itens_pedido; ?></span><br>
 		<span class="texto_itens_grande">ÍTEN(S) NO PEDIDO</span><br>
-		<span class="texto_peq_itens_grande">PED: <?php echo $id_venda; ?></span>
+		<span class="texto_peq_itens_grande">PED Nº: <?php echo $id_venda; ?></span>
 	</div>
 
 	<div class="col-md-12 text-center top15 upper hide" id="sucesso_salva_pedido_mobile">
@@ -180,14 +196,14 @@ require("../../diversos/funcoes_diversas.php");
 		  			$contador_produtos=1;
 		  			$seleciona_produtos = $db->select("SELECT codigo, id, produto, preco_composto FROM lanches 
 		  				WHERE ativo='1' AND categoria='$id_categoria' 
-		  				ORDER BY codigo, produto");
+		  				ORDER BY ABS($ordem_exibicao_produtos)");
 
 		  			if($db->rows($seleciona_produtos)) {
 			  			while($line = $db->expand($seleciona_produtos)){
 
 			  				
 
-			  				echo '<div class="col-6 col-md-3 hide bottom10" data-name="'.nomes_produtos_busca($line['produto']).' '.nomes_produtos_busca($line['codigo']).'" id="prod_name_div'.$line['id'].'">';
+			  				echo '<div class="col-6 col-md-3 hide bottom10 exibe_lanches_categoria'.$id_categoria.'  exibe_lanches_categoria" data-name="'.nomes_produtos_busca($line['produto']).' '.nomes_produtos_busca($line['codigo']).'" id="prod_name_div'.$line['id'].'">';
 
 			  				if($row['meio_meio']!=0){
 			  					$classe = 'pdr1';
@@ -257,9 +273,6 @@ require("../../diversos/funcoes_diversas.php");
 <input type="hidden" id="avanca-pedido-enter" value="1">
 
 <script>
-	$(document).ready(function(){		
-		$('#exibicao_produtos_pedido, #resumo-pedido-comanda, #exibicao_adicionais_produto_selecionado, #exibicao_opcoes_produto_selecionado').perfectScrollbar();
-	});	
 	window.clearTimeout(atualiza_pedidos);	
 </script>
 

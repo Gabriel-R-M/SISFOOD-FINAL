@@ -147,7 +147,7 @@ if($total_categorias<2){
 			</div>
 
 			<div id="campo_para_variacao_produto">
-				<select class="form-control pull-right" id="tamanho" onchange="javascript:selecao_variacao(this.value)"></select>
+				<select class="form-control pull-right upper" id="tamanho" onchange="javascript:selecao_variacao(this.value)"></select>
 				<i class="icofont-exclamation-tringle error-select-variacao"></i>
 				<i class="icofont-verification-check ok-select-variacao"></i>
 			</div>	
@@ -201,7 +201,7 @@ if($total_categorias<2){
 		  			$contador_produtos=1;
 		  			$seleciona_produtos = $db->select("SELECT codigo, id, produto, preco_composto FROM lanches 
 		  				WHERE ativo='1' AND categoria='$id_categoria' 
-		  				ORDER BY $ordem_exibicao_produtos");
+		  				ORDER BY ABS($ordem_exibicao_produtos)");
 
 		  			if($db->rows($seleciona_produtos)) {
 			  			while($line = $db->expand($seleciona_produtos)){

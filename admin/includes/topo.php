@@ -31,6 +31,7 @@ $MensagensSistema = new MensagensDesenvolvedorSistema();
   <body>
 
     <?php require("menu.php"); ?>
+    <?php require("modais.php"); ?>
 
 
     <div class="slim-mainpanel">

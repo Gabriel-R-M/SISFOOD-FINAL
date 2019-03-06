@@ -1,3 +1,56 @@
+<div id="ModalRejeicaoPedidoInternet" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-header">        
+        <h4 class="modal-title">Motivo da Rejeição</h4>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
+      </div>
+        
+        <form method="post" id="FormRejeitaPedidoInternet" action="menu_internet/actions/aceita-rejeita-pedido.php">      
+        <div class="modal-body" id="motivo_rejeicao_pedido_internet_conteudo">
+          
+            <div class="form-group">
+                <input type="hidden" name="status" value="3">
+                <input type="hidden" name="id" id="id_pedido_rejeicao">
+                <textarea name="motivo_erro_internet" id="motivo_erro_internet" class="form-control" style="height: 120px" placeholder="Informe o motivo da rejeição do pedido"></textarea>
+            </div>  
+          
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn  btn-danger" id="botao_rejeita_pedido_modal">REJEITAR</button>
+      </div>  
+      </form>
+      
+    </div>
+
+  </div>
+</div>
+
+
+<div id="ModalPedidoInternet" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-header">        
+        <h4 class="modal-title">Detalhes do Pedido</h4>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
+      </div>
+      
+        <div class="modal-body" id="detalhes_pedido_internet_conteudo">
+            
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
 
 <div id="ModalIniciaNovoPedido" class="modal fade" role="dialog" tabindex="-1">
   <div class="modal-dialog">
@@ -7,7 +60,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Novo Pedido?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
@@ -19,14 +72,14 @@
                   </button>               
             </div>
 
-            <div class="col-md-12 d-block d-sm-none">              
+            <div class="col-md-12 d-block d-md-none">              
                   <button onclick="javascript:inicia_pedido(0,1);" class="btn btn-info btn-block grandao" id="sim_novo_pedido">
                     SIM
                   </button>               
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -50,7 +103,7 @@
       
       <div class="modal-header">
         <h4 class="modal-title">Pagamentos Recebidos</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
         
       </div>
       
@@ -75,7 +128,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Divisão de Mesa</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_compartilhamento_mesa_recebimento">
@@ -99,7 +152,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Divisão de Ítens</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_pessoas_mesa_divisao">
@@ -123,7 +176,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Dados do Cliente</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button"  class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_dados_cliente_pedido">
@@ -145,7 +198,7 @@
       
       <div class="modal-header">
         <h6 class="modal-title">Cancelamento</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1" aria-label="Close">
               <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -200,7 +253,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Cancela Ítem</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body text-center">
@@ -243,7 +296,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Cancela Adicional</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body text-center">
@@ -287,7 +340,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Cancela Opção</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body text-center">
@@ -331,7 +384,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Retirada de Caixa</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body">
@@ -343,7 +396,7 @@
                 <span><h19><strong>VALOR DA RETIRADA</strong></h19></span>                
               </li> 
               <li class="list-group-item" style="border-top: 0">
-                <input type="text" name="valor_saida_caixa" placeholder="0.00" class="form-control input-lg valores text-center" required="required">
+                <input type="text" name="valor_saida_caixa" placeholder="0.00" class="form-control input-lg valores text-center" required="required" id="valor_saida_caixa">
               </li>
               <li class="list-group-item" style="border-top: 0">
                 <input type="text" name="motivo_saida_caixa" placeholder="Informe o motivo" class="form-control input-lg text-center " required="required">
@@ -376,7 +429,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Retiradas do Caixa</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_retiradas_caixa">
@@ -400,7 +453,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Entregas Realizadas</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_saidas_caixa">
@@ -427,7 +480,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Listagem de Vendas</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="exibe_vendas_caixa">
@@ -449,7 +502,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Finalizar Caixa</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body text-center">
@@ -483,7 +536,7 @@
       
       <div class="modal-header">
         <h4 class="modal-title">Iniciar Caixa</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body text-center">
@@ -516,7 +569,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Ficha do Cliente</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
       <div class="modal-body" id="carrega_dados_cliente_modal">
@@ -553,7 +606,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Detalhes da Venda</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body" id="exibe_detalhes_venda_modal" style="text-transform: uppercase;">
@@ -575,7 +628,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title">Ops!</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body pd-20 text-center" style="text-transform: uppercase;">
@@ -600,7 +653,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Imprimir Comanda?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
@@ -611,7 +664,7 @@
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -634,18 +687,18 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Imprimir Ítem(s) ?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
           <div class="row">
 
             <div class="col-md-12">               
-                    <button onclick="javascript:imprime_comanda02();" class="btn btn-success btn-block  grandao">SIM</button>               
+                    <button onclick="javascript:imprime_comanda02(0,0);" class="btn btn-success btn-block  grandao">SIM</button>               
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button onclick="javascript:marca_itens_impressos();" data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button onclick="javascript:marca_itens_impressos();" data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -665,7 +718,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Imprimir Ítem ?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
@@ -677,7 +730,7 @@
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -699,7 +752,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Imprimir Recibo?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
@@ -710,7 +763,7 @@
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -732,7 +785,7 @@
       
       <div class="modal-header">        
         <h4 class="modal-title"><center>Imprimir Comprovante?</center></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
       </div>
       
         <div class="modal-body">
@@ -743,7 +796,7 @@
             </div> 
 
             <div class="col-md-12 top15">                
-                    <button data-dismiss="modal" class="btn btn-danger btn-block  grandao">NÃO</button>                
+                    <button data-dismiss="modal" tabindex="-1" class="btn btn-danger btn-block  grandao">NÃO</button>                
             </div> 
 
           </div>           
@@ -764,7 +817,7 @@
       
       <div class="modal-header">
         <h4 class="modal-title">Atenção</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" tabindex="-1">&times;</button>
         
       </div>
       

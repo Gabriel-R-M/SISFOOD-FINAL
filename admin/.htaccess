@@ -87,7 +87,13 @@
 	RewriteRule ^despesas-nova?$ views/menu_vendas/despesas-nova.php [L,QSA]
 	RewriteRule ^despesas-relatorio?$ views/menu_vendas/despesas-relatorio.php [L,QSA]
 	RewriteRule ^despesas-categorias-nova?$ views/menu_vendas/despesas-categorias-nova.php [L,QSA]
+
+
+	RewriteRule ^modulos-internet?$ views/menu_configuracoes/modulos-internet.php [L,QSA]
+	RewriteRule ^atualiza-servidor-web?$ views/menu_configuracoes/atualiza-servidor-web.php [L,QSA]
 	
+
+
 
 	#CONTROLERS**************************************************************
 
@@ -122,6 +128,8 @@
 	RewriteRule ^gerais/save?$ controlers/configuracoes/salva_geral.php [L,QSA]	
 	RewriteRule ^formas-pgto/save?$ controlers/configuracoes/salva_formas_pagamento.php [L,QSA]	
 	RewriteRule ^sistema-pontuacao/save?$ controlers/configuracoes/salva_pontuacao.php [L,QSA]
+	RewriteRule ^modulos-internet/save?$ controlers/configuracoes/salva_modulo_internet.php [L,QSA]
+
 
 
 	

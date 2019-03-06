@@ -73,6 +73,11 @@ if($impressao=='secundaria'){
 			}
 
 		} 
+
+		//PEDIDO DA INTERNET
+		if($dados_venda['pedido_internet']!=0){
+			$txt_cabecalho[] = '--- PEDIDO VIA INTERNET ---';
+		} 
 	
 	
 		$cabecalho = array_map("centraliza", $txt_cabecalho);
@@ -392,18 +397,27 @@ if($impressao=='secundaria'){
 				}  else {
 
 						
-							$txt_dados_entrega = array();		
+							$txt_dados_entrega = array();
+							$txt_dados_entrega[] = '----------------------------------------';
 							$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
 							$txt_dados_entrega[] = '----------------------------------------';
 							$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
-							$id_cliente = $dados_venda['id_cliente'];
-							$selectx = $db->select("SELECT nome, telefone, ddd FROM clientes WHERE id='$id_cliente' LIMIT 1");
-							$dados_cliente = $db->expand($selectx);
+							if(!empty($dados_venda['nome_cliente'])){
+								
+								$dados_entrega = "\r\n".retira_acentos($dados_venda['nome_cliente'])."\r\n";	
 
-							$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
-							if(!empty($dados_cliente['telefone'])){					
-								$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'];
+							} else {
+								
+								$id_cliente = $dados_venda['id_cliente'];
+								$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
+								$dados_cliente = $db->expand($selectx);
+								$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
+								
+								if(!empty($dados_cliente['telefone'])){					
+									$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+								}
+
 							}
 
 
@@ -435,6 +449,7 @@ if($impressao=='secundaria'){
 				while($ln = $db->expand($select)){
 					$categorias_pedido_gerais .= $ln['nome_categoria'].'/';	
 				}
+
 				
 				//REMOVE A ULTIMA BARRA DO NOME DA CATEGORIA
 				$final = substr($categorias_pedido_gerais, -1);
@@ -444,6 +459,15 @@ if($impressao=='secundaria'){
 				}
 
 				$dados_entrega .= retira_acentos($categorias_pedido_gerais)."\r\n";	
+
+
+				//IMPRIME O NOME DO ATENDENTE NA COMANDA
+				$dados_atendente = $dados_venda['id_usuario'];
+				$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
+				$dados_atendente = $db->expand($dados_atendente);
+
+				$dados_entrega .= '----------------------------------------'."\r\n";
+				$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 
 

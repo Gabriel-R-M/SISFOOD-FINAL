@@ -164,7 +164,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12">
         		ENTREGA/RETIRADA: <br>
         		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA ENTREGA OU RETIRADA</a><br>
-        			<select class="form-control top2" id="taxa_entrega" onchange="javascript:escolhe_taxa_entrega(this.value);">
+        			<select class="form-control top2 upper" id="taxa_entrega" onchange="javascript:escolhe_taxa_entrega(this.value);">
 						
 						<?php
 							if($dados_venda['entrega']!=0){								

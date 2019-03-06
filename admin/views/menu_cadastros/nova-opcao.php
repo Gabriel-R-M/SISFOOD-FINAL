@@ -100,6 +100,34 @@ if(isset($id)){
 
 	          <div class="col-lg-12" id="list_produtos">
               <label class="form-control-label">ESCOLHA OS PRODUTOS LIBERADOS PARA ESCOLHA:</label>      
+
+              <div class="row row-xs">
+
+                  <div class="col-lg-3">                 
+                       <div class="form-group">                          
+                          <select id="categoria_selecionar" class="form-control select2 upper" >
+                              <option value="0">TODAS</option>
+                              <?php
+                                $sal = $db->select("SELECT id, categoria FROM categorias ORDER BY categoria");
+                                while($var = $db->expand($sal)){
+                                  echo '<option value="'.$var['id'].'">'.$var['categoria'].'</option>';
+                                }
+                              ?>
+                        </select>   
+                       </div>
+                  </div>
+
+                  <div class="col-lg-3">                 
+                       <div class="form-group">                          
+                          <button class="btn btn-success" type="button" onclick="javascript:marcar_todas_opcoes(1);">MARCAR</button>
+                          <button class="btn btn-danger" type="button" onclick="javascript:marcar_todas_opcoes(0);">DESMARCAR</button>
+                       </div>
+                  </div>
+
+              </div>  
+
+              <hr>
+
 	          	<?php require("listagem/listagem-produtos-opcoes.php"); ?>
 	          </div>
 

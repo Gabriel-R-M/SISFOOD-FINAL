@@ -98,7 +98,67 @@ if(isset($id)){
   
 </div>
 
+
+
+<div class="section-wrapper top10">
+  		
+		
+  		<div class="form-layout">
+            <div class="row mg-b-25">
+
+	             <div class="col-lg-12">
+
+	             	<button type="button" data-toggle="modal" data-target="#ModalNovoIngrediente" class="btn btn-warning bd-0">NOVO INGREDIENTE</button> 
+
+	                <div class="form-group top20">
+	                  <label class="form-control-label top10">MARQUE OS INGREDIENTES DO PRODUTO:</label>
+	                  <BR>
+	                  <?php 
+	                  	$sql = $db->select("SELECT * FROM ingredientes ORDER BY id");
+	                  	
+	                  		echo '<div class="table-responsive top0">';
+	                  		echo '<table class="table" id="tabela_ingredientes">';
+	                  		echo '<tr class="apend_ingredientes">';
+	                  	if($db->rows($sql)){
+	                  		$contador =0;
+	                  		while($line = $db->expand($sql)){
+	                  			
+	                  			if($contador==4){$contador=0; echo '</tr><tr class="apend_ingredientes">';}
+	                  			$checked= '';
+	                  			$id_ingrediente = $line['id'];
+
+	                  			if($edit==1){	                  				
+	                  				$pega = $db->select("SELECT id FROM ingredientes_lanches WHERE id_ingrediente='$id_ingrediente' AND id_produto='$id' LIMIT 1");
+	                  				if($db->rows($pega)){
+	                  					$checked= 'checked';		
+	                  				}
+	                  			}
+	                  			
+	                  			echo '<td class="upper coluna-fixa"><input class="form-control" value="'.$line['id'].'" type="checkbox" '.$checked.' name="ingrediente_produto[]"> '.$line['ingrediente'].'</td>';
+
+	                  			$contador++;
+	                  		}
+	                  		
+	                  	} else {
+	                  		echo '<span id="some_nenhum_ingrediente">- NENHUM INGREDIENTE CADASTRADO.</span>';
+	                  	}
+
+	                  	echo '</tr>';
+	                  		echo '</table>';
+	                  		echo '</div>';
+
+	                  ?>	
+	                </div>
+	              </div>				
+
+			 </div>
+		</div>
+
 </div>
+
+
+</div>
+
 
 <div class="col-md-4">
 
@@ -111,7 +171,7 @@ if(isset($id)){
 	             <div class="col-lg-12">
 	                <div class="form-group">
 	                  <label class="form-control-label">Categoria:</label>
-	                  <select class="form-control select2" name="categoria" id="categoria" required="required" onchange="javascript:varia(this.value);">
+	                  <select class="form-control select2 upper" name="categoria" id="categoria" required="required" onchange="javascript:varia(this.value);">
 		                	<?php
 		                		if($edit==1){
 		                			

@@ -113,7 +113,7 @@ if($db->rows($sql)){
 			
 			if($dados_venda['aguarde']==1){	
 				echo '<a tabindex="-1" href="javascript:void(0);" onclick="javascript:confirma_reimpressao_item_unico('.$id_controle.');" class=" top10 thin pull-right" style="margin-right:2px">
-					<button tabindex="-1" class="btn '.$class_impressao.' btn-sm" id="botao_item'.$id_controle.'"><i class="icofont-print"></i></button></a>';		
+					<button tabindex="-1" class="btn '.$class_impressao.' btn-sm botao_imprime_item" id="botao_item'.$id_controle.'"><i class="icofont-print"></i></button></a>';		
 			}
 
 

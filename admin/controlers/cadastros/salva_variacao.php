@@ -10,6 +10,9 @@ if($id!=0){
 	$grava = $db->select("INSERT INTO tamanhos (tamanho, id_categoria, opcao_obrigatoria) VALUES ('$tamanho', '$id_categoria', '$opcao_obrigatoria')");	
 }
 
+
+$update = $db->select("UPDATE sistema SET aviso_update_internet='1'");
+
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Variação cadastrada com sucesso.';

@@ -1,21 +1,37 @@
 @media (max-width: 768px) {  
 
 
-html{overflow-y: hidden;}
-body{overflow-y: hidden; }
+html{overflow-y: auto;}
+body{overflow-y: auto;}
 .pricing-icon {
   position: inherit; right:inherit; bottom: inherit;
 }
 
+
+#resumo-pedido-comanda, #exibicao_produtos_pedido, #exibicao_adicionais_produto_selecionado, #exibicao_opcoes_produto_selecionado{overflow-y: auto;}
+#resumo-pedido-comanda{padding-bottom: 10px}
+
+
 #input_busca_produto input{font-weight: 300; max-width: inherit; margin-bottom: 10px; max-width: 70%}
 
+/* 
+AQUI MEXI 
 .pedidos-gerais-aguardando{ height: calc(100vh - 180px); max-height: calc(100vh - 180px);}
 #lateral-pedido{height: calc(100vh - 150px); max-height: calc(100vh - 150px); display: none;}
 #resumo-pedido-comanda{height: calc(100vh - 353px); max-height: calc(100vh - 353px); }
+ */
+ .botao_imprime_item{display: none;}
+
+.pedidos-gerais-aguardando{ height: auto; max-height: inherit;}
+#lateral-pedido{height: auto; max-height: inherit; display: none;}
+#resumo-pedido-comanda{height: auto; max-height: inherit; }
 
 
 #tudo_conteudo{height: calc(100vh - 100px); }
-.exibicao_produtos_pedido{position: relative; overflow-x: hidden; height: calc(100vh - 180px); }
+
+/* AQUI MEXI .exibicao_produtos_pedido{position: relative; overflow-x: hidden; height: calc(100vh - 180px); } */
+
+.exibicao_produtos_pedido{position: relative; overflow-x: height: auto; max-height: inherit; }
 .margin30{margin-top: 80px; height: calc(100vh - 200px);}
 .tamanho_exibicao_produtos_pedido{height: calc(100vh - 200px);}
 
@@ -49,11 +65,12 @@ span.texto_peq_itens_grande{font-weight: 700; font-size: 30px; color:#C9403C }
 #rola_mobile{height: calc(100vh - 105px); max-height: calc(100vh - 105px);}
 
 
-.icone_deleta_item_pedido{display: none;}
-.icone_deleta_item_pedido_mobile{display: block;}
+.icone_deleta_item_pedido{display: block;}
+.icone_deleta_item_pedido_mobile{display: none;}
 
 .hide_mobile{display: none;}
 
 .pedidos-gerais-aguardando{position: relative; height: calc(100vh - 220px); max-height: calc(100vh - 220px);}
 .mesas-exibicao{position: relative; height: calc(100vh - 135px); max-height: calc(100vh - 135px); }
+
 }

@@ -11,6 +11,8 @@ $sel= $db->select("SELECT id FROM caixa ORDER BY id DESC LIMIT 1");
 $fd = $db->expand($sel);
 $id_cx_original = $fd['id'];
 
+$update = $db->select("UPDATE usuarios SET online='0' WHERE id!='$id_usuario'");
+
 echo 1;
 
 ?>

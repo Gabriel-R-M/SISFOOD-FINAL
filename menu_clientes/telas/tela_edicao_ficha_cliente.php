@@ -22,7 +22,7 @@ $dados = $db->expand($sql);
                 <div class="input-group-append">
                   <span class="input-group-text" style="border-right:0"><i class="icofont-ui-dial-phone"></i></span>
                 </div>
-                <input class="form-control" id="telefone" onkeypress='return SomenteNumero(event)'  autofocus="autofocus">
+                <input class="form-control bsc_tel_cli" id="telefone" onkeypress='return SomenteNumero(event)' >
                 <span class="input-group-btn">                 
                   <button style="height: 42px;  margin-left: -3px" class="btn btn-primary" type="button" id="btn_buscar" onClick="javascript:busca_cliente(1);">
                     <i class="icofont-search-user" style="font-size: 17px"></i>

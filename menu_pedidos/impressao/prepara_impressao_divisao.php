@@ -39,7 +39,11 @@ require("../../diversos/funcoes_impressao.php");
 			}
 
 		} 
-	
+		
+		//PEDIDO DA INTERNET
+		if($dados_venda['pedido_internet']!=0){
+			$txt_cabecalho[] = '--- PEDIDO VIA INTERNET ---';
+		} 
 
 		$txt_cabecalho[] = '----------------------------------------';
 	
@@ -312,6 +316,14 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 		$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
 	}
 
+
+	//IMPRIME O NOME DO ATENDENTE NA COMANDA
+	$dados_atendente = $dados_venda['id_usuario'];
+	$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
+	$dados_atendente = $db->expand($dados_atendente);
+
+	$dados_entrega .= '----------------------------------------'."\r\n";
+	$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 
 

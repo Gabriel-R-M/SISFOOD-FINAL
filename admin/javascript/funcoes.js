@@ -1,5 +1,20 @@
 // JavaScript Document
 
+function marcar_todas_opcoes(tipo){
+
+	var categoria_selecionar = $("#categoria_selecionar").val();
+
+	$(".prdx"+categoria_selecionar).each(function () {
+		if(tipo==1){
+			$(this).prop("checked", true);	
+		} else {
+			$(this).prop("checked", false);	
+		}
+        
+    });
+
+}
+
 function salva_cadastro_insere(){	
 	$('<input>').attr({
 	    type: 'hidden',
@@ -9,9 +24,18 @@ function salva_cadastro_insere(){
 
 }
 
-
 $(document).ready(function(){
 
+	
+
+
+		$('#ModalNovoIngrediente').on('shown.bs.modal', function () {
+	  		$("#ingrediente").focus();
+		});
+
+		$('#ModalNovoIngrediente').on('hidden.bs.modal', function (){
+	  		$("#msg_ok_ingrediente").hide();	
+		});
 
 		
 		$(".cat").change(function(){
@@ -38,6 +62,39 @@ $(document).ready(function(){
 
 		});
 
+
+
+
+	$("#FormCadastroIngredientes").submit(function(){
+		
+		$("#msg_ok_ingrediente").hide();	
+		$("#btn_salva_ingrediente").html('SALVANDO...');
+		var formdata = $("#FormCadastroIngredientes").serialize();		
+		var ingrediente_name = $("#ingrediente").val();
+
+			$.ajax({type: "POST", url:$("#FormCadastroIngredientes").attr('action'), data:formdata, success: function(retorno){										
+							
+				$('#FormCadastroIngredientes')[0].reset();
+				$("#ingrediente").focus();
+				$("#msg_ok_ingrediente").show();	
+				$("#btn_salva_ingrediente").html('CADASTRAR');
+
+				var total_colunas = $(".apend_ingredientes:last td").length;	
+				$("#some_nenhum_ingrediente").hide();			
+				if(total_colunas==4){
+					var row = $('</tr><tr class="apend_ingredientes"><td class="upper coluna-fixa"><input name="ingrediente_produto[]" value="'+retorno+'" class="form-control" type="checkbox"> '+ingrediente_name+'</td>');    				
+					$('#tabela_ingredientes').append(row);
+				} else {
+					var row = $('<td class="upper coluna-fixa"><input name="ingrediente_produto[]" class="form-control" value="'+retorno+'" type="checkbox">'+ingrediente_name+'</td>');    				
+					$('.apend_ingredientes:last').append(row);
+				}
+								
+			} 
+		
+		});
+		
+		return false;
+	});
 
 
 	$("#FormLoginRetaguarda").submit(function(){

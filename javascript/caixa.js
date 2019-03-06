@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	
+
+	$('#NovaSaidaCaixa').on('shown.bs.modal', function () {
+    	$('#valor_saida_caixa').focus();
+	}) 
+
+
 
 	$('#ModalFinalizaCaixa').on('show.bs.modal', function (){
 		sim_finaliza_caixa=1;		

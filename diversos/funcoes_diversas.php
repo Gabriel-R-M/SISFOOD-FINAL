@@ -32,4 +32,7 @@ function tempo_decorrido_pedido($hora,$tipo){
 	}
 }
 
+
+
+
 ?>

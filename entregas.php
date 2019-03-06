@@ -105,6 +105,7 @@ include("includes/verifica_caixa_aberto.php");
 
                     <div class="row" style="padding-bottom: 0; margin-bottom: 0">
                       <div class="col-12" style="margin-top: 10px; padding-bottom: 0; margin-bottom: 0">
+                        <hr class="top0">
                         <h6 class="prod-name upper corta_texto" style="font-size: 13px">
                           <?php echo $dados['endereco']; ?>, <?php echo $dados['numero']; ?><br>                          
                           <?php echo $dados['bairro']; ?> <?php echo $dados['complemento']; ?>
@@ -114,15 +115,26 @@ include("includes/verifica_caixa_aberto.php");
 
                     <?php
                     $display_entregadores = ''; 
-                    $display_marca_ok = ''; 
+                    $display_marca_ok = '';
+                    $col= 6; 
                    
-                    if($dados['pedido_entregue']==0){  
+                    if($dados['pedido_saiu_entrega']=='00:00:00'){  
                       
                       $display_entregadores = ''; 
                       $display_marca_ok = 'style="display:none"'; 
+                      $display_marca_ok2 = 'style="display:none"'; 
+
                     } else {                      
+
                       $display_entregadores = 'style="display:none"'; 
-                      $display_marca_ok = '"'; 
+                      $display_marca_ok = ''; 
+                      $display_marca_ok2 = ''; 
+
+                        if($dados['pedido_entregue']!='00:00:00'){  
+                            $display_marca_ok2 = 'style="display:none;"'; 
+                            $col= 12;
+                        }
+
                     }
                     ?>  
 
@@ -151,8 +163,12 @@ include("includes/verifica_caixa_aberto.php");
                             </div>
 
 
-                            <div class="col-md-12" id="marca_ok_entrega<?php echo $id; ?>" <?php echo $display_marca_ok; ?>> 
+                            <div class="col-md-<?php echo $col; ?>" id="marca_ok_entrega<?php echo $id; ?>" <?php echo $display_marca_ok; ?>> 
                                <button class="btn btn-block btn-primary" onclick="javascript:marca_pedido_entregue(0,<?php echo $id; ?>,0);" type="button">NÃO ENTREGUE</button> 
+                            </div>
+
+                            <div class="col-md-6" id="marca_ok_entrega2<?php echo $id; ?>" <?php echo $display_marca_ok2; ?>> 
+                               <button class="btn btn-block btn-success" onclick="javascript:marca_pedido_entregue(0,<?php echo $id; ?>,1,1);" type="button">ENTREGUE</button> 
                             </div>
 
                         </div> 

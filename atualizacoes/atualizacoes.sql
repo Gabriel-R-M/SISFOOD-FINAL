@@ -1,3 +1,89 @@
+--
+-- Estrutura para tabela `adicioinais por categoria`
+--
+
+CREATE TABLE `opcionais_categorias_relacao` (
+  `id` int(11) NOT NULL,
+  `id_opcional` int(10) NOT NULL,
+  `id_categoria` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `opcionais_categorias_relacao`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `opcionais_categorias_relacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT; 
+
+--
+-- Estrutura para tabela `horarios de funcionamento`
+--
+
+CREATE TABLE `horarios_funcionamento` (
+  `id` int(10) NOT NULL,
+  `dia` int(10) NOT NULL,
+  `abre` time NOT NULL,
+  `fecha` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `horarios_funcionamento` (`id`, `dia`, `abre`, `fecha`) VALUES
+(2, 1, '00:00:00', '00:00:00'),
+(3, 2, '00:00:00', '00:00:00'),
+(4, 3, '00:00:00', '00:00:00'),
+(5, 4, '00:00:00', '00:00:00'),
+(6, 5, '00:00:00', '00:00:00'),
+(7, 6, '00:00:00', '00:00:00'),
+(8, 7, '00:00:00', '00:00:00');
+
+ALTER TABLE `horarios_funcionamento`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `horarios_funcionamento`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;  
+
+
+
+--
+-- Estrutura para tabela `dados_loja_internet`
+--
+CREATE TABLE `dados_loja_internet` (
+  `id` int(10) NOT NULL,
+  `nome_loja` varchar(99) NOT NULL,
+  `tipo_comida` varchar(99) NOT NULL,
+  `endereco_linha1` varchar(99) NOT NULL,
+  `endereco_linha2` varchar(99) NOT NULL,
+  `telefones_loja` varchar(99) NOT NULL,
+  `imagem_topo` varchar(99) NOT NULL,
+  `logo_topo` varchar(99) NOT NULL,
+  `favicon_topo` varchar(99) NOT NULL,
+  `facebook` text NOT NULL,
+  `instagram` text NOT NULL,
+  `google` text NOT NULL,
+  `sobre` text NOT NULL,
+  `tempo_retirada` varchar(20) NOT NULL,
+  `tipo_tempo_retirada` varchar(99) NOT NULL,
+  `tempo_entrega` varchar(20) NOT NULL,
+  `tipo_tempo_entrega` varchar(99) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `dados_loja_internet` (`id`, `nome_loja`, `tipo_comida`, `endereco_linha1`, `endereco_linha2`, `telefones_loja`, `imagem_topo`, `logo_topo`, `favicon_topo`, `facebook`, `instagram`, `google`, `sobre`, `tempo_retirada`, `tipo_tempo_retirada`, `tempo_entrega`, `tipo_tempo_entrega`) VALUES
+(1, 'Nome do Estabelecimento', 'Tipos de Produtos', 'Endereço', 'Bairro, Cidade', 'Telefones', 'topo.jpg', 'logo.jpg', 'favicon.png', 'face', 'insta', 'google', 'Descrição do Estabelecimento', '00', 'minutos', '00:00', 'horas');
+
+
+ALTER TABLE `dados_loja_internet`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `dados_loja_internet`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT; 
+
+
+--
+-- Estrutura para tabela `pontuacao`
+--
 
 CREATE TABLE `pontuacao_usada` (
   `id` int(10) NOT NULL,
@@ -11,6 +97,10 @@ CREATE TABLE `pontuacao_usada` (
   `id_venda` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+--
+-- Estrutura para tabela `fiscal`
+--
 
 CREATE TABLE `fiscal` (
   `id` int(10) NOT NULL,
@@ -77,5 +167,46 @@ ALTER TABLE `despesas`
 
 
 ALTER TABLE `despesas`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+
+--
+-- ingredientes
+--
+
+CREATE TABLE `ingredientes` (
+  `id` int(10) NOT NULL,
+  `ingrediente` varchar(99) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `ingredientes`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `ingredientes`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+
+--
+-- ingredientes produtos
+--
+
+CREATE TABLE `ingredientes_lanches` (
+  `id` int(10) NOT NULL,
+  `id_produto` int(10) NOT NULL,
+  `id_ingrediente` int(10) NOT NULL,
+  `ordem` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `ingredientes_lanches`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `ingredientes_lanches`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 COMMIT;

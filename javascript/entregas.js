@@ -83,20 +83,10 @@ function marca_pedidos_entrega(){
 
 
 
-function marca_pedido_entregue(entregador, pedido, tipo){
-	
-	if(tipo==1){
-		$("#seleciona_entregador"+pedido).hide();	
-		$("#marca_ok_entrega"+pedido).show();	
-	} else {
+function marca_pedido_entregue(entregador, pedido, tipo, entrega_ok=0){
 
-		//$("#nome_entregador"+pedido).prepend(new Option("--- ESCOLHA ---", ""));
-		//.html('<option value="">--- ESCOLHA ---</option>');	
-		$("#marca_ok_entrega"+pedido).hide();	
-		$("#seleciona_entregador"+pedido).show();				
-	}
-	
-	$.post('menu_pedidos/actions/marca_entrega.php',{entregador:entregador, pedido:pedido, tipo:tipo}, function(resposta){		
+
+	$.post('menu_pedidos/actions/marca_entrega.php',{entregador:entregador, pedido:pedido, tipo:tipo, entrega_ok:entrega_ok}, function(resposta){		
 			location.reload();		
 	});
 }

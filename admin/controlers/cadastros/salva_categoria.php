@@ -10,6 +10,8 @@ if($id!=0){
 	$grava = $db->select("INSERT INTO categorias (categoria, ativo, ordem, meio_meio, adicionais, impressao, imprime_codigo) VALUES ('$categoria','$ativo', '$ordem', '$meio_meio', '$adicionais', '$impressao', '$imprime_codigo')");	
 }
 
+$update = $db->select("UPDATE sistema SET aviso_update_internet='1'");
+
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';
 $_SESSION['avisos-admin-sis-frase'] = 'Categoria cadastrada com sucesso.';

@@ -13,6 +13,8 @@ $line = $db->expand($seleciona_produtos);
 if($line['adicionais']==1){
 
 
+
+	echo $realiza_pesquisa;
 	$seleciona_produtos = $db->select("SELECT * FROM opcionais WHERE ativo='1' ORDER BY opcional");
 	$class=''; 
 
@@ -20,8 +22,27 @@ if($line['adicionais']==1){
 
 	if($db->rows($seleciona_produtos)) {
 		while($line = $db->expand($seleciona_produtos)){
+
+			$id_opcional = $line['id'];
+
+			////
+			$realiza_pesquisa = 0;
+			$permissao_select = $db->select("SELECT id FROM opcionais_categorias_relacao WHERE id_opcional='$id_opcional' LIMIT 1");
+			if($db->rows($permissao_select)){
+				$realiza_pesquisa = 1;
+			}
+
+			$hide_opc = '';
+			if($realiza_pesquisa==1){
+				$seleciona_pode_exibir= $db->select("SELECT id FROM opcionais_categorias_relacao WHERE id_categoria='$categoria' AND id_opcional='$id_opcional' LIMIT 1");	
+				if(!$db->rows($seleciona_pode_exibir)){
+					$hide_opc = 'hide';		
+				}
+			}
+			////
+
 			
-			echo '<div class="col-6 col-md-3 bottom10" >';
+			echo '<div class="col-6 col-md-3 bottom10 '.$hide_opc.'" >';
 
 				if(empty($class)){
 					$link='javascript:marca_opcional('.$line['id'].')';

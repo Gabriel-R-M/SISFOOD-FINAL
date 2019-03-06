@@ -6,6 +6,9 @@ body{height:100%; width: 100%; background-position: center center; background-si
 .thin{font-weight: 300}
 .slim-mainpanel{margin-bottom: 50px}
 
+
+.avisos-loja-warning .btn-danger{margin-top: -3px}
+.avisos-loja-warning{border-radius:0; border-top: 0; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}
 .avisos-loja{border-radius:0; background-color:#ACE1C1; color:#3C763D; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}
 .avisos-desenvolvedor{border-radius:0; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}
 
@@ -17,3 +20,25 @@ body{height:100%; width: 100%; background-position: center center; background-si
 .bottom20{margin-bottom: 20px}
 
 .btn{font-weight: 300}
+
+.modal-body h5{font-size: 15px; font-weight: 400}
+.hide{display: none;}
+
+.coluna-fixa{ width: 25%; border:1px solid #efefef;}
+.altura_progresso{height: 40px; font-size: 15px; font-weight: 300; -webkit-transition-duration:.5s;}
+
+
+
+.modal-header {
+color:#FFF;
+  padding: 0 ;
+  font-weight: 300;
+  border-bottom: 1px solid #B92A25;
+  background-color:#B92A25;
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}

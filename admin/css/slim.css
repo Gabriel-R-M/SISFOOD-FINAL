@@ -4012,7 +4012,7 @@ button.close {
   align-items: flex-start;
   justify-content: space-between;
   padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem; }
   .modal-header .close {
@@ -8256,7 +8256,7 @@ textarea.parsley-error:active {
   .modal .modal-header {
     padding: 20px 25px;
     align-items: center; }
-  .modal .modal-header,
+  
   .modal .modal-footer {
     background-color: #f8f9fa; }
   .modal.animated .modal-dialog {

@@ -5,6 +5,10 @@ $(document).ready(function(){
 	global_pesquisa_opcoes=0;
 	global_produto_selecionado = 0;
 
+	$('#ModalEditaDadosClienteVenda').on('shown.bs.modal', function () {
+    	$('#telefone').focus();
+	}) 
+
 	$('#CancelaItemPedidoSenha').on('show.bs.modal', function (){
 		$("#senha_cancelamento_item_pedido").focus();	  
 	});
@@ -296,8 +300,10 @@ function ve_compartilhamento_mesa(){
 function modal_edita_cliente_pedido(cliente){	
 	$("#exibe_dados_cliente_pedido").html('<br><CENTER><h4>CARREGANDO...</h4></CENTER><br>');
 	$("#ModalEditaDadosClienteVenda").modal();
+	
 	$.post('menu_clientes/telas/tela_edicao_ficha_cliente.php', {id:cliente}, function(resposta){			
-			$("#exibe_dados_cliente_pedido").html(resposta);	
+		$("#exibe_dados_cliente_pedido").html(resposta);	
+	
 	});
 }
 
@@ -1260,6 +1266,8 @@ function atualiza_valor_final_pedido_comanda(){
 
 function pesquisa_produtos_venda(pesquisa){
 
+	$("#categoria_selecionada_mobile").val($("#categoria_selecionada_mobile option:eq(0)").val());	
+
 	$("#sucesso_salva_pedido_mobile").hide();
 	
 	var tela_mobile = $("#tela-mobile").val();		
@@ -1452,6 +1460,7 @@ function salva_item_pedido(){
 
 		//PEGA QTD DE ITENS E ATUALIZA NO MOBILE
 		if(tela_mobile==1){
+			$("#categoria_selecionada_mobile").val($("#categoria_selecionada_mobile option:eq(0)").val());	
 			$("#sucesso_salva_pedido_mobile").show();
 			setTimeout('$("#sucesso_salva_pedido_mobile").hide()',4000 );
 			$.post('menu_pedidos/actions/pega_qtd_itens_pedido.php',{id:1}, function(resposta){

@@ -19,6 +19,8 @@ $update = $db->select("UPDATE caixa SET data_fechamento='$dt', hora_fechamento='
 
 $update = $db->select("UPDATE produtos_venda SET impresso='1'");
 
+$update = $db->select("UPDATE usuarios SET online='0' WHERE id!='$id_usuario'");
+
 echo $id_caixa_aberto;
 
 ?>

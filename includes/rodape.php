@@ -20,12 +20,7 @@
 		</div>	
 	<?php
 		}
-	?>	
-
-	<div class="internet text-center" onclick="javascript:ok_pedido_internet();">
-		<span id="qtd_pedidos_internet">1</span>
-		<div class="rodape_internet">INTERNET</div>
-	</div>	
+	?>
 
 
 
@@ -44,6 +39,21 @@
 
 
 
+<?php if($dados_configuracoes['modulo_internet']==1){ ?>		
+<script>
+	modulo_internet =1;
+</script>
+<?php
+	} else {
+?>
+<script>
+	modulo_internet =0;
+</script>		
+<?php
+	} 
+?>
+
+
 
 
 <script src="admin/lib/jquery/js/jquery.js"></script>
@@ -56,14 +66,14 @@
 <script src="js/jquery.maskMoney.js"></script>
 <script src="js/mascara.js"></script>
 <script src="javascript/usadas.js"></script>
-<script src="javascript/menus.js"></script>
-<script src="javascript/pedidos.js"></script>
+<script src="javascript/menus.js?<?php echo time(); ?>"></script>
+<script src="javascript/pedidos.js?<?php echo time(); ?>"></script>
 <script src="javascript/caixa.js"></script>
 <script src="javascript/clientes.js"></script>
 <script src="javascript/impressao.js"></script>
 <script src="javascript/internet.js"></script>
 <script src="javascript/teclas_atalho.js"></script>
-<script src="javascript/mobile.js"></script>
+<script src="javascript/mobile.js?<?php echo time(); ?>"></script>
 <script src="javascript/entregas.js"></script>
 <script src="javascript/configuracoes.js"></script>
 

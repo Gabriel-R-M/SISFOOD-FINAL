@@ -33,22 +33,7 @@
 
 
 
-        <div class="col-md-6">
-           <div class="form-group">
-                <label for="exampleInputEmail1">Ativar Módulo de Internet</label>
-                <select class="form-control" name="modulo_internet" required="required">
-                    <?php
-                      if($ln['modulo_internet']==1){
-                        echo '<option value="1" selected>SIM</option>';
-                        echo '<option value="0">NÃO</option>';
-                      } else {
-                        echo '<option value="0" selected>NÃO</option>';
-                        echo '<option value="1">SIM</option>';                        
-                      }
-                    ?>
-                </select>  
-           </div>
-        </div> 
+       
 
 
         <div class="col-md-6">

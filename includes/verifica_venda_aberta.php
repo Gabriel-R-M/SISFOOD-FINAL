@@ -12,7 +12,7 @@ if(isset($_SESSION['id_venda_erp_sis'])){
 } else {
 	
 	$seleciona = $db->select("SELECT * FROM aguarda_venda 	
-	WHERE id_usuario='$id_usuario' AND finalizada='0' 
+	WHERE id_usuario='$id_usuario' AND md5_usuario='$md5_usuario_logado' AND finalizada='0' 
 	ORDER BY aguarda_venda.id DESC 
 	LIMIT 1");
 

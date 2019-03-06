@@ -1,6 +1,6 @@
 
 
-<div class="slim-navbar d-block d-sm-none">
+<div class="slim-navbar d-block d-md-none" id="menu_mobile_celular">
     <div class="container">
         <ul class="nav">
           

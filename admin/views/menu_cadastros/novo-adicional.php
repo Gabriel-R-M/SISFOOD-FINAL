@@ -74,6 +74,55 @@ if(isset($id)){
                 </div>
               </div><!-- col-4 -->
 
+
+              <div class="col-lg-12 top10">
+                <label class="form-control-label">ESCOLHA EM QUAIS CATEGORIAS O ADICIONAL SERÁ EXIBIDO:</label>  
+                <small class="tx-primary upper"><br>*CASO NENHUMA CATEGORIA SEJA SELECIONADA, O ADICIONAL APARECERÁ EM TODAS AS QUE FOREM PERMITIDAS.<BR>**SÃO LISTADAS ABAIXO SOMENTE AS CATEGORIAS EM QUE É PERMITIDO ADICIONAIS.</small>    
+                <hr style="margin-top: 9px">
+              </div>
+
+          
+              <?php
+              
+                $sel = $db->select("SELECT id, categoria FROM categorias WHERE ativo='1' AND adicionais='1' ORDER BY categoria");
+
+                    if($db->rows($sel)){
+                    
+                   // echo '<div class="row row-xs">';  
+                      
+                      while($yy = $db->expand($sel)){
+
+                        $id_cat = $yy['id'];
+
+                        $check='';
+                        if($edit==1){
+                          $sel2 = $db->select("SELECT id FROM opcionais_categorias_relacao WHERE id_categoria='$id_cat' AND id_opcional='$id' LIMIT 1");  
+                          if($db->rows($sel2)){
+                            $check = 'checked';
+                          }
+                        }
+                        
+                        echo '<div class="col-md-3 text-center">';
+
+                          echo '<div class="col-md-12 text-center" style="border:1px solid #efefef; margin-bottom:10px; padding:10px">';
+
+                            echo '<input class="categoria" name="categorias[]" '.$check.' type="checkbox" value="'.$yy['id'].'"><br>';
+                            echo '<span style="text-transform:uppercase; margin-top:8px; font-weight:300">'.$yy['categoria'].'</span>';
+
+                          echo '</div>';  
+
+                        echo '</div>';
+                      }
+
+                  //  echo '</div>';  
+
+
+
+                    }  
+
+                ?>
+            
+
             </div><!-- row -->
 
             <div class="form-layout-footer">

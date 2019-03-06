@@ -8,7 +8,21 @@ if($id!=0){
 //INSERT
 } else {
 	$grava = $db->select("INSERT INTO opcionais (opcional, valor, ativo) VALUES ('$opcional', '$preco', '$ativo')");
+	$id = $db->last_id($grava);
 }
+
+
+//CATEGORIAS//
+$grava = $db->select("DELETE FROM opcionais_categorias_relacao WHERE id_opcional='$id'");
+$categorias = $_POST['categorias']; 
+foreach($categorias as $k => $v){ 
+	$categoria = $v; 
+	$grava = $db->select("INSERT INTO opcionais_categorias_relacao (id_opcional, id_categoria) VALUES ('$id', '$categoria')");
+}
+
+
+
+$update = $db->select("UPDATE sistema SET aviso_update_internet='1'");
 
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';

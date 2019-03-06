@@ -42,7 +42,7 @@ $(document).ready(function(){
 						$("#erro").html(msg);		
 						$("#erro").show();	
 						$("#botao_enviar_login").html('ACESSAR');
-						setTimeout(function(){$("#erro").hide(); }, 2000);
+						setTimeout(function(){$("#erro").hide(); }, 4000);
 
 
 					}

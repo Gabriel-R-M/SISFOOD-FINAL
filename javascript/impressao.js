@@ -152,6 +152,9 @@ function imprime_comanda02(contador=0,item=0){
 	if(item!=0){
 		$("#botao_item"+item).removeClass("btn-primary");
 		$("#botao_item"+item).addClass("btn-success");
+	} else {
+		$(".botao_imprime_item:first").removeClass("btn-primary");
+		$(".botao_imprime_item:first").addClass("btn-success");
 	}
 
 	//VERIFICA SE IMPRIME APENAS O ULTIMO ITEM, OU TODOS QUE NAO FORAM IMPRESSOS AINDA DO PEDIDO

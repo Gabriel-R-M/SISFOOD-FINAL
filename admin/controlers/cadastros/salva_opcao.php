@@ -40,6 +40,8 @@ if($id!=0){
 }
 
 
+$update = $db->select("UPDATE sistema SET aviso_update_internet='1'");
+
 
 
 //SESSIONS DE AVISO//

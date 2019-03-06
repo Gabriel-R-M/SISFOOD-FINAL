@@ -18,11 +18,38 @@
 	$sql = $db->select("ALTER TABLE produtos_venda ADD impresso INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD ocupou_mesa INT(10) NOT NULL");
 	$sql = $db->select("ALTER TABLE tamanhos ADD opcao_obrigatoria INT(1) NOT NULL");
-	$sql = $db->select("UPDATE produtos_venda SET impresso='1'");
-	$sql = $db->select("UPDATE configuracoes SET ordem_exibicao_produtos='codigo'");
-
+	
 	$sql = $db->select("ALTER TABLE lanches CHANGE codigo codigo VARCHAR(90) NOT NULL;");
 	$sql = $db->select("ALTER TABLE dados_loja ADD inscricao_estadual VARCHAR(99) NOT NULL");
+
+
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_saiu_entrega TIME NOT NULL");
+
+	$sql = $db->select("ALTER TABLE clientes ADD obs TEXT NOT NULL");
+	$sql = $db->select("ALTER TABLE clientes ADD senha VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE clientes ADD internet INT(1) NOT NULL");
+	$sql = $db->select("ALTER TABLE clientes ADD hash VARCHAR(200) NOT NULL");
+	$sql = $db->select("ALTER TABLE clientes ADD codigo_renova_senha VARCHAR(20) NOT NULL");
+
+	$sql = $db->select("UPDATE produtos_venda SET impresso='1'");
+	$sql = $db->select("UPDATE configuracoes SET ordem_exibicao_produtos='codigo'");
+	$sql = $db->select("DELETE FROM clientes WHERE nome='CLIENTE AVULSO' AND endereco!='' AND numero!=''");
+
+	$sql = $db->select("ALTER TABLE opcionais2 CHANGE id_produto id_produto TEXT NOT NULL");
+
+	$sql = $db->select("ALTER TABLE sistema ADD url_servidor_pedidos VARCHAR(999) NOT NULL");
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD pedido_internet INT(10) NOT NULL");
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD cliente_internet INT(10) NOT NULL");
+
+
+	$sql = $db->select("ALTER TABLE sistema ADD aviso_update_internet INT(1) NOT NULL");
+	$sql = $db->select("ALTER TABLE sistema ADD data_update_internet DATE NOT NULL");
+	
+	$sql = $db->select("ALTER TABLE configuracoes ADD categorias_mobile INT(1) NOT NULL");
+
+	$sql = $db->select("ALTER TABLE usuarios ADD online INT(1) NOT NULL");
+	
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD md5_usuario VARCHAR(99) NOT NULL AFTER id_usuario");
 
 
 	

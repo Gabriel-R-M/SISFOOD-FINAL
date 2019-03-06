@@ -6,6 +6,8 @@
 
 <script>
 $(document).ready(function(){   // incial o jquery
+
+	//alert($(window).width())
 	inicia_sistema();
 });
 </script>
