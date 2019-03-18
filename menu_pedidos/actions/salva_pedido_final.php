@@ -23,7 +23,7 @@ if($troco_levar<0){
 	$troco_levar = 0;
 }
 	
-$sql = $db->select("UPDATE aguarda_venda SET embala_viagem='$embala_viagem', pre_tipo_pagamento='$pre_tipo_pagamento', levar_troco='$troco_levar', levar_maquina_cartao='$levar_maquina_cartao', entregador='$entregador', troco_para='$troco_leva_maquina', id_mesa='$mesa', entrega='$entrega', valor_final_venda='$final_venda', aguarde='1', valor_entrega='$taxa_entrega', tipo_desc='$tipo_desconto', val_desc='$val_desc', valor_desconto='$desconto' WHERE id='$id_venda' LIMIT 1");	
+$sql = $db->select("UPDATE aguarda_venda SET  embala_viagem='$embala_viagem', pre_tipo_pagamento='$pre_tipo_pagamento', levar_troco='$troco_levar', levar_maquina_cartao='$levar_maquina_cartao', entregador='$entregador', troco_para='$troco_leva_maquina', id_mesa='$mesa', entrega='$entrega', valor_final_venda='$final_venda', aguarde='1', valor_entrega='$taxa_entrega', tipo_desc='$tipo_desconto', val_desc='$val_desc', valor_desconto='$desconto' WHERE id='$id_venda' LIMIT 1");	
 
 
 //NOME DO CLIENTE NA VENDA//

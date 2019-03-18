@@ -34,5 +34,30 @@ function tempo_decorrido_pedido($hora,$tipo){
 
 
 
+function loja_aberta_fechada(){
+	$db = new DB();
+	$hoje = date("w");
+	$sql = $db->select("SELECT * FROM horarios_funcionamento WHERE dia='$hoje' LIMIT 1");
+	$dados_funcionamento = $db->expand($sql);
+
+	if($dados_funcionamento['abre']!='00:00:00'){
+
+		$hora1 = strtotime(substr($dados_funcionamento['abre'],0,4));
+    	$hora2 = strtotime(substr($dados_funcionamento['fecha'],0,4));
+    	$horaAtual = strtotime(date('H:i'));
+    
+    	switch ($horaAtual){
+        	case ($horaAtual > $hora1 && $horaAtual < $hora2) : $retorno = 1; break; 
+        	default :  $retorno = 0;
+    	}
+   
+	} else {
+		$retorno = 0;
+	}
+
+	return $retorno;
+}
+
+
 
 ?>

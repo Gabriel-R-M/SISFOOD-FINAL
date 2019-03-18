@@ -91,6 +91,9 @@
 
 	RewriteRule ^modulos-internet?$ views/menu_configuracoes/modulos-internet.php [L,QSA]
 	RewriteRule ^atualiza-servidor-web?$ views/menu_configuracoes/atualiza-servidor-web.php [L,QSA]
+
+	RewriteRule ^modulos-fiscal?$ views/menu_configuracoes/modulos-fiscal.php [L,QSA]
+	RewriteRule ^xml-visualizar?$ views/menu_configuracoes/xml-visualizar.php [L,QSA]
 	
 
 
@@ -129,6 +132,7 @@
 	RewriteRule ^formas-pgto/save?$ controlers/configuracoes/salva_formas_pagamento.php [L,QSA]	
 	RewriteRule ^sistema-pontuacao/save?$ controlers/configuracoes/salva_pontuacao.php [L,QSA]
 	RewriteRule ^modulos-internet/save?$ controlers/configuracoes/salva_modulo_internet.php [L,QSA]
+	RewriteRule ^modulos-fiscal/save?$ controlers/configuracoes/salva_modulo_fiscal.php [L,QSA]
 
 
 

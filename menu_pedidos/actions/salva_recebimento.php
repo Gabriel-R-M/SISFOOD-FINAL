@@ -115,6 +115,13 @@ if($valor_final_receber==0){
 
 
 
+/////////////////VENDA FISCAL//////////////////
+//if($venda_fiscal==1){
+//require("venda_fiscal.php");	
+//}
+
+
+
 
 ////////////////DEVOLVE VALORES/////////////////
 

@@ -34,13 +34,27 @@
             </a>
           </li>
 
-          <?php if($dados_configuracoes['modulo_internet']==1){ ?>
-          <li class="sidebar-nav-item" id="menu_aviso_pedidos_internet">
-            <a href="javascript:void(0);" onclick="javascript:pedidos_internet();" class="sidebar-nav-link" tabindex="-1">              
-              <i class="icofont-ui-cell-phone"></i>
-            </a>
-          </li>
-         <?php } ?>
+
+
+            <?php 
+              $ip = getenv("REMOTE_ADDR");
+              if($ip=='::1'){
+                if($dados_configuracoes['modulo_internet']==1){                                      
+            ?>
+
+              <li class="sidebar-nav-item" id="menu_aviso_pedidos_internet">
+                <a href="javascript:void(0);" onclick="javascript:pedidos_internet();" class="sidebar-nav-link" tabindex="-1">              
+                  <i class="icofont-ui-cell-phone"></i>
+                </a>
+              </li>
+            
+            <?php 
+              }} 
+            ?>
+
+
+
+
 
           <li class="sidebar-nav-item">
             <a href="javascript:void(0);" onclick="javascript:pedidos_finalizados();"  class="sidebar-nav-link" tabindex="-1">

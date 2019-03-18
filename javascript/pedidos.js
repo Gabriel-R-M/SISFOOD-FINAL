@@ -1683,7 +1683,7 @@ function finaliza_pedido2(imprime=0, reload=0){
 
 
 function realiza_pagamento(){
-		
+			
 
 			var valor_recebe = $("#valor_recebe").val();
 			if(valor_recebe=='' || valor_recebe=='0.00'){
@@ -1714,12 +1714,37 @@ function realiza_pagamento(){
 		  	var nome_cliente_venda = $("#nome_cliente_venda").val(); 
 
 
+		  	//SE FOR VENDA FISCAL//
+		  	var venda_fiscal = 0;
+			if ($("#venda_fiscal").length){
+				if($("#venda_fiscal").is(':checked')){				
+					var venda_fiscal = 1;
+					var final_venda = $("#soma_final").val();
+					if(valor_recebe<final_venda){
+						exibe_erros_gerais('Não é possível receber menos que o total da venda.');
+						$("#icon-ok-val-recebe").hide();
+						$("#icon-erro-val-recebe").show();
+						return;	
+
+					}
+				}
+			}
+
+
 		  	//MARCA NA CONTA DO CLIENTE//
 		  	if(forma_pagamento==3){
+		  		
+		  		if(venda_fiscal==1){
+		  			exibe_erros_gerais('Não é possível gerar um Cupom Fiscal para essa forma de pagamento.');
+		  			return;
+		  		}	
+
 		  		if(nome_cliente_venda=='CLIENTE AVULSO'){
 		  			modal_edita_cliente_pedido(id_cliente_venda);
 		  			return;
 		  		}
+
+		  		
 		  	}
 		  	
 		  	//USAR PONTUACAO CLIENTE
@@ -1749,12 +1774,12 @@ function realiza_pagamento(){
 			var embala_viagem = $("#embala_viagem").val();
 			var venda_aguarde = $("#pedido_aguarda_venda").val();
 
-			$.post('menu_pedidos/actions/salva_pedido_final.php',{embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
+			$.post('menu_pedidos/actions/salva_pedido_final.php',{venda_fiscal:venda_fiscal, embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
 			
 
 					$("#escrito_btn_recebimento").html("EFETUANDO...");	
 
-					$.post('menu_pedidos/actions/salva_recebimento.php',{pontos_validos_troca:pontos_validos_troca, utiliza_resgate_pontos:utiliza_resgate_pontos, troco_recebe:troco_recebe, forma_pagamento:forma_pagamento, valor_recebe:valor_recebe}, function(resposta){				
+					$.post('menu_pedidos/actions/salva_recebimento.php',{venda_fiscal:venda_fiscal, pontos_validos_troca:pontos_validos_troca, utiliza_resgate_pontos:utiliza_resgate_pontos, troco_recebe:troco_recebe, forma_pagamento:forma_pagamento, valor_recebe:valor_recebe}, function(resposta){				
 
 							var val = resposta.split('&@&');
 							var ja_recebido = parseFloat(val[1]);
@@ -1762,31 +1787,48 @@ function realiza_pagamento(){
 		
 							//NAO FALTA RECEBER MAIS NADA
 							if(resta_receber==0){
-								
-								//PAGOU TUDO E AINDA NAO IMPRIMIU//	
-								if(venda_aguarde==0){
 
-									if(forma_pagamento==3){											
-										imprime_ciencia_crediario();
-									} else {										
-										imprime_recebimentos();
-									}
-									
-									sim_imprime_pedido_completo=1;
-									$("#ModalPerguntaImprime01").modal();	
+
+								///É VENDA FISCAL///
+								if(venda_fiscal==1){
+
+									exibe_avisos_fiscais("AGUARDE, Enviando venda para o equipamento fiscal...");	
+									$.post('menu_pedidos/actions/venda_fiscal.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
+
+
+
+									});				
 
 								} else {
-									
-									if(forma_pagamento==3){	
 
-										imprime_ciencia_crediario();
+								
+									//PAGOU TUDO E AINDA NAO IMPRIMIU//	
+									if(venda_aguarde==0){
+
+										if(forma_pagamento==3){											
+											imprime_ciencia_crediario();
+										} else {										
+											imprime_recebimentos();
+										}
+										
+										sim_imprime_pedido_completo=1;
+										$("#ModalPerguntaImprime01").modal();	
+
 									} else {
-										imprime_recebimentos();
-									}
-								}
+										
+										if(forma_pagamento==3){	
 
-								carregando();
-								$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');		
+											imprime_ciencia_crediario();
+										} else {
+											imprime_recebimentos();
+										}
+									}
+
+									carregando();
+									$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');		
+
+
+								}
 
 
 							//AINDA TEM COISA A RECEBER	
@@ -1797,7 +1839,10 @@ function realiza_pagamento(){
 								$("#val_final").html(resta_receber.toFixed(2));
 								$("#restante_receber").val(resta_receber);
 
-								
+								//DESABILITA O FISCAL
+								$("#venda_fiscal").prop("checked", false);
+								$("#venda_fiscal").attr('disabled', true);
+
 								$("#aviso_pagamentos_existentes").show();								
 								$("#valor_recebe").val('');
 								$("#valor_recebe").focus();

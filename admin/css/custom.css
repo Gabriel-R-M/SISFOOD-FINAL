@@ -27,7 +27,10 @@ body{height:100%; width: 100%; background-position: center center; background-si
 .coluna-fixa{ width: 25%; border:1px solid #efefef;}
 .altura_progresso{height: 40px; font-size: 15px; font-weight: 300; -webkit-transition-duration:.5s;}
 
-
+.tabs{display: none;}
+.tabs:first-child { 
+  display: flex;
+}
 
 .modal-header {
 color:#FFF;

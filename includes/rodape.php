@@ -39,7 +39,10 @@
 
 
 
-<?php if($dados_configuracoes['modulo_internet']==1){ ?>		
+<?php 
+$ip = getenv("REMOTE_ADDR");
+	if($dados_configuracoes['modulo_internet']==1 && $ip=='::1'){ 
+?>		
 <script>
 	modulo_internet =1;
 </script>
@@ -76,6 +79,7 @@
 <script src="javascript/mobile.js?<?php echo time(); ?>"></script>
 <script src="javascript/entregas.js"></script>
 <script src="javascript/configuracoes.js"></script>
+<script src="javascript/fiscal.js"></script>
 
 
 </html>

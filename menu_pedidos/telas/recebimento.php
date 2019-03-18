@@ -488,11 +488,14 @@ if($total_recebido_venda!=0){
 		                  
 				    <input style="border-radius: 0" type="text" class="form-control valores" placeholder="0.00" id="valor_recebe" onkeyup="javascript:faz_saldo_restante(this.value);">	
 
-				    <div class="input-group-append">
-		            	<span class="input-group-text" style="border-radius:0" >
-		            		<input  type="checkbox" id="fiscal" <?php if($dados_configuracoes['modulo_fiscal']){echo 'checked="checked"';} ?>>            		
-		            	</span>
-		            </div>  	              	
+				    <?php if($dados_configuracoes['modulo_fiscal']==1){ ?>
+					    <div class="input-group-append">
+			            	<span class="input-group-text" style="border-radius:0" >
+			            		<input type="checkbox" value="1" id="venda_fiscal" <?php	if($total_recebido_venda!=0){echo 'disabled="disabled"'; } else { if($dados_configuracoes['fiscal_sempre_ativo']==1){echo 'checked="checked"';}  }?>>            		
+			            	</span>
+			            </div> 
+		        	<?php } ?>
+
 				</div>
 			</div>
 

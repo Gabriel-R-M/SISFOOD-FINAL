@@ -4,6 +4,8 @@ include_once ("../../admin/class/class.seguranca.php");
 include_once ("../../includes/verifica_configuracoes_loja.php");
 include_once ("../../includes/verifica_dados_sistema.php");
 
+		
+
 	$curl = curl_init();                                                                      
 	curl_setopt_array($curl, array(
 	    CURLOPT_RETURNTRANSFER => 1,
@@ -12,6 +14,7 @@ include_once ("../../includes/verifica_dados_sistema.php");
 	));
 
 	$return = curl_exec($curl);
+	
 
 	if($return){
 	    

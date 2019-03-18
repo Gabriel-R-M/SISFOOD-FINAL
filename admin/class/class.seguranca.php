@@ -9,10 +9,13 @@ $db = new DB();
 
 	foreach($_POST as $nome_campo => $valor){	
 		
-		
-			@$comando = "$" . $nome_campo . '="' . $valor . '";';
-			@eval($comando);
-				
+		$valor = str_replace("\\", '/', $valor);
+		$valor = str_replace("'", '`', $valor);
+
+		@$comando = "$" . $nome_campo . '="' . $valor . '";';
+		//echo '<br>';
+		@eval($comando);
+
 	}
 
 

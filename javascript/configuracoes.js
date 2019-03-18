@@ -11,3 +11,39 @@ function testa_impressoras(imp){
 		});	
 
 }
+
+
+
+function abre_loja_online(tipo){
+	
+	if(tipo=='automatica'){
+		$("#manual").hide();
+		$("#automatica").show();
+	} else {
+		$("#automatica").hide();
+		$("#manual").show();
+	}
+
+}
+
+
+
+function abre_fecha_loja_online(tipo){
+	$("#botao_atualiza_abre_fecha").html("ATUALIZANDO...");
+	$.post('menu_internet/actions/abre_fecha_loja.php',{tipo:tipo}, function(resposta){		
+		submenu_abre_loja_online();
+	});	
+
+}
+
+
+function altera_tipo_abertura_loja_online(){
+	var tipo_abertura_loja = $("#tipo_abertura_loja").val();
+	$("#botao_atualiza").html("ATUALIZANDO...");
+	$.post('menu_internet/actions/modo_abertura_loja.php',{tipo_abertura_loja:tipo_abertura_loja}, function(resposta){		
+		$.post('menu_internet/actions/abre_fecha_loja.php',{tipo:0}, function(resposta){		
+			submenu_abre_loja_online();
+		});	
+	});	
+
+}

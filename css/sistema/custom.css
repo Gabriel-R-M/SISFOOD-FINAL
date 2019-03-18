@@ -7,6 +7,7 @@ ul li.menu_pisca_internet{animation: fundoVermelho .8s; animation-iteration-coun
   100% { background: #333; }
 }
 
+.altura_progresso{height: 40px; font-size: 15px; font-weight: 300; -webkit-transition-duration:.5s;}
 
 .icone_rodando_btn{font-size: 18px}
 #motivo_rejeicao_pedido_internet_conteudo {min-width: 400px}

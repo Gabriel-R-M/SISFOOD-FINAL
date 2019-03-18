@@ -153,9 +153,10 @@
               <span>CONFIGURAÇÕES</span>
             </a>
             <div class="sub-item">
-              <ul>
-                <li><a href="modulos">MÓDULOS</a></li>                                
-                <li><a href="modulos-internet">MÓDULO PEDIDOS WEB</a></li>                                
+              <ul>                
+                <li><a href="modulos-fiscal">MÓDULO FISCAL</a></li>                                
+                <li><a href="modulos">MÓDULO CONTROLE DE ENTREGAS</a></li>                                
+                <li><a href="modulos-internet">MÓDULO PEDIDOS WEB</a></li>                                                
                 <li><a href="impressao">IMPRESSÃO</a></li>                                
                 <li><a href="gerais">GERAIS</a></li>                
                 <li><a href="formas-pagamento">FORMAS DE PAGAMENTO</a></li>                

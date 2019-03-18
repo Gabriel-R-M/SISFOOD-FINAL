@@ -15,7 +15,7 @@ if($id!=0){
 	}
 	
 		
-	$grava = $db->select("UPDATE lanches SET produto='$produto', preco_composto='$preco_composto', categoria='$categoria', codigo='$codigo', ativo='$ativo' $q WHERE id='$id' LIMIT 1");	
+	$grava = $db->select("UPDATE lanches SET ncm='$ncm', cst='$cst', cfop='$cfop', produto='$produto', preco_composto='$preco_composto', categoria='$categoria', codigo='$codigo', ativo='$ativo' $q WHERE id='$id' LIMIT 1");	
 
 
 	//APAGA OS PRECOS E INSERE
@@ -52,7 +52,7 @@ if($id!=0){
 		$foto=$arquivo;
 	}
 
-	$grava = $db->select("INSERT INTO lanches (produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
+	$grava = $db->select("INSERT INTO lanches (ncm, cst, cfop, produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$ncm', '$cst', '$cfop', '$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
 
 	$id_produto = $db->last_id($grava);
 	

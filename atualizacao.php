@@ -50,10 +50,29 @@
 	$sql = $db->select("ALTER TABLE usuarios ADD online INT(1) NOT NULL");
 	
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD md5_usuario VARCHAR(99) NOT NULL AFTER id_usuario");
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD venda_fiscal INT(1) NOT NULL");
 
+	$sql = $db->select("ALTER TABLE configuracoes ADD fiscal_sempre_ativo INT(1) NOT NULL");
 
 	
+	//FISCAL//
+	$sql = $db->select("ALTER TABLE categorias ADD ncm_categoria VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE categorias ADD cst_categoria VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE categorias ADD cfop_categoria VARCHAR(99) NOT NULL");
+
+	$sql = $db->select("ALTER TABLE fiscal ADD ncm_sistema VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE fiscal ADD cst_sistema VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE fiscal ADD cfop_sistema VARCHAR(99) NOT NULL");
+
+	$sql = $db->select("ALTER TABLE lanches ADD ncm VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE lanches ADD cst VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE lanches ADD cfop VARCHAR(99) NOT NULL");
+
+	$sql = $db->select("ALTER TABLE fiscal ADD caminho_acbr VARCHAR(999) NOT NULL");
+	$sql = $db->select("ALTER TABLE dados_loja_internet ADD tipo_abertura_loja VARCHAR(25) NOT NULL");
+	$sql = $db->select("ALTER TABLE dados_loja_internet ADD loja_aberta_manual INT(1) NOT NULL");
 	
+
 
 	//RODA O SCRIPT//
 	$nome_do_arquivo = "atualizacoes/atualizacoes.sql"; 

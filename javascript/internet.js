@@ -15,6 +15,46 @@ $(document).ready(function(){
 	}
 
 
+	$("#FormHorariosFuncionamento").submit(function(){	
+
+		$("#resposta_sucesso_servidor").hide();
+
+		$(".altura_progresso").show();
+		$("#barra_progresso_servidor_web").css('width', 10+'%');				
+		$("#barra_progresso_servidor_web").html(10+'%');
+		
+		$("#botao_atualiza_horarios").html('ATUALIZANDO, AGUARDE...');
+		var formdata = $("#FormHorariosFuncionamento").serialize();		
+
+			$.ajax({type: "POST", url:$("#FormHorariosFuncionamento").attr('action'), data:formdata, success: function(msg){										
+				
+				$("#barra_progresso_servidor_web").css('width', 50+'%');				
+				$("#barra_progresso_servidor_web").html(50+'%');
+
+				$.post('menu_internet/actions/atualiza_horarios_servidor.php', function(resposta){	
+					
+					$("#barra_progresso_servidor_web").css('width', 100+'%');																		
+					$("#barra_progresso_servidor_web").html(100+'%');
+					$("#botao_atualiza_horarios").html('SALVAR HORÁRIOS');
+
+					if(resposta==1){
+						$("#resposta_sucesso_servidor").show();
+					} else {
+						$("#resposta_erro_servidor").show();
+					}
+		
+				});
+
+						
+			} 
+		
+		});
+		
+		return false;
+	});
+
+
+
 	$("#FormRejeitaPedidoInternet").submit(function(){			
 		$("#botao_rejeita_pedido_modal").html('AGUARDE...');
 		var formdata = $("#FormRejeitaPedidoInternet").serialize();		
@@ -52,9 +92,12 @@ function verifica_pedidos_internet(){
 			toca_som_pedido_web=1;
 		}	
 
+
+		setTimeout(function(){ verifica_pedidos_internet(); }, 20000);
+
 	});		
 	
-	setTimeout(function(){ verifica_pedidos_internet(); }, 30000);
+	
 
 }
 
@@ -66,7 +109,9 @@ function pedidos_internet(){
 
 	carregando();
 	$.post('menu_internet/telas/pedidos_internet.php', function(resposta){					
-		$("#conteudo_geral").html(resposta);	
+		$("#conteudo_geral").html(resposta);
+
+		$.post('menu_internet/actions/pedido_verifica_novos.php');	
 
 	});			
 	

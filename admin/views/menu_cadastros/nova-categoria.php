@@ -188,13 +188,13 @@ if(isset($id)){
 
 
 
-              <div class="col-md-12 top10">
+              <div class="col-md-12 top20">
 
-              <div id="accordion2" class="accordion-two accordion-two-primary" role="tablist" aria-multiselectable="true">
+              <div id="accordion2" class="accordion-two accordion-two-primary" >
                 <div class="card">
                   <div class="card-header" role="tab" id="headingOne2">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2" class="tx-gray-800 transition">
-                      CONFIGURAÇÕES FISCAIS
+                    <a data-toggle="collapse">
+                      CONFIGURAÇÕES FISCAIS PARA A CATEGORIA
                     </a>
                   </div><!-- card-header -->
 
@@ -209,15 +209,28 @@ if(isset($id)){
                             <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">NCM PADRÃO</label>
-                                    <input type="text"  class="form-control" name="" value="<?php echo $ln['']; ?>">  
+                                    <input type="number"  class="form-control" name="ncm_categoria" value="<?php if($edit==1){ echo $ln['ncm_categoria'];} ?>">  
                                </div>
                             </div>
 
                             <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CST PADRÃO</label>
-                                    <input type="text"  class="form-control" name="" value="<?php echo $ln['']; ?>">  
+                                    <input type="number"  class="form-control" name="cst_categoria" value="<?php if($edit==1){ echo $ln['cst_categoria'];} ?>">  
                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">CFOP PADRÃO</label>
+                                    <input type="number"  class="form-control" name="cfop_categoria" value="<?php if($edit==1){ echo $ln['cfop_categoria'];} ?>">  
+                               </div>
+                            </div>
+
+                            <div class="col-md-12"> 
+                              <div class="alert alert-warning thin">
+                                  <i class="icofont-exclamation-tringle"></i> AS INFORMAÇÕES ACIMA, SÓ SÃO OBRIGATÓRIAS EM UTILIZAÇÃO FISCAL.
+                              </div>
                             </div>
 
 

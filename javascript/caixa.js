@@ -97,6 +97,7 @@ function abre_caixa(){
 	$("#btn_abre_caixa").html('AGUARDE...');
 	carregando();
 	$.post('menu_caixa/actions/salva_abre_caixa.php', {valor_inicial:valor_inicial}, function(resposta){
+		$.post('menu_internet/actions/abre_fecha_loja.php',{tipo:0});
 		location.href='home';			
 	});
 }
@@ -149,10 +150,10 @@ function confirma_fecha_caixa(){
 
 
 function finaliza_caixa(){	
-	$("#btn_fecha_caixa").html('AGUARDE...');		
-	
+	$("#btn_fecha_caixa").html('AGUARDE...');			
 	
 	$.post('menu_caixa/actions/finaliza_caixa.php', {id:1}, function(resposta){		
+		$.post('menu_internet/actions/abre_fecha_loja.php',{tipo:0});
 		$("#ModalFinalizaCaixa").modal('hide');
 		$("#btn_fecha_caixa").html('CONFIRMAR');		
 		imprime_fechamento_caixa(resposta);	

@@ -1,3 +1,27 @@
+<div id="ModalCupomFiscal" class="modal fade" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-header">        
+        <h4 class="modal-title">Cupom Fiscal</h4>
+       
+      </div>
+      
+        <div class="modal-body pd-20 text-center" style="text-transform: uppercase;">
+
+            <h19 id="cupom_fiscal_avisos"></h19>
+                     
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+
 <div id="ModalRejeicaoPedidoInternet" class="modal fade" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg">
 

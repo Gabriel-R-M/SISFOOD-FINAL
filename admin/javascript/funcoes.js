@@ -1,5 +1,31 @@
 // JavaScript Document
 
+$(".muda_tabs").click(function(){
+	var target = $(this).attr('data-id');			
+	$(".tabs").css('display', 'none');
+	$("#tab"+target).css('display', 'flex');
+});
+
+$("#PesquisaXML").submit(function(){
+		
+		$("#resultado_pesquisa").html("<center>PESQUISANDO, AGUARDE...</center>");
+		$("#resultado_pesquisa").show();
+		//$("#btn_pesquisa").html('PESQUISANDO...');
+		var formdata = $("#PesquisaXML").serialize();		
+		
+		$.ajax({type: "POST", url:$("#PesquisaXML").attr('action'), data:formdata, success: function(retorno){										
+				
+								
+			} 
+		
+		});
+		
+		return false;
+});
+
+
+
+
 function marcar_todas_opcoes(tipo){
 
 	var categoria_selecionar = $("#categoria_selecionar").val();
@@ -25,8 +51,6 @@ function salva_cadastro_insere(){
 }
 
 $(document).ready(function(){
-
-	
 
 
 		$('#ModalNovoIngrediente').on('shown.bs.modal', function () {
