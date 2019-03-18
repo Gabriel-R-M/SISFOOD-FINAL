@@ -2,7 +2,7 @@
 require("../../admin/class/class.db.php");
 require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_configuracoes_loja.php");
-
+require("../../includes/verifica_venda_aberta.php");
 
 
 
@@ -14,7 +14,7 @@ if($tipo==1){
 		$printer_principal = $dados_configuracoes['impressora_principal'];
 		if($ph = printer_open($printer_principal)){
 	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
+	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido$id_venda.txt"));
 	   		fclose($fh);
 	       
 	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
@@ -36,7 +36,7 @@ if($tipo==1){
 		$printer_principal = $dados_configuracoes['impressora_secundaria'];
 		if($ph = printer_open($printer_principal)){
 	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
+	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido$id_venda.txt"));
 	   		fclose($fh);
 	       
 	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
@@ -65,7 +65,7 @@ if($tipo==11){
 		$printer_principal = $dados_configuracoes['impressora_principal'];
 		if($ph = printer_open($printer_principal)){
 	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
+	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido$id_venda.txt"));
 	   		fclose($fh);
 	       
 	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
