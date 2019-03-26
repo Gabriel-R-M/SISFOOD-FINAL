@@ -1,7 +1,18 @@
+<?php
+require("../admin/class/class.db.php");
+require("../admin/class/class.seguranca.php");
+require("../includes/verifica_dados_loja.php");
+require("../includes/verifica_dados_fiscais.php");
+
+
+
+$caminho_acbr=$dados_fiscais['caminho_acbr'];
+	
+///CRIA O ARQUIVO INI PARA ENVIAR AO SAT///
+$ecf = '
 [infCFe]
 
 versao=0.07
-
 
 
 [Identificacao]
@@ -116,6 +127,14 @@ vMP=1.99
 [DadosAdicionais]
 
 infCpl=Teste emissao CFe/SAT
+';
+	
 
+	$fp = fopen("$caminho_acbr\cupom.ini", "w");
+	$escreve = fwrite($fp, $ecf);
+	fclose($fp); 					
+	///CRIA O ARQUIVO INI PARA ENVIAR AO SAT///
+		
 
-
+		
+?>

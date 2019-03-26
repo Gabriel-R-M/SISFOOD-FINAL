@@ -1835,10 +1835,15 @@ function realiza_pagamento(){
 								///É VENDA FISCAL///
 								if(venda_fiscal==1){
 
-									exibe_avisos_fiscais("Aguarde, Inicializando equipamento fiscal...");	
+									exibe_avisos_fiscais("Aguarde, Inicializando equipamento...");	
 									$.post('fiscal/inicializa_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
 
-											alert(resposta_fiscal);
+											muda_mensagem_fiscal("Emitindo cupom fiscal...");
+											$.post('fiscal/cria_cupom_fiscal.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
+												
+												alert(resposta_fiscal)
+
+											});		
 
 									});				
 
