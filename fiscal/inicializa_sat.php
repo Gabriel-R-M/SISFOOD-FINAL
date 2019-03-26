@@ -21,7 +21,15 @@ require("../includes/verifica_dados_fiscais.php");
 			$x=2;
 			//LÊ O ARQUIVO DE RESPOSTA//
 			$ponteiro = fopen ("$caminho_acbr\sai.txt","r");
-			echo $linha = trim(fgets($ponteiro));		
+			$linha = trim(fgets($ponteiro));		
+
+			if($linha=='OK: SAT ja inicializado' || $linha==''){
+				echo 1;
+			} else {
+				echo 0;
+			}
+
+
 			fclose($ponteiro);	
 			unlink("$caminho_acbr\sai.txt");	
 			exit();				
