@@ -1835,10 +1835,10 @@ function realiza_pagamento(){
 								///É VENDA FISCAL///
 								if(venda_fiscal==1){
 
-									exibe_avisos_fiscais("AGUARDE, Enviando venda para o equipamento fiscal...");	
-									$.post('menu_pedidos/actions/venda_fiscal.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
+									exibe_avisos_fiscais("Aguarde, Inicializando equipamento fiscal...");	
+									$.post('fiscal/inicializa_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
 
-
+											alert(resposta_fiscal);
 
 									});				
 
