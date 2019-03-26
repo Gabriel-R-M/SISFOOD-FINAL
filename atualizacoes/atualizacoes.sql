@@ -1,4 +1,44 @@
 --
+-- Estrutura da tabela `enderecos_clientes`
+--
+
+CREATE TABLE `enderecos_clientes` (
+  `id` int(11) NOT NULL,
+  `endereco` varchar(999) NOT NULL,
+  `numero` varchar(99) NOT NULL,
+  `complemento` varchar(999) NOT NULL,
+  `bairro` varchar(999) NOT NULL,
+  `cidade` varchar(999) NOT NULL,
+  `cliente` INT(10) NOT NULL,
+  `padrao` INT(1) NOT NULL,
+  `tipo` varchar(99) NOT NULL,
+  `data_cadastro` date NOT NULL,
+  `ativo` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `enderecos_internet`
+--
+ALTER TABLE `enderecos_clientes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `enderecos_internet`
+--
+ALTER TABLE `enderecos_clientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+--
 -- Estrutura para tabela `adicioinais por categoria`
 --
 
@@ -26,14 +66,6 @@ CREATE TABLE `horarios_funcionamento` (
   `fecha` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `horarios_funcionamento` (`id`, `dia`, `abre`, `fecha`) VALUES
-(2, 1, '00:00:00', '00:00:00'),
-(3, 2, '00:00:00', '00:00:00'),
-(4, 3, '00:00:00', '00:00:00'),
-(5, 4, '00:00:00', '00:00:00'),
-(6, 5, '00:00:00', '00:00:00'),
-(7, 6, '00:00:00', '00:00:00'),
-(8, 7, '00:00:00', '00:00:00');
 
 ALTER TABLE `horarios_funcionamento`
   ADD PRIMARY KEY (`id`);
@@ -68,9 +100,6 @@ CREATE TABLE `dados_loja_internet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
-INSERT INTO `dados_loja_internet` (`id`, `nome_loja`, `tipo_comida`, `endereco_linha1`, `endereco_linha2`, `telefones_loja`, `imagem_topo`, `logo_topo`, `favicon_topo`, `facebook`, `instagram`, `google`, `sobre`, `tempo_retirada`, `tipo_tempo_retirada`, `tempo_entrega`, `tipo_tempo_entrega`) VALUES
-(1, 'Nome do Estabelecimento', 'Tipos de Produtos', 'Endereço', 'Bairro, Cidade', 'Telefones', 'topo.jpg', 'logo.jpg', 'favicon.png', 'face', 'insta', 'google', 'Descrição do Estabelecimento', '00', 'minutos', '00:00', 'horas');
 
 
 ALTER TABLE `dados_loja_internet`

@@ -157,9 +157,9 @@ if($total_categorias<2){
 	
 	
 
-	<div class="top10" id="exibicao_adicionais_produto_selecionado"></div>	
+	<div class="top10" id="exibicao_adicionais_produto_selecionado" ></div>	
 
-	<div class="top10" id="exibicao_opcoes_produto_selecionado"></div>	
+	<div class="top10" id="exibicao_opcoes_produto_selecionado" ></div>	
 
 
 		
@@ -312,7 +312,7 @@ if($total_categorias<2){
 <script>
 	$(document).ready(function(){
 		
-		$('#resumo-pedido-comanda, #exibicao_produtos_pedido, #exibicao_categorias_pedido, .listagem-pagamentos-recebidos').perfectScrollbar();
+		$('#resumo-pedido-comanda, #exibicao_produtos_pedido, #exibicao_categorias_pedido, .listagem-pagamentos-recebidos, exibicao_adicionais_produto_selecionado').perfectScrollbar();
 	});	
 	window.clearTimeout(atualiza_pedidos);	
 </script>

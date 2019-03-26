@@ -20,8 +20,6 @@ function inicia_sistema(){
 
 	carregando();
 	//$("#conteudo_geral").load('menu_pedidos/telas/recebimento.php');
-	
-
 	$.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {		
 		
 		//TUDO OK PARA INICIAR VENDAS
@@ -30,9 +28,7 @@ function inicia_sistema(){
 			if(mobile==1){
 				$("#conteudo_geral").load('mobile/tela_aguarde.php');			
 			} else {
-				$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php', function(){				
-					vendas_internet();
-				});			
+				$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');			
 			}
 
 			
@@ -54,6 +50,8 @@ function inicia_sistema(){
 	});	
 
 	
+
+	
 	
 }
 
@@ -73,6 +71,11 @@ function submenu_impressoras(){
 function submenu_abre_loja_online(){
 	$("#telas_menu_ajustes").html('<center>CARREGANDO...</center>');
 	$("#telas_menu_ajustes").load('menu_configuracoes/telas/abre_online.php');	
+}
+
+function submenu_tempo_retirada_entrega(){
+	$("#telas_menu_ajustes").html('<center>CARREGANDO...</center>');
+	$("#telas_menu_ajustes").load('menu_configuracoes/telas/tempo_retirada_entrega.php');		
 }
 
 

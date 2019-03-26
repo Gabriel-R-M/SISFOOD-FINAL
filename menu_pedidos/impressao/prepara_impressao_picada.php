@@ -374,7 +374,7 @@ if($impressao=='secundaria'){
 					
 
 							$txt_dados_entrega = array();		
-							$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
+							$txt_dados_entrega[] = 'DADOS DO CLIENTEx2';         
 							$txt_dados_entrega[] = '----------------------------------------';
 							$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
@@ -382,9 +382,15 @@ if($impressao=='secundaria'){
 							$selectx = $db->select("SELECT nome, telefone, ddd FROM clientes WHERE id='$id_cliente' LIMIT 1");
 							$dados_cliente = $db->expand($selectx);
 
-							$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
+							if(!empty($dados_venda['nome_cliente'])){
+								
+								$dados_entrega = "\r\n".retira_acentos($dados_venda['nome_cliente'])."\r\n";
+							} else {
+								$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";	
+							}
+							
 							if(!empty($dados_cliente['telefone'])){					
-								$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'];
+								$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
 							}
 
 												

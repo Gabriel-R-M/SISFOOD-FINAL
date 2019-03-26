@@ -10,8 +10,23 @@ $(document).ready(function(){
 	}) 
 
 	$('#CancelaItemPedidoSenha').on('show.bs.modal', function (){
-		$("#senha_cancelamento_item_pedido").focus();	  
+		$("#senha_cancelamento_item_pedido").val('');	
+		setTimeout('$("#senha_cancelamento_item_pedido").focus();',400 );			  	
 	});
+
+	$('#CancelaVendaSenha').on('show.bs.modal', function (){		
+		setTimeout('$("#senha_cancelamento").focus();',400 );			  	
+	});
+
+	$('#CancelaAdicionalPedidoSenha').on('show.bs.modal', function (){		
+		setTimeout('$("#senha_cancelamento_adicional_pedido").focus();',400 );			  	
+	});
+
+	$('#CancelaOpcoesPedidoSenha').on('show.bs.modal', function (){		
+		setTimeout('$("#senha_cancelamento_opcoes_pedido").focus();',400 );			  	
+	});
+
+
 	
 	$('#ModalPerguntaImprime01').on('hidden.bs.modal', function (){
 	  sim_imprime_pedido_completo=0;
@@ -195,6 +210,23 @@ $(document).ready(function(){
 
 });	
 
+
+
+function seleciona_outro_endereco_cliente(id_endereco, id_cliente){
+	$("#carregando_outro_endereco").show();
+	$(".trava_endereco").prop('disabled', true);
+	$.post('menu_clientes/actions/recupera_dados_endereco.php', {id_endereco:id_endereco, id_cliente:id_cliente}, function(resposta){		
+		var val = resposta.split('&@&');
+		$("#endereco").val(val[0]);
+		$("#numero").val(val[1]);
+		$("#complemento").val(val[2]);
+		$("#bairro").val(val[3]);
+		
+		$("#carregando_outro_endereco").hide();
+		$(".trava_endereco").prop('disabled', false);	
+
+	});
+}
 
 
 function confirma_reimpressao_item_unico(id){
@@ -491,6 +523,19 @@ function busca_cliente(a,modulo_pontos=0){
 					$("#pontuacao").val(val[12]);
 					
 					$("#nome").focus();
+
+
+					////OUTROS ENDEREÇOS////
+					if($("#outros_enderecos").length){
+						if(val[13]!=''){
+							$("#exibe_outros_enderecos").show();
+							$("#outros_enderecos").html(val[13])	
+						} else {
+							$("#exibe_outros_enderecos").hide();
+							$("#outros_enderecos").html('<option>NENHUM OUTRO ENDEREÇO CADASTRADO</option>')	
+						}
+					} 
+
 
 					//BUSCA A PONTUACAO//
 					if(modulo_pontos==1){						
@@ -963,9 +1008,7 @@ function exlcui_produto_pedido(tipo,id){
 
 	if(pedido_aguarda_venda==1){
 		var_global=1;
-		$("#id_prod_venda_cancelamento").val(id);
-		$("#senha_cancelamento_item_pedido").val('');
-		$("#senha_cancelamento_item_pedido").focus();
+		$("#id_prod_venda_cancelamento").val(id);		
 		$("#CancelaItemPedidoSenha").modal();
 	} else {
 

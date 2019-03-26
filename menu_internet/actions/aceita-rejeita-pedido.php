@@ -85,7 +85,7 @@ $data_cadastro = date("Y-m-d");
 							if($db->rows($query)){
 								$lines = $db->expand($query);
 								$id_cliente_sistema_local = $lines['id']; 
-								$update = $db->select("UPDATE clientes SET endereco='$endereco_cliente', numero='$numero_cliente', complemento='$complemento_cliente', bairro='$bairro_cliente' WHERE id='$id_cliente_sistema_local' LIMIT 1");
+								$update = $db->select("UPDATE clientes SET nome='$nome_cliente', endereco='$endereco_cliente', numero='$numero_cliente', complemento='$complemento_cliente', bairro='$bairro_cliente' WHERE id='$id_cliente_sistema_local' LIMIT 1");
 							} else {
 								$insert = $db->select("INSERT INTO clientes (nome, ddd, telefone, endereco, numero, complemento, bairro, data_cadastro, internet, hash) VALUES ('$nome_cliente', '$ddd_cliente', '$telefone_cliente', '$endereco_cliente', '$numero_cliente', '$complemento_cliente', '$bairro_cliente', '$data_cadastro', '1', '$hash_cliente')");
 								$id_cliente_sistema_local = $db->last_id($insert);

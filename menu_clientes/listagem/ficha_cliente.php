@@ -24,7 +24,7 @@ if($dados['cartao']!=0){
 
 
 <h15>
-	<strong>Endereço:</strong><br>
+	<strong>Endereço Padrão:</strong><br>
 	<?php echo verifica_vazio($dados['endereco'],1); ?> <?php echo verifica_vazio($dados['numero'],0); ?><br>
 	<?php echo verifica_vazio($dados['bairro'],1); ?><br>
 	<?php if(!empty($dados['complemento'])){echo $dados['complemento'].'<br>';} ?>

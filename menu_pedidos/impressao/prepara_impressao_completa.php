@@ -316,7 +316,7 @@ require("../../diversos/funcoes_diversas.php");
 
 		$aux_valor_total = 'TOTAL:';
 		//$aux_valor_total2 = 'R$ '.number_format(($dados_venda['valor_total']-$dados_venda['valor_desconto']),2,",",".");
-		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_final_venda'],2,",",".");	
+		$aux_valor_total2 = 'R$ '.number_format((($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos'])-$dados_venda['valor_desconto']),2,",",".");
 		$total_espacos = $n_colunas - strlen($aux_valor_total);
 		$total_espacos = $total_espacos- strlen($aux_valor_total2);
 		$espacos = ''; 

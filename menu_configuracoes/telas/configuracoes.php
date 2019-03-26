@@ -41,6 +41,13 @@ require("../../includes/verifica_configuracoes_loja.php");
 	            		HORÁRIOS DE FUNCIONAMENTO</p>
 	            	</a>
 	            </li>
+
+                <li tabindex="-1" class="list-group-item upper" style="border-top: 0">
+                    <a href="javascript:submenu_tempo_retirada_entrega();"><p class="mg-b-0 thin">   
+                        <i class="icofont-motor-biker mg-r-8"></i>                        
+                        TEMPO DE RETIRADA E ENTREGA</p>
+                    </a>
+                </li>
             <?php 
              	}
             ?>

@@ -75,6 +75,26 @@ function pesquisa_cadastro_clientes(){
 }
 
 
+function altera_outro_endereco_cliente(id_endereco){
+	$("#exibe_dados_cliente_pedido").html('');
+	$("#id_endereco").val(id_endereco);
+	var id_cliente = $("#id_cliente").val();
+
+	$(".trava_endereco").prop('disabled', true);
+	$.post('menu_clientes/actions/recupera_dados_endereco.php', {id_endereco:id_endereco, id_cliente:id_cliente}, function(resposta){		
+		var val = resposta.split('&@&');
+		$("#endereco").val(val[0]);
+		$("#numero").val(val[1]);
+		$("#complemento").val(val[2]);
+		$("#bairro").val(val[3]);
+		
+		$("#carregando_outro_endereco").hide();
+		$(".trava_endereco").prop('disabled', false);	
+
+	});
+
+}
+
 
 function exibe_ficha_cliente(id){
 	$("#carrega_dados_cliente_modal").html('<br><center><h16>CARREGANDO...</h16></center><br>');
@@ -84,9 +104,12 @@ function exibe_ficha_cliente(id){
 
 
 function edita_ficha_cliente(){
+	
+	$("#outros_enderecos").html('');
 	id_cliente = $("#id_cliente_exibe").val();
 	telefone_cliente = $("#telefone_cliente_exibe").val();	
 	$(".procura-telefone-cliente").val(telefone_cliente);
+	
 	busca_cliente(1);
 	$("#ModalFichaCliente").modal('hide');
 }
@@ -106,12 +129,17 @@ function cancela_cadastro_cliente(){
 	$("#celular").val('');	
 	$(".btn-cancela-edicao").hide();
 	$("#pontos_resgatar_display").hide();
+
+	$("#exibe_outros_enderecos").hide();
+	$("#outros_enderecos").html('');
+
 }
 
 
 function salva_edicao_cliente(){
 
 	var id_cliente = $("#id_cliente").val();
+	var id_endereco = $("#id_endereco").val();
 	var numero_cartao = $("#numero_cartao").val();
 	var nome = $("#nome").val();
 	var endereco = $("#endereco").val();
@@ -134,7 +162,7 @@ function salva_edicao_cliente(){
 	}
 	
 	$("#reload_pesquisa").html("<br><center>CARREGANDO...</center>");
-	$.post('menu_clientes/actions/salva_cliente.php', {id_cliente:id_cliente, numero_cartao:numero_cartao, nome:nome, endereco:endereco, numero:numero, bairro:bairro, cidade:cidade, complemento:complemento, ddd:ddd, numero_telefone:numero_telefone, celular:celular}, function(resposta) {		
+	$.post('menu_clientes/actions/salva_cliente.php', {id_endereco:id_endereco, id_cliente:id_cliente, numero_cartao:numero_cartao, nome:nome, endereco:endereco, numero:numero, bairro:bairro, cidade:cidade, complemento:complemento, ddd:ddd, numero_telefone:numero_telefone, celular:celular}, function(resposta) {		
 
 		$("#reload_pesquisa").load("menu_clientes/listagem/listagem_clientes.php");	
 		
@@ -144,6 +172,7 @@ function salva_edicao_cliente(){
 		$("#btn_cancel").hide();
 
 		$("#id_cliente").val('');
+		$("#id_endereco").val('');
 		$("#numero_cartao").val('');
 		$("#nome").val('');
 		$("#endereco").val('');
@@ -156,6 +185,8 @@ function salva_edicao_cliente(){
 		$("#celular").val('');	
 
 		$("#pontos_resgatar_display").hide();
+		$("#exibe_outros_enderecos").hide();
+		$("#outros_enderecos").html('');
 		
 	});
 }

@@ -8,14 +8,47 @@ $(document).ready(function(){
 	toca_som_pedido_web=1;
 
 	if(typeof(modulo_internet) != "undefined") {
-		if(modulo_internet==1){			
-			verifica_pedidos_internet();	
+		if(modulo_internet==1){		
+
+			var mobile = 0;
+			if($('.is_mobile').is(":visible") == true) {
+				mobile = 1;       
+			}
+
+			if(mobile==0){	
+				verifica_pedidos_internet();	
+			}
 			
 		}
 	}
 
+	
 
-	$("#FormHorariosFuncionamento").submit(function(){	
+	$("#FormRejeitaPedidoInternet").submit(function(){			
+		$("#botao_rejeita_pedido_modal").html('AGUARDE...');
+		var formdata = $("#FormRejeitaPedidoInternet").serialize();		
+
+			$.ajax({type: "POST", url:$("#FormRejeitaPedidoInternet").attr('action'), data:formdata, success: function(msg){										
+				
+				pedidos_internet();
+				$("#id_pedido_rejeicao").val('');
+				$("#ModalRejeicaoPedidoInternet").modal('hide');
+				$("#botao_rejeita_pedido_modal").html('REJEITAR');
+						
+			} 
+		
+		});
+		
+		return false;
+	});
+
+
+
+});
+
+
+function atualiza_horarios_abre_fecha(){
+	
 
 		$("#resposta_sucesso_servidor").hide();
 
@@ -50,32 +83,52 @@ $(document).ready(function(){
 		
 		});
 		
-		return false;
-	});
+		
+
+}
 
 
+function atualiza_tempo_entrega_retirada(){
 
-	$("#FormRejeitaPedidoInternet").submit(function(){			
-		$("#botao_rejeita_pedido_modal").html('AGUARDE...');
-		var formdata = $("#FormRejeitaPedidoInternet").serialize();		
+	
+		$("#resposta_sucesso_servidor").hide();
 
-			$.ajax({type: "POST", url:$("#FormRejeitaPedidoInternet").attr('action'), data:formdata, success: function(msg){										
+		$(".altura_progresso").show();
+		$("#barra_progresso_servidor_web").css('width', 10+'%');				
+		$("#barra_progresso_servidor_web").html(10+'%');
+		
+		$("#botao_atualiza_horarios").html('ATUALIZANDO, AGUARDE...');
+		var formdata = $("#FormTempoEntregaRetirada").serialize();		
+
+			$.ajax({type: "POST", url:$("#FormTempoEntregaRetirada").attr('action'), data:formdata, success: function(msg){										
 				
-				pedidos_internet();
-				$("#id_pedido_rejeicao").val('');
-				$("#ModalRejeicaoPedidoInternet").modal('hide');
-				$("#botao_rejeita_pedido_modal").html('REJEITAR');
+				$("#barra_progresso_servidor_web").css('width', 50+'%');				
+				$("#barra_progresso_servidor_web").html(50+'%');
+
+				$.ajax({type: "POST", url:'menu_internet/actions/atualiza_tempo_entrega_retirada.php', data:formdata, success: function(resposta){										
+					
+					$("#barra_progresso_servidor_web").css('width', 100+'%');																		
+					$("#barra_progresso_servidor_web").html(100+'%');
+					$("#botao_atualiza_horarios").html('ATUALIZAR NO SITE');
+
+					if(resposta==1){
+						$("#resposta_sucesso_servidor").show();
+					} else {
+						$("#resposta_erro_servidor").show();
+					}
+
+				}
+		
+				});
+
 						
 			} 
 		
 		});
 		
-		return false;
-	});
+	
 
-
-
-});
+}
 
 
 function verifica_pedidos_internet(){

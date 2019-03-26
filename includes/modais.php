@@ -290,7 +290,7 @@
 
               <div class="input-group input-group-lg top15">
               
-                    <input type="password" class="form-control" style="border-radius: 4px 4px 0 0; text-align: center; " placeholder="Senha de cancelamento" id="senha_cancelamento_item_pedido" name="senha_cancelamento_item_pedido" required="required">
+                    <input type="password" class="form-control" style="border-radius: 4px 4px 0 0; text-align: center; " placeholder="Senha de cancelamento" id="senha_cancelamento_item_pedido" name="senha_cancelamento_item_pedido" required="required" autocomplete="off" >
                     <button type="submit" id="botao_cancela_item_pedido" class="btn btn-danger btn-block " style="border-radius:0 0  4px 4px">CANCELAR ÍTEM</button>
                   
               </div>  

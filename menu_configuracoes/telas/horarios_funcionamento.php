@@ -54,7 +54,7 @@ while($dados_horarios = $db->expand($select)){
 
 
 	<div class="card" >
-	<form id="FormHorariosFuncionamento" method="post" action="menu_configuracoes/actionS/salva_horarios_funcionamento.php">	
+	<form id="FormHorariosFuncionamento" method="post" action="menu_configuracoes/actions/salva_horarios_funcionamento.php">	
 
 		<div class="col-md-12">	
 		<div class="row ">
@@ -172,7 +172,7 @@ while($dados_horarios = $db->expand($select)){
 
 			<div class="col-md-6 top15">
 				<h5>&nbsp;</h5>	
-				<button id="botao_atualiza_horarios" class="btn btn-primary btn-block bottom15 top10"  type="submit">SALVAR HORÁRIOS</button>
+				<button id="botao_atualiza_horarios" class="btn btn-primary btn-block bottom15 top10"  type="button" onclick="javascript:atualiza_horarios_abre_fecha();">SALVAR HORÁRIOS</button>
 			</div>
 
 
@@ -199,4 +199,3 @@ while($dados_horarios = $db->expand($select)){
 
 
 
-<script src="javascript/internet.js"></script>	

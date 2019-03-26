@@ -17,6 +17,7 @@ require("../../includes/verifica_configuracoes_loja.php");
 	<div class="row row-xs">	
 			
 		  <input type="hidden" id="id_cliente">	
+		  <input type="hidden" id="id_endereco">	
 
 
 		  <?php if($dados_configuracoes['modulo_pontuacao']==1){ ?>
@@ -83,7 +84,7 @@ require("../../includes/verifica_configuracoes_loja.php");
 		  	<div class="input-group">                                
                 <input class="form-control procura-telefone-cliente" id="numero_telefone" onkeypress='return SomenteNumero(event)' placeholder="TELEFONE">
                 <span class="input-group-btn">                 
-                  <button style="height: 42px;  margin-left: -3px" class="btn btn-primary" type="button" id="btn_buscar" onClick="javascript:busca_cliente(1, <?php echo $dados_configuracoes['modulo_pontuacao']; ?>);">
+                  <button style="height: 42px; display: none;  margin-left: -3px" class="btn btn-primary" type="button" id="btn_buscar" onClick="javascript:busca_cliente(1, <?php echo $dados_configuracoes['modulo_pontuacao']; ?>);">
                     <i class="icofont-search-user" style="font-size: 17px"></i>
                   </button>
                    
@@ -97,6 +98,10 @@ require("../../includes/verifica_configuracoes_loja.php");
 		  </div>
 
 
+		  <div class="col-lg-12 col-xs-12 top15 upper hide" id="exibe_outros_enderecos">    
+		      <select class="form-control upper" id="outros_enderecos" onchange="javascript:altera_outro_endereco_cliente(this.value);">
+		      </select>  
+		  </div>
 		  
 
 		<div class="col-md-12  col-xs-12 top15 hide" id="pontos_resgatar_display">    
@@ -117,9 +122,8 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 
 
-		  <div class="col-md-12"><hr></div>
 
-		  <div class="col-lg-12">
+		  <div class="col-lg-12 top15">
 		  	<button type="button" class="btn btn-md  btn-primary" id="btn_salvar" onClick="javascript:salva_edicao_cliente();">
 		  		<i class="icofont-save"></i>&nbsp;&nbsp;SALVAR CADASTRO&nbsp;(F2)</button>    
 
