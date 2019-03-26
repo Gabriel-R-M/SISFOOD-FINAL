@@ -1,9 +1,9 @@
 <?php
-require("../../admin/class/class.db.php");
-require("../../admin/class/class.seguranca.php");
+require("../admin/class/class.db.php");
+require("../admin/class/class.seguranca.php");
 require("../includes/verifica_dados_fiscais.php");
 
-	
+
 	$caminho_acbr=$dados_fiscais['caminho_acbr'];
 	@unlink("$caminho_acbr\sai.txt");	
 
