@@ -1,5 +1,18 @@
 // JavaScript Document
 
+
+function valida_ncm(ncm){
+	$("#ncm_erro").hide();
+	$("#esconde_frase").show();
+	$.post("ajax/valida_ncm.php",{ncm:ncm},function(resposta){
+		if(resposta==0){
+			$("#esconde_frase").hide();
+			$("#ncm_erro").show();
+		}
+	});
+}
+
+
 $(".muda_tabs").click(function(){
 	var target = $(this).attr('data-id');			
 	$(".tabs").css('display', 'none');

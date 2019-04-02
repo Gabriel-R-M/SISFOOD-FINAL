@@ -14,11 +14,27 @@
             <a href="javascript:void(0);" tabindex="-1" class="sidebar-nav-link upper" id="logo_icone_menu" ><img src="img/icone.png"></a>  
           </li>
 
-          <li class="sidebar-nav-item">
-            <a href="javascript:void(0);" onclick="javascript:confirma_abertura_pedido();" class="sidebar-nav-link" tabindex="-1">
-                <i class="icofont-fast-food"></i>
-            </a>
-          </li>
+          
+          <?php if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0){ ?>          
+
+
+              <li class="sidebar-nav-item">
+                <a href="javascript:void(0);" onclick="javascript:inicia_sistema();" class="sidebar-nav-link" tabindex="-1">
+                    <i class="icofont-mathematical-alt-1"></i>
+                </a>
+              </li>
+            
+
+          <?php } else { ?>
+            
+              <li class="sidebar-nav-item">
+                <a href="javascript:void(0);" onclick="javascript:confirma_abertura_pedido();" class="sidebar-nav-link" tabindex="-1">
+                    <i class="icofont-fast-food"></i>
+                </a>
+              </li>
+
+          <?php } ?>  
+
 
           <?php if($dados_mesas['mesa']>0){ ?>
           <li class="sidebar-nav-item">
@@ -28,12 +44,13 @@
           </li>
          <?php } ?>
 
+          <?php if($dados_configuracoes['modulo_entregas_pedidos']==1){ ?>
           <li class="sidebar-nav-item">
             <a href="javascript:void(0);" onclick="javascript:entregas_comandas(0);" class="sidebar-nav-link" tabindex="-1">
               <i class="icofont-motor-biker"></i>
             </a>
           </li>
-
+          <?php } ?>
 
 
             <?php 

@@ -1,12 +1,25 @@
 $.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {		
+
+		var val = resposta.split('&@&');
 		
 		//TUDO OK PARA INICIAR VENDAS
-		if(resposta==1){
+		if(val[0]==1){
 
 			if(mobile==1){
 				$("#conteudo_geral").load('mobile/tela_aguarde.php');			
 			} else {
-				$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');			
+
+				//TEM MESAS
+				if(val[1]>0){
+					$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');				
+				//NAO TEM MESAS MAS TEM ENTREGAS	
+				} else if(val[2]==1){
+					$("#conteudo_geral").load('menu_pedidos/telas/entregas_comandas.php');			
+				//NAO TEM MESAS NEM ENTREGAS		
+				} else {
+					inicia_pedido();
+				}
+				
 			}
 
 			
@@ -25,4 +38,4 @@ $.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {
 		}		
 
 
-	});	
+	});

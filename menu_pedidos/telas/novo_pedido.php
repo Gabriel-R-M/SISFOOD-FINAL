@@ -7,6 +7,8 @@ require("../../includes/verifica_cliente_venda.php");
 require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_diversas.php");
 
+
+
 $disabled='';
 if($dados_venda['finalizada']==1){
 	$disabled = 'hide';	
@@ -22,14 +24,21 @@ if($total_categorias<2){
 	$classe_tamanho_exibicao_produtos = 'produtos_exibe_uma_categoria';
 	$hide_categorias='hide';
 }
+
+$pdv = 0;
+if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0){
+	$pdv=1;
+}
+
+
 ?>
 
 
 <div class="col-md-4 thin" id="lateral-pedido">
-	
+
 	<div class="order-top">
 		<h20>
-			PEDIDO: <?php echo $id_venda; ?>
+			VENDA: <?php echo $id_venda; ?>
 			<?php 
             	if($dados_venda['id_mesa']!=0){
             		echo '&nbsp;(MESA '.$dados_venda['id_mesa'].')';	            	
@@ -122,9 +131,9 @@ if($total_categorias<2){
 
 			<div class="botoes-insercao-itens-pedido">
 				<div class="input-group ">
-	                <input type="text" tabindex="-1" onkeypress='return SomenteNumero(event)' class="form-control" id="quantidade-produto" value="1">
-	                <span class="input-group-btn">
-	                  <button class="btn bd bd-l-0 btn-danger botao-adicao-produto" type="button" onclick="javascript:exibicao_adicionais_produto_selecionado();">
+	                <input type="number" tabindex="-1"  class="form-control" id="quantidade-produto" value="1" >
+	                <span class="input-group-btn">	                  	
+	                  <button class="btn bd bd-l-0 btn-danger botao-adicao-produto" id="botao_permite_adicional" type="button" onclick="javascript:exibicao_adicionais_produto_selecionado();">
 	                  	<i class="icofont-ui-add"></i> <br><span>(ADICIONAIS)</span>
 	                  </button>
 	                  <button id="botao_opcoes_combo" class="btn bd bd-l-0 btn-info botao-adicao-produto bt-adicao-produto2 hide" type="button" onclick="javascript:exibicao_opcoes_produto_selecionado();">
@@ -198,6 +207,7 @@ if($total_categorias<2){
 		  		echo '<div class="row row-xs">';
 
 		  			$id_categoria = $row['id'];
+		  			$permite_adicionais = $row['adicionais'];
 		  			$contador_produtos=1;
 		  			$seleciona_produtos = $db->select("SELECT codigo, id, produto, preco_composto FROM lanches 
 		  				WHERE ativo='1' AND categoria='$id_categoria' 
@@ -220,14 +230,16 @@ if($total_categorias<2){
 								}	
 			  				
 
-			  				echo '<div class="col-md-3 bottom10 produtos_categoria_selecionada'.$contador.'" data-name="'.nomes_produtos_busca($line['produto']).' '.nomes_produtos_busca($line['codigo']).'" id="prod_name_div'.$line['id'].'">';
+			  				echo '<div class="col-md-3 bottom10 produtos_categoria_selecionada'.$contador.'" data-name="'.nomes_produtos_busca($line['produto']).' '.nomes_produtos_busca($line['codigo']).'" id="prod_name_div'.$line['id'].'" data-codigo="'.$line['id'].'">';
 
 			  				if($row['meio_meio']!=0){
 			  					$classe = 'pdr1';
 			  					$classe2 = 'pdr1a';
-			  					echo '<a tabindex="-1" href="javascript:void(0)" onclick="javascript: seleciona_produtos(1,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');" id="link_selecao'.$line['id'].'">';
+			  					echo '<a id="link_produto'.$line['id'].'" tabindex="-1" href="javascript:void(0)" onclick="javascript:seleciona_produtos(1,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.', '.$permite_adicionais.');" id="link_selecao'.$line['id'].'" data-link="1,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.', '.$permite_adicionais.'">';
+			  					
 				  			} else {
-				  				echo '<a tabindex="-1" href="javascript:void(0)" onclick="javascript: seleciona_produtos(2,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.');" id="link_selecao'.$line['id'].'">';
+				  				echo '<a id="link_produto'.$line['id'].'" tabindex="-1" href="javascript:void(0)" onclick="javascript:seleciona_produtos(2,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.', '.$permite_adicionais.');" id="link_selecao'.$line['id'].'" data-link="2,'.$line['id'].','.$line['preco_composto'].','.$id_categoria.', '.$permite_adicionais.'">';
+
 				  				$classe = 'pdr2';
 				  				$classe2 = 'pdr2a';
 				  			}
@@ -245,11 +257,16 @@ if($total_categorias<2){
 				  									echo '<input tabindex="-1" name="produto" value="'.$line['id'].'" type="radio" class="radio-produtos2 marca-produtos prod-normais" id="check'.$line['id'].'">';
 				  								}
 				  							
-			  						
+			  						if($total_categorias>1){
 			  						echo '<input tabindex="-1" type="text" id="foca_campo'.$line['id'].'" value="['.$row['categoria'].']" class="campo-focus upper '.$classe2.'" readonly>';
+			  						}
 
 			  						if(!empty($line['codigo'])){	
-			  							echo '<span class="destaca pull-right" id="destaca'.$line['id'].'">('.$line['codigo'].')</span>';
+
+			  							$tamanho_codigo = strlen($line['codigo']);
+			  							if($tamanho_codigo<6){	
+			  								echo '<span class="destaca pull-right" id="destaca'.$line['id'].'">('.$line['codigo'].')</span>';
+			  							}
 			  						}
 
 			  						echo '<h2 id="prod_name'.$line['id'].'" class=" prod_name">'.$line['produto'].'</h2>';	
@@ -283,7 +300,7 @@ if($total_categorias<2){
 	</div>
 
 		
-
+		<input type="hidden" id="qtd_categorias" value="<?php echo $total_categorias; ?>">
 		<div class="top20 <?php echo $disabled; ?> <?php echo $hide_categorias; ?>" id="exibicao_categorias_pedido" >
 			<select id="categoria_selecionada" class="form-control select_pedido_grande upper thin text-center" style="height: 60px; border-radius: 0" onchange="javascript:exibe_produtos_categorias_pedido(this.value)">
 				<?php
@@ -304,6 +321,7 @@ if($total_categorias<2){
 
 
 
+<input type="hidden" id="pdv" value="<?php echo $pdv; ?>">
 <input type="hidden" id="impressao_item_avulso" value="<?php echo $dados_configuracoes['impressao_avulsa_item']; ?>">
 <input type="hidden" id="tela-mobile" value="0">
 <input type="hidden" id="pedido_aguarda_venda" value="<?php echo $dados_venda['aguarde']; ?>">

@@ -1,7 +1,7 @@
 <?php
 require("../../config.php");
 
-	$grava = $db->select("UPDATE configuracoes SET  modulo_entregas='$modulo_entregas' ");
+$grava = $db->select("UPDATE configuracoes SET  modulo_entregas='$modulo_entregas', modulo_entregas_pedidos='$modulo_entregas_pedidos' ");
 
 
 //SESSIONS DE AVISO//

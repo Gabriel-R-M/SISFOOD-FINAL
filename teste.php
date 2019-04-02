@@ -1,30 +1,9 @@
 <?php
 
-	$caminho='c:\ACBrMonitorPLUS';
+include("admin/class/class.db.php");
+include("admin/class/class.seguranca.php");
+include("diversos/funcoes_diversas.php");
 
-	///ATIVA O ECF///
-	$ecf = 'SAT.Inicializar';
-	$fp = fopen("$caminho\ENT.txt", "w");
-	$escreve = fwrite($fp, $ecf);
-	fclose($fp); 			
+echo impostos_fiscais_produto('ncm',104,6);
 
-
-	$x=1;
-	while($x==1){						
-		if(file_exists("$caminho\sai.txt")){
-			$x=2;
-			//LÊ O ARQUIVO DE RESPOSTA//
-			$ponteiro = fopen ("$caminho\sai.txt","r");
-			echo $linha = trim(fgets($ponteiro));		
-			fclose($ponteiro);	
-			unlink("$caminho\sai.txt");	
-			exit();				
-		} else {
-			sleep(.2);			
-		}			
-	}				
-	///ATIVA O ECF///
-		
-
-		
 ?>

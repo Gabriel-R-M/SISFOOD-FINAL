@@ -577,7 +577,9 @@ function inicia_pedido(mesa=0,mobile=0){
 
 	$.post('menu_caixa/actions/verifica_sistema.php', {id:1}, function(resposta) {	
 
-		if(resposta==1){
+		var val = resposta.split('&@&');
+
+		if(val[0]==1){
 
 			var venda_avulsa = 1;
 			var id_cliente = 0;
@@ -641,7 +643,11 @@ function exibicao_opcoes_produto_selecionado(){
 	if( $('#exibicao_opcoes_produto_selecionado').is(':visible') ) {
 		
 		$("#exibicao_opcoes_produto_selecionado").hide();
-		$("#exibicao_produtos_pedido, #exibicao_categorias_pedido").show();
+		$("#exibicao_produtos_pedido").show();
+		var qtd_categorias = $("#qtd_categorias").val();
+		if(qtd_categorias>1){
+			$("#exibicao_categorias_pedido").show();
+		}
 			
 	} else {
 
@@ -660,7 +666,12 @@ function exibicao_adicionais_produto_selecionado(){
 	if( $('#exibicao_adicionais_produto_selecionado').is(':visible') ) {
 		
 		$("#exibicao_adicionais_produto_selecionado").hide();
-		$("#exibicao_produtos_pedido, #exibicao_categorias_pedido").show();
+		$("#exibicao_produtos_pedido").show();
+
+		var qtd_categorias = $("#qtd_categorias").val();
+		if(qtd_categorias>1){
+			$("#exibicao_categorias_pedido").show();
+		}
 			
 	} else {
 
@@ -724,34 +735,45 @@ function selecao_variacao(valor_recebe='0&@@&0'){
 
 
 
-function seleciona_produtos(tipo,id,preco_composto,categoria){
+function seleciona_produtos(tipo,id,preco_composto,categoria,permite_adicionais){
 
 	var tela_mobile = $("#tela-mobile").val();
-
-	//CARREGA OS ADICIONAIS//
-	if(global_pesquisa_adicionais==0 || global_produto_selecionado!=id){
-		$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
-		$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);		
-		global_pesquisa_adicionais=1;	
+	var pdv = $("#pdv").val();
+	
+	if(permite_adicionais==1){
+		$("#botao_permite_adicional").show()
 	} else {
-		if (!$("#contador_adicionais").length) {  
-			$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
-			$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);			
-			global_pesquisa_adicionais=1;	
-		}
+		$("#botao_permite_adicional").hide()
 	}
 
-	//CARREGA AS OPCOES DE COMBO//
-	if(global_pesquisa_opcoes==0 || global_produto_selecionado!=id){
-		$("#exibicao_opcoes_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
-		$("#exibicao_opcoes_produto_selecionado").load('menu_pedidos/listagem/listagem_opcoes.php?categoria='+categoria+'&produto='+id);		
-		global_pesquisa_opcoes=1;	
-	} else {
-		if (!$("#contador_opcoes").length) {  
+	if(pdv==0){
+
+		//CARREGA OS ADICIONAIS//
+		if(global_pesquisa_adicionais==0 || global_produto_selecionado!=id){
+			$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+			$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);		
+			global_pesquisa_adicionais=1;	
+		} else {
+			if (!$("#contador_adicionais").length) {  
+				$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+				$("#exibicao_adicionais_produto_selecionado").load('menu_pedidos/listagem/listagem_adicionais.php?categoria='+categoria);			
+				global_pesquisa_adicionais=1;	
+			}
+		}
+
+		//CARREGA AS OPCOES DE COMBO//
+		if(global_pesquisa_opcoes==0 || global_produto_selecionado!=id){
 			$("#exibicao_opcoes_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
 			$("#exibicao_opcoes_produto_selecionado").load('menu_pedidos/listagem/listagem_opcoes.php?categoria='+categoria+'&produto='+id);		
 			global_pesquisa_opcoes=1;	
+		} else {
+			if (!$("#contador_opcoes").length) {  
+				$("#exibicao_opcoes_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');
+				$("#exibicao_opcoes_produto_selecionado").load('menu_pedidos/listagem/listagem_opcoes.php?categoria='+categoria+'&produto='+id);		
+				global_pesquisa_opcoes=1;	
+			}
 		}
+
 	}
 
 	global_produto_selecionado = id;
@@ -786,8 +808,11 @@ function seleciona_produtos(tipo,id,preco_composto,categoria){
     	});
 
 
-    	if(qtd>0){    		    		
-    		$(".box-nome-cliente").show();
+    	if(qtd>0){  
+
+    		if(pdv==0){  		    		
+    			$(".box-nome-cliente").show();
+	    	}
     		
     		if(tela_mobile==1){    			
     			$("#exibicao_produtos_pedido").addClass('margin30');    			
@@ -874,7 +899,11 @@ function seleciona_produtos(tipo,id,preco_composto,categoria){
 			$("#produtox"+id).removeClass("produto-round_cor");		
 			$("#foca_campo"+id).css("color","#333");
 			$("#destaca"+id).css("color","#B92A25");	
-			$(".box-nome-cliente").hide();
+
+			if(pdv==0){  		    		
+    			$(".box-nome-cliente").show();
+	    	}
+			
 			$(".botoes-insercao-itens-pedido").hide();
 
 			//OCULTA CAMPO VARIACOES
@@ -900,7 +929,9 @@ function seleciona_produtos(tipo,id,preco_composto,categoria){
 			$("#produtox"+id).addClass("produto-round_cor");
 			$("#foca_campo"+id).css("color","#FFF");
 			$("#destaca"+id).css("color","#FFF");		
-			$(".box-nome-cliente").show();
+			if(pdv==0){  		    		
+    			$(".box-nome-cliente").show();
+	    	}
 			$(".botoes-insercao-itens-pedido").show(0, function(){
 				if(tela_mobile==0){
     				$("#quantidade-produto").focus().select();	
@@ -1120,7 +1151,8 @@ function escolhe_taxa_entrega(a){
 				$("#soma_entrega").val(resposta);
 
 					var soma_pedido_entrega = (total_pedido+parseFloat(resposta));
-					$("#soma_final").val(soma_pedido_entrega);						
+					$("#soma_final").val(soma_pedido_entrega);
+					$("#restante_receber").val(soma_pedido_entrega);						
 
 					var geral = (soma_pedido_entrega-val_recebido);
 
@@ -1234,7 +1266,8 @@ function faz_saldo_restante(valor){
 
 	} else {
 
-		var troco = (valor-final);
+
+		var troco = (recebe-final);
 		if(troco<0){
 			troco=0;
 		}	
@@ -1378,6 +1411,33 @@ function pesquisa_produtos_venda(pesquisa){
 
 	var pesquisa = pesquisa.toLowerCase();	
 	$('[data-name*="'+pesquisa+'"]').show();
+
+			
+			if(pesquisa!=''){
+				var tecla = event.keyCode;
+				var qtd=0;
+				var id_seleciona_sozinho=0;
+				$(".produto-round").each(function () {
+					if($(this).is(':visible')) {
+						qtd ++;
+						id_seleciona_sozinho=$(this).attr("data-id");;
+					}	
+				});
+				
+				//ENTER//
+				if(tecla==13){
+					if(qtd==1 && id_seleciona_sozinho!=0){
+						var link = $("#link_produto"+id_seleciona_sozinho).attr('data-link');	
+						var val = link.split(',');					
+						seleciona_produtos(val[0],val[1],val[2],val[3],val[4]);
+					}
+				}
+				
+								
+					
+			}
+
+
 }
 
 
@@ -1477,7 +1537,14 @@ function salva_item_pedido(){
 	    $("#exibicao_opcoes_produto_selecionado").hide();
 		$("#exibicao_adicionais_produto_selecionado").html('<center><br><br>CARREGANDO...</center>');		
 		
-		$("#exibicao_produtos_pedido, #exibicao_categorias_pedido").show();
+		$("#exibicao_produtos_pedido").show();
+
+		var qtd_categorias = $("#qtd_categorias").val();
+		if(qtd_categorias>1){
+			$("#exibicao_categorias_pedido").show();	
+		}
+		
+		
 
 		$(".opcoes_desmarca").prop( "checked", false);	
 
@@ -1617,6 +1684,19 @@ function finaliza_pedido2(imprime=0, reload=0){
 	var embala_viagem = $("#embala_viagem").val();
 	var venda_aguarde = $("#pedido_aguarda_venda").val();
 
+
+	//VERIFICAÇÃO
+	var modulo_entregas_pedidos = $("#modulo_entregas_pedidos").val();
+	var qtd_mesas_totais = $("#qtd_mesas_totais").val();
+
+	if(modulo_entregas_pedidos==0){
+		if(qtd_mesas_totais>0){
+			if(mesa==0){
+				exibe_erros_gerais('Escolha uma mesa!');
+				return;	
+			}
+		}
+	}
 
 
 	//MOBILE
@@ -1835,17 +1915,8 @@ function realiza_pagamento(){
 								///É VENDA FISCAL///
 								if(venda_fiscal==1){
 
-									exibe_avisos_fiscais("Aguarde, Inicializando equipamento...");	
-									$.post('fiscal/inicializa_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
-
-											muda_mensagem_fiscal("Emitindo cupom fiscal...");
-											$.post('fiscal/cria_cupom_fiscal.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
-												
-												alert(resposta_fiscal)
-
-											});		
-
-									});				
+									exibe_avisos_fiscais("Deseja informar CPF?");	
+													
 
 								} else {
 
@@ -1872,8 +1943,9 @@ function realiza_pagamento(){
 										}
 									}
 
-									carregando();
-									$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');		
+									//carregando();
+									//$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');		
+									inicia_sistema();
 
 
 								}
@@ -1908,6 +1980,13 @@ function realiza_pagamento(){
 }
 
 
+
+
+function apenas_encerra_venda(){
+	$.post('menu_pedidos/actions/finaliza_venda.php',{finaliza:1}, function(resposta){		
+		inicia_sistema();
+	});
+}
 
 
 function resgate_pontos(){

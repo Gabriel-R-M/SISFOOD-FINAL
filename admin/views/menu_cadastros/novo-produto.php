@@ -93,15 +93,16 @@ if(isset($id)){
 
 	        <div class="row tabs" id="tab2">
 
-	        		<div class="col-md-4">
+	        		   <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">NCM</label>
-                            <input type="number"  class="form-control" name="ncm" value="<?php if($edit==1){ echo $ln['ncm'];} ?>">  
-                            <small>*Apenas em caso fiscal</small>
+                            <input type="number" onblur="javascript:valida_ncm(this.value);"   class="form-control" name="ncm" value="<?php if($edit==1){ echo $ln['ncm'];} ?>">  
+                            <small id="esconde_frase">*Apenas em caso fiscal</small>
+                            <small id="ncm_erro" class="hide red"><b>NCM NÃO ENCONTRADO</b></small>  
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                     	<div class="form-group">
                         	<label for="exampleInputEmail1">CST</label>
                             <input type="number"  class="form-control" name="cst" value="<?php if($edit==1){ echo $ln['cst'];} ?>">  
@@ -109,14 +110,24 @@ if(isset($id)){
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">CFOP</label>
                             <input type="number"  class="form-control" name="cfop" value="<?php if($edit==1){ echo $ln['cfop'];} ?>">  
                             <small>*Apenas em caso fiscal</small>
                         </div>
                     </div>
-	              	              
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">CSOSN</label>
+                            <input type="number"  class="form-control" name="csosn" value="<?php if($edit==1){ echo $ln['csosn'];} ?>">  
+                            <small>*Apenas em caso fiscal</small>
+                        </div>
+                    </div>
+	              	            
+
+                                
 	        </div>    
 
 

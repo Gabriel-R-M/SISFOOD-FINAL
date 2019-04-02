@@ -165,6 +165,8 @@ if($total_recebido_venda!=0){
 
 </div>
 
+
+
 <input type="hidden" id="tela-mobile" value="1">
 <input type="hidden" id="pedido_aguarda_venda" value="<?php echo $dados_venda['aguarde']; ?>">
 <input type="hidden" id="tela_finaliza-pedido-enter" value="1">

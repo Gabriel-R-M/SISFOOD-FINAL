@@ -3,7 +3,7 @@ require("../../config.php");
 
 //UPDATE
 if($id!=0){
-	$grava = $db->select("UPDATE categorias SET ncm_categoria='$ncm_categoria', cst_categoria='$cst_categoria', cfop_categoria='$cfop_categoria', categoria='$categoria', ativo='$ativo', ordem='$ordem', meio_meio='$meio_meio', adicionais='$adicionais', impressao='$impressao', imprime_codigo='$imprime_codigo' WHERE id='$id' LIMIT 1");	
+	$grava = $db->select("UPDATE categorias SET csosn_categoria='$csosn_categoria', ncm_categoria='$ncm_categoria', cst_categoria='$cst_categoria', cfop_categoria='$cfop_categoria', categoria='$categoria', ativo='$ativo', ordem='$ordem', meio_meio='$meio_meio', adicionais='$adicionais', impressao='$impressao', imprime_codigo='$imprime_codigo' WHERE id='$id' LIMIT 1");	
 
 //INSERT
 } else {

@@ -4,6 +4,7 @@
 	error_reporting(0);
 	ini_set('display_errors', 0 );
 	
+	
 	//CRIA CAMPOS//
 	$sql = $db->select("ALTER TABLE configuracoes ADD modulo_entregas INT(1) NOT NULL");
 	$sql = $db->select("ALTER TABLE configuracoes ADD modulo_pontuacao INT(1) NOT NULL");
@@ -59,18 +60,36 @@
 	$sql = $db->select("ALTER TABLE categorias ADD ncm_categoria VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE categorias ADD cst_categoria VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE categorias ADD cfop_categoria VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE categorias ADD csosn_categoria VARCHAR(10) NOT NULL");
 
 	$sql = $db->select("ALTER TABLE fiscal ADD ncm_sistema VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE fiscal ADD cst_sistema VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE fiscal ADD cfop_sistema VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE fiscal ADD csosn_sistema VARCHAR(10) NOT NULL");
 
 	$sql = $db->select("ALTER TABLE lanches ADD ncm VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE lanches ADD cst VARCHAR(99) NOT NULL");
 	$sql = $db->select("ALTER TABLE lanches ADD cfop VARCHAR(99) NOT NULL");
+	$sql = $db->select("ALTER TABLE lanches ADD csosn VARCHAR(10) NOT NULL");
 
 	$sql = $db->select("ALTER TABLE fiscal ADD caminho_acbr VARCHAR(999) NOT NULL");
 	$sql = $db->select("ALTER TABLE dados_loja_internet ADD tipo_abertura_loja VARCHAR(25) NOT NULL");
 	$sql = $db->select("ALTER TABLE dados_loja_internet ADD loja_aberta_manual INT(1) NOT NULL");
+
+
+	$sql = $db->select("ALTER TABLE configuracoes ADD modulo_entregas_pedidos VARCHAR(1) NOT NULL");
+	
+
+
+
+	$sel = $db->select("SELECT modulo_entregas_pedidos FROM configuracoes LIMIT 1");
+	$lnx = $db->expand($sel);
+	if($lnx['modulo_entregas_pedidos']==''){
+		$sql = $db->select("UPDATE configuracoes SET modulo_entregas_pedidos='1'");	
+	}
+
+
+	$sql = $db->select("ALTER TABLE produtos_venda CHANGE quantidade quantidade DOUBLE(10,2) NOT NULL;");
 	
 
 
@@ -89,6 +108,39 @@
 		//rename($nome_do_arquivo, $renomeia);
 	}
 	
+
+	////TABELA DE NCM
+	$sql = $db->select("SELECT id FROM fiscal_ncm LIMIT 1");
+	if(!$db->rows($sql)){
+		
+		//RODA O SCRIPT//
+		$nome_do_arquivo = "atualizacoes/tabela_ncm.sql"; 
+		if(file_exists($nome_do_arquivo)){	
+			$arquivo = Array();
+			$arquivo = file($nome_do_arquivo);  
+			$prepara = "";  
+			foreach($arquivo as $v)$prepara.=$v; 
+			echo $sql = explode(";",$prepara); 
+			foreach($sql as $v) $db->select($v);				
+		}	
+	}
+
+
+	////TABELA DE CSOSN
+	$sql = $db->select("SELECT id FROM fiscal_relacao_csosn LIMIT 1");
+	if(!$db->rows($sql)){
+		
+		//RODA O SCRIPT//
+		$nome_do_arquivo = "atualizacoes/tabela_csosn.sql"; 
+		if(file_exists($nome_do_arquivo)){	
+			$arquivo = Array();
+			$arquivo = file($nome_do_arquivo);  
+			$prepara = "";  
+			foreach($arquivo as $v)$prepara.=$v; 
+			echo $sql = explode(";",$prepara); 
+			foreach($sql as $v) $db->select($v);				
+		}	
+	}
 
 	
 

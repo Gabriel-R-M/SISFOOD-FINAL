@@ -19,6 +19,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 	//echo 'NAO VEM ID MESA';
 }
 
+
 ?>
 
 
@@ -49,13 +50,15 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 		
 	        <div class="row row-xs top15">
 
-	        	<div class="col-6">
-	        		<button class="btn btn-block btn-success"  onclick="javascript:finaliza_pedido2();" type="button">
-	        			<i class="icofont-save"></i>&nbsp;&nbsp;SALVAR (F2)
-	        		</button>
-	        	</div>
+	        	<?php if($dados_configuracoes['modulo_entregas_pedidos']==1 || $dados_mesas['mesa']>0){ ?>
+		        	<div class="col-6 bottom10">
+		        		<button class="btn btn-block btn-success"  onclick="javascript:finaliza_pedido2();" type="button">
+		        			<i class="icofont-save"></i>&nbsp;&nbsp;SALVAR (F2)
+		        		</button>
+		        	</div>
+	        	<?php } ?>
 
-	        	<div class="col-6">
+	        	<div class="col-6 bottom10">
 	        		<button class="btn btn-block btn-danger" id="botao_cancela_venda_pgto"  onclick="javascript:cancela_venda(<?php echo $id_venda; ?>);" type="button">
 	        			<i class="icofont-ui-close"></i> CANCELAR (F4)
 	        		</button>	        		
@@ -65,7 +68,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 	        	<?php
 				if($dados_venda['aguarde']==1){
 				?>
-	        	<div class="col-6 top10">
+	        	<div class="col-6 bottom10">
 	        		<button class="btn btn-danger btn-block" id="botao_impressao_pedido" style="font-weight: 300" onclick="javascript:finaliza_pedido2(<?php echo $id_venda; ?>, 1);">
 						<i class="icofont-printer"></i>
 						&nbsp;IMP. CONTA (F3)
@@ -79,7 +82,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 					if($db->rows($analiza)){
 				?>
 
-				<div class="col-6 top10">
+				<div class="col-6 bottom10">
 					<button class="btn btn-md btn-teal btn-block " id="botao_impressao_pedido_divisao"  onclick="javascript:reimpressao_divisao_pedido(<?php echo $id_venda; ?>);" type="button">
 						<i class="fa fa-print fa-fw" aria-hidden="true"></i> IMP. DIVISÃO (F6)
 					</button>
@@ -88,7 +91,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 				<?php }} ?>
 
 
-				<div class="col-6 top10">
+				<div class="col-6 bottom10">
 	        		<button class="btn btn-info btn-block"  onclick="javascript:mais_item_pedido();" type="button">
 	        			<i class="icofont-plus"></i> ÍTENS (F8)
 	        		</button>
@@ -149,15 +152,16 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 </div>
 
 
+<?php if($dados_configuracoes['modulo_entregas_pedidos']==1 || $dados_mesas['mesa']>0){ ?>
 <div class="col-lg-4">
 
 		
-
+	<?php if($dados_configuracoes['modulo_entregas_pedidos']==1){ ?>
 	<div class="order-top">
 			<h20>Entrega/Retirada</h20>			
 		</div>
     
-    <div class="card" style="border-top: 0">
+    <div class="card bottom10" style="border-top: 0">
     <div class="row row-xs">	
 
     		<div class="col-12 top15">
@@ -315,9 +319,21 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 
     </div>  
     </div>
+	<?php } else { ?>
 
+		<input type="hidden" id="embala_viagem" value="0">
+		<input type="hidden" id="entregador" value="0">
+		<input type="hidden" id="levar_maquina_cartao" value="">
+		<input type="hidden" id="pre_tipo_pagamento" value="0">
+		<input type="hidden" id="troco_leva_maquina" value="0">
+		<input type="hidden" id="taxa_entrega" value="0">
 
-    <div class="order-top top10">
+	<?php }  ?>	
+
+    <?php
+    if($dados_mesas['mesa']>0){
+    ?>
+    <div class="order-top">
 			<h20>Mesa</h20>			
 		</div>
     
@@ -365,10 +381,28 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	</div>    
         	</div>
     </div>
-    </div>    	 
+    </div>
+    <?php
+    } else {
+    ?>
+    	<input type="hidden" id="mesa" value="0">
+    <?php
+    } 
+    ?>    	 
 
 
-</div>    	
+</div>   
+<?php } else { ?>
+
+	<input type="hidden" id="mesa" value="0">
+	<input type="hidden" id="embala_viagem" value="0">
+	<input type="hidden" id="entregador" value="0">
+	<input type="hidden" id="levar_maquina_cartao" value="">
+	<input type="hidden" id="pre_tipo_pagamento" value="0">
+	<input type="hidden" id="troco_leva_maquina" value="0">
+	<input type="hidden" id="taxa_entrega" value="0">
+	
+<?php } ?>
 
 
 <?php
@@ -476,6 +510,7 @@ if($total_recebido_venda!=0){
 
         <hr>
 
+
         <div class="row">
 	        <div class="col-md-12"> 
 		        <div class="input-group input-group-lg">		              
@@ -486,7 +521,7 @@ if($total_recebido_venda!=0){
 		            	</span>
 		            </div>  
 		                  
-				    <input style="border-radius: 0" type="text" class="form-control valores" placeholder="0.00" id="valor_recebe" onkeyup="javascript:faz_saldo_restante(this.value);">	
+				    <input style="border-radius: 0" type="text" class="form-control valores" placeholder="0.00" id="valor_recebe" onkeyup="javascript:faz_saldo_restante(this.value);" <?php if($valor_final_receber==0){echo 'readonly';} ?>>	
 
 				    <?php if($dados_configuracoes['modulo_fiscal']==1){ ?>
 					    <div class="input-group-append">
@@ -511,7 +546,7 @@ if($total_recebido_venda!=0){
 		</div>
 
 
-		<select class="form-control top10" id="forma_pagamento" style="border-radius: 0; text-transform: uppercase;">
+		<select class="form-control top10" id="forma_pagamento" style="border-radius: 0; text-transform: uppercase;" <?php if($valor_final_receber==0) {echo 'disabled';} ?>>
 			<option value="0">-- FORMA DE PAGAMENTO --</option>
 			<?php							
 				$sql = $db->select("SELECT * FROM formas_pagamento WHERE ativo='1' ORDER BY id");
@@ -521,14 +556,26 @@ if($total_recebido_venda!=0){
 			?>	
 		</select>
        
-          
-		<button class="btn btn-success btn-block top10" id="btn_realiza_pagamento"  onclick="javascript:realiza_pagamento();" type="button" style="height: 42px">
-			<i class="fa fa-calculator fa-fw" aria-hidden="true"></i> <span id="escrito_btn_recebimento">RECEBER (F10)</span>
-		</button>
+        <?php if($valor_final_receber==0){ ?>
+
+        	<button class="btn btn-success btn-block top10" id="btn_realiza_pagamento"  onclick="javascript:apenas_encerra_venda();" type="button" style="height: 42px">
+				<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span id="escrito_btn_recebimento">ENCERRAR VENDA</span>
+			</button>
+
+        <?php } else { ?>  
+
+			<button class="btn btn-success btn-block top10" id="btn_realiza_pagamento"  onclick="javascript:realiza_pagamento();" type="button" style="height: 42px">
+				<i class="fa fa-calculator fa-fw" aria-hidden="true"></i> <span id="escrito_btn_recebimento">RECEBER (F10)</span>
+			</button>
+
+	    <?php } ?>  
               
     </div>
 </div>
 
+
+<input type="hidden" id="modulo_entregas_pedidos" value="<?php echo $dados_configuracoes['modulo_entregas_pedidos']; ?>">
+<input type="hidden" id="qtd_mesas_totais" value="<?php echo $dados_mesas['mesa']; ?>">
 
 <input type="hidden" id="utiliza_resgate_pontos" value="0">	
 <input type="hidden" id="tela-mobile" value="0">

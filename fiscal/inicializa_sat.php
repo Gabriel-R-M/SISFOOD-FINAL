@@ -8,8 +8,16 @@ require("../includes/verifica_dados_fiscais.php");
 	@unlink("$caminho_acbr\sai.txt");	
 
 
-	///INICIALIZA O SAT///
-	$ecf = 'SAT.Inicializar';
+	///INICIALIZA O SAT///	
+	if($inicializa==1){
+		$ecf = 'SAT.Inicializar';
+	///DESINICIALIZA O SAT///		
+	} else {
+		$ecf = 'SAT.Desinicializar';
+	}
+
+
+	
 	$fp = fopen("$caminho_acbr\ENT.txt", "w");
 	$escreve = fwrite($fp, $ecf);
 	fclose($fp); 			
@@ -31,7 +39,7 @@ require("../includes/verifica_dados_fiscais.php");
 
 
 			fclose($ponteiro);	
-			unlink("$caminho_acbr\sai.txt");	
+			@unlink("$caminho_acbr\sai.txt");	
 			exit();				
 		} else {
 			sleep(.2);			

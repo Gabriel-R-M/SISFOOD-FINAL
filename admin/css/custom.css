@@ -6,6 +6,8 @@ body{height:100%; width: 100%; background-position: center center; background-si
 .thin{font-weight: 300}
 .slim-mainpanel{margin-bottom: 50px}
 
+.red{color: #B20000}
+
 
 .avisos-loja-warning .btn-danger{margin-top: -3px}
 .avisos-loja-warning{border-radius:0; border-top: 0; border-top:0; border-left: 0; border-right: 0; font-size:14px; font-weight: 300; margin-bottom:0px}

@@ -209,7 +209,9 @@ if(isset($id)){
                             <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">NCM PADRÃO</label>
-                                    <input type="number"  class="form-control" name="ncm_categoria" value="<?php if($edit==1){ echo $ln['ncm_categoria'];} ?>">  
+                                    <input type="number" onblur="javascript:valida_ncm(this.value);"  class="form-control" name="ncm_categoria" value="<?php if($edit==1){ echo $ln['ncm_categoria'];} ?>">
+                                    <small id="esconde_frase">Em caso de não preenchimento no produto.</small>
+                                    <small id="ncm_erro" class="hide red"><b>NCM NÃO ENCONTRADO</b></small>  
                                </div>
                             </div>
 
@@ -217,6 +219,7 @@ if(isset($id)){
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CST PADRÃO</label>
                                     <input type="number"  class="form-control" name="cst_categoria" value="<?php if($edit==1){ echo $ln['cst_categoria'];} ?>">  
+                                    <small >Em caso de não preenchimento no produto.</small>                                    
                                </div>
                             </div>
 
@@ -224,6 +227,15 @@ if(isset($id)){
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CFOP PADRÃO</label>
                                     <input type="number"  class="form-control" name="cfop_categoria" value="<?php if($edit==1){ echo $ln['cfop_categoria'];} ?>">  
+                                    <small >Em caso de não preenchimento no produto.</small>                                    
+                               </div>
+                            </div>
+
+                             <div class="col-md-3">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">CSOSN PADRÃO</label>
+                                    <input type="number"  class="form-control" name="csosn_categoria" value="<?php if($edit==1){ echo $ln['csosn_categoria'];} ?>">  
+                                    <small >Em caso de não preenchimento no produto.</small>                                    
                                </div>
                             </div>
 

@@ -126,15 +126,16 @@
                                </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">NCM PADRÃO</label>
-                                    <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="number"  class="form-control" name="ncm_sistema" value="<?php  echo $ln2['ncm_sistema']; ?>">  
-                                    <small>Em caso de não preenchimento no produto/categoria.</small>
+                                    <input onblur="javascript:valida_ncm(this.value);" <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="number"  class="form-control" name="ncm_sistema" value="<?php  echo $ln2['ncm_sistema']; ?>">  
+                                      <small id="esconde_frase">Em caso de não preenchimento no produto/categoria.</small>
+                                      <small id="ncm_erro" class="hide red"><b>NCM NÃO ENCONTRADO</b></small>
                                </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CST PADRÃO</label>
                                     <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="number"  class="form-control" name="cst_sistema" value="<?php echo $ln2['cst_sistema']; ?>">  
@@ -142,10 +143,18 @@
                                </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CFOP PADRÃO</label>
                                     <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="number"  class="form-control" name="cfop_sistema" value="<?php  echo $ln2['cfop_sistema']; ?>">  
+                                    <small>Em caso de não preenchimento no produto/categoria.</small>
+                               </div>
+                            </div>
+
+                            <div class="col-md-3">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">CSOSN PADRÃO</label>
+                                    <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="number"  class="form-control" name="csosn_sistema" value="<?php  echo $ln2['csosn_sistema']; ?>">  
                                     <small>Em caso de não preenchimento no produto/categoria.</small>
                                </div>
                             </div>

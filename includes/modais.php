@@ -1,5 +1,5 @@
-<div id="ModalCupomFiscal" class="modal fade" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-sm">
+<div id="ModalCupomFiscal" class="modal fade" tabindex="-1" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -12,6 +12,16 @@
         <div class="modal-body pd-20 text-center" style="text-transform: uppercase;">
 
             <h19 id="cupom_fiscal_avisos"></h19>
+
+            <div class="form-group top10" id="hide_input_fiscal">               
+                <input type="number" autocomplete="off" style="width: 280px" name="cpf_cliente" id="cpf_cliente" class="form-control">
+                <button type="button" onclick="javascript:venda_fiscal();" class="btn btn-block  btn-danger top5">CONTINUAR</button>
+            </div> 
+
+            <div class="form-group top10 hide" id="botao_erro_sat">                               
+                <button type="button" onclick="javascript:libera_venda_fiscal();" class="btn btn-block  btn-danger top5">ENTENDI</button>
+            </div> 
+
                      
         </div>
       

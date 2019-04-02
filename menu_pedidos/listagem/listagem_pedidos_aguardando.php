@@ -29,6 +29,8 @@ include_once("../../diversos/funcoes_diversas.php");
 		if($db->rows($sel)){
 			
 			while($dados = $db->expand($sel)){
+
+       $id_venda_roda = $dados['id']; 
 			
 			//ENTREGA	
 			if($dados['entrega']!=0){				
@@ -77,7 +79,12 @@ include_once("../../diversos/funcoes_diversas.php");
                     
             		  <?php
                     if($dados_configuracoes['modulo_entregas']==1){
-                      echo '<input tabindex="-1" value="'.$dados['id'].'" id="" type="checkbox" class="pull-right top5 marca_pedidos_entrega hide_mobile" onclick="javascript:marca_pedidos_entrega();">';
+
+                      $sal = $db->select("SELECT id FROM pagamentos_vendas WHERE id_venda='$id_venda_roda' LIMIT 1");
+
+                      if(!$db->rows($sal)){
+                        echo '<input tabindex="-1" value="'.$dados['id'].'" id="" type="checkbox" class="pull-right top5 marca_pedidos_entrega hide_mobile" onclick="javascript:marca_pedidos_entrega();">';
+                      }
                     }
                   ?>
                   </label>

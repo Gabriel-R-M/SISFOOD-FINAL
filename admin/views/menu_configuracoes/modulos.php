@@ -4,11 +4,7 @@
   $sql = $db->select("SELECT * FROM configuracoes");  
   $ln = $db->expand($sql);
 
-  $sql2 = $db->select("SELECT * FROM fiscal");  
-  $ln2 = $db->expand($sql2);
-
-  $sql3= $db->select("SELECT * FROM dados_loja");  
-  $ln3= $db->expand($sql3);
+ 
 
 
 ?>
@@ -19,7 +15,7 @@
     <li class="breadcrumb-item active" aria-current="page">GERAIS</li>
   </ol>
   <h6 class="slim-pagetitle upper">
-    CONFIGURAÇÕES GERAIS
+    MÓDULO DE ENTREGAS
   </h6>
 </div>
 
@@ -32,9 +28,27 @@
             <div class="row mg-b-25">
 
 
+       <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Ativar Módulo de Entregas</label>
+                <select class="form-control" name="modulo_entregas_pedidos" required="required">
+                    <?php
+                      if($ln['modulo_entregas_pedidos']==1){
+                        echo '<option value="1" selected>SIM</option>';
+                        echo '<option value="0">NÃO</option>';
+                      } else {
+                        echo '<option value="0" selected>NÃO</option>';
+                        echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div>        
+
+
         <div class="col-md-4">
            <div class="form-group">
-                <label for="exampleInputEmail1">Ativar Módulo de Controle de Entregas</label>
+                <label for="exampleInputEmail1">Ativar Controle de Motoqueiros</label>
                 <select class="form-control" name="modulo_entregas" required="required">
                     <?php
                       if($ln['modulo_entregas']==1){

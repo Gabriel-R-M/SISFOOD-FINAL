@@ -17,8 +17,7 @@ if(isset($verifica_senha)){
 
 
 
-@session_start();
-unset($_SESSION['id_venda_erp_sis'] );
+
 
 if(isset($id_venda_cancela)){
 	$id_venda = $id_venda_cancela;

@@ -71,7 +71,11 @@ if($db->rows($sql)){
         
 
 		//POE O ZERO NA QUANTIDADE
-		if($row['quantidade']<10){$row['quantidade']= '0'.$row['quantidade'];}
+		$quan = explode('.', $row['quantidade']);
+		
+		if($quan[1]=='00'){
+			if($row['quantidade']<10){$row['quantidade']= '0'.$quan[0];}	
+		} 
 
 		//EXIBE		
 		if(!empty($row['nome_cliente_divisao'])){
@@ -235,7 +239,7 @@ if($db->rows($sql)){
 
 } else {
 
-	echo '<center>NENHUM ÍTEM NO PEDIDO.</center>';
+	echo '<center>NENHUM ÍTEM ENCONTRADO.</center>';
 
 }
 

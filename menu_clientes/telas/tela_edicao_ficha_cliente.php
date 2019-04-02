@@ -5,6 +5,10 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 $sql = $db->select("SELECT * FROM clientes WHERE id='$id' LIMIT 1");
 $dados = $db->expand($sql);
+
+if($dados['nome']=='CLIENTE AVULSO'){
+  $dados['cartao'] = '';
+}
 ?>
 
 

@@ -3,130 +3,197 @@ require("../admin/class/class.db.php");
 require("../admin/class/class.seguranca.php");
 require("../includes/verifica_dados_loja.php");
 require("../includes/verifica_dados_fiscais.php");
-
+require("../includes/verifica_venda_aberta.php");
+require("../diversos/funcoes_impressao.php");
+require("../diversos/funcoes_diversas.php");
 
 
 $caminho_acbr=$dados_fiscais['caminho_acbr'];
+
 	
 ///CRIA O ARQUIVO INI PARA ENVIAR AO SAT///
-$ecf = '
-[infCFe]
+$ecf = '[infCFe]
 
 versao=0.07
 
 
 [Identificacao]
-
-CNPJ=07387314000138
-
-signAC=T3iry1SLbKpZ/2LOFbKaUHmOAEcYMw6+DvrCmSziWgImEFk96hPW6lOqHTvc6I3YWirh16g63NueIk5doEksiCF/ocXufTBAmo/YlQ9iJeJAFtAJkUoRJHLxG067T6WNkILZWgs2CKc4UqbCN3cEHNq+9RdFTjNf9TZjtT9qIliQgw4sSseCd5tJAT6iG6N1KUb8aie05vtwRiJ8RGyic5t45o2+KzmmD7CX7NCktMU+5GJbEM37M8CZQ/BqC3tW4x3M8DazNPnvMoznxr8mOaET4srKtDHPOCRbcyVIUekhYqTBuDBKp0UCtOlna2AOBsrwk4FfeFw/rS9DuLJuFQ==
-
+CNPJ='.trim($dados_fiscais['cnpj_desenvolvedor']).'
+signAC='.trim($dados_fiscais['chave_sat']).'
 numeroCaixa=1
 
 
-
 [Emitente]
-
-CNPJ=13913760000131
-
-IE=416048093114
-
+CNPJ='.trim($dados_loja['cnpj']).'
+IE='.trim($dados_loja['inscricao_estadual']).'
 IM=
+indRatISSQN=N';
 
-indRatISSQN=N
 
+if(isset($cpf_cliente)){
 
+$ecf .= '
 
 [Destinatario]
+CNPJCPF='.trim($cpf_cliente);
 
-CNPJCPF=35805292858
+}
 
-xNome=Diogo
+$imposto_transparencia = 0;
 
+$sql = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
+$qtd_produtos_carrinho = $db->rows($sql);
+if($db->rows($sql)){
+	$x=1;
+	while($row = $db->expand($sql)){
 
-[Entrega]
+		$id_produto = $row['id_produtos'];
 
-xLgr=Rua Cel. Aureliano de Camargo
+		//APENAS UM PRODUTO
+		if(is_numeric($row['id_produtos'])){
 
-nro=973
+			$pg = $db->select("SELECT produto, categoria FROM lanches WHERE id='$id_produto' LIMIT 1");
+			$var = $db->expand($pg);			
+			$nome_produto= $var['produto'];
+			$categoria_produto=$var['categoria'];
 
-xCpl=
+		//MEIO A MEIO	
+		} else {	
 
-xBairro=Centro
+			$nome_produto='';
+			$prods = explode(',', $row['id_produtos']);	
+			foreach($prods as $prod) {
 
-xMun=Tatui
+		    	$id_produto = trim($prod);		    	
 
-UF=SP
+		    	$pg = $db->select("SELECT produto, categoria FROM lanches WHERE id='$id_produto' LIMIT 1");
+				$var = $db->expand($pg);				
 
+				$nome_produto= $nome_produto.$var['produto'].'/';
+				$categoria_produto=$var['categoria'];
+			}
+		}	
 
-
-[Produto001]
-
-cProd=1189
-
-infAdProd=Teste de Produto
-
-xProd=OVO VERMELHO
-
-NCM=61044200
-
-CFOP=5102
-
-uCom=PC
-
-qCom=1.0000
-
-vUnCom=1.99
-
-indRegra=A
-
-
-[ObsFiscoDet001]
-
-xCampoDet=Teste
-
-xTextoDet=Texto Teste
+		//REMOVE A ULTIMA BARRA
+		$final = substr($nome_produto, -1);
+		if($final=='/'){
+			$size = strlen($nome_produto);
+			$nome_produto = substr($nome_produto,0, $size-1);
+		}
 
 
 
-[ICMS001]
 
+$ecf.= '
+
+[Produto00'.$x.']
+cProd='.$id_produto.'				
+xProd='.retira_acentos($nome_produto).'
+NCM='.impostos_fiscais_produto('ncm',$id_produto,$categoria_produto).'
+CFOP='.impostos_fiscais_produto('cfop',$id_produto,$categoria_produto).'
+uCom=UN
+qCom='.$row['quantidade'].'				
+vUnCom='.$row['valor'].'				
+indRegra=A';
+
+$ecf.= '
+
+[ICMS00'.$x.']
 Orig=0
+CSOSN='.impostos_fiscais_produto('csosn',$id_produto,$categoria_produto);
 
-CSOSN=102
+$ecf.= '
 
+[PIS00'.$x.']
+CST='.impostos_fiscais_produto('cst',$id_produto,$categoria_produto);
 
+$ecf.= '
 
-[PIS001]
-
-CST=49
-
-
-
-[COFINS001]
-
-CST=49
+[COFINS00'.$x.']
+CST='.impostos_fiscais_produto('cst',$id_produto,$categoria_produto);
 
 
+		/////IMPOSTO LEI TRANSPARENCIA//////
+		$total_produto = ($row['valor']*$row['quantidade']);
+		$imposto_produto = impostos_fiscais_produto('ncm',$id_produto,$categoria_produto,'imposto_lei',$total_produto);
+		$imposto_transparencia = ($imposto_transparencia+$imposto_produto);
+		////////////////////////////////////
+
+
+
+		$x++;
+
+	}
+}		
+
+
+
+if($imposto_transparencia!=0){
+$ecf.= '
 
 [Total]
-
-vCFeLei12741=0.20
-
-
+vCFeLei12741='.$imposto_transparencia;	
+}
 
 
-[Pagto001]
+//TAXA DE ENTREGA////
+if($dados_venda['valor_entrega']!='0.00'){
+	$ecf.= '
 
-cMP=04
+[DescAcrEntr]
+vAcresSubtot='.$dados_venda['valor_entrega'];
+}
 
-vMP=1.99
+
+//DESCONTOS////
+if($dados_venda['valor_desconto']!='0.00'){
+	$ecf.= '
+
+[DescAcrEntr]
+vDescSubtot='.$dados_venda['valor_desconto'];
+}
 
 
+/////PAGAMENTOS///
+$sql = $db->select("SELECT * FROM pagamentos_vendas WHERE id_venda='$id_venda' ORDER BY id DESC");
+$qtd_produtos_carrinho = $db->rows($sql);
+if($db->rows($sql)){
+	$x=1;
+	while($row = $db->expand($sql)){
+
+		// MEIOS PAGAMENTOS - SAT
+		//01 - Dinheiro
+		//02 - Cheque
+		//03 - Cartão de Crédito
+		//04 - Cartão de Débito
+		//05 - Crédito Loja
+		//10 - Vale Alimentação
+		//11 - Vale Refeição
+		//12 - Vale Presente
+		//13 - Vale Combustível	
+
+		$pgto ='01';
+
+		//DINHEIRO
+		if($row['forma_pagamento']==1){$pgto ='01';}
+		if($row['forma_pagamento']==2){$pgto ='03';}
+
+$ecf.= '
+
+[Pagto00'.$x.']
+cMP='.$pgto.'
+vMP='.$row['valor_pagamento'];
+
+		$x++;
+
+	}
+}
+
+
+$ecf.= '
 
 [DadosAdicionais]
-
-infCpl=Teste emissao CFe/SAT
+infCpl=Sis E-Food Sistemas
 ';
 	
 
@@ -134,6 +201,9 @@ infCpl=Teste emissao CFe/SAT
 	$escreve = fwrite($fp, $ecf);
 	fclose($fp); 					
 	///CRIA O ARQUIVO INI PARA ENVIAR AO SAT///
+
+
+	echo 1;
 		
 
 		
