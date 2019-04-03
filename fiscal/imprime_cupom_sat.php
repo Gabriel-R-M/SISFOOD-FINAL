@@ -9,7 +9,7 @@ require("../includes/verifica_dados_fiscais.php");
 
 
 	
-	$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'", "impressora")';
+	$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'")';
 	
 	
 	$fp = fopen("$caminho_acbr\ENT.txt", "w");
