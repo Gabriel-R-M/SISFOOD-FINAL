@@ -14,12 +14,12 @@
             <h19 id="cupom_fiscal_avisos"></h19>
 
             <div class="form-group top10" id="hide_input_fiscal">               
-                <input type="number" autocomplete="off" style="width: 380px; " name="cpf_cliente" id="cpf_cliente" class="form-control">
-                <button type="button" onclick="javascript:venda_fiscal();" class="btn btn-block  btn-danger top5">CONTINUAR</button>
+                <input type="number" autocomplete="off" style="width: 330px; " name="cpf_cliente" id="cpf_cliente" class="form-control">
+                <button type="button" onclick="javascript:venda_fiscal();" class="btn btn-block  btn-danger top10">CONTINUAR</button>
             </div> 
 
             <div class="form-group top10 hide" id="botao_erro_sat">                               
-                <button type="button" onclick="javascript:libera_venda_fiscal();" class="btn btn-block  btn-danger top5">ENTENDI</button>
+                <button type="button" onclick="javascript:libera_venda_fiscal();" class="btn btn-block  btn-danger top10">ENTENDI</button>
             </div> 
 
                      

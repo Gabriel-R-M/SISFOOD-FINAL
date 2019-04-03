@@ -2,9 +2,13 @@ $(document).ready(function(){
 
 	global_cpf_cliente = 0;
 
-	$('#ModalEditaDadosClienteVenda').on('shown.bs.modal', function () {
+	$('#ModalCupomFiscal').on('shown.bs.modal', function () {
     	global_cpf_cliente = 1;
     	$('#cpf_cliente').focus();    	
+	}) 
+
+	$('#ModalCupomFiscal').on('hidden.bs.modal', function (){
+    	global_cpf_cliente = 0;    	
 	}) 
 
 }) 
