@@ -87,6 +87,23 @@ function impostos_fiscais_produto($tipo,$produto,$categoria,$imposto_lei='',$val
 		} else {
 			$retorno =  $dados_impostos_produtos['ncm'];
 		}
+
+		$conta = strlen($retorno);
+		
+		if($conta<8){
+			$falta = (8-$conta);
+			$x=1;
+			$add='';
+			while($x<=$falta){
+				$add .= '0';
+				$x++;
+			}
+			$retorno = $add.$retorno;
+		}
+
+		if($conta>8){			
+			$retorno = substr($retorno, 0,8);
+		}
 				
 
 	}	

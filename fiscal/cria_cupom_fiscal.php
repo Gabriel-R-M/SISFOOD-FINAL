@@ -30,7 +30,7 @@ IM=
 indRatISSQN=N';
 
 
-if(isset($cpf_cliente)){
+if(!empty($cpf_cliente)){
 
 $ecf .= '
 
