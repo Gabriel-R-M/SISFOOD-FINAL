@@ -24,17 +24,17 @@ function venda_fiscal(){
 
 	var cpf_cliente = $("#cpf_cliente").val();
 
-	muda_mensagem_fiscal("Aguarde, inicializando equipamento...");
+	muda_mensagem_fiscal("<br><br>Aguarde, inicializando equipamento...<br><br>");
 	$.post('fiscal/inicializa_sat.php',{inicializa:1}, function(resposta_fiscal){
 
 		if(resposta_fiscal==1){
 														
-			muda_mensagem_fiscal("Emitindo cupom fiscal...");
+			muda_mensagem_fiscal("<br><br>Emitindo cupom fiscal...<br><br>");
 			$.post('fiscal/cria_cupom_fiscal.php',{cpf_cliente:cpf_cliente}, function(resposta_fiscal2){
 				
 				if(resposta_fiscal2==1){
 
-					muda_mensagem_fiscal("Transmitindo cupom...");
+					muda_mensagem_fiscal("<br><br>Transmitindo cupom...<br><br>");
 					$.post('fiscal/envia_cupom_sat.php',{fiscal:1}, function(resposta_fiscal3){
 						
 
@@ -43,7 +43,7 @@ function venda_fiscal(){
 
 						if(val[0]==1){
 
-							alert('ok: '+val[1])
+							
 
 						//ERRO AO TRANSMITIR CUPOM	
 						} else {
