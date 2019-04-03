@@ -31,7 +31,24 @@ function venda_fiscal(){
 			muda_mensagem_fiscal("Emitindo cupom fiscal...");
 			$.post('fiscal/cria_cupom_fiscal.php',{cpf_cliente:cpf_cliente}, function(resposta_fiscal){
 				
-				alert(resposta_fiscal)
+				if(resposta_fiscal==1){
+
+					muda_mensagem_fiscal("Transmitindo cupom...");
+					$.post('fiscal/envia_cupom_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal){
+						
+
+													
+						alert(resposta_fiscal)
+																
+
+					});	
+					
+
+				//ERRO AO CRIAR CUPOM//	
+				} else {
+					$("#botao_erro_sat").show();
+					muda_mensagem_fiscal("<h4>Erro:</h4>"+resposta_fiscal);				
+				}
 												
 
 			});	
