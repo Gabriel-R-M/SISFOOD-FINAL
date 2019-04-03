@@ -2,6 +2,8 @@
 require("../../admin/class/class.db.php");
 require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_venda_aberta.php");
+require("../../includes/verifica_cliente_venda.php");
+
 
 	
 	$id_mesa_ocupou=$dados_venda['id_mesa'];	
@@ -12,10 +14,8 @@ require("../../includes/verifica_venda_aberta.php");
 
 
 	@session_start();
-	unset($_SESSION['id_caixa_erp_sis'] );
-	$_SESSION['id_venda_erp_sis']=$id_venda;
-
-
+	
+	
 	////TRANSFERE A VENDA PARA CLIENTE AVULSO CASO O TELEFONE SEJA VAZIO////
 	if($dados_cliente['telefone']=='' && $dados_cliente['nome']!='CLIENTE AVULSO'){
 
@@ -51,9 +51,8 @@ require("../../includes/verifica_venda_aberta.php");
 	////////////////////////////////////////////////////////////////////////
 
 
-	@session_start();
 	unset($_SESSION['id_venda_erp_sis'] );
-
+	unset($_SESSION['id_caixa_erp_sis'] );
 
 
 ?>
