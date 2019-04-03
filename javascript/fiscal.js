@@ -66,6 +66,8 @@ function venda_fiscal(){
 								$("#ModalCupomFiscal").modal('hide');	
 								inicia_sistema();
 
+								$.post('fiscal/inicializa_sat.php',{inicializa:0}, function(resposta_fiscal){});
+
 
 							});
 							
