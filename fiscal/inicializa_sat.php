@@ -31,6 +31,7 @@ require("../includes/verifica_dados_fiscais.php");
 			$ponteiro = fopen ("$caminho_acbr\sai.txt","r");
 			$linha = trim(fgets($ponteiro));		
 
+			
 			if($linha=='OK: SAT ja inicializado' || $linha=='' || $linha='OK: SAT inicializado'){
 				echo 1;
 			} else {
