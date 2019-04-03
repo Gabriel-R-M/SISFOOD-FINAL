@@ -43,12 +43,18 @@ function venda_fiscal(){
 
 						if(val[0]==1){
 
+							muda_mensagem_fiscal("<br><br>Imprimindo cupom...<br><br>");
+							$.post('fiscal/imprime_cupom_sat.php',{arquivo_imprimir:val[1]}, function(resposta_fiscal3){	
+
+								inicia_sistema();
+
+							});
 							
 
 						//ERRO AO TRANSMITIR CUPOM	
 						} else {
 							$("#botao_erro_sat").show();
-							muda_mensagem_fiscal("<h4>Erro:</h4>"+resposta_fiscal3);				
+							muda_mensagem_fiscal("<h4>Erro:</h4>"+val[1]);				
 						}
 						
 																
