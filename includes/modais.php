@@ -14,7 +14,7 @@
             <h19 id="cupom_fiscal_avisos"></h19>
 
             <div class="form-group top10" id="hide_input_fiscal">               
-                <input type="number" autocomplete="off" style="width: 280px" name="cpf_cliente" id="cpf_cliente" class="form-control">
+                <input type="number" autocomplete="off" style="width: 380px; min-height: 250px" name="cpf_cliente" id="cpf_cliente" class="form-control">
                 <button type="button" onclick="javascript:venda_fiscal();" class="btn btn-block  btn-danger top5">CONTINUAR</button>
             </div> 
 
