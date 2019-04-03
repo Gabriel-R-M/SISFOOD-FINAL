@@ -13,10 +13,10 @@ require("../includes/verifica_dados_fiscais.php");
 	}
 
 	$caminho_acbr=$dados_fiscais['caminho_acbr'];
-	@unlink("$caminho\sai.txt");
+	@unlink("$caminho_acbr\sai.txt");
 
 	///ATIVA O ECF///
-	$ecf = 'SAT.CriarEnviarCFe("'.$caminho_acbr.'\cupom.ini")';
+	$ecf = 'SAT.CriarEnviarCFe("C:\ACBrMonitorPLUS\cupom.ini")';
 	$fp = fopen("$caminho_acbr\ENT.txt", "w");
 	$escreve = fwrite($fp, $ecf);
 	fclose($fp); 			
