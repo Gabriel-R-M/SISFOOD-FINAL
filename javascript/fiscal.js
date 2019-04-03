@@ -26,6 +26,50 @@ function venda_fiscal(){
 	muda_mensagem_fiscal("Aguarde, inicializando equipamento...");
 	$.post('fiscal/inicializa_sat.php',{inicializa:1}, function(resposta_fiscal){
 
+		if(resposta_fiscal==1){
+														
+			muda_mensagem_fiscal("Emitindo cupom fiscal...");
+			$.post('fiscal/cria_cupom_fiscal.php',{cpf_cliente:cpf_cliente}, function(resposta_fiscal2){
+				
+				if(resposta_fiscal2==1){
+
+					muda_mensagem_fiscal("Transmitindo cupom...");
+					$.post('fiscal/envia_cupom_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal3){
+						
+
+						var val = resposta_fiscal3.split('&@&');
+
+
+						if(val[0]==1){
+
+							alert('ok: '+val[1])
+
+						//ERRO AO TRANSMITIR CUPOM	
+						} else {
+							$("#botao_erro_sat").show();
+							muda_mensagem_fiscal("<h4>Erro:</h4>"+resposta_fiscal3);				
+						}
+						
+																
+
+					});	
+					
+
+				//ERRO AO CRIAR CUPOM//	
+				} else {
+					$("#botao_erro_sat").show();
+					muda_mensagem_fiscal("<h4>Erro:</h4>"+resposta_fiscal2);				
+				}
+												
+
+			});	
+
+										
+		//ERRO AO INICIALIZAR O SAT//
+		} else {
+			$("#botao_erro_sat").show();
+			muda_mensagem_fiscal("<h4>Erro:</h4> Problema ao inicializar equipamento.");				
+		}
 
 	});
 }
