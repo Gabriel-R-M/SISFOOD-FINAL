@@ -176,7 +176,14 @@ $(document).ready(function(){
     			reimprime_item_avulso();
     			sim_reimprime_item_pedido=0;
     		}  				    		
+
+    		//AVANÇA NO CPF DO CLIENTE NA PARTE FISCAL
+    		if(global_cpf_cliente==1){
+    			venda_fiscal();
+    			global_cpf_cliente=0;
+    		}
     				
+    		
 
 
     	}        	

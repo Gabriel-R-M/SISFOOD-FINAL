@@ -1,3 +1,15 @@
+$(document).ready(function(){
+
+	global_cpf_cliente = 0;
+
+	$('#ModalEditaDadosClienteVenda').on('shown.bs.modal', function () {
+    	global_cpf_cliente = 1;
+    	$('#cpf_cliente').focus();    	
+	}) 
+
+}) 
+
+
 function exibe_avisos_fiscais(mensagem){
 	$("#botao_erro_sat").hide();
 	$("#hide_input_fiscal").show();
@@ -22,6 +34,7 @@ function libera_venda_fiscal(){
 
 function venda_fiscal(){
 
+	global_cpf_cliente = 0;
 	var cpf_cliente = $("#cpf_cliente").val();
 
 	muda_mensagem_fiscal("<br>Aguarde, inicializando equipamento...<br><br>");
