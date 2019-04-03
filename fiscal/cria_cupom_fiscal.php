@@ -10,6 +10,9 @@ require("../diversos/funcoes_diversas.php");
 
 $caminho_acbr=$dados_fiscais['caminho_acbr'];
 
+@unlink("$caminho_acbr\sai.txt");
+@unlink("$caminho_acbr\cupom.ini");
+
 	
 ///CRIA O ARQUIVO INI PARA ENVIAR AO SAT///
 $ecf = '[infCFe]
