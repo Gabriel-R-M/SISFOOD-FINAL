@@ -9,6 +9,7 @@ function exibe_avisos_fiscais(mensagem){
 
 function muda_mensagem_fiscal(mensagem){
 	$("#hide_input_fiscal").hide();
+	$("#cupom_fiscal_avisos").html('');	
 	$("#cupom_fiscal_avisos").html(mensagem);	
 }
 
@@ -34,7 +35,7 @@ function venda_fiscal(){
 				if(resposta_fiscal2==1){
 
 					muda_mensagem_fiscal("Transmitindo cupom...");
-					$.post('fiscal/envia_cupom_sat.php',{venda_fiscal:venda_fiscal}, function(resposta_fiscal3){
+					$.post('fiscal/envia_cupom_sat.php',{fiscal:1}, function(resposta_fiscal3){
 						
 
 						var val = resposta_fiscal3.split('&@&');
