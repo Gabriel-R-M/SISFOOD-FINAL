@@ -7,9 +7,9 @@ require("../includes/verifica_dados_fiscais.php");
 	$caminho_acbr=$dados_fiscais['caminho_acbr'];
 	@unlink("$caminho_acbr\sai.txt");	
 
-	$arquivo_imprimir = 'C:\ACBrMonitorPLUS\Arqs\Vendas\13913760000131\201904\AD35190413913760000131590005422330007760332740.xml';
+	$arquivo_imprimir = 'C:\ACBrMonitorPLUS\Arqs\Vendas\13913760000131\201904\AD35190413913760000131590005422330007681133566.xml';
 	
-	$ecf = 'SAT.ImprimirExtratoVenda("$arquivo_imprimir")';
+	$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'")';
 	
 	
 	$fp = fopen("$caminho_acbr\ENT.txt", "w");
