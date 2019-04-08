@@ -118,11 +118,19 @@
                             ?>
 
 
-                            <div class="col-md-12 top10">
+                            <div class="col-md-6 top10">
                                <div class="form-group">
                                     <label for="exampleInputEmail1">CAMINHO ACBR SERVIDOR</label>
                                     <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="text"  class="form-control" name="caminho_acbr" value="<?php  if($ln2['caminho_acbr']=='') { echo 'c:\ACBrMonitorPLUS'; } else { echo $ln2['caminho_acbr']; } ?>">
                                     <small>Padrão: c:\ACBrMonitorPLUS</small>                                      
+                               </div>
+                            </div>
+
+
+                            <div class="col-md-6 top10">
+                               <div class="form-group">
+                                    <label for="exampleInputEmail1">NOME IMPRESSORA CUPONS SAT</label>
+                                     <input <?php if($ln['modulo_fiscal']==0){ echo 'readonly'; } ?> type="text"  class="form-control" name="impressora_fiscal" value="<?php echo $ln2['impressora_fiscal'];  ?>">                                     
                                </div>
                             </div>
 

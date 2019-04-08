@@ -130,7 +130,41 @@ CST='.impostos_fiscais_produto('cst',$id_produto,$categoria_produto);
 }		
 
 
+//TAXA DE ENTREGA////
+if($dados_venda['valor_entrega']!='0.00'){
+	
+$ecf.= '
 
+[Produto00'.$x.']
+cProd=0				
+xProd=TAXA DE ENTREGA
+NCM=00
+CFOP=5102
+uCom=UN
+qCom=1.00				
+vUnCom='.$dados_venda['valor_entrega'].'				
+indRegra=A';
+
+$ecf.= '
+
+[ICMS00'.$x.']
+Orig=0
+CSOSN=102';
+
+$ecf.= '
+
+[PIS00'.$x.']
+CST=49';
+
+$ecf.= '
+
+[COFINS00'.$x.']
+CST=49';
+
+}
+
+
+//IMPOSTO TRANSPARENCIA
 if($imposto_transparencia!=0){
 $ecf.= '
 
@@ -139,13 +173,7 @@ vCFeLei12741='.$imposto_transparencia;
 }
 
 
-//TAXA DE ENTREGA////
-if($dados_venda['valor_entrega']!='0.00'){
-	$ecf.= '
 
-[DescAcrEntr]
-vAcresSubtot='.$dados_venda['valor_entrega'];
-}
 
 
 //DESCONTOS////

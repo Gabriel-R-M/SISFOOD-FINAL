@@ -4,6 +4,11 @@
   <div class="card" style="height: 207px">
               
               <div class="col-md-12 top20">
+
+                <?php if($dados_venda['venda_fiscal']==1){ ?>    
+                    <span class="label-mesa mesa-ocupada" style="font-size:13px; ">VENDA FISCAL</span><br><br>
+                <?php } ?>                    
+
                 <div class="row row-xs"> 
                   <div class="col-md">
                     <label class="section-label-sm tx-gray-500">CLIENTE</label>
@@ -73,6 +78,9 @@
 
 </div>
 
+
+
+
 <div class="card top10 listagem-pagamentos-recebidos">
             
             <div class="col-md-12 top20">             
@@ -123,3 +131,16 @@
               
             
 </div>
+
+
+
+<?php
+  if($dados_venda['venda_fiscal']==1){
+?>    
+      <button class="btn bd bd-l-0 btn-warning pull-right top10" type="button" onclick="javascript:reeimprimi_venda_fiscal();">
+        <i class="icofont-printer"></i>
+        &nbsp;REIMPRIMIR CUPOM FISCAL
+      </button>
+<?php
+  }
+?>

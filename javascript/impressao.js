@@ -141,6 +141,7 @@ function reimpressao_completa_pedido(id){
 			$.post('menu_pedidos/impressao/imprime.php',{tipo:5}, function(resposta){	
 				aviso_impressao_sistema(1);
 			});
+			
 		});	
 }
 

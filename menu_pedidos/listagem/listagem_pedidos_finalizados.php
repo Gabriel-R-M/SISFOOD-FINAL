@@ -30,6 +30,10 @@
 			//RETIRA BALCÃO	
 			} else {
 				$entrega = '<span class="label label-warning">BALCÃO</span>';
+			}
+
+			if($dados['venda_fiscal']==1){
+				$entrega .= '&nbsp;&nbsp;<span class="label label-danger">FISCAL</span>';
 			}	
 
 

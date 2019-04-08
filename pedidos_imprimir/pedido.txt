@@ -1,15 +1,17 @@
        SHEIK ESFIHARIA E PIZZARIA
    DR. ANTONIO TEDESCO, 822 - CENTRO
           FONE: (14) 3264-3494
+             PEDIDO: #6716
 ----------------------------------------
-           CIENCIA DE DIVIDA
+       COMPROVANTE DE RECEBIMENTO
 ----------------------------------------
-VALOR DA COMPRA                 R$ 14,00
+VALOR DEVIDO                    R$ 11,00
 ----------------------------------------
-DIVIDA TOTAL                    R$ 14,00
+DINHEIRO RECEBIDO               R$ 20,00
 ----------------------------------------
-ESTOU CIENTE QUE PAGAREI A DIVIDA ACIMA
-DIOGO
+TROCO                            R$ 9,00
 ----------------------------------------
-         RESPONSAVEL: MARCIO
-        02/04/2019 AS 18:12hs
+RESTANTE A RECEBER               R$ 0,00
+----------------------------------------
+          RECEBIDO POR: MARCIO
+Array

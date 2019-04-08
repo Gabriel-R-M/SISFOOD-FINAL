@@ -11,7 +11,7 @@
       
         <div class="modal-body pd-20 text-center" style="text-transform: uppercase;">
 
-            <h19 id="cupom_fiscal_avisos"></h19>
+            <h19 class="text-center" id="cupom_fiscal_avisos"></h19>
 
             <div class="form-group top10" id="hide_input_fiscal">               
                 <input type="number" autocomplete="off" style="width: 330px; " name="cpf_cliente" id="cpf_cliente" class="form-control">

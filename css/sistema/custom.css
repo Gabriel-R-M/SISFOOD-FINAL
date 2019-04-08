@@ -7,6 +7,12 @@ ul li.menu_pisca_internet{animation: fundoVermelho .8s; animation-iteration-coun
   100% { background: #333; }
 }
 
+
+
+
+#cupom_fiscal_avisos{line-height: 22px}
+#cupom_fiscal_avisos i{font-size: 50px; padding-bottom: 20px}
+
 .altura_progresso{height: 40px; font-size: 15px; font-weight: 300; -webkit-transition-duration:.5s;}
 
 .icone_rodando_btn{font-size: 18px}
@@ -266,7 +272,70 @@ color:#FFF;
 .icone-busca-pedido{position: absolute; right: 20px; top:15px;}
 
 .selected{border:2px solid #B72925; }
+
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+
+.label-default {
+  background-color: #777;
+}
+.label-default[href]:hover,
+.label-default[href]:focus {
+  background-color: #5e5e5e;
+}
+.label-primary {
+  background-color: #337ab7;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+  background-color: #286090;
+}
+.label-success {
+  background-color: #5cb85c;
+}
+.label-success[href]:hover,
+.label-success[href]:focus {
+  background-color: #449d44;
+}
+.label-info {
+  background-color: #5bc0de;
+}
+.label-info[href]:hover,
+.label-info[href]:focus {
+  background-color: #31b0d5;
+}
+.label-warning {
+  background-color: #f0ad4e;
+}
+.label-warning[href]:hover,
+.label-warning[href]:focus {
+  background-color: #ec971f;
+}
+.label-danger {
+  background-color: #d9534f;
+}
+.label-danger[href]:hover,
+.label-danger[href]:focus {
+  background-color: #c9302c;
+}
+
 /*************************************
 .selected .destaca{color: #FFF}
 .selected .campo-focus{color: #FFF}
 /*************************************
+
+
+
+

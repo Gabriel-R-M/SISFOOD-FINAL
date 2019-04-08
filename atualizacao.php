@@ -79,6 +79,12 @@
 
 	$sql = $db->select("ALTER TABLE configuracoes ADD modulo_entregas_pedidos VARCHAR(1) NOT NULL");
 	
+	$sql = $db->select("ALTER TABLE fiscal ADD impressora_fiscal VARCHAR(99) NOT NULL");
+
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD xml_fiscal TEXT");
+	$sql = $db->select("ALTER TABLE fiscal ADD email_envio_xml VARCHAR(999) NOT NULL");
+
+
 
 
 
@@ -90,6 +96,8 @@
 
 
 	$sql = $db->select("ALTER TABLE produtos_venda CHANGE quantidade quantidade DOUBLE(10,2) NOT NULL;");
+
+
 	
 
 

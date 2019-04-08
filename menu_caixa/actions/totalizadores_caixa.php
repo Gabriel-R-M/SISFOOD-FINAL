@@ -113,7 +113,7 @@ function totais_caixa_separado_entrega_balcao($id_caixa_aberto,$tipo){
 
 	//ENTREGAS
 	if($tipo==1){
-		$busca = "AND entrega='1'";
+		$busca = "AND entrega!='0'";
 	}
 
 	//DINHEIRO OU CARTAO	

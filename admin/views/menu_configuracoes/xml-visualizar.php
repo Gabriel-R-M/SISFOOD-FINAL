@@ -19,7 +19,7 @@
 </div>
 
 
-<form method="post" action="gerais/save" id="PesquisaXML">
+<form method="post" action="controlers/fiscal/pesquisa_xml.php" id="PesquisaXML">
 <div class="section-wrapper">
           
 

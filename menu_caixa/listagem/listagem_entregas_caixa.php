@@ -11,56 +11,70 @@ require("../../includes/verifica_caixa_aberto.php");
     
     <tbody>
       <?php
-      $seleciona = $db->select("SELECT * FROM entregadores WHERE ativo='1'");
-      if($db->rows($seleciona)){     
 
-      while($linha = $db->expand($seleciona)){
-
-          $total_entregador=0;
-          $total_entregas=0;
-
-          $id_entregador = $linha['id'];
-          $nome_entregador = $linha['nome'];          
-
-          $sel = $db->select("SELECT aguarda_venda.*, tipos_entrega.entrega AS local_entrega FROM aguarda_venda
-          LEFT JOIN tipos_entrega ON aguarda_venda.entrega=tipos_entrega.id 
-          WHERE aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.entrega!='0' AND aguarda_venda.entregador='$id_entregador'
-          ORDER BY aguarda_venda.data_pedido DESC, aguarda_venda.pedido_inicio DESC
+        $sel = $db->select("SELECT entregador FROM aguarda_venda
+          WHERE id_caixa='$id_caixa_aberto' AND entrega!='0' 
+          GROUP BY entregador          
           ");
+
 
           if($db->rows($sel)){
 
-            echo '<tr><td colspan="10" class="upper thin"><b>'.$nome_entregador.'</b></td></tr>';
+              while($dados = $db->expand($sel)){
 
-            while($dados = $db->expand($sel)){
+                $entregador_id = $dados['entregador'];
 
-                $total_entregador=($total_entregador+$dados['valor_entrega']);
-                $total_entregas++; 
+                if($entregador_id==0){
+                    $nome_entregador = 'Entregador não identificado';
+                } else {
+                    $seleciona = $db->select("SELECT * FROM entregadores WHERE id='$entregador_id' LIMIT 1");
+                    $nm = $db->expand($seleciona);
+                    $nome_entregador = $nm['nome'];
+                }
 
-                echo '
-                 <tr>
-                  <td class="upper thin">'.data_mysql_para_user($dados['data_pedido']).' ás '.substr($dados['pedido_inicio'],0,5).'</td>
-                  <td class="upper thin">R$ '.($dados['valor_entrega']).'</td>
+                echo '<tr><td colspan="10" class="upper thin"><b>'.$nome_entregador.'</b></td></tr>';
 
-                  <td class="upper thin">'.($dados['local_entrega']).'</td>
-                      
-                </tr>
-                ';
-            }
+                 $sel2 = $db->select("SELECT aguarda_venda.valor_entrega, aguarda_venda.data_pedido, aguarda_venda.pedido_inicio, tipos_entrega.entrega AS local_entrega FROM aguarda_venda
+                  LEFT JOIN tipos_entrega ON aguarda_venda.entrega=tipos_entrega.id 
+                  WHERE aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.entrega!='0' AND aguarda_venda.entregador='$entregador_id'
+                  ORDER BY aguarda_venda.data_pedido DESC, aguarda_venda.pedido_inicio DESC
+                  ");
 
-              if($total_entregas<10){
-                $total_entregas = '0'.$total_entregas;
+                  if($db->rows($sel2)){
+
+                        $total_entregador=0;
+                        $total_entregas=0;
+
+                        while($dados2 = $db->expand($sel2)){
+
+                              $total_entregador=($total_entregador+$dados2['valor_entrega']);
+                              $total_entregas++;  
+
+                              echo '
+                               <tr>
+                                <td class="upper thin">'.data_mysql_para_user($dados2['data_pedido']).' ás '.substr($dados2['pedido_inicio'],0,5).'</td>
+                                <td class="upper thin">R$ '.($dados2['valor_entrega']).'</td>
+                                <td class="upper thin">'.($dados2['local_entrega']).'</td>                                    
+                              </tr>
+                              ';
+
+                        }
+
+                        if($total_entregas<10){
+                          $total_entregas = '0'.$total_entregas;
+                        }
+
+                        echo '<tr><td colspan="10" class="upper thin"><b>'.$total_entregas.' ENTREGAS, TOTALIZANDO R$: '.number_format($total_entregador,2,",",".").'</b></td></tr>';
+
+                  }
+       
+
+                
               }
 
-              echo '<tr><td colspan="10" class="upper thin"><b>'.$total_entregas.' ENTREGAS, TOTALIZANDO R$: '.number_format($total_entregador,2,",",".").'</b></td></tr>';
+         
 
-
-          } 
-
-
-        }
-      
-      } else {
+          } else {
 
               echo '
               <tr>              
@@ -70,9 +84,10 @@ require("../../includes/verifica_caixa_aberto.php");
               </tr>
              '; 
 
-      }
+          }
 
-	      
+
+
 		  	
 	  ?>
      

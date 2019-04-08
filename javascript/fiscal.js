@@ -36,40 +36,81 @@ function libera_venda_fiscal(){
 }
 
 
+function reeimprimi_venda_fiscal(){
+	
+	$("#botao_erro_sat").hide();
+	$("#hide_input_fiscal").hide();	
+	$("#cupom_fiscal_avisos").html('<br><i class="icofont-hour-glass"></i><br><br>Aguarde, inicializando equipamento...<br><br>');		
+	$("#ModalCupomFiscal").modal();	
+
+	$.post('fiscal/inicializa_sat.php',{inicializa:1}, function(resposta_fiscal){
+
+		if($.trim(resposta_fiscal)==1){
+			
+			muda_mensagem_fiscal('<br><i class="icofont-printer"></i><br><br>Imprimindo cupom...<br><br>');	
+			$.post('fiscal/imprime_cupom_sat.php',{venda_pesquisa:1}, function(resposta_fiscal){		
+
+				$("#ModalCupomFiscal").modal('hide');	
+				$.post('fiscal/inicializa_sat.php',{inicializa:0}, function(resposta_fiscal){});
+
+			});	
+
+		//ERRO AO INICIALIZAR O SAT//
+		} else {
+			$("#botao_erro_sat").show();
+			muda_mensagem_fiscal("<h4>Erro:</h4> Problema ao inicializar equipamento.");				
+		}
+
+	});
+
+
+}
+
+
+
 function venda_fiscal(){
 
 	global_cpf_cliente = 0;
 	var cpf_cliente = $("#cpf_cliente").val();
 
-	muda_mensagem_fiscal("<br>Aguarde, inicializando equipamento...<br><br>");
+	muda_mensagem_fiscal('<br><i class="icofont-hour-glass"></i><br><br>Aguarde, inicializando equipamento...<br><br>');
 	$.post('fiscal/inicializa_sat.php',{inicializa:1}, function(resposta_fiscal){
 
-		if(resposta_fiscal==1){
+		if($.trim(resposta_fiscal)==1){
 														
-			muda_mensagem_fiscal("<br>Emitindo cupom fiscal...<br><br>");
+			muda_mensagem_fiscal('<br><i class="icofont-binary"></i><br><br>Emitindo cupom fiscal...<br><br>');
 			$.post('fiscal/cria_cupom_fiscal.php',{cpf_cliente:cpf_cliente}, function(resposta_fiscal2){
 				
-				if(resposta_fiscal2==1){
+				if($.trim(resposta_fiscal2)==1){
 
-					muda_mensagem_fiscal("<br>Transmitindo cupom...<br><br>");
+					muda_mensagem_fiscal('<br><i class="icofont-wifi"></i><br><br>Transmitindo cupom...<br><br>');
 					$.post('fiscal/envia_cupom_sat.php',{fiscal:1}, function(resposta_fiscal3){
 						
-
+						resposta_fiscal3 = $.trim(resposta_fiscal3);
 						var val = resposta_fiscal3.split('&@&');
 
+						arquivo_imprimir = $.trim(val[1]);	
 
 						if(val[0]==1){
 
-							muda_mensagem_fiscal("<br>Imprimindo cupom...<br><br>");
-							$.post('fiscal/imprime_cupom_sat.php',{arquivo_imprimir:val[1]}, function(resposta_fiscal3){	
+							muda_mensagem_fiscal('<br><i class="icofont-printer"></i><br><br>Imprimindo cupom...<br><br>');
 
-								$("#ModalCupomFiscal").modal('hide');	
-								inicia_sistema();
-
-								$.post('fiscal/inicializa_sat.php',{inicializa:0}, function(resposta_fiscal){});
+								$.post('fiscal/imprime_cupom_sat.php',{arquivo_imprimir:arquivo_imprimir}, function(resposta_fiscal3){	
 
 
-							});
+									if($.trim(resposta_fiscal3)==''){
+										$("#ModalCupomFiscal").modal('hide');	
+									} else {
+										$("#botao_erro_sat").show();
+										muda_mensagem_fiscal("<h4>Erro:</h4>"+resposta_fiscal3);
+									}	 
+									
+									inicia_sistema();
+
+									$.post('fiscal/inicializa_sat.php',{inicializa:0}, function(resposta_fiscal){});
+
+
+								});
 							
 
 						//ERRO AO TRANSMITIR CUPOM	

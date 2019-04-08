@@ -19,15 +19,54 @@ $(".muda_tabs").click(function(){
 	$("#tab"+target).css('display', 'flex');
 });
 
+
+
 $("#PesquisaXML").submit(function(){
 		
 		$("#resultado_pesquisa").html("<center>PESQUISANDO, AGUARDE...</center>");
 		$("#resultado_pesquisa").show();
-		//$("#btn_pesquisa").html('PESQUISANDO...');
+		$("#btn_pesquisa").html('PESQUISANDO...');
 		var formdata = $("#PesquisaXML").serialize();		
 		
 		$.ajax({type: "POST", url:$("#PesquisaXML").attr('action'), data:formdata, success: function(retorno){										
 				
+				$("#resultado_pesquisa").html(retorno);
+				$("#btn_pesquisa").html("<center>PESQUISAR</center>");
+								
+			} 
+		
+		});
+		
+		return false;
+});
+
+
+$("#EnviaXML").submit(function(){
+		
+		$("#sucesso_xml").hide();
+		$("#erro_xml").hide();	
+
+		$(".form-control")		
+		$("#btn_envio").html('AGUARDE, ENVIANDO...');
+		var formdata = $("#EnviaXML").serialize();		
+		
+		$.ajax({type: "POST", url:$("#EnviaXML").attr('action'), data:formdata, success: function(retorno){										
+
+				if(retorno==1){
+					$("#sucesso_xml").show();
+				} else {
+					
+					if(retorno==''){
+						$("#erro_xml").html('ERRO AO ANEXAR ARQUIVO E ENVIAR E-MAIL');
+					} else {
+						$("#erro_xml").html(retorno);
+					}
+					
+					$("#erro_xml").show();
+
+				}
+
+				$("#btn_envio").html('COMPACTAR E ENVIAR');
 								
 			} 
 		

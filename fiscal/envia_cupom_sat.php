@@ -1,8 +1,9 @@
 <?php
 require("../admin/class/class.db.php");
 require("../admin/class/class.seguranca.php");
-require("../includes/verifica_dados_loja.php");
 require("../includes/verifica_dados_fiscais.php");
+require("../includes/verifica_venda_aberta.php");
+
 	
 
 	function pega_linha($arq,$linha){
@@ -51,20 +52,30 @@ require("../includes/verifica_dados_fiscais.php");
 					$result = str_replace('9', '', $result);
 					$result = str_replace('|', '', $result);
 
-					echo '0'.'&@&'.$result;
+					if($result=='Erro desconhecido'){
+						$result = ' <br>A transmissão falhou.<br>Contate o suporte para mais detalhes.';
+					}
+
+					echo '0'.'&@&'.trim($result);
 
 				///SUCESSO	
 				} else if($ex[1]==6000){
 
 					$sucesso = pega_linha("$caminho_acbr\sai.txt",3);
 					$ex = explode('Arquivo=', $sucesso);	
-					echo '1'.'&@&'.$ex[1];	
+
+					//GRAVA NO BANCO//
+					$arquivo_xml = trim($ex[1]);
+					$arquivo_xml = str_replace("\\", '/', $arquivo_xml);
+					$grava = $db->select("UPDATE aguarda_venda SET venda_fiscal='1', xml_fiscal='$arquivo_xml' WHERE id='$id_venda' LIMIT 1");
+
+					echo '1'.'&@&'.trim($ex[1]);	
 
 				//OUTRO RETORNO QUALQUER	
 				} else {
 
 					$erro = pega_linha("$caminho_acbr\sai.txt",6);
-					echo '0'.'&@&'.$erro;
+					echo '0'.'&@&'.trim($erro);
 
 				}
 

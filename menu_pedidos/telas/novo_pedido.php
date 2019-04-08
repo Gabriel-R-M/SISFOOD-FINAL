@@ -75,7 +75,20 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 		<button class="btn btn-danger top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
 			<i class="icofont-printer"></i>
 			&nbsp;REIIMPRIMIR (F3)
+		</button>
+
+		<?php
+		if($dados_venda['venda_fiscal']==0){
+		?>
+
+		<button class="btn btn-info top10" style="font-weight: 300" id="botao_impressao_sat" onclick="javascript:exibe_avisos_fiscais();">
+			<i class="icofont-printer"></i>
+			&nbsp;ENVIAR SAT
 		</button>	
+
+		<?php
+		}
+		?>		
 
 	<?php } else { ?>	
 

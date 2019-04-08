@@ -18,12 +18,48 @@ function envia_email_servicos_sis($email,$mensagem){
 	
 	$mail->isHTML(true);                              
 	
-	$mail->Subject = 'SOLICITAÇÃO DE SERVIÇOS';
+	$mail->Subject = 'SOLICITAÃ‡ÃƒO DE SERVIÃ‡OS';
 	$mail->Body    = $mensagem;
 	
 	if(!$mail->send()) {
 			//echo 'Mailer Error: ' . $mail->ErrorInfo;
 			return 0;
+	} else {
+			return 1;
+	}
+				
+}
+
+
+
+function envia_email_xml_fiscais($email,$mensagem,$assunto, $anexo=''){
+				
+	$mail = new PHPMailer;	
+	$mail->SMTPDebug =0;                 	
+	$mail->isSMTP();                    
+	$mail->Host = 'srv74.prodns.com.br';  
+	$mail->SMTPAuth = true;                             
+	$mail->Username = 'sistema@sisconnection.com.br';
+	$mail->Password = 'kaca123!@#';                      
+	$mail->SMTPSecure = 'tls';                         
+	$mail->Port = 587;   
+	$mail->CharSet = 'UTF-8';                                
+	
+	if(!empty($anexo)){
+		$mail->AddAttachment($anexo);
+	}
+
+	$mail->setFrom('sistema@sisconnection.com.br', 'SIS SISTEMAS');
+	$mail->addAddress($email);     
+	
+	$mail->isHTML(true);                              
+	
+	$mail->Subject = $assunto;
+	$mail->Body    = $mensagem;
+	
+	if(!$mail->send()) {
+			return 'Problema ao enviar e-mail, informe ao suporte do sistema.';
+			//$mail->ErrorInfo;			
 	} else {
 			return 1;
 	}

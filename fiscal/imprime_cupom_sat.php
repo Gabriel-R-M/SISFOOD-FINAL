@@ -7,11 +7,21 @@ require("../includes/verifica_dados_fiscais.php");
 	$caminho_acbr=$dados_fiscais['caminho_acbr'];
 	@unlink("$caminho_acbr\sai.txt");	
 
-	$arquivo_imprimir = 'C:\ACBrMonitorPLUS\Arqs\Vendas\13913760000131\201904\AD35190413913760000131590005422330007681133566.xml';
+	////REIMPRESSAO DE CUPOM/////
+	if(isset($venda_pesquisa) && $venda_pesquisa!=0){
+		require("../includes/verifica_venda_aberta.php");		
+		$arquivo_imprimir = $dados_venda['xml_fiscal'];
+	}
 	
-	$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'")';
+
+	if(!empty($dados_fiscais['impressora_fiscal'])){
+		$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'", "'.$dados_fiscais['impressora_fiscal'].'")';
+	} else {
+		$ecf = 'SAT.ImprimirExtratoVenda("'.$arquivo_imprimir.'")';	
+	}
+
 	
-	
+	 
 	$fp = fopen("$caminho_acbr\ENT.txt", "w");
 	$escreve = fwrite($fp, $ecf);
 	fclose($fp); 			
@@ -23,10 +33,9 @@ require("../includes/verifica_dados_fiscais.php");
 			$x=2;
 			//LÊ O ARQUIVO DE RESPOSTA//
 			$ponteiro = fopen ("$caminho_acbr\sai.txt","r");
-			echo $linha = trim(fgets($ponteiro));		
+			$linha = trim(fgets($ponteiro));		
 
-			
-
+	
 
 			fclose($ponteiro);	
 			@unlink("$caminho_acbr\sai.txt");	
