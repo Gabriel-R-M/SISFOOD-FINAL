@@ -52,7 +52,7 @@ if($id!=0){
 		$foto=$arquivo;
 	}
 
-	$grava = $db->select("INSERT INTO lanches (csosn, ncm, cst, cfop, produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$csosn', $ncm', '$cst', '$cfop', '$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
+	$grava = $db->select("INSERT INTO lanches (csosn, ncm, cst, cfop, produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$csosn', '$ncm', '$cst', '$cfop', '$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
 
 	$id_produto = $db->last_id($grava);
 	

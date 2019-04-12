@@ -1,6 +1,11 @@
 <?php 
 ob_start();
 @session_start();
+
+if(!file_exists('class/class.db.php')){
+    header("Location: ../instalador");       
+}
+
 include("class/class.db.php"); 
 include("class/class.seguranca.php"); 
 require('class/class.upload.php'); 

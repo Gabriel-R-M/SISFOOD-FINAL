@@ -1804,7 +1804,7 @@ var defaults = $.fn.steps.defaults = {
      * @default true
      * @for defaults
      **/
-    enableFinishButton: true,
+    enableFinishButton: false,
 
     /**
      * Not yet implemented.
@@ -1974,7 +1974,7 @@ var defaults = $.fn.steps.defaults = {
          * @default "Cancel"
          * @for defaults
          **/
-        cancel: "Cancel",
+        cancel: "CANCELAR",
 
         /**
          * This label is important for accessability reasons.
@@ -2006,7 +2006,7 @@ var defaults = $.fn.steps.defaults = {
          * @default "Finish"
          * @for defaults
          **/
-        finish: "Finish",
+        finish: "INSTALAR AGORA",
 
         /**
          * Label for the next button.
@@ -2016,7 +2016,7 @@ var defaults = $.fn.steps.defaults = {
          * @default "Next"
          * @for defaults
          **/
-        next: "Next",
+        next: "AVANÇAR",
 
         /**
          * Label for the previous button.
@@ -2026,7 +2026,7 @@ var defaults = $.fn.steps.defaults = {
          * @default "Previous"
          * @for defaults
          **/
-        previous: "Previous",
+        previous: "VOLTAR",
 
         /**
          * Label for the loading animation.

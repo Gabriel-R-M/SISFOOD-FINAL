@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    
+	#Bloquear listagem
+	Options -Indexes
+
+	Options +FollowSymLinks
+	RewriteEngine on
+
+	DefaultLanguage pt-BR
+	AddDefaultCharset UTF-8
+
+	
+
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
+
+	#Errors
+	
+
+
+	#VIEWS**************************************************************
+
+	RewriteRule ^home?$ index.php [L,QSA]
+	RewriteRule ^mensagem?$ mensagem.php [L,QSA]
+	
+
+</IfModule>

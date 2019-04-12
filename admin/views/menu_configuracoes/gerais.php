@@ -38,7 +38,7 @@
         <div class="col-md-4">
            <div class="form-group">
                 <label for="exampleInputEmail1">Quantidade de Mesas</label>
-                <input type="text" class="form-control" name="mesa"  value="<?php echo $ln2['mesa']; ?>"/>
+                <input type="number" class="form-control" name="mesa"  value="<?php echo $ln2['mesa']; ?>"/>
            </div>
         </div> 
 

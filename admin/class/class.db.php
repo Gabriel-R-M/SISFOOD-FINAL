@@ -1,23 +1,22 @@
 <?php
-
 	set_time_limit(300);
-	ini_set('max_execution_time', 300);
-	ini_set('memory_limit', '-1');
+	ini_set("max_execution_time", 300);
+	ini_set("memory_limit", "-1");
 
 	@ob_start();
 	@session_start();
 	@session_cache_expire(180000); 
 	
-	date_default_timezone_set('America/Sao_Paulo');
+	date_default_timezone_set("America/Sao_Paulo");
 
 	define("HOST", "localhost");
-	define("DBNAME", "sheik");
+	define("DBNAME", "abc");
 	define("USER", "root");
 	define("PASSWORD", "");
 
 class DB{
     private $link;
-	
+
 	public function connect(){
 		$this->link = new mysqli(HOST, USER, PASSWORD, DBNAME);
 		mysqli_set_charset($this->link,"utf8");
@@ -26,8 +25,7 @@ class DB{
             exit();
         }
 	}
-	
-        
+	     
     public function __construct(){
 	   $this->connect(); 
 	}
@@ -42,10 +40,12 @@ class DB{
 	}
 	
 	
-	public function select($query){	
+	public function select($query,$erro=1){	
 		error_reporting(0);
 		if(!$result = $this->link->query($query)){
-			echo("<b>Erro MYSQL</b>:<br>" . mysqli_error($this->link)).'<br><br>';
+			if($erro==1){
+				echo("<b>Erro MYSQL</b>:<br>" . mysqli_error($this->link))."<br><br>";
+			}			
 		} else {
 			return $result;		
 		}		
@@ -53,7 +53,6 @@ class DB{
 	
 	
 	public function rows($query){	
-		//error_reporting(0);
 		return mysqli_num_rows($query);
 		
 	}
@@ -74,9 +73,5 @@ class DB{
 		return $result;		
 	}
 	
-	
-
 }
-
-
 ?>

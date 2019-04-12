@@ -15,13 +15,15 @@
 	RewriteCond %{SCRIPT_FILENAME} !-f
 
 	#Errors
-	ErrorDocument 404 http://localhost/sistema/admin/
+	
 
 
 	#VIEWS**************************************************************
 
+	
 	RewriteRule ^home?$ views/menu_vendas/administracao.php [L,QSA]
 	RewriteRule ^acesso?$ index.php?logout=1 [L,QSA]
+	RewriteRule ^inicio?$ index.php [L,QSA]
 	RewriteRule ^logout?$ controlers/login/logout.php [L,QSA]
 
 	RewriteRule ^formas-pagamento?$ views/menu_configuracoes/formas-pagamento.php [L,QSA]

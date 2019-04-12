@@ -1,4 +1,7 @@
 <?php
+if(!file_exists('admin/class/class.db.php')){
+    header("Location: instalador");       
+}
 include("admin/class/class.db.php");
 include("admin/class/class.seguranca.php");
 include("includes/verifica_configuracoes_loja.php");
