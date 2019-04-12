@@ -10,7 +10,7 @@
 	date_default_timezone_set("America/Sao_Paulo");
 
 	define("HOST", "localhost");
-	define("DBNAME", "abc");
+	define("DBNAME", "sheik");
 	define("USER", "root");
 	define("PASSWORD", "");
 

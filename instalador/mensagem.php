@@ -27,10 +27,32 @@
         <h5 class="tx-sm-24 tx-normal">O sistema foi instalado corretamente.</h5>
         <p class="mg-b-50">Outras configurações devem ser feitas, para que o sistema funcione.</p>
         <p class="mg-b-50"><a href="../admin/inicio" class="btn btn-error">Acessar e configurar Sis E-Food</a></p>
-        <p class="error-footer upper">&copy; <?php echo date("Y"); ?> - Todos os Direitos Reservados. SisConnection Sites e Sistemas.</p>
+        
+        <?php
+        @session_start();
+        if(isset($_SESSION['erro_copiar_dll_php'])){
+        ?>
+        <div class="col-md-12 bottom10 text-center">
+          <div class="alert alert-warning">
+            <strong>Atenção:</strong> A DLL de impressão não foi copiada para a pasta do XAMPP.
+          </div>
+        </div>  
+        <?php
+        }
+        ?>
+
+        <p class="error-footer upper top10">&copy; <?php echo date("Y"); ?> - Todos os Direitos Reservados. SisConnection Sites e Sistemas.</p>
+
+
+        
+
       </div>
 
-    </div><!-- page-error-wrapper --> 
+
+
+
+
+  </div>  
 
     <script src="../admin/lib/jquery/js/jquery.js"></script>
     <script src="../admin/lib/popper.js/js/popper.js"></script>
