@@ -156,7 +156,8 @@ require("../../diversos/funcoes_impressao.php");
 	.implode("\r\n", $txt_fim2);
 
    //CAMINHO DO TXT CRIADO
-   $file = '../../pedidos_imprimir/pedido.txt';
+   $arquivo = 'comp_pag_crediario_'.md5(time()).'.txt';	
+   $file = '../../pedidos_imprimir/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

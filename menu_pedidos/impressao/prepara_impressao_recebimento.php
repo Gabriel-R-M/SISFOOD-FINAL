@@ -146,7 +146,8 @@ require("../../diversos/funcoes_impressao.php");
 	.$txt_fim2;
 
    //CAMINHO DO TXT CRIADO
-   $file = '../../pedidos_imprimir/pedido.txt';
+   $arquivo = 'comp_recebimento_'.$id_venda.'.txt';	
+   $file = '../../pedidos_imprimir/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

@@ -264,7 +264,7 @@ require("../../diversos/funcoes_diversas.php");
 
 
 
-<input type="text" id="pdv" value="0">
+<input type="hidden" id="pdv" value="0">
 
 <input type="hidden" id="impressoras_instaladas" value="<?php echo $dados_configuracoes['impressora_principal'].' '.$dados_configuracoes['impressora_secundaria']; ?>">
 

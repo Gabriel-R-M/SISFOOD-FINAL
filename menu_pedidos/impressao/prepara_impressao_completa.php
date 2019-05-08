@@ -560,13 +560,17 @@ require("../../diversos/funcoes_diversas.php");
 	.$dados_entrega;
 
    //CAMINHO DO TXT CRIADO
-   $file = '../../pedidos_imprimir/pedido.txt';
+   $arquivo = 'pedido_'.$id_venda.'.txt';	
+   $file = '../../pedidos_imprimir/'.$arquivo;
+
+
+   
 
    // cria o arquivo
    $_file  = fopen($file,"w");
    fwrite($_file,$txt);
    fclose($_file);
 
-
+   echo $arquivo;
 
 ?>

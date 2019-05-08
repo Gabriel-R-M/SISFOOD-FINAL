@@ -70,7 +70,7 @@ if($db->rows($sel_total_itens)){
 		//VERIFICA COMO QUE É PRA IMPRIMIR ITEM A ITEM OU TODOS OS QUE AINDA NAO FORAM IMPRESSOS
 		if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
 			
-			$group = "AND impresso='0' GROUP BY categoria_produto ORDER BY id DESC LIMIT 1";	
+			$group = "AND impresso='0' GROUP BY categoria_produto ORDER BY id DESC ";	
 			$tipo_query = "AND impresso='0' ORDER BY id DESC";
 
 		} else {
@@ -91,7 +91,6 @@ if($db->rows($sel_total_itens)){
 $sel_group = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' $query_item $group");	
 if($db->rows($sel_group)){
 while($cat_pesq = $db->expand($sel_group)){
-
 
 	$categoria_pesquisa = $cat_pesq['categoria_produto'];
 
@@ -198,15 +197,6 @@ while($cat_pesq = $db->expand($sel_group)){
 
 
 	}
-
-
-
-}
-}	
-
-
-
-
 
 
 
@@ -421,29 +411,52 @@ while($cat_pesq = $db->expand($sel_group)){
 	.$dados_entrega;
 
    //CAMINHO DO TXT CRIADO
-   $file = '../../pedidos_imprimir/pedido.txt';
+
+
+   $select_pen = $db->select("SELECT impressao FROM categorias WHERE id='$categoria_produto' LIMIT 1");
+   $imp = $db->expand($select_pen);	
+
+   if($imp['impressao']=='principal'){
+
+   		$arquivo = 'pedido_unico_item_'.md5((time()+rand(0,1987))).'.txt';	
+   		$file = '../../pedidos_imprimir/'.$arquivo;
+
+   } else if($imp['impressao']=='secundaria'){
+
+   		$arquivo = 'coz_'.md5((time()+rand(0,1987))).'.txt';	
+   		$file = '../../pedidos_imprimir/'.$arquivo;
+
+   }
+	
+   
 
    // cria o arquivo
    $_file  = fopen($file,"w");
    fwrite($_file,$txt);
    fclose($_file);
 
+   unset($itens);
+   unset($txt_itens); 
+   unset($txt_itens_cabecalho); 
+   $dados_entrega='';
+   $txt_dados_entrega='';
+   
 
-   		//VERIFICA COMO QUE É PRA IMPRIMIR ITEM A ITEM OU TODOS OS QUE AINDA NAO FORAM IMPRESSOS
-		if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
-						
-
-			$sel_categorias = $db->select("SELECT categoria_produto FROM produtos_venda WHERE id_venda='$id_venda' AND impresso='0' GROUP BY categoria_produto");		
-			$qtd_categorias_imprime = $db->rows($sel_categorias);
-
-		} else {
-			
-			$qtd_categorias_imprime=0;
-		}
+}
+}	
 
 
+if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
+	echo 1;
+} else {
+	echo 0;
+}
 
 
-echo $categoria_pesquisa.'&@&'.$qtd_categorias_imprime;
+
+	
+
+
+   		
 
 ?>

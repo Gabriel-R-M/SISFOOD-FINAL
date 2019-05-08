@@ -728,7 +728,7 @@
           <div class="row">
 
             <div class="col-md-12">               
-                    <button onclick="javascript:imprime_comanda02(0,0);" class="btn btn-success btn-block  grandao">SIM</button>               
+                    <button onclick="javascript:imprime_comanda02(1,0);" class="btn btn-success btn-block  grandao">SIM</button>               
             </div> 
 
             <div class="col-md-12 top15">                

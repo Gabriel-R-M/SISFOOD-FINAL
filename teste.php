@@ -1,37 +1,27 @@
 <?php
-
-require_once("admin/email_autenticado/class.phpmailer.php");
-
-function envia_email_xml_fiscais($email,$mensagem,$assunto, $anexo=''){
-				
-	$mail = new PHPMailer;	
-	$mail->SMTPDebug =1;                 	
-	$mail->isSMTP();                    
-	$mail->Host = 'srv74.prodns.com.br';  
-	$mail->SMTPAuth = true;                             
-	$mail->Username = 'sistema@sisconnection.com.br';
-	$mail->Password = 'kaca123!@#';                      
-	$mail->SMTPSecure = 'tls';                         
-	$mail->Port = 587;    
-	$mail->CharSet = 'UTF-8';                             
-	
-	if(!empty($anexo)){
-		$mail->AddAttachment($anexo);
-	}
+require("admin/class/class.db.php");
+require("admin/class/class.seguranca.php");
+require("includes/verifica_configuracoes_loja.php");
+require("includes/verifica_venda_aberta.php");
 
 
+function imprime_caixa($arquivo){
 
-	$mail->setFrom('sistema@sisconnection.com.br', 'SIS SISTEMAS');
-	$mail->addAddress($email);     	
-	$mail->isHTML(true);                              
-	
-	$mail->Subject = $assunto;
-	$mail->Body    = $mensagem;
-	$mail->send();
-				
+	echo $arquivo;
+
+
 }
 
-envia_email_xml_fiscais('diogo.mastrangelo@atitudecomunicacao.com.br', 'çãoasas', 'éçãasas', 'admin/teste.txt');
+
+$path = "pedidos_imprimir/";
+$diretorio = dir($path);
+ 
+while($arquivo = $diretorio -> read() ){
+	if($arquivo!='..' && $arquivo!='.' && $arquivo!='cozinha'){		
+		imprime_caixa($arquivo);
+		sleep(2);		
+	}
+}
+$diretorio -> close();
 
 ?>
-

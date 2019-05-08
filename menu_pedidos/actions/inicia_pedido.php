@@ -53,7 +53,7 @@ if($id_cliente!='' && $id_cliente!=0){
 
 
 
-	$seleciona = $db->select("SELECT id FROM aguarda_venda WHERE id_usuario='$id_usuario' AND finalizada='0' AND aguarde='0' ORDER BY id DESC");
+	$seleciona = $db->select("SELECT id FROM aguarda_venda WHERE id_usuario='$id_usuario' AND md5_usuario='$md5_usuario_logado' AND finalizada='0' AND aguarde='0' ORDER BY id DESC");
 
 	if($db->rows($seleciona)){
 		while($ln = $db->expand($seleciona)){

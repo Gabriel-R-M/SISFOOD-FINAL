@@ -487,7 +487,9 @@ if($impressao=='secundaria'){
 		.implode("\r\n", $txt_dados_entrega)
 		.$dados_entrega;
 		
-		$file_cozinha = '../../pedidos_imprimir/cozinha/pedido'.$nome_arquivo.'.txt';
+
+
+		$file_cozinha = '../../pedidos_imprimir/coz_'.$nome_arquivo.'.txt';
 
 		// cria o arquivo
 		$_file_cozinha  = fopen($file_cozinha,"w");

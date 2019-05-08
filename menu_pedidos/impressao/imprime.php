@@ -5,272 +5,264 @@ require("../../includes/verifica_configuracoes_loja.php");
 require("../../includes/verifica_venda_aberta.php");
 
 
+function impressao_tipo1($arquivo){
+
+	$db = new DB();	
+	$selecionax = $db->select("SELECT * FROM configuracoes LIMIT 1");
+	$dados_configuracoes = $db->expand($selecionax);
 
 
-//IMPRESSÃO COMPLETA DO PEDIDO IGUAL NAS DUAS IMPRESSORAS
-if($tipo==1){
-
+	//////////IMPRESSORA PRINCIPAL//////////
 	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-	   		fclose($fh);
-	       
-	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
 
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
+		$fh = fopen("../../pedidos_imprimir/".$arquivo, "rb");
+		$content = fread($fh, filesize("../../pedidos_imprimir/".$arquivo));
+		fclose($fh);
 
-			printer_close($ph);
-		}
-	}
+		if(!empty($content)){
 
-
-	if(!empty($dados_configuracoes['impressora_secundaria'])){
-		$printer_principal = $dados_configuracoes['impressora_secundaria'];
-		if($ph = printer_open($printer_principal)){
-	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-	   		fclose($fh);
-	       
-	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-			printer_close($ph);
-		}
-	}
-
-}
-
-
-
-
-//IMPRESSÃO COMPLETA DO PEDIDO APENAS NO CAIXA
-if($tipo==11){
-
-	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-	   		$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-	   		$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-	   		fclose($fh);
-	       
-	   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-			printer_close($ph);
-		}
-	}
-
-}
-
-
-//IMPRESSÃO PICADO DO PEDIDO APENAS NA COZINHA
-if($tipo==12){
-
-	if(!empty($dados_configuracoes['impressora_secundaria'])){
-		$printer_principal = $dados_configuracoes['impressora_secundaria'];
-		if(file_exists("../../pedidos_imprimir/cozinha/$arquivo_impressao")){
-				
+			$printer_principal = $dados_configuracoes['impressora_principal'];
 			if($ph = printer_open($printer_principal)){
-				$fh = fopen("../../pedidos_imprimir/cozinha/$arquivo_impressao", "rb");
-				$content = fread($fh, filesize("../../pedidos_imprimir/cozinha/$arquivo_impressao"));
-				fclose($fh);
-				       
-				printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-				printer_start_page($ph); // Start Logo
+	   			   			
+
+				   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
+						printer_start_page($ph); // Start Logo
 					       
-					printer_set_option($ph, PRINTER_MODE, "RAW");
-					printer_write($ph, $content);
-
-				printer_end_page($ph);
-				printer_end_doc($ph); 
-				//printer_abort($ph);
-
-				printer_close($ph);
-			}
-
-
-		}
-		 
-	}
-
-}
-
-
-
-
-//IMPRESSÃO DE ÍTEM
-if($tipo==2){
-
-	$select = $db->select("SELECT impressao FROM categorias WHERE id='$categoria_produto' LIMIT 1");
-	$imp = $db->expand($select);
-
-	
-
-	if(!empty($imp['impressao'])){
-
-		if($imp['impressao']=='principal'){$impressora = $dados_configuracoes['impressora_principal'];}
-		if($imp['impressao']=='secundaria'){$impressora = $dados_configuracoes['impressora_secundaria'];}
+					   		printer_set_option($ph, PRINTER_MODE, "RAW");
+					   		printer_write($ph, $content);	
 		
-		if($ph = printer_open($impressora)){
-			$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-			$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-			fclose($fh);
-			       
-			printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
+					   	
+					   	printer_end_page($ph);
+						printer_end_doc($ph);
 
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
+						printer_close($ph);
 
-			printer_close($ph);
+						unlink("../../pedidos_imprimir/".$arquivo);	
+						sleep(2);
+
+			}				
 
 		}
+
+	}
+	////////////////////////////////
+}
+
+
+
+function impressao_tipo2($arquivo){
+
+
+	$db = new DB();	
+	$selecionax = $db->select("SELECT * FROM configuracoes LIMIT 1");
+	$dados_configuracoes = $db->expand($selecionax);
+
+
+	//////////IMPRESSORA PRINCIPAL//////////
+	if(!empty($dados_configuracoes['impressora_principal'])){
+
+		$fh = fopen("../../pedidos_imprimir/".$arquivo, "rb");
+		$content = fread($fh, filesize("../../pedidos_imprimir/".$arquivo));
+		fclose($fh);
+
+		if(!empty($content)){
+
+			$printer_principal = $dados_configuracoes['impressora_principal'];
+			if($ph = printer_open($printer_principal)){
+	   			   			
+
+				   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
+						printer_start_page($ph); // Start Logo
+					       
+					   		printer_set_option($ph, PRINTER_MODE, "RAW");
+					   		printer_write($ph, $content);	
 		
+					   	
+					   	printer_end_page($ph);
+						printer_end_doc($ph);
 
+						printer_close($ph);
+						
+						sleep(2);
 
-	}
+			}				
 
-}
-
-
-//IMPRESSÃO RECEBIMENTOS
-if($tipo==3){
-
-	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-		   	$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-		   	$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-		   	fclose($fh);
-		       
-		   	printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-			printer_close($ph);
 		}
+
 	}
+	////////////////////////////////
 
-}
 
+	//////////IMPRESSORA SECUNDARIA//////////
+	if(!empty($dados_configuracoes['impressora_secundaria'])){
 
-//IMPRESSÃO FECHAMENTO CAIXA
-if($tipo==4){
+		$fh = fopen("../../pedidos_imprimir/".$arquivo, "rb");
+		$content = fread($fh, filesize("../../pedidos_imprimir/".$arquivo));
+		fclose($fh);
+
+		if(!empty($content)){
+
+			$printer_principal = $dados_configuracoes['impressora_secundaria'];
+			if($ph = printer_open($printer_principal)){
+	   			   			
+
+				   		printer_start_doc($ph, "IMPRESSAOSECUNDARIA"); // Name Document 
+						printer_start_page($ph); // Start Logo
+					       
+					   		printer_set_option($ph, PRINTER_MODE, "RAW");
+					   		printer_write($ph, $content);	
+		
+					   	
+					   	printer_end_page($ph);
+						printer_end_doc($ph);
+
+						printer_close($ph);
+
+						unlink("../../pedidos_imprimir/".$arquivo);	
+						sleep(2);
+
+			}				
+
+		}
+
+	} else {
+		unlink("../../pedidos_imprimir/".$arquivo);		
+	}
+	////////////////////////////////
+
 	
-	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-		   	$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-		   	$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-		   	fclose($fh);
-		       
-		   	printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-			printer_close($ph);
-		}
-	}
-
 }
 
 
 
-//REIMPRESSAO DO PEDIDO
-if($tipo==5){
+
+
+function impressao_tipo3($arquivo){
+
+
+	$db = new DB();	
+	$selecionax = $db->select("SELECT * FROM configuracoes LIMIT 1");
+	$dados_configuracoes = $db->expand($selecionax);
+
+	$prisn = substr($arquivo,0,4);
+
+if($prisn!='coz_'){
+	//////////IMPRESSORA PRINCIPAL//////////
+	if(!empty($dados_configuracoes['impressora_principal'])){
+
+		$fh = fopen("../../pedidos_imprimir/".$arquivo, "rb");
+		$content = fread($fh, filesize("../../pedidos_imprimir/".$arquivo));
+		fclose($fh);
+
+		if(!empty($content)){
+
+			$printer_principal = $dados_configuracoes['impressora_principal'];
+			if($ph = printer_open($printer_principal)){
+	   			   			
+
+				   		printer_start_doc($ph, "IMPRESSAO"); // Name Document 
+						printer_start_page($ph); // Start Logo
+					       
+					   		printer_set_option($ph, PRINTER_MODE, "RAW");
+					   		printer_write($ph, $content);	
+		
+					   	
+					   	printer_end_page($ph);
+						printer_end_doc($ph);
+
+						printer_close($ph);
+						
+						unlink("../../pedidos_imprimir/".$arquivo);	
+						sleep(2);
+
+			}				
+
+		}
+
+	}
+}
+	////////////////////////////////
+
+if($prisn=='coz_'){
+	//////////IMPRESSORA SECUNDARIA//////////
+	if(!empty($dados_configuracoes['impressora_secundaria'])){
+
+		$fh = fopen("../../pedidos_imprimir/".$arquivo, "rb");
+		$content = fread($fh, filesize("../../pedidos_imprimir/".$arquivo));
+		fclose($fh);
+
+		if(!empty($content)){
+
+			$printer_principal = $dados_configuracoes['impressora_secundaria'];
+			if($ph = printer_open($printer_principal)){
+	   			   			
+
+				   		printer_start_doc($ph, "IMPRESSAOSECUNDARIA"); // Name Document 
+						printer_start_page($ph); // Start Logo
+					       
+					   		printer_set_option($ph, PRINTER_MODE, "RAW");
+					   		printer_write($ph, $content);	
+		
+					   	
+					   	printer_end_page($ph);
+						printer_end_doc($ph);
+
+						printer_close($ph);
+
+						unlink("../../pedidos_imprimir/".$arquivo);	
+						sleep(2);
+
+			}				
+
+		}
+
+	} else {
+		unlink("../../pedidos_imprimir/".$arquivo);		
+	}
+	////////////////////////////////
+}
+
 	
-	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-		   	$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-		   	$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-		   	fclose($fh);
-
-		   	printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-		   	printer_close($ph);
-
-
-		}
-	}
-
 }
 
 
 
 
-//COMPROVANTE PAGAMENTO CREDIARIO
-if($tipo==20){
+
+
+
+$sel = $db->select("SELECT usando FROM arquivos_imprimir LIMIT 1");
+if(!$db->rows($sel)){	
+
+$insert = $db->select("INSERT INTO arquivos_imprimir (usando) VALUES ('1')");
+
+$path = "../../pedidos_imprimir/";
+$diretorio = dir($path);
+ 
+while($arquivo = $diretorio -> read() ){
+	if($arquivo!='..' && $arquivo!='.' && $arquivo!='cozinha'){		
+		
+		
+		if($tipo==1){impressao_tipo1($arquivo);}
+		if($tipo==2){impressao_tipo2($arquivo);}
+		if($tipo==3){impressao_tipo3($arquivo);}
+		///if($tipo==4){impressao_tipo4($arquivo);}
 	
-	if(!empty($dados_configuracoes['impressora_principal'])){
-		$printer_principal = $dados_configuracoes['impressora_principal'];
-		if($ph = printer_open($printer_principal)){
-		   	$fh = fopen("../../pedidos_imprimir/pedido.txt", "rb");
-		   	$content = fread($fh, filesize("../../pedidos_imprimir/pedido.txt"));
-		   	fclose($fh);
-
-		   	printer_start_doc($ph, "IMPRESSAO"); // Name Document 
-			printer_start_page($ph); // Start Logo
-		       
-		   		printer_set_option($ph, PRINTER_MODE, "RAW");
-		   		printer_write($ph, $content);
-
-		   	printer_end_page($ph);
-			printer_end_doc($ph);
-			//printer_abort($ph);
-
-		   	printer_close($ph);
-
-
-		}
+		
+		ob_flush();
+        flush();		
 	}
-
 }
+$diretorio -> close();
+$del = $db->select("DELETE FROM arquivos_imprimir");
+
+echo 1;
+
+} else {
+
+	echo 0;
+}
+
+
 
 ?>

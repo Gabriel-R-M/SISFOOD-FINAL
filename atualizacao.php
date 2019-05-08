@@ -93,7 +93,8 @@
 	}
 
 
-	$sql = $db->select("ALTER TABLE produtos_venda CHANGE quantidade quantidade DOUBLE(10,2) NOT NULL;",0);
+	//$sql = $db->select("ALTER TABLE produtos_venda CHANGE quantidade quantidade DOUBLE(10,2) NOT NULL;",0);
+	
 
 
 	
