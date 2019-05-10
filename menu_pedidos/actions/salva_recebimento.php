@@ -71,10 +71,10 @@ if($valor_final_receber==0){
 
 	
 	//finaliza a venda caso nao seja entrega
-	if($dados_venda['entrega']==0){
+	//if($dados_venda['entrega']==0){
 
 		$sql = $db->select("UPDATE aguarda_venda SET finalizada='1', id_mesa='0', aguarde='0', ocupou_mesa='$id_mesa_ocupou'  WHERE id='$id_venda' LIMIT 1");
-	}
+	//}
 
 
 	@session_start();
