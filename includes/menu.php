@@ -54,8 +54,8 @@
 
 
             <?php 
-              $ip = getenv("REMOTE_ADDR");
-              if($ip=='::1'){
+              //$ip = getenv("REMOTE_ADDR");
+              //if($ip=='::1'){
                 if($dados_configuracoes['modulo_internet']==1){                                      
             ?>
 
@@ -66,7 +66,8 @@
               </li>
             
             <?php 
-              }} 
+              }
+              //} 
             ?>
 
 

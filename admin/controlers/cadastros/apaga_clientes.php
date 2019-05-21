@@ -2,7 +2,22 @@
 require("../../config.php");
 
 //APAGA O PRODUTO
-$apaga = $db->select("DELETE FROM clientes WHERE id='$id' LIMIT 1");
+
+
+if(isset($apaga_varios)){
+
+	$_checkbox = $_POST['apaga'];
+	foreach($_checkbox as $_valor){
+	    
+	    $apaga = $db->select("DELETE FROM clientes WHERE id='$_valor' LIMIT 1");
+	}
+
+} else {
+	$apaga = $db->select("DELETE FROM clientes WHERE id='$id' LIMIT 1");
+}
+
+
+
 
 //SESSIONS DE AVISO//
 $_SESSION['avisos-admin-sis-classe'] = 'success';

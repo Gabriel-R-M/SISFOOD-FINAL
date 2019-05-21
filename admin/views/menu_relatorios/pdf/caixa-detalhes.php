@@ -62,8 +62,9 @@ $pdf->SetFillColor(244,244,244);
 
 $pdf->Cell(32, 6, 'DATA/HORA',1, 0, 'L',true);	
 $pdf->Cell(88, 6, 'CLIENTE',1, 0, 'L',true);
-$pdf->Cell(51, 6, 'ATENDENTE',1, 0, 'L',true);			
-$pdf->Cell(20, 6, 'R$ TOTAL',1, 0, 'R',true);		
+$pdf->Cell(29, 6, 'ATENDENTE',1, 0, 'L',true);			
+$pdf->Cell(20, 6, 'R$ TOTAL',1, 0, 'R',true);
+$pdf->Cell(22, 6, 'R$ RECEBIDO',1, 0, 'R',true);		
 $pdf->Ln(6);
 
 //DADOS DA VENDA
@@ -73,6 +74,8 @@ $sql = $db->select("SELECT aguarda_venda.*, usuarios.nome AS atendente, clientes
 	LEFT JOIN clientes ON aguarda_venda.id_cliente=clientes.id
 	WHERE aguarda_venda.id_caixa='$id' AND aguarda_venda.finalizada='1' AND aguarda_venda.valor_final_venda!='0.00'  
 	ORDER BY aguarda_venda.data_pedido, aguarda_venda.pedido_inicio");
+
+//echo $db->rows($sql).'<br><br>'; 
 if($db->rows($sql)){
 	while($row= $db->expand($sql)){
 
@@ -82,25 +85,37 @@ if($db->rows($sql)){
 		$pdf->SetTextColor(0,0,0);
 		$valor_recebido_venda=0;
 		$id_venda = $row['id'];
-		$sel2 = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_venda'");
+		$sel2 = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_venda' AND forma_pagamento!='3'");
 		if($db->rows($sel2)){
 			while($row2 = $db->expand($sel2)){
-				$valor_recebido_venda = ($valor_recebido_venda+$row2['valor_caixa_real']);	
+				$valor_recebido_venda = ($valor_recebido_venda+$row2['valor_caixa_real']);
+
+				//echo $row2['valor_caixa_real'].' - '.$row2['forma_pagamento'].' - '.$id_venda.'<br>';
+
 			}
+		} else {
+			//echo 'NAO TEM PGTO: '.$id_venda.'<br>';
 		}
 		
+		//echo $diferenca = ($row['valor_final_venda']-$valor_recebido_venda).'<br>';
 
 		if($valor_recebido_venda==0){
 			$msg=' - (VENDA NÃO RECEBIDA)';
 			$pdf->SetFillColor(165,36,32);
 			$pdf->SetTextColor(255,255,255);
-		} else if($valor_recebido_venda!=$row['valor_final_venda']){
+			$exibe=0;
+		} else if($diferenca!=0){
 			$msg=' - (VALOR TOTAL NÃO RECEBIDO)';
 			$pdf->SetFillColor(165,36,32);
 			$pdf->SetTextColor(255,255,255);
-		} else {
+			
+		} else {			
 			$total_vendas = ($total_vendas+$row['valor_final_venda']);
 		}
+
+
+		//echo 'tot eq:'.$total_vendas.'<br><br>';
+
 
 
 		$pdf->Cell(32, 6, data_mysql_para_user($row['data_pedido']).' ás '.substr($row['pedido_inicio'],0,5),1, 0, 'L',true);	
@@ -114,10 +129,12 @@ if($db->rows($sql)){
 	
 
 
-		$pdf->Cell(51, 6, $row['atendente'],1, 0, 'L',true);	
+		$pdf->Cell(29, 6, $row['atendente'],1, 0, 'L',true);	
 
 
 		$pdf->Cell(20, 6, 'R$ '.number_format($row['valor_final_venda'],2,".",","),1, 0, 'R',true);	
+
+		$pdf->Cell(22, 6, 'R$ '.number_format($valor_recebido_venda,2,".",","),1, 0, 'R',true);	
 		
 		$pdf->Ln(6);
 

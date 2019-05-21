@@ -31,7 +31,8 @@ include_once("../../includes/verifica_session.php");
 				    <tr>
 				        <th width="60">ID</th>				        
 				        <th>Nome</th>
-				        <th>Telefone</th>				        
+				        <th>Telefones</th>				        
+				        			        
 				    </tr>	
 
 				    <tbody>
@@ -47,6 +48,7 @@ include_once("../../includes/verifica_session.php");
 						        <td>#<?php echo ($dados['id']); ?></td>						        					       
 						        <td><?php echo ($dados['nome']); ?></td>
 						        <td>(<?php echo ($dados['ddd']); ?>) <?php echo ($dados['telefone']); ?></td>
+						        
 						        	
 						      </tr>
 				      <?php

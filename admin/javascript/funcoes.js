@@ -1,6 +1,21 @@
 // JavaScript Document
 
 
+function marca_checkbox(){
+	marcado=0;
+	$('.ompa').each(function () {
+       if($(this).is(":checked")){
+       		marcado++;
+       }
+  });
+
+	if(marcado>0){
+		$("#botao_apaga_registros").show();
+	} else {
+		$("#botao_apaga_registros").hide();
+	}
+}
+
 function valida_ncm(ncm){
 	$("#ncm_erro").hide();
 	$("#esconde_frase").show();

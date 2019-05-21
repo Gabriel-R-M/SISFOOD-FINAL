@@ -13,6 +13,7 @@ require("../../includes/verifica_caixa_aberto.php");
         <th width="150">Data/Hora</th>
         <th width="150">Valor</th>
         <th>Motivo/Operador</th>        
+        <th width="10"></th>        
       </tr>
     </thead>
 
@@ -26,14 +27,19 @@ require("../../includes/verifica_caixa_aberto.php");
 		  	if($db->rows($sel)){
 			while($dados = $db->expand($sel)){
 	  ?>
-      <tr>
+      <tr id="despesa<?php echo $dados['id']; ?>">
         <td>ÁS <?php echo substr($dados['hora'],0,5); ?>hs<br> <small>em <?php echo data_mysql_para_user($dados['data']); ?></small></td>
         <td>R$ <?php echo number_format($dados['valor_saida'],2,",","."); ?></td>
-        <td>
+        <td class="upper">
         	<?php echo ($dados['nome']); ?>
         	<br>
         	<small><?php echo ($dados['motivo']); ?></small>
-        </td>        
+        </td>
+
+        <td>          
+            <button class="btn btn-danger btn-sm" onclick="javacript:apaga_despesa_caixa(<?php echo $dados['id']; ?>);"><i class="icofont-ui-close"></i></button>          
+        </td>
+
       </tr>
       <?php
       	}} else {

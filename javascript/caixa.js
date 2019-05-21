@@ -50,6 +50,12 @@ $(document).ready(function(){
 });		
 
 
+function apaga_despesa_caixa(id){
+	$("#despesa"+id).hide();
+	$.post('menu_caixa/actions/apaga_retirada_caixa.php', {id:id});
+	manutencao_caixa();
+}
+
 
 function pesquisa_caixas_finalizados(){
 

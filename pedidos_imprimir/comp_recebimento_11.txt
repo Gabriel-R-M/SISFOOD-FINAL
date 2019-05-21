@@ -1,0 +1,17 @@
+       SHEIK ESFIHARIA E PIZZARIA
+   DR. ANTONIO TEDESCO, 822 - CENTRO
+          FONE: (14) 3264-3494
+              PEDIDO: #11
+----------------------------------------
+       COMPROVANTE DE RECEBIMENTO
+----------------------------------------
+VALOR DEVIDO                    R$ 15,00
+----------------------------------------
+DINHEIRO RECEBIDO               R$ 30,00
+----------------------------------------
+TROCO                           R$ 15,00
+----------------------------------------
+RESTANTE A RECEBER               R$ 0,00
+----------------------------------------
+          RECEBIDO POR: MARCIO
+Array

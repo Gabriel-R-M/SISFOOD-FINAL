@@ -6,7 +6,8 @@
   <h6 class="slim-pagetitle">LISTAGEM DE CLIENTES</h6>
 </div><!-- slim-pageheader -->
 
-
+<form method="post" action="controlers/cadastros/apaga_clientes.php">
+<input type="hidden" name="apaga_varios" value="1"> 
 <div class="row row-sm">        
 <div class="col-lg-12">
   <div class="card card-table">
@@ -20,6 +21,7 @@
                 <table class="table mg-b-0 tx-13">
                   <thead>
                     <tr class="tx-10">
+                    <th class="pd-y-5" width="5"></th>    
                     <th class="pd-y-5" width="20">CÓD</th>		
                       <th class="pd-y-5">NOME</th>                      
                       <th class="pd-y-5">TELEFONE</th>
@@ -40,6 +42,8 @@
 
                     <tr>
                      
+                      <td class="valign-middle upper"><input type="checkbox" class="ompa" value="<?php echo $yy['id']; ?>" name="apaga[]" onclick="javascript:marca_checkbox();"></td>
+
                       <td class="valign-middle upper"><?php if($yy['id']<10){echo '0';} echo $yy['id']; ?></td>		
                       <td class="valign-middle upper"><?php echo $yy['nome']; ?></td>
                       
@@ -83,9 +87,15 @@
                 </table>
               </div><!-- table-responsive -->
               
+              
              
   </div>
 </div>
+
+            <div class="col-md-3 top10 hide" id="botao_apaga_registros">
+                <button type="submit" class="btn btn-danger">APAGAR REGISTROS</button>
+            </div>
 </div>
+</form>
 
 <?php require("../../includes/rodape.php"); ?>

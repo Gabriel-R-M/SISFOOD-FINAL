@@ -45,7 +45,7 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 			while($row = $db->expand($sel)){
 
 				$id_ven_procura = $row['id'];
-				$sel2 = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_ven_procura' ORDER BY id DESC");
+				$sel2 = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_ven_procura' AND forma_pagamento!='3' ORDER BY id DESC");
 				while($row2 = $db->expand($sel2)){
 
 						//DINHEIRO
@@ -92,6 +92,11 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 		//TOTAIS
 		if($tipo==0){
 			$subtotal_vendas = ($totais_dinheiro+$totais_cartao+$totais_recebimento_convenio);
+			return $subtotal_vendas;
+		}
+
+		if($tipo==99){
+			$subtotal_vendas = ($totais_dinheiro+$totais_cartao);
 			return $subtotal_vendas;
 		}
 }
