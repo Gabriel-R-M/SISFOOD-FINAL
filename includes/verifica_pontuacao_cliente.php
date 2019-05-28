@@ -7,88 +7,75 @@ $pontuacao_cliente=0;
 $desconto_reais = 0;
 $pontuacao_usada = 0;
 $pontuacao_expirada=0;
+$pontos_ganhos=0;
+$pontos_emdia=0;
 
 $hoje = date("Y-m-d");
 $dias_expira_pontos = $dados_configuracoes['dias_expira_pontos'];
+$data_pesquisa = date('Y-m-d',strtotime("-$dias_expira_pontos day")); 					
+ 
 
-//DATA LIMITE PARA EXPIRAR PONTOS//
-$data_pesquisa = date('Y-m-d',strtotime("-$dias_expira_pontos day")); 
 
+$sel = $db->select("SELECT data_pedido, valor_final_venda FROM aguarda_venda WHERE finalizada='1' AND id_cliente='$id_cliente_venda' ORDER BY id DESC");
+if($db->rows($sel)){
+while($dados = $db->expand($sel)){
 
-///PEGA O VALOR TOTAL DE VENDAS//
-$selecionax = $db->select("SELECT SUM(valor_final_venda) AS total_gasto_cliente 
-	FROM aguarda_venda 
-	WHERE  finalizada='1' AND id_cliente='$id_cliente_venda'
-	LIMIT 1");
-if($db->rows($selecionax)){
-	$dados_pontuacao_cliente = $db->expand($selecionax);
-	$pontuacao_cliente = $dados_pontuacao_cliente['total_gasto_cliente'];
-	if($pontuacao_cliente==''){
-		$pontuacao_cliente=0;
+	//VALIDOS
+	if($dados['data_pedido']>=$data_pesquisa){
+
+		$equivalencia_reais_pontos = $dados_configuracoes['valor_real_ponto'];
+		$pontos_aguarda = ($dados['valor_final_venda']*$equivalencia_reais_pontos);	
+		$pontos_emdia = ($pontos_emdia+$pontos_aguarda);
+
+	//EXPIRADOS	
+	} else {
+
+		$equivalencia_reais_pontos = $dados_configuracoes['valor_real_ponto'];
+		$pontos_aguarda = ($dados['valor_final_venda']*$equivalencia_reais_pontos);	
+		$pontuacao_expirada = ($pontuacao_expirada+$pontos_aguarda);
+
 	}
+
+	$equivalencia_reais_pontos = $dados_configuracoes['valor_real_ponto'];
+	$pontos_aguarda = ($dados['valor_final_venda']*$equivalencia_reais_pontos);	
+	$pontos_ganhos = ($pontos_ganhos+$pontos_aguarda);
+	$pontos_ganhos = floor($pontos_ganhos); 
+	
+
+	$pontos_emdia = floor($pontos_emdia); 
+	$pontuacao_expirada = floor($pontuacao_expirada); 
+
+
 }
-
-
-///PEGA PONTOS JÁ UTILIZADOS///
-$selecionax = $db->select("SELECT SUM(qtd_pontos) AS qtd_pontos_final 
-	FROM pontuacao_usada 
-	WHERE id_cliente='$id_cliente_venda'
-	");
-if($db->rows($selecionax)){
-	$dados_pontuacao_usada = $db->expand($selecionax);
-	$pontuacao_usada = $dados_pontuacao_usada['qtd_pontos_final'];
-	if($pontuacao_usada==''){
-		$pontuacao_usada=0;
-	}
-}
-
-$pontuacao_cliente = floor($pontuacao_cliente); 
-
-
-//GANHA - UTILIZADA
-$pontuacao_cliente = ($pontuacao_cliente-$pontuacao_usada);
-if($pontuacao_cliente<0){$pontuacao_cliente=0;}
-
-
-
-///PEGA PONTOS VÁLIDOS///
-if($pontuacao_cliente>0){
-
-	///PEGA O VALOR TOTAL DE VENDAS//
-	$selecionax = $db->select("SELECT SUM(valor_final_venda) AS total_gasto_cliente 
-		FROM aguarda_venda 
-		WHERE data_pedido<='$data_pesquisa' AND finalizada='1' AND id_cliente='$id_cliente_venda'
-		LIMIT 1");
-	if($db->rows($selecionax)){
-		$dados_pontuacao_cliente = $db->expand($selecionax);
-		$pontuacao_expirada = $dados_pontuacao_cliente['total_gasto_cliente'];
-		if($pontuacao_expirada==''){
-			$pontuacao_expirada=0;
-		}
-	}
-
 }
 
 
 
-$pontuacao_cliente = ($pontuacao_cliente-$pontuacao_expirada);
+///USADOS///
+$sel = $db->select("SELECT * FROM pontuacao_usada WHERE id_cliente='$id_cliente_venda' ORDER BY id DESC");
+if($db->rows($sel)){
+while($dados = $db->expand($sel)){
+	$pontuacao_usada = ($pontuacao_usada+$dados['qtd_pontos']);
+}
+}
 
+if($pontos_emdia>0){
 
-if($pontuacao_cliente<0){
-	$pontuacao_cliente=0;
+	$final = ($pontos_ganhos-$pontuacao_usada);	
+
+	if($final>$pontos_emdia){
+		$final=0;
+	}
+
+	
 } else {
-	$pontuacao_cliente = floor($pontuacao_cliente); 
+	$final = 0;
 }
 
+if($final<0){$final=0;}
 
 
-if($pontuacao_cliente>0){	
-	$equivalencia_reais_pontos = $dados_configuracoes['valor_ponto_troca'];
-	$desconto_reais = ($pontos_validos*$equivalencia_reais_pontos);
+if(!isset($return)){
+	echo $final;
 } 
 
-if(isset($exibe_pontos)){
-	if($pontuacao_cliente<10){$pontuacao_cliente = '0'.$pontuacao_cliente;}
-	echo $pontuacao_cliente;
-}
-?>

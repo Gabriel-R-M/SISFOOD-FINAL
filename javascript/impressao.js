@@ -32,175 +32,93 @@ function aviso_impressao_sistema(tipo=0){
 
 
 
-function reimpressao_completa_pedido(id,remonta=1){	
-	aviso_impressao_sistema();
+function reimpressao_completa_pedido(){	
 	$("#ModalEscolheTipoImpressao").modal('hide');	
-
-		if(remonta==1){
-			
-			$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(resposta){							
-				$.post('menu_pedidos/impressao/imprime.php',{imprime:1, tipo:1}, function(resposta){							
-					if(resposta==0){
-						setTimeout(function(){ reimpressao_completa_pedido(1,0);}, 3000);	
-					} else {
-						aviso_impressao_sistema(1);	
-					}					
-				});			
-			});		
-		
-		} else {
-
-			$.post('menu_pedidos/impressao/imprime.php',{imprime:1, tipo:1}, function(resposta){							
-				if(resposta==0){
-					setTimeout(function(){ reimpressao_completa_pedido(1,0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}				
-			});
-
-		}
-		
-}
-
-
-function imprime_comprovante_crediario(remonta=1){
 	aviso_impressao_sistema();
-	$("#ModalPerguntaImprime03").modal('hide');	
-
-	if(remonta==1){
-		$.post('menu_pedidos/impressao/prepara_impressao_pagamento_crediario.php',{id:id_imprime_comp_crediario}, function(resposta){	
-			$.post('menu_pedidos/impressao/imprime.php',{imprime:1, tipo:1}, function(resposta){	
-				if(resposta==0){
-					setTimeout(function(){ imprime_comprovante_crediario(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-		});	
-	} else {
-		$.post('menu_pedidos/impressao/imprime.php',{imprime:1, tipo:1}, function(resposta){	
-			if(resposta==0){
-				setTimeout(function(){ imprime_comprovante_crediario(0);}, 3000);	
-			} else {
-				aviso_impressao_sistema(1);	
-			}
-		});	
-	}
+	$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(){
+		aviso_impressao_sistema(1);		
+	});		
 
 }
 
 
-function imprime_ciencia_crediario(remonta=1){	
+function imprime_comprovante_crediario(){
+	$("#ModalPerguntaImprime03").modal('hide');	
+	aviso_impressao_sistema();
+	$.post('menu_pedidos/impressao/prepara_impressao_pagamento_crediario.php',{id:id_imprime_comp_crediario}, function(){
+		aviso_impressao_sistema(1);		
+	});		
+}
+
+
+function imprime_ciencia_crediario(){	
 	aviso_impressao_sistema();
 	$("#ModalPerguntaImprime04").modal('hide');	
+	$.post('menu_pedidos/impressao/prepara_impressao_crediario.php',{id:id_imprime_comp_crediario}, function(){
+		aviso_impressao_sistema(1);			
+	});
+}
 
-	if(remonta==1){
-		$.post('menu_pedidos/impressao/prepara_impressao_crediario.php',{id:id_imprime_comp_crediario}, function(resposta){		
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:1, imprime:1}, function(resposta){			
-				if(resposta==0){
-					setTimeout(function(){ imprime_ciencia_crediario(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-		});		
-	} else {
-		$.post('menu_pedidos/impressao/imprime.php',{tipo:1, imprime:1}, function(resposta){			
-			if(resposta==0){
-				setTimeout(function(){ imprime_ciencia_crediario(0);}, 3000);	
-			} else {
-				aviso_impressao_sistema(1);	
-			}
-		});
-	}
-	
+
+
+function imprime_recebimentos(){		
+	aviso_impressao_sistema();
+	$.post('menu_pedidos/impressao/prepara_impressao_recebimento.php',{id:1}, function(){
+		aviso_impressao_sistema(1);			
+	});
+}
+
+
+
+function reimpressao_divisao_pedido(id){
+	aviso_impressao_sistema();
+	$("#ModalEscolheTipoImpressao").modal('hide');	
+	$.post('menu_pedidos/impressao/prepara_impressao_divisao.php',{id:1}, function(){
+		aviso_impressao_sistema(1);			
+	});
+}
+
+
+function reimprime_item_avulso(id){	
+	aviso_impressao_sistema();
+	$("#ModalPerguntaImprime05").modal('hide');	
+	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{item:sim_reimprime_item_pedido}, function(){
+		aviso_impressao_sistema(1);			
+		sim_reimprime_item_pedido=0;
+	});
+}
+
+
+function imprime_fechamento_caixa(id){	
+	aviso_impressao_sistema();
+	$.post('menu_caixa/impressao/prepara_fechamento_caixa.php',{id_caixa:id}, function(a){		
+		aviso_impressao_sistema(1);					
+	});
 }
 
 
 
 
-function imprime_comanda01(remonta=1){	
-		
+function imprime_comanda01(){	
+	aviso_impressao_sistema();		
 	$("#ModalPerguntaImprime01").modal('hide');
 	
 	$.post('menu_pedidos/impressao/verifica_primeira_impressao.php',{id:1}, function(resposta){
 
 			if(resposta=='IGUAIS'){
 
-					aviso_impressao_sistema();
-
-					if(remonta==1){
-
-						$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(resposta){	
-							$.post('menu_pedidos/impressao/imprime.php',{tipo:2}, function(resposta2){	
-
-								if(resposta==0){
-									setTimeout(function(){imprime_comanda01(0);}, 3000);
-								} else {
-									aviso_impressao_sistema(1);	
-								}
-								
-							});
-						});	
-
-					} else {
-
-						$.post('menu_pedidos/impressao/imprime.php',{tipo:2}, function(resposta2){	
-
-							if(resposta==0){
-								setTimeout(function(){imprime_comanda01(0);}, 3000);
-							} else {
-								aviso_impressao_sistema(1);	
-							}
-								
-						});
-
-					}
+					$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1, primeira_impressao:1}, function(){
+						aviso_impressao_sistema(1);			
+					});
 
 					
-
-					
-
 			} else if(resposta=='PICADA'){
 
-					aviso_impressao_sistema();
-
-					if(remonta==1){
-
-
-						$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(resposta){
-
-							$.post('menu_pedidos/impressao/prepara_impressao_picada.php',{id:1}, function(resposta){
-
-								$.post('menu_pedidos/impressao/imprime.php',{tipo:3}, function(resposta){	
-
-									if(resposta==0){
-										setTimeout(function(){imprime_comanda01(0);}, 3000);
-									} else {
-										aviso_impressao_sistema(1);	
-									}
-									
-								});	
-
-							});
-						});	
-
-
-					} else {
-
-						$.post('menu_pedidos/impressao/imprime.php',{tipo:3}, function(resposta){	
-
-									if(resposta==0){
-										setTimeout(function(){imprime_comanda01(0);}, 3000);
-									} else {
-										aviso_impressao_sistema(1);	
-									}
-									
-						});
-
-					}
-
-					
+					$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(){
+						$.post('menu_pedidos/impressao/prepara_impressao_picada.php',{id:1}, function(){							
+							aviso_impressao_sistema(1);			
+						});								
+					});
 
 			}
 
@@ -210,87 +128,7 @@ function imprime_comanda01(remonta=1){
 
 
 
-function reimpressao_divisao_pedido(id, remonta=1){
-	aviso_impressao_sistema();
-	$("#ModalEscolheTipoImpressao").modal('hide');	
-
-	if(remonta==1){
-		$.post('menu_pedidos/impressao/prepara_impressao_divisao.php',{id:1}, function(resposta){	
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){	
-				if(resposta==0){
-					setTimeout(function(){ reimpressao_divisao_pedido(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-		});	
-	} else {
-		$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){	
-			if(resposta==0){
-				setTimeout(function(){ reimpressao_divisao_pedido(0);}, 3000);	
-			} else {
-				aviso_impressao_sistema(1);	
-			}
-		});
-	}
-}
-
-
-
-function imprime_recebimentos(remonta=1){		
-	aviso_impressao_sistema();
-	if(remonta==1){
-		$.post('menu_pedidos/impressao/prepara_impressao_recebimento.php',{id:1}, function(resposta){		
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){			
-				if(resposta==0){
-					setTimeout(function(){ imprime_recebimentos(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-		});	
-	} else {
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){			
-				if(resposta==0){
-					setTimeout(function(){ imprime_recebimentos(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-	}
-}
-
-
-
-
-function imprime_fechamento_caixa(id, remonta=1){
-	aviso_impressao_sistema();
-	if(remonta==1){
-		$.post('menu_caixa/impressao/prepara_fechamento_caixa.php',{id_caixa:id}, function(resposta){				
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){			
-				if(resposta==0){
-					setTimeout(function(){ imprime_fechamento_caixa(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});
-		});	
-	} else {
-		$.post('menu_pedidos/impressao/imprime.php',{tipo:1}, function(resposta){			
-			if(resposta==0){
-				setTimeout(function(){ imprime_fechamento_caixa(0);}, 3000);	
-			} else {
-				aviso_impressao_sistema(1);	
-			}
-		});
-	}
-}
-
-
-
-
-//function imprime_comanda02(contador=0,item=0, remonta=1){
-function imprime_comanda02(remonta=1, item=0){	
+function imprime_comanda02(item=0){	
 	aviso_impressao_sistema();		
 	$("#ModalPerguntaImprime02").modal('hide');
 
@@ -303,47 +141,20 @@ function imprime_comanda02(remonta=1, item=0){
 	}
 
 	//VERIFICA SE IMPRIME APENAS O ULTIMO ITEM, OU TODOS QUE NAO FORAM IMPRESSOS AINDA DO PEDIDO
-	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();	
+	var tipo_impressao_item_avulso = $('#impressao_item_avulso').val();
 
-	if(remonta==1){
+	$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1, item:item}, function(resposta){	
+		aviso_impressao_sistema(1);		
 
-		$.post('menu_pedidos/impressao/prepara_impressao_unico_item.php',{id:1, item:item}, function(resposta){	
+		if(resposta==1){
+			$(".botao_imprime_item").removeClass("btn-primary");
+			$(".botao_imprime_item").addClass("btn-success");
+		}
 
-			if(resposta==1){
-				$(".botao_imprime_item").removeClass("btn-primary");
-				$(".botao_imprime_item").addClass("btn-success");
-			}
-
-			$.post('menu_pedidos/impressao/imprime.php',{tipo:3}, function(resposta){			
-				if(resposta==0){
-					setTimeout(function(){ imprime_comanda02(0);}, 3000);	
-				} else {
-					aviso_impressao_sistema(1);	
-				}
-			});			
-		
-		});		
-
-	} else {
-
-		$.post('menu_pedidos/impressao/imprime.php',{tipo:3}, function(resposta){			
-			if(resposta==0){
-				setTimeout(function(){ imprime_comanda02(0);}, 3000);	
-			} else {
-				aviso_impressao_sistema(1);	
-			}
-		});	
-
-	}
-
+	});
 	
+
 }
-
-
-
-
-
-
 
 
 

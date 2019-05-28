@@ -331,7 +331,7 @@ while($cat_pesq = $db->expand($sel_group)){
 			}	else {
 				
 				$txt_dados_entrega = array();
-				$txt_dados_entrega[] = '----------------------------------------';
+				//$txt_dados_entrega[] = '----------------------------------------';
 				$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
 				$txt_dados_entrega[] = '----------------------------------------';
 				$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
@@ -416,18 +416,12 @@ while($cat_pesq = $db->expand($sel_group)){
    $select_pen = $db->select("SELECT impressao FROM categorias WHERE id='$categoria_produto' LIMIT 1");
    $imp = $db->expand($select_pen);	
 
-   if($imp['impressao']=='principal'){
+   $pasta = $imp['impressao'];
 
-   		$arquivo = 'pedido_unico_item_'.md5((time()+rand(0,1987))).'.txt';	
-   		$file = '../../pedidos_imprimir/'.$arquivo;
+   $arquivo = 'pedido_unico_item_'.md5(time()).'.txt';	
+   $file = '../../pedidos_imprimir/'.$pasta.'/'.$arquivo;
 
-   } else if($imp['impressao']=='secundaria'){
-
-   		$arquivo = 'coz_'.md5((time()+rand(0,1987))).'.txt';	
-   		$file = '../../pedidos_imprimir/'.$arquivo;
-
-   }
-	
+   
    
 
    // cria o arquivo
@@ -446,14 +440,14 @@ while($cat_pesq = $db->expand($sel_group)){
 }	
 
 
+
+
+
 if($dados_configuracoes['impressao_avulsa_item']=='JUNTO APENAS UMA VEZ'){
 	echo 1;
 } else {
 	echo 0;
 }
-
-
-
 	
 
 

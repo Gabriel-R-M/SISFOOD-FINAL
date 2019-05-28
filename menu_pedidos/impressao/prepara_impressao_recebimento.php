@@ -143,11 +143,11 @@ require("../../diversos/funcoes_impressao.php");
 	.$txt_total_falta_pagar."\r\n"
 	
 	.implode("\r\n", $txt_fim)."\r\n"
-	.$txt_fim2;
+	.implode("\r\n", $txt_fim2);
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'comp_recebimento_'.$id_venda.'.txt';	
-   $file = '../../pedidos_imprimir/'.$arquivo;
+   $file = '../../pedidos_imprimir/pasta1/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

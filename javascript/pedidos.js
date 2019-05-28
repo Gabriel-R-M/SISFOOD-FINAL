@@ -232,7 +232,7 @@ function seleciona_outro_endereco_cliente(id_endereco, id_cliente){
 function confirma_reimpressao_item_unico(id){
 	$("#id_item_imprimir").val(id);
 	$("#ModalPerguntaImprime05").modal();
-	sim_reimprime_item_pedido=1;
+	sim_reimprime_item_pedido=id;
 }
 
 function reimprime_item_avulso(){
@@ -1998,7 +1998,7 @@ function resgate_pontos(){
 	$("#btn_desconto2").attr('disabled', true);	
 
 	var pontos_validos = $("#pontos_validos_troca").val();
-	$.post('menu_pedidos/actions/calcula_desconto_pontuacao.php',{pontos_validos:pontos_validos}, function(resposta){		
+	$.post('menu_pedidos/actions/calcula_desconto_pontuacao.php',{final:pontos_validos}, function(resposta){		
 		
 		$("#val_desconto").val(resposta);			
 		fazdesconto(2);

@@ -8,8 +8,6 @@ require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_impressao.php");
 
 
-$var = limpa_pasta('../../pedidos_imprimir/cozinha/');
-
 $txt ='';
 $nome_arquivo=0;
 $contador_cabecalho=1;
@@ -35,7 +33,7 @@ if($db->rows($sel_total_itens)){
 
 
 //IMPRIME NA COZINHA APENAS O QUE É PRA IMPRIMIR NA COZINHA//
-if($impressao=='secundaria'){	
+if($impressao!='pasta1'){	
 		
 
 		$txt ='';
@@ -374,7 +372,7 @@ if($impressao=='secundaria'){
 					
 
 							$txt_dados_entrega = array();		
-							$txt_dados_entrega[] = 'DADOS DO CLIENTEx2';         
+							$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
 							$txt_dados_entrega[] = '----------------------------------------';
 							$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
@@ -488,8 +486,8 @@ if($impressao=='secundaria'){
 		.$dados_entrega;
 		
 
-
-		$file_cozinha = '../../pedidos_imprimir/coz_'.$nome_arquivo.'.txt';
+		$pasta = $impressao;
+   		$file_cozinha = '../../pedidos_imprimir/'.$pasta.'/coz'.$nome_arquivo.'_'.md5(time()).'.txt';
 
 		// cria o arquivo
 		$_file_cozinha  = fopen($file_cozinha,"w");
@@ -505,9 +503,6 @@ if($impressao=='secundaria'){
 }
 
 	
-
-//RETORNA A QUANTIDADE DE ARQUIVOS CRIADOS PARA IMPRESSAO PICADA//
-echo $nome_arquivo;
 
 
 

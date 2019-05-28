@@ -6,4 +6,5 @@ $seleciona2 = $db->select("SELECT * FROM clientes
 
 $dados_cliente = $db->expand($seleciona2);
 
+
 ?>

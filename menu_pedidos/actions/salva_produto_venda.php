@@ -4,6 +4,9 @@ require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
 
+$selecionax = $db->select("SELECT tipo_preco_meio_meio FROM configuracoes LIMIT 1");
+$dados_configuracoes = $db->expand($selecionax);
+
 
 $preco_produto=0;
 $tam = explode('&@@&', $tamanho);
@@ -29,7 +32,8 @@ if(!empty($normal)){
 
 	$preco_maior=0;
 	$ids_produtos='';
-	$prods = explode(',', $meio_meio);	
+	$prods = explode(',', $meio_meio);
+	$conta_itens_meio = count($prods);	
 	foreach($prods as $prod) {
 
     	$id_produto = trim($prod);
@@ -37,8 +41,23 @@ if(!empty($normal)){
     	$samba = $db->select("SELECT preco FROM lanches_tamanhos_valores WHERE id_tamanho='$tamanho' AND id_produto='$id_produto' LIMIT 1");
 		$result_preco = $db->expand($samba);
 
-		if($result_preco['preco']>$preco_produto){
-			$preco_produto = $result_preco['preco'];
+
+		//PRECO MAIOR NO MEIO A MEIO
+		if($dados_configuracoes['tipo_preco_meio_meio']=='' || $dados_configuracoes['tipo_preco_meio_meio']=='maior_preco') {
+
+			if($result_preco['preco']>$preco_produto){
+				$preco_produto = $result_preco['preco'];
+			}
+
+		//SOMA DAS METADES DOS VALORES	
+		} else {
+
+			if($conta_itens_meio==1){
+				$preco_produto = $result_preco['preco'];	
+			} else {
+				$preco_produto = ($preco_produto+($result_preco['preco']/2));
+			}
+			
 		}
 
     	$pg = $db->select("SELECT categoria FROM lanches WHERE id='$id_produto' LIMIT 1");

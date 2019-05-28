@@ -12,12 +12,13 @@ require_once("../../includes/verifica_configuracoes_loja.php");
 $pontuacao_cliente=0;
 if($dados_configuracoes['modulo_pontuacao']==1){ 
 if(!empty($dados_cliente['nome']) && $dados_cliente['nome']!="CLIENTE AVULSO" ){
+	$return=1;
 	require_once("../../includes/verifica_pontuacao_cliente.php");	
 }
 }
 ?>
 
-<input type="hidden" id="pontos_validos_troca" value="<?php echo $pontuacao_cliente; ?>"> 
+<input type="hidden" id="pontos_validos_troca" value="<?php echo $final; ?>"> 
 
 <input type="hidden" id="nome_cliente_venda" value="<?php echo $dados_cliente['nome']; ?>">
 <input type="hidden" id="endereco_cliente_venda" value="<?php echo $dados_cliente['endereco']; ?>">
@@ -29,9 +30,12 @@ if(!empty($dados_cliente['nome']) && $dados_cliente['nome']!="CLIENTE AVULSO" ){
 </a>
 
 <?php 
+	
+
+
 	//MODULO DE PONTUACAO ATIVO	
 	if($dados_configuracoes['modulo_pontuacao']==1){ 	
-	if($dados_cliente['cartao']!=0){		
+	if($dados_cliente['cartao']!=0 && $dados_cliente['nome']!='CLIENTE AVULSO'){		
 ?>	
 	<span class="upper"><b>CARTÃO: </b><?php echo $dados_cliente['cartao']; ?></span> <br>	
 <?php }} ?>			
@@ -73,9 +77,9 @@ if(!empty($dados_cliente['nome']) && $dados_cliente['nome']!="CLIENTE AVULSO" ){
 ?>		
 	<span class="thin"><b>PONTOS A UTILIZAR: </b>
 		<?php 
-			echo $pontuacao_cliente; 
+			echo $final; 
 			$pontos_validos = $pontuacao_cliente; 
-			if($pontos_validos>0){
+			if($final>0){
 				echo ' (R$ ';
 				include_once("../actions/calcula_desconto_pontuacao.php");				
 				echo ')';	
@@ -84,7 +88,7 @@ if(!empty($dados_cliente['nome']) && $dados_cliente['nome']!="CLIENTE AVULSO" ){
 		?>
 	</span>
 	<?php
-		if($pontuacao_cliente>0){
+		if($final>0){
 			echo '
 				<button class="btn btn-success btn-sm pull-right" type="button" onclick="javascript:resgate_pontos();">RESGATAR</button>
 			';

@@ -561,15 +561,20 @@ require("../../diversos/funcoes_diversas.php");
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'pedido_'.$id_venda.'.txt';	
-   $file = '../../pedidos_imprimir/'.$arquivo;
+   $file = '../../pedidos_imprimir/pasta1/'.$arquivo;
+   $_file  = fopen($file,"w"); fwrite($_file,$txt); fclose($_file);
 
+   if(isset($primeira_impressao)){
+   		$file2 = '../../pedidos_imprimir/pasta2/'.$arquivo;
+        $file3 = '../../pedidos_imprimir/pasta3/'.$arquivo;
+        $file4 = '../../pedidos_imprimir/pasta4/'.$arquivo;	
 
+        $_file2  = fopen($file2,"w"); fwrite($_file2,$txt); fclose($_file2);
+	    $_file3  = fopen($file3,"w"); fwrite($_file3,$txt); fclose($_file3);
+	    $_file4  = fopen($file4,"w"); fwrite($_file4,$txt); fclose($_file4);
+   }
    
 
-   // cria o arquivo
-   $_file  = fopen($file,"w");
-   fwrite($_file,$txt);
-   fclose($_file);
 
    echo $arquivo;
 

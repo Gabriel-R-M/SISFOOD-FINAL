@@ -130,7 +130,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'fechamento_caixa_'.md5(time()).'.txt';	
-   $file = '../../pedidos_imprimir/'.$arquivo;
+   $file = '../../pedidos_imprimir/pasta1/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

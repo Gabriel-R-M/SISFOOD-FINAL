@@ -338,7 +338,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'pedido_divisao_'.$id_venda.'.txt';	
-   $file = '../../pedidos_imprimir/'.$arquivo;
+   $file = '../../pedidos_imprimir/pasta1/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

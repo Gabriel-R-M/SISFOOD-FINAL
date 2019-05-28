@@ -138,20 +138,48 @@ if(isset($id)){
 	                    <?php
 	                		if($edit==1){
 	                			
-	                			if($ln['impressao']=='principal'){
-	                				echo '<option value="principal" selected>Principal (Caixa)</option>';
-	                				echo '<option value="secundaria">Secundária (Cozinha)</option>';
+	                			if($ln['impressao']=='pasta1'){
+	                				echo '<option value="pasta1" selected>IMPRESSORA 01</option>';
+                          echo '<option value="pasta2">IMPRESSORA 02</option>';
+                          echo '<option value="pasta3">IMPRESSORA 03</option>';
+                          echo '<option value="pasta4">IMPRESSORA 04</option>';
 	                			}	
 
-	                			else if($ln['impressao']=='secundaria'){
-	                				echo '<option value="secundaria" selected>Secundária (Cozinha)</option>';
-	                				echo '<option value="principal">Principal (Caixa)</option>';                				
-	                			}
+	                			else if($ln['impressao']=='pasta2'){
+                          echo '<option value="pasta1">IMPRESSORA 01</option>';
+                          echo '<option value="pasta2" selected>IMPRESSORA 02</option>';
+                          echo '<option value="pasta3">IMPRESSORA 03</option>';
+                          echo '<option value="pasta4">IMPRESSORA 04</option>';
+                        }
+
+                        else if($ln['impressao']=='pasta3'){
+                          echo '<option value="pasta1">IMPRESSORA 01</option>';
+                          echo '<option value="pasta2">IMPRESSORA 02</option>';
+                          echo '<option value="pasta3" selected>IMPRESSORA 03</option>';
+                          echo '<option value="pasta4">IMPRESSORA 04</option>';
+                        }
+
+                        else if($ln['impressao']=='pasta4'){
+                          echo '<option value="pasta1">IMPRESSORA 01</option>';
+                          echo '<option value="pasta2">IMPRESSORA 02</option>';
+                          echo '<option value="pasta3">IMPRESSORA 03</option>';
+                          echo '<option value="pasta4" selected>IMPRESSORA 04</option>';
+                        }
+
+                        else {
+                          echo '<option value="">------------</option>';
+                          echo '<option value="pasta1">IMPRESSORA 01</option>';
+                          echo '<option value="pasta2">IMPRESSORA 02</option>';
+                          echo '<option value="pasta3">IMPRESSORA 03</option>';
+                          echo '<option value="pasta4">IMPRESSORA 04</option>';
+                        }
 
 	                		} else {
-
-	                				echo '<option value="principal" selected>Principal (Caixa)</option>';
-	                				echo '<option value="secundaria">Secundária (Cozinha)</option>';                				
+                          echo '<option value="">------------</option>';
+	                				echo '<option value="pasta1">IMPRESSORA 01</option>';
+	                				echo '<option value="pasta2">IMPRESSORA 02</option>';
+                          echo '<option value="pasta3">IMPRESSORA 03</option>';
+                          echo '<option value="pasta4">IMPRESSORA 04</option>';
 
 	                		}
                 	    ?>

@@ -50,20 +50,6 @@
 
 
 
-        <div class="col-md-4">
-           <div class="form-group">
-                <label for="exampleInputEmail1">Nome Impressora Principal (Caixa)</label>
-                <input type="text" class="form-control" name="impressora_principal"  value="<?php echo $ln2['impressora_principal']; ?>"/>
-           </div>
-        </div>
-
-        <div class="col-md-4">
-           <div class="form-group">
-                <label for="exampleInputEmail1">Nome Impressora Secundária (Cozinha)</label>
-                <input type="text" class="form-control" name="impressora_secundaria"  value="<?php echo $ln2['impressora_secundaria']; ?>"/>
-           </div>
-        </div> 
-
 
         <div class="col-md-4">
            <div class="form-group">

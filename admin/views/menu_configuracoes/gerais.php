@@ -97,6 +97,29 @@
 
 
 
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Preço Meio-Meio</label>
+                <select class="form-control" name="tipo_preco_meio_meio" required="required">
+                    <?php
+                      if($ln['tipo_preco_meio_meio']=='maior_preco'){
+                        echo '<option value="maior_preco" selected>MAIOR PREÇO</option>';
+                        echo '<option value="meio_preco">SOMA METADE DOS PREÇOS</option>';
+                      } else if($ln['tipo_preco_meio_meio']=='meio_preco'){
+                        echo '<option value="meio_preco" selected>SOMA METADE DOS PREÇOS</option>';
+                        echo '<option value="maior_preco">MAIOR PREÇO</option>';                        
+                      } else {
+                        echo '<option value="">--------------</option>';                                                
+                        echo '<option value="maior_preco">MAIOR PREÇO</option>';                        
+                        echo '<option value="meio_preco">SOMA METADE DOS PREÇOS</option>';
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div> 
+
+
+
 
             </div><!-- row -->
 

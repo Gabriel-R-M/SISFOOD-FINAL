@@ -119,7 +119,7 @@ require("../../diversos/funcoes_impressao.php");
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'crediario_'.md5(time()).'.txt';	
-   $file = '../../pedidos_imprimir/'.$arquivo;
+   $file = '../../pedidos_imprimir/pasta1/'.$arquivo;
 
    // cria o arquivo
    $_file  = fopen($file,"w");

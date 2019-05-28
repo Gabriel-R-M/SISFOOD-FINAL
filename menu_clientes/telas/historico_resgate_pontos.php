@@ -32,7 +32,9 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 						    <tbody>
 						      <?php  
-						         
+						          $pontos_ganhos_total = 0;	
+						          $total_pontos_expirados=0;
+						          $total_pontos_validos=0;
 							      $sel = $db->select("SELECT * FROM aguarda_venda 	      						      
 							      WHERE finalizada='1' AND id_cliente='$id_cliente_venda' 
 							      ORDER BY id DESC
@@ -45,7 +47,7 @@ require("../../includes/verifica_configuracoes_loja.php");
 									$equivalencia_reais_pontos = $dados_configuracoes['valor_real_ponto'];
 									$pontos_ganhos = ($dados['valor_final_venda']*$equivalencia_reais_pontos);	
 									$pontos_ganhos = floor($pontos_ganhos); 
-									if($pontos_ganhos<10){$pontos_ganhos='0'.$pontos_ganhos;}	
+									//if($pontos_ganhos<10){$pontos_ganhos='0'.$pontos_ganhos;}	
 
 
 
@@ -72,8 +74,31 @@ require("../../includes/verifica_configuracoes_loja.php");
 								      </tr>
 						      <?php
 
+						      $pontos_ganhos_total = ($pontos_ganhos_total+$pontos_ganhos);
+
+						      if($dados['data_pedido']<$data_pesquisa){
+						      		$total_pontos_expirados = ($total_pontos_expirados+$pontos_ganhos);
+						      		
+						      } else {
+						      		$total_pontos_validos = ($total_pontos_validos+$pontos_ganhos);
+						      }
+
 						  	}
 						      	}
+
+						      	echo '<tr>';
+						      		echo '<td colspan="2" align="left">';
+						      			echo '<b>GERAL: '.$pontos_ganhos_total.'</b>';
+						      		echo '</td>';
+						      		echo '<td colspan="2" align="left">';
+						      			echo '<b>EXPIRADOS: '.$total_pontos_expirados.'</b>';
+						      		echo '</td>';
+
+						      		echo '<td colspan="2" align="left">';
+						      			echo '<b>VÁLIDOS: '.$total_pontos_validos.'</b>';
+						      		echo '</td>';
+						      	echo '</tr>';
+
 						      } else {
 						      	echo '<tr><td colspan="10"><center>Nenhuma compra encontrada!</center></td></tr>';
 						      }
@@ -120,6 +145,7 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 						    <tbody>
 						      <?php      
+						      	$pontos_trocados_total=0;
 							      $sel = $db->select("SELECT * FROM pontuacao_usada 	      						      
 							      WHERE id_cliente='$id_cliente_venda' 
 							      ORDER BY id DESC
@@ -132,7 +158,9 @@ require("../../includes/verifica_configuracoes_loja.php");
 
 									
 									$pontos_resgatados = $dados['qtd_pontos'];
-									if($pontos_resgatados<10){$pontos_resgatados='0'.$pontos_resgatados;}	
+									//if($pontos_resgatados<10){$pontos_resgatados='0'.$pontos_resgatados;}	
+
+									$pontos_trocados_total = ($pontos_trocados_total+$pontos_resgatados);
 
 									$status = '<span class="bg-warning tx-white pd-pd"><small>&nbsp;RESGATADO&nbsp;</small></span>';	
 
@@ -150,6 +178,15 @@ require("../../includes/verifica_configuracoes_loja.php");
 						      <?php
 						      
 						      	}
+
+
+						      	echo '<tr>';
+						      		echo '<td colspan="6" align="left">';
+						      			echo '<b>TOTAL: '.$pontos_trocados_total.'</b>';
+						      		echo '</td>';						      		
+						      	echo '</tr>';
+
+
 						      } else {
 						      	echo '<tr><td colspan="10"><center>Nenhum resgate encontrado!</center></td></tr>';
 						      }
