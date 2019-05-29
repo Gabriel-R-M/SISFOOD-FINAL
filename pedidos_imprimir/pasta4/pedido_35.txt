@@ -1,0 +1,30 @@
+    SHEIK ESFIHARIA E PIZZARIA
+DR. ANTONIO TEDESCO, 822 - CENTRO
+       FONE: (14) 3264-3494
+           PEDIDO: #35
+       29/05/2019 AS 18:38
+----------------------------------
+              MESA 1
+----------------------------------
+Qtd COD/Produto       V. UN  Total
+----------------------------------
+01.0TUDO              10,00  10,00
+    (NORMAL)                      
+    SICILIANA                     
+----------------------------------
+01.0TUDO 2            90,00  90,00
+    FRANGO COM CATUPIRY           
+----------------------------------
+SUBTOTAL                 R$ 100,00
+TOTAL A RECEBER (=)      R$ 100,00
+----------------------------------
+         DADOS DO CLIENTE
+----------------------------------
+CLIENTE AVULSO
+----------------------------------
+TOTAL DE ITENS DO PEDIDO: 2
+----------------------------------
+PEDIDO CONTENDO:
+TUDO/TUDO 2
+----------------------------------
+ATENDENTE: MARCIO

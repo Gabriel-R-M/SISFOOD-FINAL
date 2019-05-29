@@ -214,24 +214,24 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 	
 		if($item[8]!=''){
 			
-			$itens[] .= addEspacos($item[8], 40, 'F')."\r\n";
+			$itens[] .= addEspacos($item[8], 34, 'F')."\r\n";
 		
 		} else { 
 
         $itens[] .= addEspacos($item[0], 4, 'F')
-        	. addEspacos($item[1], 22, 'F')
+        	. addEspacos($item[1], 16, 'F')
         	. addEspacos($item[2], 7, 'I')
             . addEspacos($item[3], 7, 'I');        	
         	  
 
         	if($item[5]!=''){
         		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[5], 36, 'F')
+        		.addEspacos($item[5], 30, 'F')
         		."\r\n".addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 36, 'F');        		
+        		.addEspacos($item[4], 30, 'F');        		
         	} else {
         		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 36, 'F');
+        		.addEspacos($item[4], 30, 'F');
         	}
 
 
@@ -250,7 +250,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 						$total_opcional = ($item[0]*$val_opcional);												
 
 						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 22, 'F')
+			        	. addEspacos($opcional, 16, 'F')
 			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																		
@@ -267,7 +267,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 				if($db->rows($peg)){
 
 					$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ADICIONAIS]', 22, 'F');
+					. addEspacos('[ADICIONAIS]', 16, 'F');
 
 					while($ln = $db->expand($peg)){
 						
@@ -276,7 +276,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 						$total_opcional = ($item[0]*$val_opcional);												
 
 						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 22, 'F')
+			        	. addEspacos($opcional, 16, 'F')
 			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																		
@@ -285,7 +285,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 			//ADICIONAIS SE HOUVER//
 			
 			if(empty($item[8])){
-        		$itens[] .= addEspacos('------------------------------------------------------------------', 40, 'F');
+        		$itens[] .= addEspacos('------------------------------------------------------------------', 34, 'F');
         	}
 
         }
@@ -305,14 +305,14 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
     for($i = 0; $i < $total_espacos; $i++){
     	$espacos .= ' ';
     }
-	$txt_valor_total =addEspacos('------------------------------------------------------------------', 40, 'F')."\r\n";
+	$txt_valor_total =addEspacos('------------------------------------------------------------------', 34, 'F')."\r\n";
 	$txt_valor_total .= $aux_valor_total.$espacos.$aux_valor_total2;
     // SUBTOTAL //
 
 	$dados_entrega='';
     //IMPRIME O TOTAL DE ITENS DO PEDIDO//
 	if($total_itens_pedido!=0){
-		$dados_entrega .= '----------------------------------------'."\r\n";
+		$dados_entrega .= '----------------------------------'."\r\n";
 		$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
 	}
 
@@ -322,7 +322,7 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 	$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
 	$dados_atendente = $db->expand($dados_atendente);
 
-	$dados_entrega .= '----------------------------------------'."\r\n";
+	$dados_entrega .= '----------------------------------'."\r\n";
 	$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 

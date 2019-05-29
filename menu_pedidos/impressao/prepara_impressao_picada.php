@@ -89,14 +89,14 @@ if($impressao!='pasta1'){
 		$itens = array();
 		$cabs = array();
 
-		$txt_itens_cabecalho[] = array('----', '------------------------------', '-------', '-------');
-		$txt_itens_cabecalho[] = array('Qtd ', 'COD/Produto', 'V. UN', 'Total');
-		$txt_itens_cabecalho[] = array('----', '------------------------------', '-------', '-------');	
+		$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');
+    $txt_itens_cabecalho[] = array('Qtd ', 'COD/Produto', 'V. UN', 'Total');
+	$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');;
 
 
 		foreach ($txt_itens_cabecalho as $cab) {
 			$cabs[] = addEspacos($cab[0], 4, 'F')
-			. addEspacos($cab[1], 22, 'F')           
+			. addEspacos($cab[1], 16, 'F')           
 			. addEspacos($cab[2], 7, 'I')
 			. addEspacos($cab[3], 7, 'I');
 		}
@@ -244,24 +244,24 @@ if($impressao!='pasta1'){
 
 			       //VEM NOME DO CLIENTE DA DIVISAO NA MESA
 				   if(!empty($item[8])){
-					   $itens[] .= "\r\n".addEspacos('('.$item[8].')', 40, 'F')."\r\n";			    
+					   $itens[] .= "\r\n".addEspacos('('.$item[8].')', 34, 'F')."\r\n";			    
 					}
 			        
 
 			        $itens[] .= addEspacos($item[0], 4, 'F')
-			        	. addEspacos($item[1], 22, 'F')
+			        	. addEspacos($item[1], 16, 'F')
 			        	. addEspacos($item[2], 7, 'I')
 			            . addEspacos($item[3], 7, 'I');        	
 			        	  
 
 			        	if($item[5]!=''){
 			        		$itens[] .= addEspacos('', 4, 'F')
-			        		.addEspacos($item[5], 36, 'F')
+			        		.addEspacos($item[5], 30, 'F')
 			        		."\r\n".addEspacos('', 4, 'F')
-			        		.addEspacos($item[4], 36, 'F');        		
+			        		.addEspacos($item[4], 30, 'F');        		
 			        	} else {
 			        		$itens[] .= addEspacos('', 4, 'F')
-			        		.addEspacos($item[4], 36, 'F');
+			        		.addEspacos($item[4], 30, 'F');
 			        	}
 
 
@@ -281,7 +281,7 @@ if($impressao!='pasta1'){
 									$total_opcional = ($item[0]*$val_opcional);												
 
 									$itens[] .= addEspacos('+', 4, 'F')
-						        	. addEspacos($opcional, 22, 'F')
+						        	. addEspacos($opcional, 16, 'F')
 						        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 						            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																					
@@ -299,7 +299,7 @@ if($impressao!='pasta1'){
 							if($db->rows($peg)){
 
 								$itens[] .= addEspacos('', 4, 'F')
-								. addEspacos('[ADICIONAR AO ITEM]', 22, 'F');
+								. addEspacos('[ADICIONAR AO ITEM]', 16, 'F');
 
 								while($ln = $db->expand($peg)){
 									
@@ -308,7 +308,7 @@ if($impressao!='pasta1'){
 									$total_opcional = ($item[0]*$val_opcional);												
 
 									$itens[] .= addEspacos('+', 4, 'F')
-						        	. addEspacos($opcional, 22, 'F')
+						        	. addEspacos($opcional, 16, 'F')
 						        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 						            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																					
@@ -320,14 +320,14 @@ if($impressao!='pasta1'){
 						//OBSERVACOES DO PRODUTO SE HOUVER
 						if(!empty($item[7])){
 							$itens[] .= addEspacos('', 4, 'F')
-								. addEspacos('[ATENCAO]', 22, 'F');
+								. addEspacos('[ATENCAO]', 16, 'F');
 
 							$itens[] .= addEspacos('', 4, 'F')
-						    . addEspacos($item[7], 36, 'F');			    
+						    . addEspacos($item[7], 30, 'F');			    
 						}
 
 
-			        	$itens[] .= addEspacos('------------------------------------------------------------------', 40, 'F');
+			        	$itens[] .= addEspacos('------------------------------------------------------------------', 34, 'F');
 	          
 			    }
 
@@ -342,7 +342,7 @@ if($impressao!='pasta1'){
 
 						$txt_dados_entrega = array();		
 						$txt_dados_entrega[] = 'DADOS PARA ENTREGA';         
-						$txt_dados_entrega[] = '----------------------------------------';
+						$txt_dados_entrega[] = '----------------------------------';
 						$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
 						$id_cliente = $dados_venda['id_cliente'];
@@ -358,7 +358,7 @@ if($impressao!='pasta1'){
 							$dados_entrega .= retira_acentos($dados_cliente['complemento'])."\r\n";
 						}
 
-						$dados_entrega .= '----------------------------------------'."\r\n";
+						$dados_entrega .= '----------------------------------'."\r\n";
 
 							if($dados_venda['levar_maquina_cartao']!=0){
 								$dados_entrega .= 'LEVAR A MAQUINA DE CARTAO'."\r\n";	
@@ -373,7 +373,7 @@ if($impressao!='pasta1'){
 
 							$txt_dados_entrega = array();		
 							$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
-							$txt_dados_entrega[] = '----------------------------------------';
+							$txt_dados_entrega[] = '----------------------------------';
 							$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
 							$id_cliente = $dados_venda['id_cliente'];
@@ -402,9 +402,9 @@ if($impressao!='pasta1'){
 
 						
 							$txt_dados_entrega = array();
-							$txt_dados_entrega[] = '----------------------------------------';
+							$txt_dados_entrega[] = '----------------------------------';
 							$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
-							$txt_dados_entrega[] = '----------------------------------------';
+							$txt_dados_entrega[] = '----------------------------------';
 							$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
 
 							if(!empty($dados_venda['nome_cliente'])){
@@ -436,7 +436,7 @@ if($impressao!='pasta1'){
 
 				//IMPRIME O TOTAL DE ITENS DO PEDIDO//
 				if($total_itens_pedido!=0){
-					$dados_entrega .= '----------------------------------------'."\r\n";
+					$dados_entrega .= '----------------------------------'."\r\n";
 					$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
 				}
 
@@ -470,7 +470,7 @@ if($impressao!='pasta1'){
 				$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
 				$dados_atendente = $db->expand($dados_atendente);
 
-				$dados_entrega .= '----------------------------------------'."\r\n";
+				$dados_entrega .= '----------------------------------'."\r\n";
 				$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 

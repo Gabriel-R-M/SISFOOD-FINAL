@@ -14,12 +14,12 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
         $txt_cabecalho[] = $dados_loja['cabecalho_linha02'];         
 		$txt_cabecalho[] = $dados_loja['cabecalho_linha03'];     		
         		
-		$txt_cabecalho[] = '----------------------------------------';
+		$txt_cabecalho[] = '----------------------------------';
 
 		$txt_cabecalho[] = 'FECHAMENTO DE CAIXA';
 		//.data_mysql_para_user(retorna_data_abertura_caixa($id_caixa))
 
-		$txt_cabecalho[] = '----------------------------------------';
+		$txt_cabecalho[] = '----------------------------------';
 		 
 		$cabecalho = array_map("centraliza", $txt_cabecalho);
 	//CABEÇALHO
@@ -35,7 +35,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 
 		$aux_valor_total = 'CARTAO:';
 		$aux_valor_total2 = 'R$ '.number_format(devolve_valores_caixa($id_caixa,2),2,".",",").' (+)';
@@ -46,7 +46,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";
 
 
 		$aux_valor_total = 'CONVENIO:';
@@ -58,7 +58,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 
 
 		$aux_valor_total = 'SUBTOTAL:';
@@ -70,7 +70,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 
 
 		$aux_valor_total = 'TROCO INICIAL:';
@@ -82,7 +82,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";
 
 
 		$aux_valor_total = 'SAIDAS DE CAIXA:';
@@ -94,7 +94,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 
 
 		$aux_valor_total = 'TOTAL DO CAIXA:';
@@ -106,7 +106,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 
 
 		$aux_valor_total = 'QTD ENTREGAS:';
@@ -118,7 +118,7 @@ require("../../menu_caixa/actions/totalizadores_caixa.php");
 			$espacos .= ' ';
 		}			
 		$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+		$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 	//DADOS DO CAIXA//	
 
 

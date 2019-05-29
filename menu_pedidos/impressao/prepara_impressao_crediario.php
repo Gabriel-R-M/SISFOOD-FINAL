@@ -48,7 +48,7 @@ require("../../diversos/funcoes_impressao.php");
 		$espacos .= ' ';
 	}			
 	$txt_total_venda .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-	$txt_total_venda .=	'----------------------------------------';	
+	$txt_total_venda .=	'----------------------------------';	
 	//VALOR DEVIDO ANTES DE PAGAR//
 
 
@@ -81,14 +81,14 @@ require("../../diversos/funcoes_impressao.php");
 			$espacos .= ' ';
 		}			
 		$txt_total_falta_pagar .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_total_falta_pagar .=	'----------------------------------------';						
+		$txt_total_falta_pagar .=	'----------------------------------';						
 	//VALOR TOTAL DA DIVIDA DO CLIENTE//
 
 
 	//NOME DO CLIENTE//	
 		$txt_nome_cliente=retira_acentos('ESTOU CIENTE QUE PAGAREI A DIVIDA ACIMA')."\r\n";
 		$txt_nome_cliente.=retira_acentos($dados_pgto['nome'])."\r\n";
-		$txt_nome_cliente.=	'----------------------------------------';					
+		$txt_nome_cliente.=	'----------------------------------';					
 	//NOME DO CLIENTE//		
 
 

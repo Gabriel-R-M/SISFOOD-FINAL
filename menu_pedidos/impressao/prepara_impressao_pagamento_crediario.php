@@ -53,7 +53,7 @@ require("../../diversos/funcoes_impressao.php");
 
 			//TROCO SE HOUVER//	
 			if($dados_pgto['troco_passado']!='0.00'){				
-				$txt_pgto_recebidos .=	'----------------------------------------'."\r\n";	
+				$txt_pgto_recebidos .=	'----------------------------------'."\r\n";	
 				$aux_valor_total = retira_acentos('TROCO');
 				$aux_valor_total2 = 'R$ '.number_format($dados_pgto['troco_passado'],2,",",".");
 				$total_espacos = $n_colunas - strlen($aux_valor_total);
@@ -63,9 +63,9 @@ require("../../diversos/funcoes_impressao.php");
 					$espacos .= ' ';
 				}			
 				$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-				$txt_pgto_recebidos .=	'----------------------------------------';					
+				$txt_pgto_recebidos .=	'----------------------------------';					
 			} else {
-				$txt_pgto_recebidos .=	'----------------------------------------';		
+				$txt_pgto_recebidos .=	'----------------------------------';		
 			}	
 			//TROCO SE HOUVER//
 			 			  
@@ -103,7 +103,7 @@ require("../../diversos/funcoes_impressao.php");
 		$espacos .= ' ';
 	}			
 	$txt_total_venda .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-	$txt_total_venda .=	'----------------------------------------';			
+	$txt_total_venda .=	'----------------------------------';			
 
 
 
@@ -120,13 +120,13 @@ require("../../diversos/funcoes_impressao.php");
 			$espacos .= ' ';
 		}			
 		$txt_total_falta_pagar .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_total_falta_pagar .=	'----------------------------------------';					
+		$txt_total_falta_pagar .=	'----------------------------------';					
 	}
 
 
 	//NOME DO CLIENTE//	
 		$txt_nome_cliente=retira_acentos($dados_pgto['nome_cliente'])."\r\n";
-		$txt_nome_cliente.=	'----------------------------------------';					
+		$txt_nome_cliente.=	'----------------------------------';					
 	//NOME DO CLIENTE//	
 
 

@@ -2,7 +2,7 @@
 
 <?php
 
-		$n_colunas = 40; // 40 colunas por linha
+		$n_colunas = 34; // 40 colunas por linha
         
         /**
          * Adiciona a quantidade necessaria de espaços no inicio 

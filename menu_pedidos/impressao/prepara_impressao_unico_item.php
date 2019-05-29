@@ -61,9 +61,9 @@ if($db->rows($sel_total_itens)){
 	$tot_itens = 0;
 
 
-	$txt_itens_cabecalho[] = array('----', '------------------------------', '-------', '-------');
+	$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');
     $txt_itens_cabecalho[] = array('Qtd ', 'COD/Produto', 'V. UN', 'Total');
-	$txt_itens_cabecalho[] = array('----', '------------------------------', '-------', '-------');	
+	$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');	
 
 		
 
@@ -204,23 +204,23 @@ while($cat_pesq = $db->expand($sel_group)){
 
 		//VEM NOME DO CLIENTE DA DIVISAO NA MESA
 		if(!empty($item[8])){
-			$itens[] .= addEspacos('('.$item[8].')', 40, 'F')."\r\n";			    
+			$itens[] .= addEspacos('('.$item[8].')', 34, 'F')."\r\n";			    
 		}
        
         $itens[] .= addEspacos($item[0], 4, 'F')
-        	. addEspacos($item[1], 22, 'F')
+        	. addEspacos($item[1], 16, 'F')
         	. addEspacos($item[2], 7, 'I')
             . addEspacos($item[3], 7, 'I');        	
         	  
 
         	if($item[5]!=''){
         		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[5], 36, 'F')
+        		.addEspacos($item[5], 30, 'F')
         		."\r\n".addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 36, 'F');        		
+        		.addEspacos($item[4], 30, 'F');        		
         	} else {
         		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 36, 'F');
+        		.addEspacos($item[4], 30, 'F');
         	}
 
 
@@ -240,7 +240,7 @@ while($cat_pesq = $db->expand($sel_group)){
 						$total_opcional = ($item[0]*$val_opcional);												
 
 						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 22, 'F')
+			        	. addEspacos($opcional, 16, 'F')
 			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																		
@@ -259,7 +259,7 @@ while($cat_pesq = $db->expand($sel_group)){
 				if($db->rows($peg)){
 
 					$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ADICIONAR AO ITEM]', 22, 'F');
+					. addEspacos('[ADICIONAR]', 16, 'F');
 
 					while($ln = $db->expand($peg)){
 						
@@ -268,7 +268,7 @@ while($cat_pesq = $db->expand($sel_group)){
 						$total_opcional = ($item[0]*$val_opcional);												
 
 						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 22, 'F')
+			        	. addEspacos($opcional, 16, 'F')
 			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
 			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
 																		
@@ -280,13 +280,13 @@ while($cat_pesq = $db->expand($sel_group)){
 			//OBSERVACOES DO PRODUTO SE HOUVER
 			if(!empty($item[7])){
 				$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ATENCAO]', 22, 'F');
+					. addEspacos('[ATENCAO]', 16, 'F');
 
 				$itens[] .= addEspacos('', 4, 'F')
-			    . addEspacos($item[7], 36, 'F');			    
+			    . addEspacos($item[7], 30, 'F');			    
 			}
 
-        	$itens[] .= addEspacos('------------------------------------------------------------------', 40, 'F');
+        	$itens[] .= addEspacos('------------------------------------------------------------------', 34, 'F');
             
             
     }
@@ -294,7 +294,7 @@ while($cat_pesq = $db->expand($sel_group)){
     foreach ($txt_itens_cabecalho as $cab) {
        
         $cabs[] = addEspacos($cab[0], 4, 'F')
-        	. addEspacos($cab[1], 22, 'F')           
+        	. addEspacos($cab[1], 16, 'F')           
             . addEspacos($cab[2], 7, 'I')
             . addEspacos($cab[3], 7, 'I');
             
@@ -325,7 +325,7 @@ while($cat_pesq = $db->expand($sel_group)){
 				if(!empty($dados_cliente['complemento'])){	
 					$dados_entrega .= retira_acentos($dados_cliente['complemento'])."\r\n";
 				}
-				$dados_entrega .= '----------------------------------------';
+				$dados_entrega .= '----------------------------------';
 
 
 			}	else {
@@ -362,13 +362,13 @@ while($cat_pesq = $db->expand($sel_group)){
 
 				//IMPRIME O TOTAL DE ITENS DO PEDIDO//
 				if($total_itens_pedido!=0){
-					$dados_entrega .= '----------------------------------------'."\r\n";
+					$dados_entrega .= '----------------------------------'."\r\n";
 					$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
 				}
 
 
 				//IMPRIME AS CATEGORIAS DO PEDIDO//
-				$dados_entrega .= '----------------------------------------'."\r\n";
+				$dados_entrega .= '----------------------------------'."\r\n";
 				$dados_entrega .= 'PEDIDO CONTENDO:'."\r\n";	
 
 				$categorias_pedido_gerais='';
@@ -395,7 +395,7 @@ while($cat_pesq = $db->expand($sel_group)){
 				$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
 				$dados_atendente = $db->expand($dados_atendente);
 
-				$dados_entrega .= '----------------------------------------'."\r\n";
+				$dados_entrega .= '----------------------------------'."\r\n";
 				$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
 
 
