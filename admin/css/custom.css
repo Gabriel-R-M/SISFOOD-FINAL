@@ -6,6 +6,11 @@ body{height:100%; width: 100%; background-position: center center; background-si
 .thin{font-weight: 300}
 .slim-mainpanel{margin-bottom: 50px}
 
+a.paginacao{margin-bottom:5px; color:#333; padding: 10px; border:1px solid #e1e1e1; margin-right: 5px; display: inline-grid; background-color: #FFF; min-width: 40px; text-align: center;}
+a.selecionada{background-color: #B92A25; color: #FFF}
+a.paginacao:hover{background-color: #B92A25; color: #FFF}
+
+
 .red{color: #B20000}
 
 span.span_install{color: #B92A25; font-size: 26px; font-weight: 300}
@@ -22,6 +27,7 @@ span.span_install small{color: #B92A25; font-size: 16px; font-weight: 300}
 .top10{margin-top: 10px}
 .bottom10{margin-bottom: 10px}
 .top20{margin-top: 20px}
+.top15{margin-top: 15px}
 .bottom20{margin-bottom: 20px}
 
 .btn{font-weight: 300}

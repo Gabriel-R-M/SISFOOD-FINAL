@@ -56,8 +56,8 @@ $ln = $db->expand($sql);
                       <td class="valign-middle"><?php echo $yy['codigo']; ?></td>
                       
                       <td>
-                        <a href="javascript:void(0);" class="tx-inverse tx-14 tx-medium d-block">
-                          <span class="tx-primary">   
+                        <a href="javascript:void(0);" class="tx-inverse tx-14 tx-medium d-block upper">
+                          <span class="tx-primary ">   
                             <small class="upper">[<?php echo $yy['cat']; ?>]</small><br>
                           </span>  
                           <?php echo $yy['produto']; ?></a>

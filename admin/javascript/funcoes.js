@@ -1,5 +1,12 @@
 // JavaScript Document
 
+function marca_todos_checkbox(){
+	if($("#checa_todos").is(':checked')) {
+		$(".ompa").prop("checked", true);		
+	} else {
+		$(".ompa").prop("checked", false);		
+	}
+}
 
 function marca_checkbox(){
 	marcado=0;

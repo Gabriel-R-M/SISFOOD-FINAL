@@ -7,8 +7,37 @@
 </div><!-- slim-pageheader -->
 
 
+<form method="post" action="adicionais">
+<div class="section-wrapper">
+          
+  <label class="section-title">PESQUISA DE ADICIONAIS</label>
+
+      <div class="form-layout">
+            <div class="row row-xs">
+      
+         <div class="col-lg-9 top10">              
+              <div class="input-group">
+
+              <input type="text" name="nome" class="form-control" placeholder="PESQUISE PELO ADICIONAL" value="<?php if (isset($nome)){echo $nome;} ?>">               
+                
+              </div>
+         </div>
+
+
+         <div class="col-lg-3 top10">  
+          <button type="submit" class="btn btn-primary  bd-0">PESQUISAR</button> 
+          <a href="adicionais"><button type="button" class="btn btn-primary  bd-0">LIMPAR</button> </a>
+         </div> 
+
+
+      </div><!-- row -->
+  </div><!-- form-layout -->         
+  
+</div>
+</form>
+
 <div class="row row-sm">        
-<div class="col-lg-12">
+<div class="col-lg-12 top20">
   <div class="card card-table">
   
               <div class="card-header">
@@ -30,7 +59,16 @@
                   <tbody>
 
                 <?php
-                 $sel = $db->select("SELECT * FROM opcionais ORDER BY opcional");
+
+                  if(isset($nome) && $nome!='') {
+
+                    $sel = $db->select("SELECT * FROM opcionais WHERE opcional LIKE '%$nome%' ORDER BY opcional");
+
+                  } else {
+
+                    $sel = $db->select("SELECT * FROM opcionais ORDER BY opcional");
+
+                  }
                 
                 if($db->rows($sel)){
                   $x=1; 

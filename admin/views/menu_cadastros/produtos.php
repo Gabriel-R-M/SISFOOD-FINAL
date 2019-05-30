@@ -7,8 +7,43 @@
 </div><!-- slim-pageheader -->
 
 
+
+<form method="post" action="produtos">
+<div class="section-wrapper">
+          
+  <label class="section-title">PESQUISA DE PRODUTOS</label>
+
+      <div class="form-layout">
+            <div class="row row-xs">
+          
+          <input type="hidden" name="pesquisa" value="1">
+
+    
+
+         <div class="col-lg-9 top10">              
+              <div class="input-group">
+
+              <input type="text" name="nome" class="form-control" placeholder="PESQUISE PELO PRODUTO" value="<?php if (isset($nome)){echo $nome;} ?>">               
+                
+              </div>
+         </div>
+
+
+         <div class="col-lg-3 top10">  
+          <button type="submit" class="btn btn-primary  bd-0">PESQUISAR</button> 
+          <a href="produtos"><button type="button" class="btn btn-primary  bd-0">LIMPAR</button> </a>
+         </div> 
+
+
+      </div><!-- row -->
+  </div><!-- form-layout -->         
+  
+</div>
+</form>
+
+
 <div class="row row-sm">        
-<div class="col-lg-12">
+<div class="col-lg-12 top20">
   <div class="card card-table">
   
               <div class="card-header">
@@ -29,10 +64,23 @@
                   <tbody>
 
                 <?php
-                  $sel = $db->select("SELECT lanches.*, categorias.categoria AS cat       
-                FROM lanches 
-                LEFT JOIN categorias on lanches.categoria=categorias.id
-                ORDER BY categorias.categoria, lanches.codigo, lanches.produto");
+
+                  if(isset($nome) && $nome!='') {
+
+                      $sel = $db->select("SELECT lanches.*, categorias.categoria AS cat       
+                      FROM lanches 
+                      LEFT JOIN categorias on lanches.categoria=categorias.id
+                      WHERE lanches.produto LIKE '%$nome%'
+                      ORDER BY categorias.categoria, lanches.codigo, lanches.produto");
+
+                  } else {
+
+                      $sel = $db->select("SELECT lanches.*, categorias.categoria AS cat       
+                      FROM lanches 
+                      LEFT JOIN categorias on lanches.categoria=categorias.id
+                      ORDER BY categorias.categoria, lanches.codigo, lanches.produto");
+
+                  }
                 
                 if($db->rows($sel)){
                   $x=1; 
@@ -43,7 +91,10 @@
                     $ativo = ativo_produto($yy['ativo']);
                     $id_produto = $yy['id'];
                     $valores_produto = valores_produto($id_produto);
-                      
+                     
+                    if($yy['cat']==''){
+                      $yy['cat'] = 'NÃO DEFINIDA';
+                    }  
 
                 ?>    
 
