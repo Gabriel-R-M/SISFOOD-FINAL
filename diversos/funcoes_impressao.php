@@ -1,8 +1,122 @@
-
-
 <?php
 
 		$n_colunas = 34; // 40 colunas por linha
+        $numero_colunas = $dados_configuracoes['colunas_impressora'];
+
+        function ajusta_caracteres_impressao($string='',$tipo='M',$limite=0){
+
+            global $numero_colunas;
+            
+            if($string==''){
+
+                    $x=1;
+                    $espaco = '';
+                    while($x<=$numero_colunas){
+                        $espaco .= '-';
+                        $x++;
+                    }
+
+                    return $espaco;
+
+            } else {
+
+                    $count = strlen($string);
+
+                    if($count>=$numero_colunas && $limite>=0){
+
+                         return substr($string, 0, $numero_colunas);
+
+                    } else {
+
+                        if($limite==0){
+
+                            $diferenca = ($numero_colunas-$count);    
+                            $meio_meio = floor(($numero_colunas-$count)/2);
+                        
+                        } else {
+
+                            if($count>$limite && $limite>0){
+
+                                $string = substr($string, 0, $limite);
+                                $diferenca = 0;
+                                $meio_meio = 0;
+                                    
+
+                            } else {
+
+                                if($limite<0){
+                                    
+                                    $diferenca = ($numero_colunas-abs($limite));
+                                    $meio_meio = ($numero_colunas-abs($limite));
+
+                                    if($count>$diferenca){
+                                        $string = substr($string, 0, $diferenca);
+                                    }
+
+                                } else {
+                                    $diferenca = ($limite-$count);
+                                    $meio_meio = ($limite-$count);    
+                                }
+
+                                
+                            }
+                            
+                        }
+                        
+                        
+                        
+                        //MEIO
+                        if($tipo=='M'){
+
+                            $x=1;
+                            $espaco = '';
+                            while($x<=$meio_meio){
+                                $espaco .= ' ';
+                                $x++;
+                            }
+
+                            return $espaco.$string.$espaco;
+
+                        //INICIO    
+                        } else if($tipo=='I'){
+
+                            $x=1;
+                            $espaco = '';
+                            while($x<=$diferenca){
+                                $espaco .= ' ';
+                                $x++;
+                            }
+
+                            return $espaco.$string;
+
+                        
+                        //FIM    
+                        } else if($tipo=='F'){
+
+                            $x=1;
+                            $espaco = '';
+                            while($x<=$diferenca){
+                                $espaco .= ' ';
+                                $x++;
+                            }
+
+                            return $string.$espaco;
+                            
+                        }
+
+
+                    }
+
+                }
+
+
+        }
+
+
+
+
+
+
         
         /**
          * Adiciona a quantidade necessaria de espaços no inicio 

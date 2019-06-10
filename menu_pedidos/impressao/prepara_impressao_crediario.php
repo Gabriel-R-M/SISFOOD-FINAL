@@ -4,25 +4,27 @@ require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
 require("../../includes/verifica_dados_loja.php");
+require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_impressao.php");
-	
+require("../../diversos/funcoes_diversas.php");
 
+	
+	$tamanho_campo_nome_produto = $dados_configuracoes['colunas_produto'];
+	
 
 	//CABEÇALHO//	
 		$txt_cabecalho = array();
         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha01'];         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha02'];         
-		$txt_cabecalho[] = $dados_loja['cabecalho_linha03'];     		
-        		
-		$txt_cabecalho[] = '----------------------------------------';
-
-		$txt_cabecalho[] = 'CIENCIA DE DIVIDA';
-
-		$txt_cabecalho[] = '----------------------------------------';
-		 
-		$cabecalho = array_map("centraliza", $txt_cabecalho);
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha01']);         
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha02']);         
+		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);     		 
+		$txt_cabecalho[] = ajusta_caracteres_impressao('');
+		$txt_cabecalho[] = ajusta_caracteres_impressao('CIENCIA DE DIVIDA');
+		$txt_cabecalho[] = ajusta_caracteres_impressao('');
+		$cabecalho = $txt_cabecalho;	
 	//CABEÇALHO
+
+
 
 	$where = '';	
 	if(isset($id) && $id!=0){
@@ -41,14 +43,11 @@ require("../../diversos/funcoes_impressao.php");
 
 	$aux_valor_total = retira_acentos('VALOR DA COMPRA');
 	$aux_valor_total2 = 'R$ '.number_format($total_recebido_agora,2,",",".");
-	$total_espacos = $n_colunas - strlen($aux_valor_total);
-	$total_espacos = $total_espacos- strlen($aux_valor_total2);
-	$espacos = ''; 
-	for($i = 0; $i < $total_espacos; $i++){
-		$espacos .= ' ';
-	}			
-	$txt_total_venda .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-	$txt_total_venda .=	'----------------------------------';	
+	
+
+	$txt_total_venda .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+	$txt_total_venda .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";
+	$txt_total_venda .=	ajusta_caracteres_impressao('');
 	//VALOR DEVIDO ANTES DE PAGAR//
 
 
@@ -74,21 +73,18 @@ require("../../diversos/funcoes_impressao.php");
 	
 		$aux_valor_total = retira_acentos('DIVIDA TOTAL');
 		$aux_valor_total2 = 'R$ '.number_format($total_divida,2,",",".");
-		$total_espacos = $n_colunas - strlen($aux_valor_total);
-		$total_espacos = $total_espacos- strlen($aux_valor_total2);
-		$espacos = ''; 
-		for($i = 0; $i < $total_espacos; $i++){
-			$espacos .= ' ';
-		}			
-		$txt_total_falta_pagar .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
-		$txt_total_falta_pagar .=	'----------------------------------';						
+		
+		$txt_total_falta_pagar .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_total_falta_pagar .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";
+		$txt_total_falta_pagar .=	ajusta_caracteres_impressao('');	
 	//VALOR TOTAL DA DIVIDA DO CLIENTE//
 
 
 	//NOME DO CLIENTE//	
-		$txt_nome_cliente=retira_acentos('ESTOU CIENTE QUE PAGAREI A DIVIDA ACIMA')."\r\n";
-		$txt_nome_cliente.=retira_acentos($dados_pgto['nome'])."\r\n";
-		$txt_nome_cliente.=	'----------------------------------';					
+		$txt_nome_cliente =	ajusta_caracteres_impressao('ESTOU CIENTE SOBRE A DIVIDA ACIMA','M')."\r\n";	
+		$txt_nome_cliente .= ajusta_caracteres_impressao(retira_acentos($dados_pgto['nome']),'M')."\r\n";		
+		$txt_nome_cliente .=ajusta_caracteres_impressao();	
+		
 	//NOME DO CLIENTE//		
 
 
@@ -97,13 +93,9 @@ require("../../diversos/funcoes_impressao.php");
 		$selx = $db->select("SELECT nome FROM usuarios WHERE id='$id_user' LIMIT 1");	
 		$dados_user_venda = $db->expand($selx); 
 
-		$txt_fim = array();        
-        $txt_fim[] = 'RESPONSAVEL: '.retira_acentos($dados_user_venda['nome'])."\r\n";                  
-		$txt_fim = array_map("centraliza", $txt_fim);		
-
-		$txt_fim2 = array();
-		$txt_fim2[] = data_mysql_para_user(substr($dados_pgto['data_debito'],0,10)).' AS '.substr($dados_pgto['data_debito'],11,5).'hs'."\r\n";
-		$txt_fim2 = array_map("centraliza", $txt_fim2);		
+		$txt_fim =	ajusta_caracteres_impressao('RESPONSAVEL: '.retira_acentos($dados_user_venda['nome']),'M');
+		$txt_fim2 =	ajusta_caracteres_impressao(' EM '.data_mysql_para_user($dados_pgto['data']).' AS '.substr($dados_pgto['hora'],0,5).'hs','M');
+	
 	//USUÁRIO RESPONSÁVEL//	
 
 
@@ -113,8 +105,8 @@ require("../../diversos/funcoes_impressao.php");
 	.$txt_total_venda."\r\n"
 	.$txt_total_falta_pagar."\r\n"	
 	.$txt_nome_cliente."\r\n"
-	.implode("\r\n", $txt_fim)
-	.implode("\r\n", $txt_fim2);
+	.$txt_fim."\r\n"
+	.$txt_fim2;
 	//.$txt_fim2;
 
    //CAMINHO DO TXT CRIADO

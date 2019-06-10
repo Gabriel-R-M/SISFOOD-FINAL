@@ -108,6 +108,23 @@
         </div>
 
 
+
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">Colunas da Impressora: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="number" name="colunas_impressora" required="required"  value="<?php echo $ln2['colunas_impressora']; ?>">
+                </div>
+              </div>
+
+
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">Colunas do Adicional: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="number" name="colunas_produto" required="required"  value="<?php echo $ln2['colunas_produto']; ?>">
+                </div>
+              </div>
+
+
             </div><!-- row -->
 
             <div class="form-layout-footer">

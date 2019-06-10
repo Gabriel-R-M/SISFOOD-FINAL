@@ -132,10 +132,10 @@ function imprime_comanda02(item=0){
 	aviso_impressao_sistema();		
 	$("#ModalPerguntaImprime02").modal('hide');
 
-	if(item!=0){
+	if(item!=0){		
 		$("#botao_item"+item).removeClass("btn-primary");
 		$("#botao_item"+item).addClass("btn-success");
-	} else {
+	} else {		
 		$(".botao_imprime_item:first").removeClass("btn-primary");
 		$(".botao_imprime_item:first").addClass("btn-success");
 	}

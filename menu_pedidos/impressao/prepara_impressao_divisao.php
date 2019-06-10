@@ -4,51 +4,55 @@ require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
 require("../../includes/verifica_dados_loja.php");
-require("../../diversos/funcoes_impressao.php");
+require("../../includes/verifica_configuracoes_loja.php");
+require("../../diversos/funcoes_impressao.php");;
+require("../../diversos/funcoes_diversas.php");
 	
-
+	$tamanho_campo_nome_produto = $dados_configuracoes['colunas_produto'];
 
 	//CABEÇALHO//	
 		$txt_cabecalho = array();
         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha01'];         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha02'];         
-		$txt_cabecalho[] = $dados_loja['cabecalho_linha03'];     
-		$txt_cabecalho[] = 'PEDIDO: #'.$id_venda;    
-		$txt_cabecalho[] = data_mysql_para_user($dados_venda['data_pedido']).' AS '.substr($dados_venda['pedido_inicio'],0,5);
-        		
-		$txt_cabecalho[] = '----------------------------------------';
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha01']);         
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha02']);         
+		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);     
+		$txt_cabecalho[] = ajusta_caracteres_impressao('PEDIDO: #'.$id_venda);    
+		$txt_cabecalho[] = ajusta_caracteres_impressao(data_mysql_para_user($dados_venda['data_pedido']).' AS '.substr($dados_venda['pedido_inicio'],0,5));
+       	
+
+       	$txt_cabecalho[] = ajusta_caracteres_impressao('');
 
 		//ENTREGA
 		if($dados_venda['entrega']!=0){
-			$txt_cabecalho[] = 'ENTREGA';
+			$txt_cabecalho[] = ajusta_caracteres_impressao('ENTREGA');
 		} 
 
 		//MESA
 		if($dados_venda['id_mesa']!=0){
-			$txt_cabecalho[] = 'MESA '.$dados_venda['id_mesa'];
+			$txt_cabecalho[] = ajusta_caracteres_impressao('MESA '.$dados_venda['id_mesa']);
 		} 
 
 		//RETIRADA/BALCAO
 		if($dados_venda['id_mesa']==0 && ($dados_venda['entrega']==0 || $dados_venda['entrega']=='')){
-			$txt_cabecalho[] = 'RETIRA/BALCAO';
+			$txt_cabecalho[] = ajusta_caracteres_impressao('RETIRA/BALCAO');
 			
 			//EMBALA PARA VIAGEM
 			if($dados_venda['embala_viagem']==1){					
-				$txt_cabecalho[] = '(EMBALAR PARA VIAGEM)';
+				$txt_cabecalho[] = ajusta_caracteres_impressao('(EMBALAR PARA VIAGEM)');
 			}
 
 		} 
-		
+
 		//PEDIDO DA INTERNET
 		if($dados_venda['pedido_internet']!=0){
-			$txt_cabecalho[] = '--- PEDIDO VIA INTERNET ---';
-		} 
+			$txt_cabecalho[] = ajusta_caracteres_impressao('--- PEDIDO VIA INTERNET ---');
+		}  		
+		
+		$txt_cabecalho[] = ajusta_caracteres_impressao('');
 
-		$txt_cabecalho[] = '----------------------------------------';
-	
-		$cabecalho = array_map("centraliza", $txt_cabecalho);
+		$cabecalho = $txt_cabecalho;		
 	//CABEÇALHO
+
 
 
 $total_itens_pedido=0;
@@ -80,9 +84,10 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 			      	ORDER BY id DESC");	
 		
 		if($db->rows($sel)){
-			
-    		$txt_itens[] = array('','','','','','','','','('.retira_acentos($name).')');    		
-			
+			    		
+
+    		$txt_itens[] = array('','','','','','','','','('.retira_acentos($name).')');    
+		    
 
 			while($row = $db->expand($sel)){
 
@@ -201,8 +206,8 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 
 
 
-
 			$txt_itens[] = array('', '', '', '','','','','','TOTAL A PAGAR R$ '.number_format($soma_divisao_itens,2,",",".").'');
+
 		}
 
 
@@ -211,27 +216,29 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 
 
 	foreach ($txt_itens as $item) {
+
+
 	
 		if($item[8]!=''){
 			
-			$itens[] .= addEspacos($item[8], 34, 'F')."\r\n";
+			$itens[] .= ajusta_caracteres_impressao($item[8], 'F')."\r\n";			
 		
 		} else { 
 
-        $itens[] .= addEspacos($item[0], 4, 'F')
-        	. addEspacos($item[1], 16, 'F')
-        	. addEspacos($item[2], 7, 'I')
-            . addEspacos($item[3], 7, 'I');        	
+        $itens[] .= ajusta_caracteres_impressao($item[0], 'F', 4)
+        	. ajusta_caracteres_impressao($item[1], 'F',$tamanho_campo_nome_produto)
+        	. ajusta_caracteres_impressao($item[2], 'I',7)
+            . ajusta_caracteres_impressao($item[3], 'I',8);        	
         	  
 
         	if($item[5]!=''){
-        		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[5], 30, 'F')
-        		."\r\n".addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 30, 'F');        		
+        		$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[4], 'F', -4)."\r\n"
+        		.ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[5], 'F', -4);        		
         	} else {
-        		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 30, 'F');
+        		$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[4], 'F', -4);
         	}
 
 
@@ -249,10 +256,10 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 						$val_opcional = $ln['valor_opcional'];
 						$total_opcional = ($item[0]*$val_opcional);												
 
-						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 16, 'F')
-			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
-			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
+						$itens[] .= ajusta_caracteres_impressao('+', 'F', 4)
+			        	. ajusta_caracteres_impressao($opcional, 'F', $tamanho_campo_nome_produto)
+			        	. ajusta_caracteres_impressao(number_format($val_opcional,2,",","."), 'I',7)
+			            . ajusta_caracteres_impressao(number_format($total_opcional,2,",","."),'I',8);    	    	
 																		
 					}
 				}
@@ -266,8 +273,8 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 				");
 				if($db->rows($peg)){
 
-					$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ADICIONAIS]', 16, 'F');
+					$itens[] .= "\r\n".ajusta_caracteres_impressao(' ', 'F', 4)
+					. ajusta_caracteres_impressao('[ADICIONAR]', 'F', -4);
 
 					while($ln = $db->expand($peg)){
 						
@@ -275,17 +282,17 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 						$val_opcional = $ln['valor_opcional'];
 						$total_opcional = ($item[0]*$val_opcional);												
 
-						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 16, 'F')
-			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
-			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
+						$itens[] .= ajusta_caracteres_impressao('+', 'F', 4)
+			        	. ajusta_caracteres_impressao($opcional, 'F', $tamanho_campo_nome_produto)
+			        	. ajusta_caracteres_impressao(number_format($val_opcional,2,",","."), 'I', 7)
+			            . ajusta_caracteres_impressao(number_format($total_opcional,2,",","."), 'I', 8);       	
 																		
 					}
 				} 
 			//ADICIONAIS SE HOUVER//
 			
 			if(empty($item[8])){
-        		$itens[] .= addEspacos('------------------------------------------------------------------', 34, 'F');
+        		$itens[] .= ajusta_caracteres_impressao('');
         	}
 
         }
@@ -299,21 +306,16 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
     // SUBTOTAL //
     $aux_valor_total = 'SUBTOTAL';
 	$aux_valor_total2 = 'R$ '.number_format(($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos']),2,",",".");
-	$total_espacos = $n_colunas - strlen($aux_valor_total);
-	$total_espacos = $total_espacos- strlen($aux_valor_total2);
-    $espacos = ''; 
-    for($i = 0; $i < $total_espacos; $i++){
-    	$espacos .= ' ';
-    }
-	$txt_valor_total =addEspacos('------------------------------------------------------------------', 34, 'F')."\r\n";
-	$txt_valor_total .= $aux_valor_total.$espacos.$aux_valor_total2;
+	$txt_valor_total = ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+	$txt_valor_total .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));
     // SUBTOTAL //
+
 
 	$dados_entrega='';
     //IMPRIME O TOTAL DE ITENS DO PEDIDO//
 	if($total_itens_pedido!=0){
-		$dados_entrega .= '----------------------------------'."\r\n";
-		$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
+		$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+		$dados_entrega .= ajusta_caracteres_impressao('TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido, 'F')."\r\n";	
 	}
 
 
@@ -322,8 +324,8 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 	$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
 	$dados_atendente = $db->expand($dados_atendente);
 
-	$dados_entrega .= '----------------------------------'."\r\n";
-	$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
+	$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+	$dados_entrega .= ajusta_caracteres_impressao(retira_acentos('ATENDENTE: '.$dados_atendente['nome']),'F')."\r\n";	
 
 
 

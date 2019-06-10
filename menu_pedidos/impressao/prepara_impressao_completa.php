@@ -3,55 +3,56 @@ require("../../admin/class/class.db.php");
 require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
-//require("../../includes/verifica_cliente_venda.php");
 require("../../includes/verifica_dados_loja.php");
 require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_impressao.php");
 require("../../diversos/funcoes_diversas.php");
+
 	
-
-
+	$tamanho_campo_nome_produto = $dados_configuracoes['colunas_produto'];
 
 
 	//CABEÇALHO//	
 		$txt_cabecalho = array();
         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha01'];         
-        $txt_cabecalho[] = $dados_loja['cabecalho_linha02'];         
-		$txt_cabecalho[] = $dados_loja['cabecalho_linha03'];     
-		$txt_cabecalho[] = 'PEDIDO: #'.$id_venda;    
-		$txt_cabecalho[] = data_mysql_para_user($dados_venda['data_pedido']).' AS '.substr($dados_venda['pedido_inicio'],0,5);
-        		
-		$txt_cabecalho[] = '--------------------------------------';
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha01']);         
+        $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha02']);         
+		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);     
+		$txt_cabecalho[] = ajusta_caracteres_impressao('PEDIDO: #'.$id_venda);    
+		$txt_cabecalho[] = ajusta_caracteres_impressao(data_mysql_para_user($dados_venda['data_pedido']).' AS '.substr($dados_venda['pedido_inicio'],0,5));
+       	
+
+       	$txt_cabecalho[] = ajusta_caracteres_impressao('');
 
 		//ENTREGA
 		if($dados_venda['entrega']!=0){
-			$txt_cabecalho[] = 'ENTREGA';
+			$txt_cabecalho[] = ajusta_caracteres_impressao('ENTREGA');
 		} 
 
 		//MESA
 		if($dados_venda['id_mesa']!=0){
-			$txt_cabecalho[] = 'MESA '.$dados_venda['id_mesa'];
+			$txt_cabecalho[] = ajusta_caracteres_impressao('MESA '.$dados_venda['id_mesa']);
 		} 
 
 		//RETIRADA/BALCAO
 		if($dados_venda['id_mesa']==0 && ($dados_venda['entrega']==0 || $dados_venda['entrega']=='')){
-			$txt_cabecalho[] = 'RETIRA/BALCAO';
+			$txt_cabecalho[] = ajusta_caracteres_impressao('RETIRA/BALCAO');
 			
 			//EMBALA PARA VIAGEM
 			if($dados_venda['embala_viagem']==1){					
-				$txt_cabecalho[] = '(EMBALAR PARA VIAGEM)';
+				$txt_cabecalho[] = ajusta_caracteres_impressao('(EMBALAR PARA VIAGEM)');
 			}
 
 		} 
 
 		//PEDIDO DA INTERNET
 		if($dados_venda['pedido_internet']!=0){
-			$txt_cabecalho[] = '--- PEDIDO VIA INTERNET ---';
-		} 
-	
+			$txt_cabecalho[] = ajusta_caracteres_impressao('--- PEDIDO VIA INTERNET ---');
+		}  		
+		
+		$txt_cabecalho[] = ajusta_caracteres_impressao('');
 
-		$cabecalho = array_map("centraliza", $txt_cabecalho);
+		$cabecalho = $txt_cabecalho;		
 	//CABEÇALHO
 
 
@@ -60,9 +61,13 @@ require("../../diversos/funcoes_diversas.php");
 	$tot_itens = 0;
 
 
-	$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');
-    $txt_itens_cabecalho[] = array('Qtd ', 'COD/Produto', 'V. UN', 'Total');
-	$txt_itens_cabecalho[] = array('----', '------------------------', '-------', '-------');	
+	
+    $txt_itens_cabecalho = ajusta_caracteres_impressao('Qtd','F',4);
+    $txt_itens_cabecalho .= ajusta_caracteres_impressao('CAT/Produto','F',$tamanho_campo_nome_produto);
+    $txt_itens_cabecalho .= ajusta_caracteres_impressao('V. UN','I',7);
+    $txt_itens_cabecalho .= ajusta_caracteres_impressao('Total','I',8). "\r\n";
+    $txt_itens_cabecalho .= ajusta_caracteres_impressao('');	
+	$cabs = $txt_itens_cabecalho;
 
 	
 		
@@ -191,23 +196,23 @@ require("../../diversos/funcoes_diversas.php");
        	
 		//VEM NOME DO CLIENTE DA DIVISAO NA MESA
 		if(!empty($item[8])){
-			$itens[] .= addEspacos('('.$item[8].')', 34, 'F')."\r\n";			    
+			$itens[] .= ajusta_caracteres_impressao('('.$item[8].')', 'F')."\r\n";			    
 		}
 
-        $itens[] .= addEspacos($item[0], 4, 'F')
-        	. addEspacos($item[1], 16, 'F')
-        	. addEspacos($item[2], 7, 'I')
-            . addEspacos($item[3], 7, 'I');        	
+        $itens[] .= ajusta_caracteres_impressao($item[0], 'F', 4)
+        	. ajusta_caracteres_impressao($item[1], 'F',$tamanho_campo_nome_produto)
+        	. ajusta_caracteres_impressao($item[2], 'I',7)
+            . ajusta_caracteres_impressao($item[3], 'I',8);        	
         	  
 
         	if($item[5]!=''){
-        		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[5], 30, 'F')
-        		."\r\n".addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 30, 'F');        		
+        		$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[4], 'F', -4)."\r\n"
+        		.ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[5], 'F', -4);        		
         	} else {
-        		$itens[] .= addEspacos('', 4, 'F')
-        		.addEspacos($item[4], 30, 'F');
+        		$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[4], 'F', -4);
         	}
 
 
@@ -225,10 +230,10 @@ require("../../diversos/funcoes_diversas.php");
 						$val_opcional = $ln['valor_opcional'];
 						$total_opcional = ($item[0]*$val_opcional);												
 
-						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 16, 'F')
-			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
-			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
+						$itens[] .= ajusta_caracteres_impressao('+', 'F', 4)
+			        	. ajusta_caracteres_impressao($opcional, 'F', $tamanho_campo_nome_produto)
+			        	. ajusta_caracteres_impressao(number_format($val_opcional,2,",","."), 'I',7)
+			            . ajusta_caracteres_impressao(number_format($total_opcional,2,",","."),'I',8);    	
 																		
 					}
 				}
@@ -243,8 +248,8 @@ require("../../diversos/funcoes_diversas.php");
 				");
 				if($db->rows($peg)){
 
-					$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ADICIONAR]', 16, 'F');
+					$itens[] .= "\r\n".ajusta_caracteres_impressao(' ', 'F', 4)
+					. ajusta_caracteres_impressao('[ADICIONAR]', 'F', -4);
 
 					while($ln = $db->expand($peg)){
 						
@@ -252,10 +257,10 @@ require("../../diversos/funcoes_diversas.php");
 						$val_opcional = $ln['valor_opcional'];
 						$total_opcional = ($item[0]*$val_opcional);												
 
-						$itens[] .= addEspacos('+', 4, 'F')
-			        	. addEspacos($opcional, 16, 'F')
-			        	. addEspacos(number_format($val_opcional,2,",","."), 7, 'I')
-			            . addEspacos(number_format($total_opcional,2,",","."), 7, 'I');    	
+						$itens[] .= ajusta_caracteres_impressao('+', 'F', 4)
+			        	. ajusta_caracteres_impressao($opcional, 'F', $tamanho_campo_nome_produto)
+			        	. ajusta_caracteres_impressao(number_format($val_opcional,2,",","."), 'I', 7)
+			            . ajusta_caracteres_impressao(number_format($total_opcional,2,",","."), 'I', 8);    	
 																		
 					}
 				}
@@ -265,103 +270,70 @@ require("../../diversos/funcoes_diversas.php");
 
 			//OBSERVACOES DO PRODUTO SE HOUVER
 			if(!empty($item[7])){
-				$itens[] .= addEspacos('', 4, 'F')
-					. addEspacos('[ATENCAO]', 16, 'F');
+				$itens[] .= "\r\n".ajusta_caracteres_impressao(' ', 'F', 4)
+					. ajusta_caracteres_impressao('[ATENCAO]', 'F', -4);
 
-				$itens[] .= addEspacos('', 4, 'F')
-			    . addEspacos($item[7], 30, 'F');			    
+				$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+			    . ajusta_caracteres_impressao($item[7], 'F', -4);			    
 			}	
 			
 
-        	$itens[] .= addEspacos('------------------------------------------------------------', 34, 'F');
+        	$itens[] .= ajusta_caracteres_impressao('');
             
             
     }
 
-    foreach ($txt_itens_cabecalho as $cab) {
-       
-        $cabs[] = addEspacos($cab[0], 4, 'F')
-        	. addEspacos($cab[1], 16, 'F')           
-            . addEspacos($cab[2], 7, 'I')
-            . addEspacos($cab[3], 7, 'I');
-            
-    }
 
 
 
     // SUBTOTAL //
     $aux_valor_total = 'SUBTOTAL';
 	$aux_valor_total2 = 'R$ '.number_format(($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos']),2,",",".");
-	$total_espacos = $n_colunas - strlen($aux_valor_total);
-	$total_espacos = $total_espacos- strlen($aux_valor_total2);
-    $espacos = ''; 
-    for($i = 0; $i < $total_espacos; $i++){
-    	$espacos .= ' ';
-    }
-	$txt_valor_total = $aux_valor_total.$espacos.$aux_valor_total2;
+	$txt_valor_total = ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+	$txt_valor_total .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));
     // SUBTOTAL //
+    
 
-
-    // DESCONTO //
+     // DESCONTO //
+	$txt_valor_desconto ='';
     if($dados_venda['valor_desconto']!='0.00'){
 	    $aux_valor_total = 'DESCONTO (-)';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_desconto'],2,",",".");
-		$total_espacos = $n_colunas - strlen($aux_valor_total);
-		$total_espacos = $total_espacos- strlen($aux_valor_total2);
-	    $espacos = ''; 
-	    for($i = 0; $i < $total_espacos; $i++){
-	    	$espacos .= ' ';
-	    }
-		$txt_valor_desconto = $aux_valor_total.$espacos.$aux_valor_total2. "\r\n";
+		$txt_valor_desconto = ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_valor_desconto .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";	
 
-		$aux_valor_total = 'TOTAL:';
-		//$aux_valor_total2 = 'R$ '.number_format(($dados_venda['valor_total']-$dados_venda['valor_desconto']),2,",",".");
-		$aux_valor_total2 = 'R$ '.number_format((($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos'])-$dados_venda['valor_desconto']),2,",",".");
-		$total_espacos = $n_colunas - strlen($aux_valor_total);
-		$total_espacos = $total_espacos- strlen($aux_valor_total2);
-		$espacos = ''; 
-		for($i = 0; $i < $total_espacos; $i++){
-			$espacos .= ' ';
-		}
-		$txt_valor_desconto = $txt_valor_desconto.$aux_valor_total.$espacos.$aux_valor_total2."\r\n";
+		$aux_valor_total = 'TOTAL:';		
+		$aux_valor_total2 = 'R$ '.number_format((($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos'])-$dados_venda['valor_desconto']),2,",",".");		
+		$txt_valor_desconto .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_valor_desconto .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));	
 
-	} else {
-		$txt_valor_desconto ='';
 	}	
     // DESCONTO //
 
 
     // ENTREGA //
+    $txt_valor_entrega='';
     if($dados_venda['entrega']!=0){
-    	$aux_valor_total = 'TAXA DE ENTREGA (+)';
+    	$aux_valor_total = 'TX DE ENTREGA (+)';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_entrega'],2,",",".");
-		$total_espacos = $n_colunas - strlen($aux_valor_total);
-		$total_espacos = $total_espacos- strlen($aux_valor_total2);
-		$espacos = ''; 
-		for($i = 0; $i < $total_espacos; $i++){
-			$espacos .= ' ';
-		}
-		$txt_valor_entrega = $aux_valor_total.$espacos.$aux_valor_total2."\r\n";
-	} else {
-		$txt_valor_entrega='';
-	}		
+		$txt_valor_entrega .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_valor_entrega .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));			
+	} 		
     // ENTREGA //
 
 
-	// A RECEBER FINAL //    
-    $aux_valor_total = 'TOTAL A RECEBER (=)';
+    // A RECEBER FINAL //    
+    $aux_valor_total = 'TOTAL A RECEBER';
 	$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_final_venda'],2,",",".");
-	$total_espacos = $n_colunas - strlen($aux_valor_total);
-	$total_espacos = $total_espacos- strlen($aux_valor_total2);
-	$espacos = ''; 
-	for($i = 0; $i < $total_espacos; $i++){
-		$espacos .= ' ';
-	}
-	$txt_valor_final_receber = $aux_valor_total.$espacos.$aux_valor_total2."\r\n";			
+	$txt_valor_final_receber .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+	$txt_valor_final_receber .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));				
     // A RECEBER FINAL //
-     
 
-	//FORMAS DE PAGAMENTO SE HOUVER//	
+
+	$txt_pagamentos_recebidos='';
+	$formas_pgto='';
+
+    //FORMAS DE PAGAMENTO SE HOUVER//	
     $sel = $db->select("SELECT pagamentos_vendas.*, formas_pagamento.forma, usuarios.nome FROM pagamentos_vendas 
 		LEFT JOIN formas_pagamento ON pagamentos_vendas.forma_pagamento=formas_pagamento.id
 	    LEFT JOIN usuarios ON pagamentos_vendas.id_usuario=usuarios.id
@@ -371,26 +343,22 @@ require("../../diversos/funcoes_diversas.php");
 		if($db->rows($sel)){
 
 			$txt_formas_pgto = array();
-		    $txt_formas_pgto[] = '----------------------------------';
-		    $txt_formas_pgto[] = 'PAGAMENTOS RECEBIDOS';         
-		    $txt_formas_pgto[] = '----------------------------------';
-		    $formas_pgto = array_map("centraliza", $txt_formas_pgto);
+		    $txt_formas_pgto[] = "\r\n".ajusta_caracteres_impressao();
+		    $txt_formas_pgto[] = ajusta_caracteres_impressao('PAGAMENTOS RECEBIDOS','M');         
+		    $txt_formas_pgto[] = ajusta_caracteres_impressao();
+		    $formas_pgto = $txt_formas_pgto;
 		  
 		    $txt_pgto_recebidos='';
 		    $total_ja_recebido=0;
 
 			while($dados_pgto = $db->expand($sel)){	
 
-				$aux_valor_total = retira_acentos($dados_pgto['forma'].' (-)');
+				$aux_valor_total = retira_acentos($dados_pgto['forma']);
 				$aux_valor_total2 = 'R$ '.number_format($dados_pgto['valor_caixa_real'],2,",",".");
-				$total_espacos = $n_colunas - strlen($aux_valor_total);
-				$total_espacos = $total_espacos- strlen($aux_valor_total2);
-				$espacos = ''; 
-				for($i = 0; $i < $total_espacos; $i++){
-					$espacos .= ' ';
-				}
+				$txt_pgto_recebidos .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+				$txt_pgto_recebidos .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";	
+					
 				$total_ja_recebido = ($total_ja_recebido+$dados_pgto['valor_caixa_real']);
-				$txt_pgto_recebidos .= $aux_valor_total.$espacos.$aux_valor_total2."\r\n";	
 
 			}
 
@@ -398,86 +366,74 @@ require("../../diversos/funcoes_diversas.php");
 
 			 $aux_valor_total = 'TOTAL RECEBIDO:';
 			 $aux_valor_total2 = 'R$ '.number_format($total_ja_recebido,2,",",".");
-			 $total_espacos = $n_colunas - strlen($aux_valor_total);
-			 $total_espacos = $total_espacos- strlen($aux_valor_total2);
-			 $espacos = ''; 
-			 for($i = 0; $i < $total_espacos; $i++){
-				$espacos .= ' ';
-			 }
-
+			 
 			 $falta_receber = ($dados_venda['valor_final_venda']-$total_ja_recebido);
 			 if($falta_receber<0){$falta_receber=0;}
 
-			 $txt_pagamentos_recebidos .=  $aux_valor_total.$espacos.$aux_valor_total2;	 
-
-			 $aux_valor_total = 'RESTANTE A RECEBER:';
-			 $aux_valor_total2 = 'R$ '.number_format($falta_receber,2,",",".");
-			 $total_espacos = $n_colunas - strlen($aux_valor_total);
-			 $total_espacos = $total_espacos- strlen($aux_valor_total2);
-			 $espacos = ''; 
-			 for($i = 0; $i < $total_espacos; $i++){
-				$espacos .= ' ';
-			 }
-
-			 $txt_pagamentos_recebidos .=  "\r\n".$aux_valor_total.$espacos.$aux_valor_total2."\r\n";
+			 $txt_pagamentos_recebidos .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+			 $txt_pagamentos_recebidos .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";	
 			 
 
-		} else {
-			$txt_pagamentos_recebidos='';
-			$formas_pgto='';
+			 $aux_valor_total = 'FALTA A RECEBER:';
+			 $aux_valor_total2 = 'R$ '.number_format($falta_receber,2,",",".");
+			 $txt_pagamentos_recebidos .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+			 $txt_pagamentos_recebidos .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));				 
+
 		}    
-	//FORMAS DE PAGAMENTO SE HOUVER//
+		//FORMAS DE PAGAMENTO SE HOUVER//
 
 
-	//SE FOR ENTREGA EXIBE O ENDEREÇO E DADOS DO COMPRADOR//	
+
+		//SE FOR ENTREGA EXIBE O ENDEREÇO E DADOS DO COMPRADOR//	
 	if($dados_venda['entrega']!=0){
 
 		$txt_dados_entrega = array();
-		$txt_dados_entrega[] = '----------------------------------';
-		$txt_dados_entrega[] = 'DADOS PARA ENTREGA';         
-		$txt_dados_entrega[] = '----------------------------------';
-		$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
+		$txt_dados_entrega[] = "\r\n".ajusta_caracteres_impressao();
+		$txt_dados_entrega[] = ajusta_caracteres_impressao('DADOS PARA ENTREGA','M');         
+		$txt_dados_entrega[] = ajusta_caracteres_impressao();
+		$txt_dados_entrega = $txt_dados_entrega;
 
 		$id_cliente = $dados_venda['id_cliente'];
 		$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
 		$dados_cliente = $db->expand($selectx);
 
-		$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
-		$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
-		$dados_entrega .= retira_acentos($dados_cliente['endereco'].', '.$dados_cliente['numero'])."\r\n";
-		$dados_entrega .= retira_acentos($dados_cliente['bairro'])."\r\n";
+		$dados_entrega = "\r\n".ajusta_caracteres_impressao(retira_acentos($dados_cliente['nome']),'F')."\r\n";
+		$dados_entrega .=  ajusta_caracteres_impressao('FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'],'F')."\r\n";
+		$dados_entrega .=  ajusta_caracteres_impressao(retira_acentos($dados_cliente['endereco'].', '.$dados_cliente['numero']),'F')."\r\n";
+		$dados_entrega .= ajusta_caracteres_impressao(retira_acentos($dados_cliente['bairro']),'F')."\r\n";
 		if(!empty($dados_cliente['complemento'])){	
-			$dados_entrega .= retira_acentos($dados_cliente['complemento'])."\r\n";
+			$dados_entrega .= ajusta_caracteres_impressao(retira_acentos($dados_cliente['complemento']),'F')."\r\n";
 		}
 		
 
-		$dados_entrega .= '----------------------------------'."\r\n";
+		$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
 
 		if($dados_venda['levar_maquina_cartao']!=0){
-			$dados_entrega .= 'LEVAR A MAQUINA DE CARTAO'."\r\n";	
+			$dados_entrega .= ajusta_caracteres_impressao('LEVAR A MAQUINA DE CARTAO','F')."\r\n";	
 		}
 
 		if($dados_venda['troco_para']!='0.00'){
-			$dados_entrega .= '*LEVAR TROCO PARA: R$ '.number_format($dados_venda['troco_para'],2,",",".").' / (R$ '.number_format($dados_venda['levar_troco'],2,",",".").')'."\r\n";	
+			$dados_entrega .= ajusta_caracteres_impressao('*LEVAR TROCO PARA: R$ '.number_format($dados_venda['troco_para'],2,",","."),'F')."\r\n";	
+			$dados_entrega .= ajusta_caracteres_impressao('TROCO DE: R$ '.number_format($dados_venda['levar_troco'],2,",","."),'F')."\r\n";	
 		}
 
 	}	else {
 		
 		$txt_dados_entrega = array();
-		$txt_dados_entrega[] = '----------------------------------';
-		$txt_dados_entrega[] = 'DADOS DO CLIENTE';         
-		$txt_dados_entrega[] = '----------------------------------';
-		$txt_dados_entrega = array_map("centraliza", $txt_dados_entrega);
+		$txt_dados_entrega[] = "\r\n".ajusta_caracteres_impressao();
+		$txt_dados_entrega[] = ajusta_caracteres_impressao('DADOS DO CLIENTE','M');         
+		$txt_dados_entrega[] = ajusta_caracteres_impressao();
+		$txt_dados_entrega = $txt_dados_entrega;
 
 		if(!empty($dados_venda['nome_cliente'])){
 			
 			$id_cliente = $dados_venda['id_cliente'];
-			$dados_entrega = "\r\n".retira_acentos($dados_venda['nome_cliente'])."\r\n";	
+			$dados_entrega = "\r\n".ajusta_caracteres_impressao(retira_acentos($dados_venda['nome_cliente']),'F')."\r\n";	
 			$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
 			$dados_cliente = $db->expand($selectx);
 
 			if(!empty($dados_cliente['telefone'])){					
-				$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+				$dados_entrega .= ajusta_caracteres_impressao('FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'],'F')."\r\n";
 			}
 
 		} else {
@@ -485,10 +441,10 @@ require("../../diversos/funcoes_diversas.php");
 			$id_cliente = $dados_venda['id_cliente'];
 			$selectx = $db->select("SELECT * FROM clientes WHERE id='$id_cliente' LIMIT 1");
 			$dados_cliente = $db->expand($selectx);
-			$dados_entrega = "\r\n".retira_acentos($dados_cliente['nome'])."\r\n";
+			$dados_entrega = "\r\n".ajusta_caracteres_impressao(retira_acentos($dados_cliente['nome']),'F')."\r\n";
 			
 			if(!empty($dados_cliente['telefone'])){					
-				$dados_entrega .= 'FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone']."\r\n";
+				$dados_entrega .= ajusta_caracteres_impressao('FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'],'F')."\r\n";
 			}
 
 		}
@@ -497,22 +453,23 @@ require("../../diversos/funcoes_diversas.php");
 	}
 	//SE FOR ENTREGA EXIBE O ENDEREÇO E DADOS DO COMPRADOR//	
 
-
 	//EMBALA VIAGEM//
 	if($dados_venda['embala_viagem']==1){
-		$dados_entrega .= 'EMBALAR PARA VIAGEM'."\r\n";	
+		$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+		$dados_entrega .= ajusta_caracteres_impressao('EMBALAR PARA VIAGEM','F')."\r\n";	
 	}
 
 
 	//IMPRIME O TOTAL DE ITENS DO PEDIDO//
 	if($total_itens_pedido!=0){
-		$dados_entrega .= '----------------------------------'."\r\n";
-		$dados_entrega .= 'TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido."\r\n";	
+		$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+		$dados_entrega .= ajusta_caracteres_impressao('TOTAL DE ITENS DO PEDIDO: '.$total_itens_pedido, 'F')."\r\n";	
 	}
 
+
 	//IMPRIME AS CATEGORIAS DO PEDIDO//
-	$dados_entrega .= '----------------------------------'."\r\n";
-	$dados_entrega .= 'PEDIDO CONTENDO:'."\r\n";	
+	$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+	$dados_entrega .= ajusta_caracteres_impressao('PEDIDO CONTENDO:','F')."\r\n";	
 
 	$categorias_pedido_gerais='';
 	$select = $db->select("SELECT produtos_venda.categoria_produto, categorias.categoria AS nome_categoria FROM produtos_venda
@@ -530,7 +487,7 @@ require("../../diversos/funcoes_diversas.php");
 		$categorias_pedido_gerais = substr($categorias_pedido_gerais,0, $size-1);
 	}
 
-	$dados_entrega .= retira_acentos($categorias_pedido_gerais)."\r\n";	
+	$dados_entrega .= ajusta_caracteres_impressao(retira_acentos($categorias_pedido_gerais),'F')."\r\n";
 
 
 	//IMPRIME O NOME DO ATENDENTE NA COMANDA
@@ -538,26 +495,43 @@ require("../../diversos/funcoes_diversas.php");
 	$dados_atendente = $db->select("SELECT nome FROM usuarios WHERE id='$dados_atendente' LIMIT 1");	
 	$dados_atendente = $db->expand($dados_atendente);
 
-	$dados_entrega .= '----------------------------------'."\r\n";
-	$dados_entrega .= retira_acentos('ATENDENTE: '.$dados_atendente['nome'])."\r\n";	
+	$dados_entrega .= ajusta_caracteres_impressao()."\r\n";
+	$dados_entrega .= ajusta_caracteres_impressao(retira_acentos('ATENDENTE: '.$dados_atendente['nome']),'F')."\r\n";	
+
 
 
 	///GERA O ARQUIVO	
 	$txt = implode("\r\n", $cabecalho)
 	. "\r\n"
-	.implode("\r\n", $cabs)
+	.$cabs
 	. "\r\n"
 	. implode("\r\n", $itens)
 	. "\r\n"
-	. $txt_valor_total // SubTotal	
-	."\r\n"
-	. $txt_valor_desconto // Desconto	
-	.$txt_valor_entrega	//Entrega
-    .$txt_valor_final_receber //Final	
-	.implode("\r\n", $formas_pgto)
-	.$txt_pagamentos_recebidos
-	.implode("\r\n", $txt_dados_entrega)
+	. $txt_valor_total;
+
+	if(!empty($txt_valor_desconto)){
+		$txt .= "\r\n"
+		. $txt_valor_desconto;		
+	}
+
+	if(!empty($txt_valor_entrega)){
+		$txt .= "\r\n"
+		. $txt_valor_entrega;		
+	}
+	
+	$txt .= "\r\n"
+	. $txt_valor_final_receber;
+
+
+	if(!empty($formas_pgto)){
+		$txt .= implode("\r\n", $formas_pgto)
+		.$txt_pagamentos_recebidos;	
+	}
+	
+	$txt .= implode("\r\n", $txt_dados_entrega)
 	.$dados_entrega;
+	
+
 
    //CAMINHO DO TXT CRIADO
    $arquivo = 'pedido_'.$id_venda.'.txt';	

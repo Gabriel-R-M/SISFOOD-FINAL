@@ -98,6 +98,10 @@
 
 	$sql = $db->select("ALTER TABLE configuracoes ADD tipo_preco_meio_meio VARCHAR(99) NOT NULL",0);
 
+
+	$sql = $db->select("ALTER TABLE configuracoes ADD colunas_impressora INT(10) NOT NULL",0);
+	$sql = $db->select("ALTER TABLE configuracoes ADD colunas_produto INT(10) NOT NULL",0);
+
 	//CRIA PASTAS
 	mkdir('pedidos_imprimir/pasta1/', 0777, true);
 	mkdir('pedidos_imprimir/pasta2/', 0777, true);

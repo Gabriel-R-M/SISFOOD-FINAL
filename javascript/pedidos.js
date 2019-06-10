@@ -237,7 +237,7 @@ function confirma_reimpressao_item_unico(id){
 
 function reimprime_item_avulso(){
 	var id = $("#id_item_imprimir").val();
-	imprime_comanda02(1,id);
+	imprime_comanda02(id);
 	$("#id_item_imprimir").val('');
 	$("#ModalPerguntaImprime05").modal('hide');
 }
