@@ -1104,6 +1104,13 @@ function escolhe_taxa_entrega(a){
 	var val_recebido = parseFloat($("#val_recebido").val());	
 	var mesa_id = $("#mesa").val();
 
+	if(a!=0 && a!=''){
+		$("#soma_garcom").val('0');	
+		$("#val_final_garcom").html('0.00');
+		$("#remove_taxa"). prop("checked", false);
+	}
+
+
 	//NAO TEM TAXA DE ENTREGA
 	if(a==0){
 
@@ -1184,6 +1191,7 @@ function fazdesconto(tipo){
 	total_final = $("#soma_final").val();
 	total_entrega  = $("#soma_entrega").val();
 	desconto  = $("#val_desconto").val();
+	porcentagem_garcom  = $("#porcentagem_garcom").val();
 
 	if(desconto=='' || desconto=='0.00'){
 		exibe_erros_gerais('Informe o valor ou percentual de desconto!');
@@ -1196,20 +1204,39 @@ function fazdesconto(tipo){
 	if(tipo==1){
 		$("#utiliza_resgate_pontos").val('0');
 		$("#avisa_troca_pontos").hide();
-		valor_percente = ((parseFloat(total_pedido)*parseFloat(desconto))/100);
-		desconto_final = ((parseFloat(total_pedido)-parseFloat(valor_percente))+parseFloat(total_entrega));	
-		$("#soma_desconto").val(parseFloat(valor_percente));		
-		$("#val_final").html(''+desconto_final.toFixed(2));
+		var valor_percente = ((parseFloat(total_pedido)*parseFloat(desconto))/100);
+		var desconto_final = ((parseFloat(total_pedido)-parseFloat(valor_percente))+parseFloat(total_entrega));	
+		$("#soma_desconto").val(parseFloat(valor_percente));				
 		$("#tipo_desconto").val('porcentagem');
+
+		//% GARCOM//
+		var fazx = (parseFloat(total_pedido)-parseFloat(valor_percente));
+		var fazx = ((parseFloat(fazx)*parseFloat(porcentagem_garcom))/100);		
+		$("#soma_garcom").val(fazx);	
+		$("#val_final_garcom").html(''+fazx.toFixed(2));
+
+		var desconto_final = (parseFloat(desconto_final)+parseFloat(fazx))
+		$("#val_final").html(''+desconto_final.toFixed(2));
+
 	}
 
 	//DESCONTO EM REAIS
 	if(tipo==2){
 		$("#avisa_troca_pontos").hide();
-		desconto_final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));
-		$("#soma_desconto").val(parseFloat(desconto));			
+		var desconto_final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));
+		$("#soma_desconto").val(parseFloat(desconto));					
+		$("#tipo_desconto").val('dinheiro');			
+
+
+		//% GARCOM//
+		var fazx = (parseFloat(total_pedido)-parseFloat(desconto));
+		var fazx = ((parseFloat(fazx)*parseFloat(porcentagem_garcom))/100);		
+		$("#soma_garcom").val(fazx);	
+		$("#val_final_garcom").html(''+fazx.toFixed(2));
+
+		var desconto_final = (parseFloat(desconto_final)+parseFloat(fazx))
 		$("#val_final").html(''+desconto_final.toFixed(2));
-		$("#tipo_desconto").val('dinheiro');		
+
 	}
 
 	//REMOVE OS DESCONTOS
@@ -1219,19 +1246,62 @@ function fazdesconto(tipo){
 		$("#btn_desconto1").attr('disabled', false);	
 		$("#btn_desconto2").attr('disabled', false);	
 
+		
+
 		$("#utiliza_resgate_pontos").val('0');
 		$("#avisa_troca_pontos").hide();
-		desconto_final = (parseFloat(total_pedido)+parseFloat(total_entrega));
-		$("#soma_desconto").val(0);		
-		$("#val_final").html(''+desconto_final.toFixed(2));
+		var desconto_final = (parseFloat(total_pedido)+parseFloat(total_entrega));			
+
+		$("#soma_desconto").val(0);				
 		$("#val_desconto").val('');		
 		$("#tipo_desconto").val('');
+
+
+		//% GARCOM//
+		var fazx = ((parseFloat(desconto_final)*parseFloat(porcentagem_garcom))/100);	
+		$("#soma_garcom").val(fazx);	
+		$("#val_final_garcom").html(''+fazx.toFixed(2));
+
+		var desconto_final = (parseFloat(desconto_final)+parseFloat(fazx))
+		$("#val_final").html(''+desconto_final.toFixed(2));
+		
 	}
 
 	$("#soma_final").val(parseFloat(desconto_final));	
 
 }
 
+
+function remove_taxa_garcom(){
+
+	total_pedido = $("#soma_pedido").val();	
+	total_final = $("#soma_final").val();
+	total_entrega  = $("#soma_entrega").val();
+	desconto  = $("#val_desconto").val();
+	porcentagem_garcom  = $("#porcentagem_garcom").val();
+
+
+	if($("#remove_taxa").is(':checked')){
+		
+		var final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));	
+		var final2 = ((parseFloat(final)*parseFloat(porcentagem_garcom))/100);	
+		var final = (parseFloat(final)+parseFloat(final2));
+
+		$("#val_final_garcom").html(''+final2.toFixed(2));
+		$("#soma_garcom").val(final2);		
+
+	} else {
+		$("#val_final_garcom").html('0.00');
+		$("#soma_garcom").val(0);		
+		var final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));	
+	}        	
+
+	$("#soma_final").val(parseFloat(final));
+	$("#val_final").html(''+final.toFixed(2));	
+
+	
+
+}
 
 
 function escolhe_forma_pgto(id){
@@ -1683,6 +1753,12 @@ function finaliza_pedido2(imprime=0, reload=0){
 	var pre_tipo_pagamento = $("#pre_tipo_pagamento").val();
 	var embala_viagem = $("#embala_viagem").val();
 	var venda_aguarde = $("#pedido_aguarda_venda").val();
+	var soma_garcom = $("#soma_garcom").val();
+			
+	var remove_taxa = 1;
+	if( $("#remove_taxa").is(':checked') ){				
+		var remove_taxa = 0;
+	}
 
 
 	//VERIFICAÇÃO
@@ -1769,7 +1845,7 @@ function finaliza_pedido2(imprime=0, reload=0){
 	}
 	
 	
-	$.post('menu_pedidos/actions/salva_pedido_final.php',{nome_cliente_mobile:nome_cliente_mobile, embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
+	$.post('menu_pedidos/actions/salva_pedido_final.php',{remove_taxa:remove_taxa, soma_garcom:soma_garcom, nome_cliente_mobile:nome_cliente_mobile, embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
 		
 
 		if(imprime!=0){
@@ -1896,8 +1972,14 @@ function realiza_pagamento(){
 			var pre_tipo_pagamento = $("#pre_tipo_pagamento").val();
 			var embala_viagem = $("#embala_viagem").val();
 			var venda_aguarde = $("#pedido_aguarda_venda").val();
-
-			$.post('menu_pedidos/actions/salva_pedido_final.php',{venda_fiscal:venda_fiscal, embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
+			var soma_garcom = $("#soma_garcom").val();
+			
+			var remove_taxa = 1;
+			if( $("#remove_taxa").is(':checked') ){				
+				var remove_taxa = 0;
+			}
+			
+			$.post('menu_pedidos/actions/salva_pedido_final.php',{remove_taxa:remove_taxa, soma_garcom:soma_garcom, venda_fiscal:venda_fiscal, embala_viagem:embala_viagem, pre_tipo_pagamento:pre_tipo_pagamento, levar_maquina_cartao:levar_maquina_cartao, entregador:entregador, troco_leva_maquina:troco_leva_maquina, tipo_desconto:tipo_desconto, val_desc:val_desc, desconto:desconto, entrega:entrega, mesa:mesa, taxa_entrega:taxa_entrega, final_venda:final_venda}, function(resposta2){				
 			
 
 					$("#escrito_btn_recebimento").html("EFETUANDO...");	

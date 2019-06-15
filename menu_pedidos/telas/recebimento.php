@@ -27,6 +27,8 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 <div class="col-lg-4">
 
 	
+	<input type="hidden" id="porcentagem_garcom" value="<?php echo $dados_configuracoes['porcentagem_garcom']; ?>">
+
 	<input type="hidden" id="soma_entrega" value="<?php echo $dados_venda['valor_entrega']; ?>">
 	<input type="hidden" id="soma_pedido" value="<?php echo $dados_venda['valor_total']; ?>">
 	<input type="hidden" id="soma_final" value="<?php echo $dados_venda['valor_final_venda']; ?>">
@@ -34,6 +36,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 	<input type="hidden" id="tipo_desconto" value="<?php echo $dados_venda['tipo_desc']; ?>">
 	<input type="hidden" id="restante_receber" value="<?php echo $valor_final_receber; ?>">
 	<input type="hidden" id="val_recebido" value="<?php echo $total_recebido_venda; ?>">
+	<input type="hidden" id="soma_garcom" value="<?php echo $dados_venda['valor_garcom']; ?>">
 
 	<div class="order-top">
 		<h20>Dados do Cliente</h20>			
@@ -109,7 +112,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 			if($total_recebido_venda!=0){$oculta = '';}
 		?>
 		
-		<a tabindex="-1  href="javascript:void(0)"  onclick="javascript:ve_pagamentos_recebidos();">	
+		<a tabindex="-1" href="javascript:void(0)"  onclick="javascript:ve_pagamentos_recebidos();">	
 		<div id="aviso_pagamentos_existentes" class="alert alert-warning thin top15 <?php echo $oculta; ?>" style="margin-bottom: 0">
 			<i class="icofont-exclamation-tringle"></i> Existem valores recebidos para essa venda.
 			<span class="pull-right">[ver detalhes]</span>			
@@ -123,7 +126,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 			if($db->rows($analiza)){
 		?>
 			
-			<a tabindex="-1  href="javascript:void(0)" onclick="javascript:ve_compartilhamento_mesa();">
+			<a tabindex="-1" href="javascript:void(0)" onclick="javascript:ve_compartilhamento_mesa();">
 			<div class="alert alert-danger thin top15" style="margin-bottom: 0;">
 				<i class="icofont-exclamation-tringle"></i> Mesa compartilhada entre pessoas.
 				<span class="pull-right">[ver detalhes]</span>						
@@ -167,7 +170,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
     		<div class="col-12 top15">
         	<div class="col-12">
         		ENTREGA/RETIRADA: <br>
-        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA ENTREGA OU RETIRADA</a><br>
+        		<a tabindex="-1" href="javascript:void(0)" class="qdx">ESCOLHA ENTREGA OU RETIRADA</a><br>
         			<select class="form-control top2 upper" id="taxa_entrega" onchange="javascript:escolhe_taxa_entrega(this.value);">
 						
 						<?php
@@ -221,7 +224,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 " >
         	<div class="col-12">	
         		TROCO/MÁQUINA CARTÃO: <br>
-        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA EM CASO DE ENTREGA</a><br>
+        		<a tabindex="-1" href="javascript:void(0)" class="qdx">ESCOLHA EM CASO DE ENTREGA</a><br>
         			<div class="input-group">
 							      <div class="input-group-btn">
 							        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" style="height: 42px"> 
@@ -267,7 +270,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 <?php if($dados_configuracoes['escolhe_motoqueiro']==0){echo 'hide';} ?>">
         	<div class="col-12">	
         		ENTREGADOR: <br>
-        		<a tabindex="-1  href="javascript:void(0)" class="qdx">ESCOLHA O ENTREGADOR</a><br>
+        		<a tabindex="-1" href="javascript:void(0)" class="qdx">ESCOLHA O ENTREGADOR</a><br>
         			<select class="form-control top2 upper" id="entregador">
 						<option value="0">-- ESCOLHA --</option>
 						<?php
@@ -294,7 +297,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 bottom25">
         	<div class="col-12">	
         		EMBALAR P/ VIAGEM: <br>
-        		<a tabindex="-1  href="javascript:void(0)" class="qdx">EMBALAR PEDIDO PARA VIAGEM</a><br>
+        		<a tabindex="-1" href="javascript:void(0)" class="qdx">EMBALAR PEDIDO PARA VIAGEM</a><br>
         			<select class="form-control top2" id="embala_viagem">										
 						<?php
 							if($dados_venda['embala_viagem']==1){
@@ -343,7 +346,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	<div class="col-12 top15 bottom15">
         	<div class="col-12">	
         		MESAS: <br>
-        		<a tabindex="-1  href="javascript:void(0)" class="qdx">INFORME A MESA UTILIZADA</a><br>
+        		<a tabindex="-1" href="javascript:void(0)" class="qdx">INFORME A MESA UTILIZADA</a><br>
         			<select class="form-control top2" id="mesa" onchange="javascript:escolhe_mesa(this.value);">
 					<option value="0">--- ESCOLHA A MESA ---</option>
 					<?php
@@ -415,12 +418,12 @@ if($total_recebido_venda!=0){
 
 <div class="col-lg-4">
 
-    <div class="card card-connection">
+    <div class="card card-connection" style="padding: 20px">
               
         <div class="row row-xs">
         	<div class="col-5">
             	SUBTOTAL <br>
-                <a tabindex="-1  href="javascript:void(0)">SUBTOTAL DA COMPRA</a>
+                <a tabindex="-1" href="javascript:void(0)">SUBTOTAL DA COMPRA</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<?php echo number_format(($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos']),2,".",","); ?>
@@ -434,7 +437,7 @@ if($total_recebido_venda!=0){
 	                  		DESCONTO:                	
 	                    	<?php
 	                    		if(empty($dados_venda['tipo_desc'])){
-	                    			echo '=';
+	                    			echo '';
 	                    		} else if($dados_venda['tipo_desc']=='dinheiro'){
 	                    			echo 'R$';
 	                    		} else if($dados_venda['tipo_desc']=='porcentagem'){
@@ -469,7 +472,7 @@ if($total_recebido_venda!=0){
         <div class="row row-xs" style="display: none;">
         	<div class="col-5">
             	SUBTOTAL <br>
-                <a tabindex="-1  href="javascript:void(0)">DEVIDO PARCIAL</a>
+                <a tabindex="-1" href="javascript:void(0)">DEVIDO PARCIAL</a>
             </div>
         	<div class="col-7 tx-primary"><small>R$</small> 
         		<span id="val_subtotal"><?php echo number_format(($dados_venda['valor_total']-$dados_venda['valor_desconto']),2,".",","); ?></span>
@@ -480,17 +483,34 @@ if($total_recebido_venda!=0){
         <div class="row row-xs">
         	<div class="col-5">
             	TAXA DE ENTREGA <br>
-                <a tabindex="-1  href="javascript:void(0)">SOMADO AO SUBTOTAL</a>
+                <a tabindex="-1"  href="javascript:void(0)">SOMADO AO SUBTOTAL</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<span id="val_taxa_entrega"><?php echo $dados_venda['valor_entrega']; ?></div></span>            
         </div>
         <hr>
 
+
+        <?php if($dados_configuracoes['porcentagem_garcom']!='0.00') { ?>
+
+	        <div class="row row-xs">
+	        	<div class="col-5">
+	            	TAXA DE ATENDIMENTO <br>
+	                <input type="checkbox" id="remove_taxa" onclick="javascript:remove_taxa_garcom();"  <?php if($dados_venda['libera_taxa_garcom']==0){echo 'checked';} ?>>
+	                <a tabindex="-1" style="cursor: pointer;"  href="javascript:void(0)">&nbsp;<?php echo $dados_configuracoes['porcentagem_garcom']; ?>% GARÇOM</a>
+	            </div>
+	        	<div class="col-7 tx-danger"><small>R$</small> 
+	        		<span id="val_final_garcom"><?php echo number_format($dados_venda['valor_garcom'],2,".",","); ?></span>
+	        	</div>            
+	        </div>
+
+        <hr>
+    	<?php } ?>
+
         <div class="row row-xs">
         	<div class="col-5">
             	RECEBIDO <br>
-                <a tabindex="-1  href="javascript:void(0)" onclick="javascript:ve_pagamentos_recebidos();">VALORES RECEBIDOS</a>
+                <a tabindex="-1"  href="javascript:void(0)" onclick="javascript:ve_pagamentos_recebidos();">VALORES RECEBIDOS</a>
             </div>
         	<div class="col-7 tx-black tx-medium"><small>R$</small> 
         		<span id="val_recebido_texto"><?php echo number_format($total_recebido_venda,2,".",","); ?></span>
@@ -498,10 +518,13 @@ if($total_recebido_venda!=0){
         </div>
         <hr>
 
+        
+
+
         <div class="row row-xs">
         	<div class="col-5">
             	RESTA A RECEBER <br>
-                <a tabindex="-1  href="javascript:void(0)">FINAL A RECEBER</a>
+                <a tabindex="-1" href="javascript:void(0)">FINAL A RECEBER</a>
             </div>
         	<div class="col-7 tx-danger"><small>R$</small> 
         		<span id="val_final"><?php echo number_format($valor_final_receber,2,".",","); ?></span>
@@ -511,8 +534,8 @@ if($total_recebido_venda!=0){
         <hr>
 
 
-        <div class="row">
-	        <div class="col-md-12"> 
+        <div class="row row-xs">
+	        <div class="col-md-6"> 
 		        <div class="input-group input-group-lg">		              
 		        	<div class="input-group-append">
 		            	<span class="input-group-text" style="border-right:0" >
@@ -534,7 +557,7 @@ if($total_recebido_venda!=0){
 				</div>
 			</div>
 
-			<div class="col-md-12"> 
+			<div class="col-md-6"> 
 		        <div class="input-group input-group-lg" style="border-top: 0">		              
 		        	<div class="input-group-append" style="border-top: 0">
 		            	<span class="input-group-text" style="border-right:0"><i class="icofont-ui-reply"></i></span>
@@ -546,16 +569,20 @@ if($total_recebido_venda!=0){
 		</div>
 
 
-		<select class="form-control top10" id="forma_pagamento" style="border-radius: 0; text-transform: uppercase;" <?php if($valor_final_receber==0) {echo 'disabled';} ?>>
-			<option value="0">-- FORMA DE PAGAMENTO --</option>
-			<?php							
-				$sql = $db->select("SELECT * FROM formas_pagamento WHERE ativo='1' ORDER BY id");
-				while($row = $db->expand($sql)){
-					echo '<option value="'.$row['id'].'">'.$row['forma'].'</option>';
-				}
-			?>	
-		</select>
+	<div class="row row-xs">	
+		<div class="col-md-12"> 
+			<select class="form-control top10" id="forma_pagamento" style="border-radius: 0; text-transform: uppercase;" <?php if($valor_final_receber==0) {echo 'disabled';} ?>>
+				<option value="0">-- PAGAMENTO --</option>
+				<?php							
+					$sql = $db->select("SELECT * FROM formas_pagamento WHERE ativo='1' ORDER BY id");
+					while($row = $db->expand($sql)){
+						echo '<option value="'.$row['id'].'">'.$row['forma'].'</option>';
+					}
+				?>	
+			</select>
+		</div>
        
+       <div class="col-md-12"> 
         <?php if($valor_final_receber==0){ ?>
 
         	<button class="btn btn-success btn-block top10" id="btn_realiza_pagamento"  onclick="javascript:apenas_encerra_venda();" type="button" style="height: 42px">
@@ -569,6 +596,9 @@ if($total_recebido_venda!=0){
 			</button>
 
 	    <?php } ?>  
+		</div>
+	</div>	
+
               
     </div>
 </div>

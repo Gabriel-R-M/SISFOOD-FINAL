@@ -4,6 +4,11 @@ include_once("../../admin/class/class.seguranca.php");
 include_once("../../includes/verifica_session.php");
 include_once("../../includes/verifica_venda_aberta.php");
 
+
+$seleciona_x = $db->select("SELECT * FROM configuracoes LIMIT 1");
+$dados_configuracoes_x = $db->expand($seleciona_x);
+
+
 	$total_geral_produtos=0;
 	$total_geral_adicionais=0;
 	$total_geral_opcoes=0;
@@ -52,7 +57,7 @@ include_once("../../includes/verifica_venda_aberta.php");
 
 
 	//PEGA VALOR ENTREGA
-	$sql = $db->select("SELECT valor_desconto, valor_entrega FROM aguarda_venda  WHERE id='$id_venda' LIMIT 1");	
+	$sql = $db->select("SELECT valor_desconto, valor_entrega, libera_taxa_garcom FROM aguarda_venda  WHERE id='$id_venda' LIMIT 1");	
 	$naq = $db->expand($sql);
 
 	$valor_desconto = $naq['valor_desconto'];
@@ -61,7 +66,16 @@ include_once("../../includes/verifica_venda_aberta.php");
 	$total_pedido = ($total_geral_produtos+$total_geral_adicionais);
 	$total_final = ((($total_geral_produtos+$total_geral_adicionais)-$valor_desconto)+$valor_entrega);
 
-	$sql = $db->select("UPDATE aguarda_venda SET valor_total='$total_pedido', valor_produtos='$total_geral_produtos', valor_acrescimos='$total_geral_adicionais', valor_final_venda='$total_final' WHERE id='$id_venda' LIMIT 1");	
+	//PORCENTAGEM GARÇOM//
+	if($dados_configuracoes_x['porcentagem_garcom']!='0.00' && $naq['libera_taxa_garcom']==0){
+		if($dados_venda['entrega']==0){
+			$valor_garcom = (($total_final*$dados_configuracoes_x['porcentagem_garcom'])/100);
+			$total_final = ($total_final+$valor_garcom);
+		}
+	}
+
+
+	$sql = $db->select("UPDATE aguarda_venda SET valor_total='$total_pedido', valor_produtos='$total_geral_produtos', valor_acrescimos='$total_geral_adicionais', valor_final_venda='$total_final', valor_garcom='$valor_garcom' WHERE id='$id_venda' LIMIT 1");	
 
 
 	echo number_format($total_final,2,",",".");

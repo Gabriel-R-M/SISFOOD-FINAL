@@ -101,6 +101,13 @@
 
 	$sql = $db->select("ALTER TABLE configuracoes ADD colunas_impressora INT(10) NOT NULL",0);
 	$sql = $db->select("ALTER TABLE configuracoes ADD colunas_produto INT(10) NOT NULL",0);
+	$sql = $db->select("ALTER TABLE configuracoes ADD porcentagem_garcom DOUBLE(10,2) NOT NULL",0);
+
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD valor_garcom DOUBLE(10,2) NOT NULL",0);
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD libera_taxa_garcom INT(1) NOT NULL",0);
+
+
+	porcentagem_garcom
 
 	//CRIA PASTAS
 	mkdir('pedidos_imprimir/pasta1/', 0777, true);

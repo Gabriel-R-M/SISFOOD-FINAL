@@ -119,6 +119,12 @@
         </div> 
 
 
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Porcentagem Garçom %</label>
+                <input type="text" class="form-control valores" name="porcentagem_garcom"  value="<?php echo $ln['porcentagem_garcom']; ?>"/>
+           </div>
+        </div> 
 
 
             </div><!-- row -->

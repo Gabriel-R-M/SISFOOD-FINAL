@@ -322,6 +322,17 @@ require("../../diversos/funcoes_diversas.php");
     // ENTREGA //
 
 
+     // TAXA GARÇOM //
+    $txt_valor_garcom='';
+    if($dados_venda['valor_garcom']!=0){
+    	$aux_valor_total = 'TX ATENDIMENTO (+)';
+		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_garcom'],2,",",".");
+		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));			
+	} 		
+    // ENTREGA //
+
+
     // A RECEBER FINAL //    
     $aux_valor_total = 'TOTAL A RECEBER';
 	$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_final_venda'],2,",",".");
@@ -519,6 +530,12 @@ require("../../diversos/funcoes_diversas.php");
 		. $txt_valor_entrega;		
 	}
 	
+	if(!empty($txt_valor_garcom)){
+		$txt .= "\r\n"
+		. $txt_valor_garcom;		
+	}
+
+
 	$txt .= "\r\n"
 	. $txt_valor_final_receber;
 
