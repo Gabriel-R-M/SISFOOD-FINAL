@@ -3,8 +3,8 @@ ob_start();
 @session_start();
 
 define('ROOT_DIR', dirname(__FILE__).'/' );
-define('SISTEMA_DIR', 'http://localhost/efood/SISFOOD-FINAL/');
-define('ADMIN_DIR', 'http://localhost/efood/SISFOOD-FINAL/admin/');
+define('SISTEMA_DIR', 'http://localhost/SISFOOD-FINAL/');
+define('ADMIN_DIR', 'http://localhost/SISFOOD-FINAL/admin/');
 	
 
 //CLASSES DE USO

@@ -1297,6 +1297,7 @@ function remove_taxa_garcom(){
 	}        	
 
 	$("#soma_final").val(parseFloat(final));
+	$("#restante_receber").val(parseFloat(final));
 	$("#val_final").html(''+final.toFixed(2));	
 
 	
@@ -1365,6 +1366,15 @@ function edita_nome_cliente_comanda(id){
 	var_global=1;
 }
 
+
+function edita_valor_item(id){
+	$("#span_edita_valor"+id).hide();
+	$("#campo_edita_valor"+id).show();
+	$("#campo_edita_valor"+id).focus();
+	$("#campo_edita_valor"+id).select();
+	var_global=1;
+}
+
 function edita_quantidade_item(id){
 	$("#span_edita_qtd"+id).hide();
 	$("#campo_edita_qtd"+id).show();
@@ -1392,6 +1402,19 @@ function altera_quantidade_produto(campo){
 	$("#campo_edita_qtd"+campo).hide();
 	$("#span_edita_qtd"+campo).show();
 	$.post('menu_pedidos/actions/altera_quantidade.php',{id:campo, qtd:qtd}, function(a){		
+		atualiza_valor_final_pedido_comanda();	
+	});	
+	
+	var_global=0;
+}
+
+
+function altera_valor_produto(campo){
+	var valor = $("#campo_edita_valor"+campo).val();	
+	$("#span_edita_valor"+campo).html(valor);	
+	$("#campo_edita_valor"+campo).hide();
+	$("#span_edita_valor"+campo).show();
+	$.post('menu_pedidos/actions/altera_valor_produto.php',{id:campo, valor:valor}, function(a){		
 		atualiza_valor_final_pedido_comanda();	
 	});	
 	

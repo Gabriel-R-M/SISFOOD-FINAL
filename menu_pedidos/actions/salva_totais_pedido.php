@@ -78,7 +78,7 @@ $dados_configuracoes_x = $db->expand($seleciona_x);
 	$sql = $db->select("UPDATE aguarda_venda SET valor_total='$total_pedido', valor_produtos='$total_geral_produtos', valor_acrescimos='$total_geral_adicionais', valor_final_venda='$total_final', valor_garcom='$valor_garcom' WHERE id='$id_venda' LIMIT 1");	
 
 
-	echo number_format($total_final,2,",",".");
+	echo number_format(($total_final-$valor_garcom),2,",",".");
 
 
 ?>

@@ -496,7 +496,7 @@ if($total_recebido_venda!=0){
 	        <div class="row row-xs">
 	        	<div class="col-5">
 	            	TAXA DE ATENDIMENTO <br>
-	                <input type="checkbox" id="remove_taxa" onclick="javascript:remove_taxa_garcom();"  <?php if($dados_venda['libera_taxa_garcom']==0){echo 'checked';} ?>>
+	                <input type="checkbox" id="remove_taxa" onclick="javascript:remove_taxa_garcom();"  <?php if($dados_venda['libera_taxa_garcom']==0){echo 'checked';} ?> <?php echo $disabled; ?>>
 	                <a tabindex="-1" style="cursor: pointer;"  href="javascript:void(0)">&nbsp;<?php echo $dados_configuracoes['porcentagem_garcom']; ?>% GARÇOM</a>
 	            </div>
 	        	<div class="col-7 tx-danger"><small>R$</small> 

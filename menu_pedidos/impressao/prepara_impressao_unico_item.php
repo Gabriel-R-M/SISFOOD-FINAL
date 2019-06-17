@@ -429,14 +429,14 @@ while($cat_pesq = $db->expand($sel_group)){
 
 
 	///GERA O ARQUIVO	
-	$txt = implode("\r\n", $cabecalho)
-	. "\r\n"
-	.implode("\r\n", $cabs)
-	. "\r\n"
-	. implode("\r\n", $itens)
-	. "\r\n"
-	.implode("\r\n", $txt_dados_entrega)
-	.$dados_entrega;
+	//$txt = implode("\r\n", $cabecalho)
+	//. "\r\n"
+	//.implode("\r\n", $cabs)
+	//. "\r\n"
+	//. implode("\r\n", $itens)
+	//. "\r\n"
+	//.implode("\r\n", $txt_dados_entrega)
+	//.$dados_entrega;
 
 
 	///GERA O ARQUIVO	

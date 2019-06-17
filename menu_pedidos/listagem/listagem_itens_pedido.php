@@ -128,7 +128,17 @@ if($db->rows($sql)){
 
         echo '<br>';
         echo '<span class="name_produto_comanda upper corta_texto">'.$nome_produto.'</span>';
-        echo '<span class="pull-right text-right">R$ '.number_format($row['valor'],2,",",".").'</span>';
+
+
+        $link_edita_valor='';
+		if($dados_venda['finalizada']==0){
+			$link_edita_valor='ondblclick="javascript:edita_valor_item('.$id_controle.');"';
+		}
+
+        echo '<span '.$link_edita_valor.' id="span_edita_valor'.$id_controle.'" class="pull-right text-right">R$ '.number_format($row['valor'],2,",",".").'</span>';
+
+        echo '<input tabindex="-1" type="text" data-id="'.$id_controle.'" id="campo_edita_valor'.$id_controle.'" value="'.$row['valor'].'"  class="campo_edita_valor pull-right valores" style="width:80px">';
+
         echo '<br><small style="color:#333" class="upper">'.$nome_tamanho.'</small>';
 
         if(!empty($nome_tamanho)){
@@ -254,6 +264,16 @@ if($db->rows($sql)){
 <input type="hidden" value="<?php echo $qtd_itens_pedido; ?>" id="totais_itens_pedido">
 
 
+<script type="text/javascript">     
+	$(".valores").maskMoney({
+		symbol:'', // Simbolo
+		decimal:'.', // Separador do decimal
+		precision:2, // Precisão
+		thousands:'', // Separador para os milhares
+		allowZero:true, // Permite que o digito 0 seja o primeiro caractere
+		showSymbol:false // Exibe/Oculta o símbolo
+	});	
+</script>
 
 <script>
 $(document).ready(function(){
@@ -262,6 +282,15 @@ $(document).ready(function(){
 	        event.preventDefault();
 			var id_campo = $(this).attr("data-id"); 
 			altera_quantidade_produto(id_campo);
+	    }
+	});
+
+
+	$(".campo_edita_valor").keypress(function(event) {
+	    if (event.which == 13) {
+	        event.preventDefault();
+			var id_campo = $(this).attr("data-id"); 
+			altera_valor_produto(id_campo);			
 	    }
 	});
 

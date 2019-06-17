@@ -84,6 +84,8 @@ button:focus{background-color: yellow; color: #000; box-shadow:none; outline: no
 .mleft-opt{margin-left: 15px; font-size: 12px}
 .name_produto_comanda{width: 75%;  display: inline-flex; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;}
 .campo_edita_qtd{width:40px; text-align:center; display: none;}
+.campo_edita_valor{width:40px; text-align:center; display: none;}
+
 .campo_edita_nome{width:180px; display: none; outline: none; text-transform: uppercase;  }
 #valor_final_pedido_comanda{font-size: 20px; }
 .color-black{color: #333;}

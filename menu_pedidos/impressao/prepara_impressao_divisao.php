@@ -304,11 +304,34 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 
 
     // SUBTOTAL //
+    
     $aux_valor_total = 'SUBTOTAL';
 	$aux_valor_total2 = 'R$ '.number_format(($dados_venda['valor_produtos']+$dados_venda['valor_acrescimos']),2,",",".");
 	$txt_valor_total = ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
 	$txt_valor_total .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));
     // SUBTOTAL //
+
+    // TAXA GARÇOM //
+    $txt_valor_garcom='';
+    if($dados_venda['valor_garcom']!='0.00'){
+    	$txt_valor_garcom .= ajusta_caracteres_impressao()."\r\n";
+    	$aux_valor_total = 'TX ATENDIMENTO (+)';
+		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_garcom'],2,",",".");
+		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));			
+	} 		
+    // ENTREGA //
+
+
+
+    // A RECEBER FINAL //    
+    $txt_valor_final_receber ='';
+    $txt_valor_final_receber .= ajusta_caracteres_impressao()."\r\n";
+    $aux_valor_total = 'TOTAL A RECEBER';
+	$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_final_venda'],2,",",".");
+	$txt_valor_final_receber .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
+	$txt_valor_final_receber .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));				
+    // A RECEBER FINAL //
 
 
 	$dados_entrega='';
@@ -333,9 +356,20 @@ while($dados_divisao = $db->expand($pesquisa_divisao)){
 	$txt = implode("\r\n", $cabecalho)
 	. "\r\n"
 	. implode("\r\n", $itens)
-	. "\r\n"
-	. $txt_valor_total // SubTotal	
-	."\r\n"
+	. "\r\n\r\n"
+	. $txt_valor_total; // SubTotal	
+
+	if(!empty($txt_valor_garcom)){
+		$txt .= "\r\n"
+		. $txt_valor_garcom;		
+	}
+
+
+	$txt .= "\r\n"
+	. $txt_valor_final_receber;
+
+
+	$txt .= "\r\n"
 	.$dados_entrega;
 
    //CAMINHO DO TXT CRIADO

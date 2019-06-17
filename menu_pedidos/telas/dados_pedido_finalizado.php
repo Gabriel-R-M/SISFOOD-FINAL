@@ -62,6 +62,12 @@
                         <td class="tx-right">ENTREGA (+):</td>
                         <td class="tx-right">R$ <?php echo number_format($dados_venda['valor_entrega'],2,",","."); ?></td>
                       </tr>
+                      <?php if($dados_venda['valor_garcom']!='0.00'){ ?>
+                      <tr>
+                        <td class="tx-right">TAXA ATENDIMENTO (+):</td>
+                        <td class="tx-right">R$ <?php echo number_format($dados_venda['valor_garcom'],2,",","."); ?></td>
+                      </tr>
+                      <?php } ?>
                       <tr>
                         <td class="tx-right tx-uppercase tx-bold tx-inverse">TOTAL GERAL:</td>
                         <td class="tx-right"><h4 class="tx-primary tx-bold tx-lato">R$ <?php echo number_format($dados_venda['valor_final_venda'],2,",","."); ?></h4></td>

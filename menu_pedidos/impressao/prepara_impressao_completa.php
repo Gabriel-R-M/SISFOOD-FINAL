@@ -322,9 +322,9 @@ require("../../diversos/funcoes_diversas.php");
     // ENTREGA //
 
 
-     // TAXA GARÇOM //
+    // TAXA GARÇOM //
     $txt_valor_garcom='';
-    if($dados_venda['valor_garcom']!=0){
+    if($dados_venda['valor_garcom']!='0.00'){
     	$aux_valor_total = 'TX ATENDIMENTO (+)';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_garcom'],2,",",".");
 		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));

@@ -107,8 +107,6 @@
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD libera_taxa_garcom INT(1) NOT NULL",0);
 
 
-	porcentagem_garcom
-
 	//CRIA PASTAS
 	mkdir('pedidos_imprimir/pasta1/', 0777, true);
 	mkdir('pedidos_imprimir/pasta2/', 0777, true);
