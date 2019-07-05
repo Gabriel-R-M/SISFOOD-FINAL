@@ -28,7 +28,6 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 
 	
 	<input type="hidden" id="porcentagem_garcom" value="<?php echo $dados_configuracoes['porcentagem_garcom']; ?>">
-
 	<input type="hidden" id="soma_entrega" value="<?php echo $dados_venda['valor_entrega']; ?>">
 	<input type="hidden" id="soma_pedido" value="<?php echo $dados_venda['valor_total']; ?>">
 	<input type="hidden" id="soma_final" value="<?php echo $dados_venda['valor_final_venda']; ?>">
@@ -505,7 +504,11 @@ if($total_recebido_venda!=0){
 	        </div>
 
         <hr>
-    	<?php } ?>
+    	<?php } else { ?>
+
+    			<input type="checkbox" id="remove_taxa" style="display: none;">
+
+    	<?php }  ?>	
 
         <div class="row row-xs">
         	<div class="col-5">
