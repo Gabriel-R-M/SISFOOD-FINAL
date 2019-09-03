@@ -6,7 +6,7 @@ require("../../includes/verifica_caixa_aberto.php");
 require("../actions/totalizadores_caixa.php");
 ?>
 
-<div class="col-md-12">
+<div class="col-md-12 mesas-exibicao" style="overflow-x: hidden;">
 			
 			<div class="order-top">
 				<h20>Manutenção de Caixa</h20>			
@@ -56,21 +56,68 @@ require("../actions/totalizadores_caixa.php");
 
 
 		<ul class="list-group bottom5" >
-        
+        	
+
+			<?php 
+			$busca_pgtos = $db->select("SELECT ativo FROM formas_pagamento WHERE id='1' LIMIT 1");
+			$line_pgtos = $db->expand($busca_pgtos);
+			if($line_pgtos['ativo']==1){	
+			?>
             <li class="list-group-item" style="border-bottom: 0; border-top: 0">
             	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(1);">RECEBIMENTOS EM DINHEIRO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,1),2,".",","); ?> +</span>
             </li>
+        	<?php } ?>
 
+
+        	<?php 
+			$busca_pgtos = $db->select("SELECT ativo FROM formas_pagamento WHERE id='2' LIMIT 1");
+			$line_pgtos = $db->expand($busca_pgtos);
+			if($line_pgtos['ativo']==1){	
+			?>
              <li class="list-group-item" style="border-bottom: 0">
             	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(2);">RECEBIMENTOS NO CARTÃO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,2),2,".",","); ?> +</span>
             </li>
+            <?php } ?>
            
+
+            <?php 
+			$busca_pgtos = $db->select("SELECT ativo FROM formas_pagamento WHERE id='3' LIMIT 1");
+			$line_pgtos = $db->expand($busca_pgtos);
+			if($line_pgtos['ativo']==1){	
+			?>
              <li class="list-group-item" style="border-bottom: 0">
             	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_recebimentos_crediario();">RECEBIMENTOS DE CREDIÁRIO:</a>
             	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,3),2,".",","); ?> +</span>
             </li>
+            <?php } ?>
+
+
+            <?php 
+			$busca_pgtos = $db->select("SELECT ativo FROM formas_pagamento WHERE id='10' LIMIT 1");
+			$line_pgtos = $db->expand($busca_pgtos);
+			if($line_pgtos['ativo']==1){	
+			?>
+             <li class="list-group-item" style="border-bottom: 0">
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(10);">RECEBIMENTOS APP AIQFOME:</a>
+            	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,10),2,".",","); ?> +</span>
+            </li>
+            <?php } ?>
+
+
+            <?php 
+			$busca_pgtos = $db->select("SELECT ativo FROM formas_pagamento WHERE id='11' LIMIT 1");
+			$line_pgtos = $db->expand($busca_pgtos);
+			if($line_pgtos['ativo']==1){	
+			?>
+
+			<li class="list-group-item" style="border-bottom: 0">
+            	<a tabindex="-1" href="javascript:void(0)" onclick="javascript:vizualiza_vendas(11);">RECEBIMENTOS APP IFOOD:</a>
+            	<span class="pull-right">R$ <?php echo number_format(devolve_valores_caixa($id_caixa_aberto,11),2,".",","); ?> +</span>
+            </li>
+			<?php } ?>
+
 
             <li class="list-group-item active" style="border-bottom: 0">
             	<span>SUBTOTAL:</span>
@@ -135,9 +182,8 @@ require("../actions/totalizadores_caixa.php");
 			</div>
 
 
-</div>	
-	
-	<?php 
+<div class="row row-xs">
+			<?php 
 	if($dados_caixa_aberto['data_fechamento']=='0000-00-00'){	
 			$disabled='';
 			$sel = $db->select("SELECT id FROM aguarda_venda WHERE id_caixa='$id_caixa_aberto' AND finalizada='0' AND aguarde='1' LIMIT 1");
@@ -162,10 +208,15 @@ require("../actions/totalizadores_caixa.php");
 		}
 
 	}
-	?>	
+	?>
+
+
+</div>	
+	
+</div>		
 		
 
-	
+
 
 
 <script type="text/javascript">     
@@ -179,6 +230,9 @@ require("../actions/totalizadores_caixa.php");
 	});	
 </script>
 
-<script>		
+<script>
+	$(document).ready(function(){
+		$('.mesas-exibicao').perfectScrollbar();
+	});	
 	window.clearTimeout(atualiza_pedidos);	
 </script>

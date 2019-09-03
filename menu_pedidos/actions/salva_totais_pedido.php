@@ -69,8 +69,10 @@ $dados_configuracoes_x = $db->expand($seleciona_x);
 	//PORCENTAGEM GARÇOM//
 	if($dados_configuracoes_x['porcentagem_garcom']!='0.00' && $naq['libera_taxa_garcom']==0){
 		if($dados_venda['entrega']==0){
-			$valor_garcom = (($total_final*$dados_configuracoes_x['porcentagem_garcom'])/100);
-			$total_final = ($total_final+$valor_garcom);
+			if(isset($_SESSION['id_mesa_erp_sis']) && $_SESSION['id_mesa_erp_sis']!=0){
+				$valor_garcom = (($total_final*$dados_configuracoes_x['porcentagem_garcom'])/100);
+				$total_final = ($total_final+$valor_garcom);
+			}
 		}
 	}
 

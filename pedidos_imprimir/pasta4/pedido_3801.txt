@@ -1,0 +1,36 @@
+  Casa de Rango/Big Burg Gourmet  
+         28 DE ABRIL, 239         
+   (14) 3278-2818 / 99830-0807   
+          PEDIDO: #3801          
+       19/07/2019 AS 10:51       
+----------------------------------
+              MESA 2              
+----------------------------------
+Qtd CAT/Produto     V. UN   Total
+----------------------------------
+01  REFEICAO         6,00    6,00
+    ABACAXI                              
+
+    [ATENCAO]                              
+    ASASAS                              
+----------------------------------
+01  REFEICAO        14,90   14,90
+    SELF-SERVICE                              
+
+    [ATENCAO]                              
+    assasasas aasasasasaas                              
+----------------------------------
+SUBTOTAL                  R$ 20,90
+TX ATENDIMENTO             R$ 2,09
+TOTAL A RECEBER           R$ 22,99
+----------------------------------
+         DADOS DO CLIENTE         
+----------------------------------
+CLIENTE AVULSO                    
+----------------------------------
+TOTAL DE ITENS DO PEDIDO: 2       
+----------------------------------
+PEDIDO CONTENDO:                  
+REFEICAO                          
+----------------------------------
+ATENDENTE: DIOGO                  

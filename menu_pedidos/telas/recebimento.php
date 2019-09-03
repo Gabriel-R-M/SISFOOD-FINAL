@@ -131,6 +131,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
 				<span class="pull-right">[ver detalhes]</span>						
 			</div>
 			</a>
+			
 				
 		<?php		
 			}
@@ -266,7 +267,7 @@ if(isset($_SESSION['id_mesa_erp_sis'])){
         	</div>
 
 
-        	<div class="col-12 top15 <?php if($dados_configuracoes['escolhe_motoqueiro']==0){echo 'hide';} ?>">
+        	<div class="col-12 top15 <?php if($dados_configuracoes['escolhe_motoqueiro']==1 || $dados_configuracoes['escolhe_motoqueiro']==0){echo 'hide';} ?>">
         	<div class="col-12">	
         		ENTREGADOR: <br>
         		<a tabindex="-1" href="javascript:void(0)" class="qdx">ESCOLHA O ENTREGADOR</a><br>
@@ -495,11 +496,20 @@ if($total_recebido_venda!=0){
 	        <div class="row row-xs">
 	        	<div class="col-5">
 	            	TAXA DE ATENDIMENTO <br>
-	                <input type="checkbox" id="remove_taxa" onclick="javascript:remove_taxa_garcom();"  <?php if($dados_venda['libera_taxa_garcom']==0){echo 'checked';} ?> <?php echo $disabled; ?>>
+	                <input type="checkbox" id="remove_taxa" onclick="javascript:remove_taxa_garcom();"  <?php if($dados_venda['libera_taxa_garcom']==0 && ($dados_venda['id_mesa']!=0 OR isset($_SESSION['id_mesa_erp_sis']))){echo 'checked';} ?> <?php echo $disabled; ?>>
 	                <a tabindex="-1" style="cursor: pointer;"  href="javascript:void(0)">&nbsp;<?php echo $dados_configuracoes['porcentagem_garcom']; ?>% GARÇOM</a>
 	            </div>
 	        	<div class="col-7 tx-danger"><small>R$</small> 
-	        		<span id="val_final_garcom"><?php echo number_format($dados_venda['valor_garcom'],2,".",","); ?></span>
+	        		<span id="val_final_garcom">
+	        			<?php 
+		        			if($dados_venda['libera_taxa_garcom']==0 && ($dados_venda['id_mesa']!=0 OR isset($_SESSION['id_mesa_erp_sis']))){
+		        				echo number_format($dados_venda['valor_garcom'],2,".",",");	        				
+		        			} else {
+		        				echo number_format($dados_venda['valor_garcom'],2,".",","); 	        				
+		        			}
+	        			?>	        				
+	        			
+	        		</span>
 	        	</div>            
 	        </div>
 

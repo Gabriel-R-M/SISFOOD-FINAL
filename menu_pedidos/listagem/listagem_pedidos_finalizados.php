@@ -16,7 +16,7 @@
 	      $sel = $db->select("SELECT aguarda_venda.*, clientes.nome, usuarios.nome AS atendente FROM aguarda_venda 	      	
 	      LEFT JOIN clientes ON aguarda_venda.id_cliente=clientes.id
 	      LEFT JOIN usuarios ON aguarda_venda.id_usuario=usuarios.id
-	      WHERE aguarda_venda.finalizada='1' AND aguarda_venda.id_caixa='$id_caixa_aberto' 
+	      WHERE aguarda_venda.finalizada='1' AND aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.baixado='1'
 	      ORDER BY aguarda_venda.pedido_inicio DESC
 	      ");
 		if($db->rows($sel)){
@@ -24,9 +24,12 @@
 			while($dados = $db->expand($sel)){
 			
 			//ENTREGA	
-			if($dados['entrega']==1){
+			if($dados['entrega']!=0){
 				$entrega = '<span class="label label-primary">ENTREGA</span>';
 
+			//MESA	
+			} else if($dados['ocupou_mesa']!=0){
+				$entrega = '<span class="label label-info">MESA</span>';
 			//RETIRA BALCÃO	
 			} else {
 				$entrega = '<span class="label label-warning">BALCÃO</span>';

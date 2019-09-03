@@ -34,7 +34,7 @@ function inicia_sistema(){
 				//TEM MESAS
 				if(val[1]>0){
 					$("#conteudo_geral").load('menu_pedidos/telas/mesas_pedidos.php');				
-					//$("#conteudo_geral").load('menu_pedidos/telas/novo_pedido.php');			
+					//$("#conteudo_geral").load('menu_pedidos/telas/recebimento.php');			
 				//NAO TEM MESAS MAS TEM ENTREGAS	
 				} else if(val[2]==1){
 					$("#conteudo_geral").load('menu_pedidos/telas/entregas_comandas.php');			
@@ -110,11 +110,6 @@ function mesas_pedidos(){
 	abre_menu('menu_pedidos/telas/mesas_pedidos.php');	
 }
 
-
-function mesas_pedidos(){
-	carregando();
-	abre_menu('menu_pedidos/telas/mesas_pedidos.php');	
-}
 
 
 function novo_pedido(){

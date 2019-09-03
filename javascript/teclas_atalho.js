@@ -10,10 +10,21 @@ $(document).ready(function(){
 	sim_abre_caixa=0;
 	sim_finaliza_caixa=0;
 
+	shift_duas_vezes=0;
 
 	$("body").keydown(function(e) {
 		
 		var keyCode = e.keyCode || e.which;
+
+		//TECLA SHIFT DUAS VEZES//
+		if(keyCode == 16) {
+			shift_duas_vezes++;
+			if(shift_duas_vezes==2){
+				$("#ModalConsultaPreco").modal();	
+			}
+		} else {
+			shift_duas_vezes=0;
+		}
 
 		//TECLA F2//
 		if(keyCode == 113) {

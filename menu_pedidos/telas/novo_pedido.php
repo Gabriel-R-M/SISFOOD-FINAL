@@ -67,14 +67,27 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 	if($dados_venda['finalizada']==1){
 	?>
 
+	<?php
+	if($dados_venda['baixado']==0){
+	?>
+
+		<button class="btn btn-teal top10 " id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:finaliza_venda_final(<?php echo $id_venda; ?>);">
+			<i class="icofont-verification-check"></i>
+			&nbsp;FINALIZAR
+		</button>	
+
+	<?php
+	}
+	?>
+
 		<button class="btn btn-danger top10 " id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:cancela_venda(<?php echo $id_venda; ?>);">
 			<i class="icofont-ui-close"></i>
 			&nbsp;CANCELAR (F4)
 		</button>	
  
-		<button class="btn btn-danger top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
+		<button class="btn btn-info top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
 			<i class="icofont-printer"></i>
-			&nbsp;REIIMPRIMIR (F3)
+			&nbsp;REIMPRIMIR (F3)
 		</button>
 
 		<?php
@@ -190,12 +203,12 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 		<div class="box-nome-cliente bottom10">
 			<div class="row row-xs">	
 				<div class="col-md-6">
-					<input type="text" class="form-control input-block" placeholder="NOME DO CLIENTE" id="nome-cliente-produto">
+					<input type="text" class="form-control input-block upper" placeholder="NOME DO CLIENTE" id="nome-cliente-produto">
 					<i class="icofont-users-alt-4"></i>
 			    </div>
 
 			    <div class="col-md-6" >
-					<input type="text" class="form-control input-block" placeholder="OBSERVAÇÕES" id="observacoes-produto">
+					<input type="text" class="form-control input-block upper" placeholder="OBSERVAÇÕES" id="observacoes-produto">
 					<i class="icofont-pencil-alt-1"></i>
 			    </div>
 			</div>    

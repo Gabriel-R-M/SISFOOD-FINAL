@@ -1100,6 +1100,7 @@ function defini_tipo_troco_cartao_entrega(tipo){
 
 function escolhe_taxa_entrega(a){
 
+	$("#embala_viagem").val($("#embala_viagem option:eq(1)").val());	
 	var total_pedido = parseFloat($("#soma_pedido").val());	
 	var val_recebido = parseFloat($("#val_recebido").val());	
 	var mesa_id = $("#mesa").val();
@@ -1111,11 +1112,18 @@ function escolhe_taxa_entrega(a){
 	}
 
 
+
 	//NAO TEM TAXA DE ENTREGA
 	if(a==0){
 
-		if(mesa_id==0){			
-			$("#embala_viagem").val($("#embala_viagem option:eq(1)").val());	
+		
+		$("#soma_garcom").val('0');	
+		$("#val_final_garcom").html('0.00');
+		$("#remove_taxa"). prop("checked", false);
+		
+
+		if(mesa_id!=0){						
+			$("#embala_viagem").val($("#embala_viagem option:eq(0)").val());	
 		} 
 
 		//ZERA ENTREGADOR E TROCO DA ENTREGA
@@ -1141,6 +1149,8 @@ function escolhe_taxa_entrega(a){
 
 	//TEM TAXA	
 	} else {
+
+
 
 		//ZERA ENTREGADOR E TROCO DA ENTREGA
 		$("#definicoes_entrega").show();
@@ -1198,6 +1208,7 @@ function fazdesconto(tipo){
 		return;
 	}
 
+	$('#remove_taxa').prop('checked', true);
 	
 
 	//DESCONTO EM PORCENTAGEM
@@ -1281,16 +1292,27 @@ function remove_taxa_garcom(){
 	porcentagem_garcom  = $("#porcentagem_garcom").val();
 
 
+
+	if(desconto==''){desconto=0;}
+
+
 	if($("#remove_taxa").is(':checked')){
+
+	
 		
 		var final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));	
 		var final2 = ((parseFloat(final)*parseFloat(porcentagem_garcom))/100);	
 		var final = (parseFloat(final)+parseFloat(final2));
 
+	
+
+
 		$("#val_final_garcom").html(''+final2.toFixed(2));
 		$("#soma_garcom").val(final2);		
 
 	} else {
+
+
 		$("#val_final_garcom").html('0.00');
 		$("#soma_garcom").val(0);		
 		var final = ((parseFloat(total_pedido)-parseFloat(desconto))+parseFloat(total_entrega));	
@@ -1642,11 +1664,22 @@ function salva_item_pedido(){
 		$(".opcoes_desmarca").prop( "checked", false);	
 
 
-		//APENAS PARA MOBILE//						
+		//APENAS PARA MOBILE//		
+		var nome_submesa_mobile ='';
 		if(tela_mobile==1){			
 			$("#exibicao_produtos_pedido").removeClass('margin30');
 			$("#input_pesquisa_produto").val('');
 			$("#quantidade-produto").val('');
+
+			var nome_submesa_mobile = $("#nome_submesa").val();
+			var novo_nome_submesa_mobile = $("#nome_submesa_escrito").val();
+
+			if(novo_nome_submesa_mobile!=''){
+				nome_cliente = novo_nome_submesa_mobile;
+			} else {
+				nome_cliente = $("#nome_submesa").val();
+			}
+
 			//$("#input_pesquisa_produto").focus();
 		}
 
@@ -1668,7 +1701,26 @@ function salva_item_pedido(){
 			setTimeout('$("#sucesso_salva_pedido_mobile").hide()',4000 );
 			$.post('menu_pedidos/actions/pega_qtd_itens_pedido.php',{id:1}, function(resposta){
 				$(".qtd_itens_grande").html(resposta)
-			});					
+			});		
+
+
+			
+					
+					$("#novo_nome_mesa").hide();
+					$("#nome_submesa_escrito").val('');
+					var id_venda_mobile = $("#id_venda_mobile").val();
+
+					$("#nome_submesa").html('<option value="">CARREGANDO...</option>');		    			
+	    			$.post('menu_pedidos/listagem/listagem_submesas.php', {id:id_venda_mobile}, function(resposta){
+	    				
+						$("#nome_submesa").html(resposta);	
+					});
+
+					$(".ja_nome_mesa").show();
+
+					//$("#aviso_salvar_pedido").show();
+				
+
 		}
 
 		//ZERA A VARIAVEL DE PESQUISA DE ADICIONAIS
@@ -2133,3 +2185,8 @@ function exibe_produtos_categorias_pedido(categoria){
 }
 
 
+
+function finaliza_venda_final(id){
+	$.post('menu_pedidos/actions/marca_venda_finalizada.php',{id:id});
+	inicia_sistema();
+}

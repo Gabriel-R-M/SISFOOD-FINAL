@@ -123,7 +123,7 @@ require("../../diversos/funcoes_diversas.php");
 		$dados_user_venda = $db->expand($selx); 
 
 		$txt_fim =	ajusta_caracteres_impressao('RESPONSAVEL: '.retira_acentos($dados_user_venda['nome']),'M')."\r\n";
-		$txt_fim2 =	ajusta_caracteres_impressao($dados_pgto['data_pgto'],0,10)).' AS '.substr($dados_pgto['data_pgto'],11,5).'hs','M');			
+		$txt_fim2 =	ajusta_caracteres_impressao(data_mysql_para_user(substr($dados_pgto['data_pgto'],0,10)).' AS '.substr($dados_pgto['data_pgto'],11,5).'hs','M');			
 	//USUÁRIO RESPONSÁVEL//	
 
 

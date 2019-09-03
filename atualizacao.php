@@ -106,6 +106,24 @@
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD valor_garcom DOUBLE(10,2) NOT NULL",0);
 	$sql = $db->select("ALTER TABLE aguarda_venda ADD libera_taxa_garcom INT(1) NOT NULL",0);
 
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD baixado INT(1) NOT NULL",0);
+	$sql = $db->select("ALTER TABLE lanches ADD estoque INT(10) NOT NULL",0);
+	$sql = $db->select("ALTER TABLE configuracoes ADD controla_estoque INT(1) NOT NULL",0);
+
+	$sql = $db->select("UPDATE lanches SET baixado='1' WHERE finalizada='1'",0);
+
+
+	//AiqFome e Ifood
+	$sql = $db->select("INSERT INTO formas_pagamento (id, forma) VALUES ('10', 'AiqFome')");
+	$sql = $db->select("INSERT INTO formas_pagamento (id, forma) VALUES ('11', 'Ifood')");
+
+
+	//
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD motivo_cancelamento TEXT",0);
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD valor_cancelado DOUBLE(10,2)",0);
+	$sql = $db->select("ALTER TABLE aguarda_venda ADD cancelada INT(1)",0);
+	
+
 
 	//CRIA PASTAS
 	mkdir('pedidos_imprimir/pasta1/', 0777, true);

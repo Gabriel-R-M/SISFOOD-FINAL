@@ -82,6 +82,39 @@ function marca_pedidos_entrega(){
 }
 
 
+function marca_pedido_entregue_interno_sistema(entregador, pedido, tipo, entrega_ok=0){
+	
+	$.post('menu_pedidos/actions/marca_entrega.php',{entregador:entregador, pedido:pedido, tipo:tipo, entrega_ok:entrega_ok}, function(resposta){		
+		
+		//SAIU PARA ENTREGA//
+		if(tipo==1 && entrega_ok==0){
+			$("#seleciona_entregador"+pedido).hide();
+			$("#marca_ok_entrega"+pedido).show();
+			$("#marca_ok_entrega2"+pedido).show()
+			$("#entrega_escrita"+pedido).html('<i class="fa fa-motorcycle fa-fw" aria-hidden="true"></i>&nbsp;SAIU P/ ENTREGA ÁS '+resposta);			
+		}
+
+		//NAO ENTREGUE PARA ENTREGA//
+		if(tipo==0 && entrega_ok==0){
+			$("#marca_ok_entrega"+pedido).hide();
+			$("#marca_ok_entrega2"+pedido).hide()
+			$("#seleciona_entregador"+pedido).show();			
+			$("#entrega_escrita"+pedido).html('<i class="fa fa-motorcycle fa-fw" aria-hidden="true"></i>&nbsp; AGUARDANDO ENTREGA.');			
+			$("#nome_entregador"+pedido).val($("#nome_entregador"+pedido+" option:first").val());	
+		}
+
+		//ENTREGA OK//
+		if(tipo==1 && entrega_ok==1){
+			entregas_comandas();			
+		}
+
+		
+	});
+
+}
+
+
+
 
 function marca_pedido_entregue(entregador, pedido, tipo, entrega_ok=0){
 

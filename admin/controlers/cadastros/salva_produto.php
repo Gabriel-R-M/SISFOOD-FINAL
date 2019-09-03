@@ -2,8 +2,24 @@
 require("../../config.php");
 $Images = new UploadArquivoSis(); 
 
+$hoje = date("Y-m-d");
+$hora = date("H:i");
+
+
 //UPDATE
 if($id!=0){
+
+	$sql = $db->select("SELECT estoque FROM lanches WHERE id='$id' LIMIT 1");  
+	$ln = $db->expand($sql);
+
+	if($ln['estoque']!=$estoque){
+
+		if($ln['estoque']<$estoque){$tipo=1;} else {$tipo=0;}
+
+		$sel = $db->select("INSERT INTO estoque_movimentacao (id_produto, quantidade, data, hora, tipo) VALUES ('$id', '$estoque', '$hoje', '$hora', '$tipo')");
+	}
+
+
 	
 	$id_produto = $id;
 	$arquivo = $Images->Upload('../../../imagens/produtos','foto',600);
@@ -15,7 +31,7 @@ if($id!=0){
 	}
 	
 		
-	$grava = $db->select("UPDATE lanches SET csosn='$csosn', ncm='$ncm', cst='$cst', cfop='$cfop', produto='$produto', preco_composto='$preco_composto', categoria='$categoria', codigo='$codigo', ativo='$ativo' $q WHERE id='$id' LIMIT 1");	
+	$grava = $db->select("UPDATE lanches SET estoque='$estoque', csosn='$csosn', ncm='$ncm', cst='$cst', cfop='$cfop', produto='$produto', preco_composto='$preco_composto', categoria='$categoria', codigo='$codigo', ativo='$ativo' $q WHERE id='$id' LIMIT 1");	
 
 
 	//APAGA OS PRECOS E INSERE
@@ -52,9 +68,12 @@ if($id!=0){
 		$foto=$arquivo;
 	}
 
-	$grava = $db->select("INSERT INTO lanches (csosn, ncm, cst, cfop, produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$csosn', '$ncm', '$cst', '$cfop', '$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
+	$grava = $db->select("INSERT INTO lanches (estoque, csosn, ncm, cst, cfop, produto, foto, preco_composto, categoria, codigo, ativo) VALUES ('$estoque', '$csosn', '$ncm', '$cst', '$cfop', '$produto', '$foto', '$preco_composto', '$categoria', '$codigo', '$ativo')");	
 
 	$id_produto = $db->last_id($grava);
+
+
+	$sel = $db->select("INSERT INTO estoque_movimentacao (id_produto, quantidade, data, hora, tipo) VALUES ('$id_produto', '$estoque', '$hoje', '$hora', '1')");
 	
 
 	//APAGA OS PRECOS E INSERE

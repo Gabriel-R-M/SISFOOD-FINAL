@@ -1,3 +1,38 @@
+<div id="ModalConsultaPreco" class="modal fade" tabindex="-1" >
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-header">        
+        <h4 class="modal-title">Consulta de Preços</h4>
+       
+      </div>
+      
+        <div class="modal-body pd-20 text-center" style="text-transform: uppercase;">
+
+            <div class="form-group top10">               
+                <input type="text" autocomplete="off" style="width: 430px; " name="consulta_preco_input" id="consulta_preco_input" class="form-control" onkeyup="javascript:consulta_precos_modal(this.value);">               
+            </div> 
+
+            <div class="" style="max-height: 340px; min-height: 340px; overflow-x: hidden; overflow-y: auto;" id="exibe_consulta_precos">
+                <center>PREECHA O CAMPO ACIMA PARA PESQUISAR</center>
+            </div>  
+
+                     
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
 <div id="ModalCupomFiscal" class="modal fade" tabindex="-1" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-md">
 

@@ -29,7 +29,10 @@ $dados = $db->expand($sql);
 						        <th width="60">ID</th>
 						        <th width="200">Data/Hora</th>		
 						        <th>Atendente</th>				        		        				        
-						        <th>Valor</th>				        
+						        <th>Valor</th>	
+
+						        <th width="20"></th>	
+						        <th width="20"></th>				        
 						    </tr>	
 
 						    <tbody>
@@ -45,12 +48,23 @@ $dados = $db->expand($sql);
 									
 							  ?>
 								     
-								      <tr class="cursor" onclick="javascript:edita_pedido(<?php echo $dados['id']; ?>);">
+								      <tr  >
 								        <td>#<?php echo ($dados['id']); ?></td>
 								        <td><?php echo data_mysql_para_user($dados['data_pedido']); ?> ás <?php echo substr($dados['pedido_inicio'],0,5);?>hs</td>						        						       
 								        <td class="upper"><?php echo ($dados['nome']); ?></td>
 								        <td>R$ <?php echo number_format($dados['valor_final_venda'],2,".",","); ?></td>
-								        	
+								        
+								        <td class="upper">
+								        	<a href="javascript:void(0)" onclick="javascript:edita_pedido(<?php echo $dados['id']; ?>);">
+								        		<i class="icofont-edit"></i>	
+								        	</a>	
+								        </td>
+								        <td class="upper">
+									        <a href="javascript:void(0)" onclick="javascript:reimpressao_completa_pedido(<?php echo $dados['id']; ?>);">	
+									        	<i class="icofont-printer"></i>	
+									        </a>	
+								        </td>
+
 								      </tr>
 						      <?php
 						      	}

@@ -1,7 +1,7 @@
 <?php
 require("../../config.php");
 
-	$grava = $db->select("UPDATE configuracoes SET  porcentagem_garcom='$porcentagem_garcom', tipo_preco_meio_meio='$tipo_preco_meio_meio', senha_cancelamento='$senha_cancelamento', escolhe_motoqueiro='$escolhe_motoqueiro', ordem_exibicao_produtos='$ordem_exibicao_produtos', categorias_mobile='$categorias_mobile' ");	
+	$grava = $db->select("UPDATE configuracoes SET  controla_estoque='$controla_estoque', porcentagem_garcom='$porcentagem_garcom', tipo_preco_meio_meio='$tipo_preco_meio_meio', senha_cancelamento='$senha_cancelamento', escolhe_motoqueiro='$escolhe_motoqueiro', ordem_exibicao_produtos='$ordem_exibicao_produtos', categorias_mobile='$categorias_mobile' ");	
 
 
 	$sel = $db->select("SELECT mesa FROM mesas LIMIT 1");

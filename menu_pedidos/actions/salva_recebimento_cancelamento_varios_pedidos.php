@@ -16,7 +16,24 @@ $data_hora = date("Y-m-d H:i");
 
     	//CANCELA OS PEDIDOS//
     	if($tipo==2){
-    		
+
+
+            ///VOLTA PRODUTOS NO ESTOQUE////
+            $sql_estoque = $db->select("SELECT id_produtos, quantidade FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
+            if($db->rows($sql_estoque)){
+                while($estoque = $db->expand($sql_estoque)){
+
+                    $qtd_baixa = $estoque['quantidade'];
+                    $prod_baixa = $estoque['id_produtos'];
+
+                    if(is_numeric($prod_baixa)){
+                        $sql = $db->select("UPDATE lanches SET estoque=estoque+$qtd_baixa WHERE id='$prod_baixa' LIMIT 1");             
+                    }
+
+                }
+            }
+
+    		$del = $db->select("DELETE FROM estoque_movimentacao WHERE id_venda='$id_venda'");
     		$del = $db->select("DELETE FROM produtos_venda WHERE id_venda='$id_venda'");
 			$del = $db->select("DELETE FROM opcionais_produtos_venda WHERE id_venda='$id_venda' ");
 			$del = $db->select("DELETE FROM opcionais_produtos_venda2 WHERE id_venda='$id_venda' ");
@@ -34,7 +51,28 @@ $data_hora = date("Y-m-d H:i");
 
     		$sql = $db->select("INSERT INTO pagamentos_vendas (id_venda, forma_pagamento, valor_pagamento, id_usuario, data, hora, id_caixa, valor_caixa_real) VALUES ('$id_venda', '$forma_pagamento_baixa_varios_pedidos', '$valor_final', '$id_usuario', '$data', '$hora', '$id_caixa_aberto', '$valor_final')");	
 
-			$sql = $db->select("UPDATE aguarda_venda SET finalizada='1', id_mesa='0', aguarde='0'  WHERE id='$id_venda' LIMIT 1");
+			$sql = $db->select("UPDATE aguarda_venda SET finalizada='1', id_mesa='0', aguarde='0', baixado='1'  WHERE id='$id_venda' LIMIT 1");
+
+
+
+            ///BAIXA NO ESTOQUE////
+            $sql_estoque = $db->select("SELECT id_produtos, quantidade FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
+            if($db->rows($sql_estoque)){
+                while($estoque = $db->expand($sql_estoque)){
+
+                    $qtd_baixa = $estoque['quantidade'];
+                    $prod_baixa = $estoque['id_produtos'];
+
+                    if(is_numeric($prod_baixa)){
+
+                        $sql = $db->select("UPDATE lanches SET estoque=estoque-$qtd_baixa WHERE id='$prod_baixa' LIMIT 1");     
+
+                        $sel = $db->select("INSERT INTO estoque_movimentacao (id_produto, quantidade, data, hora, tipo, id_venda, id_usuario) VALUES ('$prod_baixa', '$qtd_baixa', '$data', '$hora', '0', '$id_venda', '$id_usuario')");        
+                    }
+
+                }
+            }
+
 
 
             $id_cliente_venda = $dados_v['id_cliente'];

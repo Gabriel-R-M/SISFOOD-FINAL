@@ -72,17 +72,17 @@ require("../../diversos/funcoes_diversas.php");
 	$total_divida = ($total_debito-$total_pgtos);	
 	
 		$aux_valor_total = retira_acentos('DIVIDA TOTAL');
-		$aux_valor_total2 = 'R$ '.number_format($total_divida,2,",",".");
+		$aux_valor_total2 = 'R$ '.number_format($total_pgtos,2,",",".");
 		
 		$txt_total_falta_pagar .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
 		$txt_total_falta_pagar .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";
-		$txt_total_falta_pagar .=	ajusta_caracteres_impressao('');	
+		$txt_total_falta_pagar .=	ajusta_caracteres_impressao('')."\r\n";	
 	//VALOR TOTAL DA DIVIDA DO CLIENTE//
 
 
 	//NOME DO CLIENTE//	
 		$txt_nome_cliente =	ajusta_caracteres_impressao('ESTOU CIENTE SOBRE A DIVIDA ACIMA','M')."\r\n";	
-		$txt_nome_cliente .= ajusta_caracteres_impressao(retira_acentos($dados_pgto['nome']),'M')."\r\n";		
+		$txt_nome_cliente .= ajusta_caracteres_impressao(retira_acentos($dados_pgto['nome']),'M')."\r\n"."\r\n";				
 		$txt_nome_cliente .=ajusta_caracteres_impressao();	
 		
 	//NOME DO CLIENTE//		
@@ -94,7 +94,7 @@ require("../../diversos/funcoes_diversas.php");
 		$dados_user_venda = $db->expand($selx); 
 
 		$txt_fim =	ajusta_caracteres_impressao('RESPONSAVEL: '.retira_acentos($dados_user_venda['nome']),'M');
-		$txt_fim2 =	ajusta_caracteres_impressao(' EM '.data_mysql_para_user($dados_pgto['data']).' AS '.substr($dados_pgto['hora'],0,5).'hs','M');
+		$txt_fim2 =	ajusta_caracteres_impressao(' EM '.data_mysql_para_user(substr($dados_pgto['data_debito'],0,10)).' AS '.substr($dados_pgto['data_debito'],11,5).'hs','M');
 	
 	//USUÁRIO RESPONSÁVEL//	
 
@@ -103,7 +103,7 @@ require("../../diversos/funcoes_diversas.php");
 	$txt = implode("\r\n", $cabecalho)
 	. "\r\n"		
 	.$txt_total_venda."\r\n"
-	.$txt_total_falta_pagar."\r\n"	
+	//.$txt_total_falta_pagar."\r\n"	
 	.$txt_nome_cliente."\r\n"
 	.$txt_fim."\r\n"
 	.$txt_fim2;

@@ -291,8 +291,27 @@ while($cat_pesq = $db->expand($sel_group)){
 				$itens[] .= "\r\n".ajusta_caracteres_impressao(' ', 'F', 4)
 					. ajusta_caracteres_impressao('[ATENCAO]', 'F', -4);
 
-				$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-			    . ajusta_caracteres_impressao($item[7], 'F', -4);			    
+				$count = strlen($item[7]);
+				if($count>($dados_configuracoes['colunas_impressora']-4)){
+					$um_menos = ceil(($count/($dados_configuracoes['colunas_impressora']-4)));
+					$xp = 1;
+					$corte_inicio=0;
+					while ($xp<=$um_menos) {
+
+						$keba = ($corte_inicio*($dados_configuracoes['colunas_impressora']-4));
+						$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+						. ajusta_caracteres_impressao(substr(retira_acentos($item[7]),$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
+					
+						$corte_inicio++;
+						$xp++;
+					}					
+				} else {
+
+					$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+					.ajusta_caracteres_impressao(retira_acentos($item[7]), 'F', -4);
+
+				}	
+
 			}	
 			
 
@@ -458,6 +477,7 @@ while($cat_pesq = $db->expand($sel_group)){
    $pasta = $imp['impressao'];
 
    $arquivo = 'pedido_unico_item_'.md5(time()).'.txt';	
+   //$arquivo = 'pedido_unico_item.txt';	
    $file = '../../pedidos_imprimir/'.$pasta.'/'.$arquivo;
 
    

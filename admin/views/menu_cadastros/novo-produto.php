@@ -1,6 +1,15 @@
 <?php require("../../includes/topo.php"); ?>
 
 <?php
+$sql = $db->select("SELECT controla_estoque FROM configuracoes");  
+$config = $db->expand($sql);
+
+$disabled='';
+if($config['controla_estoque']==0){ 
+  $disabled='disabled'; 
+}
+
+
 $edit=0;
 if(isset($id)){
 	$sql = $db->select("SELECT * FROM lanches WHERE id='$id' LIMIT 1");	
@@ -34,7 +43,7 @@ if(isset($id)){
 
 	<ul class="nav nav-activity-profile">
         <li class="nav-item"><a style="border-bottom: 0" href="javascript:void(0)" class="nav-link muda_tabs" data-id="1">Dados Principais</a></li>
-        <li class="nav-item"><a style="border-bottom: 0" href="javascript:void(0)" class="nav-link muda_tabs" data-id="2">Impostos</a></li>
+        <li class="nav-item"><a style="border-bottom: 0" href="javascript:void(0)" class="nav-link muda_tabs" data-id="2">Impostos/Estoque</a></li>
         <li class="nav-item"><a style="border-bottom: 0" href="javascript:void(0)" class="nav-link muda_tabs" data-id="3">Ingredientes</a></li>
         
     </ul>
@@ -93,6 +102,41 @@ if(isset($id)){
 
 	        <div class="row tabs" id="tab2">
 
+                <div class="col-md-4">
+
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ESTOQUE</label>
+
+                            <div class="input-group">
+                               <span class="input-group-btn">
+                                <button <?php echo $disabled; ?> onclick="javascript:soma_estoque(1);" class="btn bd bd-r-0 btn-default tx-gray-600 " type="button"><i class="icofont-plus"></i></button>                               
+                              </span>
+                              <input <?php echo $disabled; ?> type="number"  class="form-control text-center" id="estoque" name="estoque" value="<?php if($edit==1){ echo $ln['estoque'];} ?>">  
+                              <span class="input-group-btn">
+                                <button <?php echo $disabled; ?> onclick="javascript:soma_estoque(0);" class="btn bd bd-l-0 btn-default tx-gray-600 0" type="button"><i class="icofont-minus"></i></button>                               
+                              </span>
+
+                            </div>
+                            
+                            
+                        </div>
+                </div>
+
+                <?php 
+                if($config['controla_estoque']==0){                   
+                    echo '<div class="col-md-8 top20">'; 
+                        echo '<div class="alert alert-danger thin">';
+                            echo '<i class="icofont-exclamation-tringle"></i> O CONTROLE DE ESTOQUE ESTÁ DESATIVADO.';
+                          echo '</div>';
+                    echo '</div>';                  
+                } 
+                ?>
+
+                <div class="col-md-12">
+                  <hr>
+                </div>
 	        		   <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">NCM</label>

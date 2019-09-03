@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
-
+        $('#ModalConsultaPreco').on('shown.bs.modal', function () {
+            $('#consulta_preco_input').focus();
+        }) 
 
 	  id_global_item_selecao = 0;	
 
@@ -19,6 +21,17 @@ $(document).ready(function(){
 
 
 });
+
+
+
+
+
+function consulta_precos_modal(digitado){
+    $.post('menu_pedidos/listagem/consulta_precos.php',{busca:digitado}, function(resposta){
+        $("#exibe_consulta_precos").html(resposta)
+    }); 
+}
+
 
 
 function exibe_erros_gerais(erro){

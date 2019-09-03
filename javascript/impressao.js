@@ -32,10 +32,11 @@ function aviso_impressao_sistema(tipo=0){
 
 
 
-function reimpressao_completa_pedido(){	
+function reimpressao_completa_pedido(reimprimi_id=0){	
+	
 	$("#ModalEscolheTipoImpressao").modal('hide');	
 	aviso_impressao_sistema();
-	$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{id:1}, function(){
+	$.post('menu_pedidos/impressao/prepara_impressao_completa.php',{reimprimi_id:reimprimi_id}, function(){
 		aviso_impressao_sistema(1);		
 	});		
 
@@ -45,7 +46,8 @@ function reimpressao_completa_pedido(){
 function imprime_comprovante_crediario(){
 	$("#ModalPerguntaImprime03").modal('hide');	
 	aviso_impressao_sistema();
-	$.post('menu_pedidos/impressao/prepara_impressao_pagamento_crediario.php',{id:id_imprime_comp_crediario}, function(){
+	$.post('menu_pedidos/impressao/prepara_impressao_pagamento_crediario.php',{id:id_imprime_comp_crediario}, function(aa){
+
 		aviso_impressao_sistema(1);		
 	});		
 }
