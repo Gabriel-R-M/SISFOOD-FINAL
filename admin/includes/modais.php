@@ -1,3 +1,57 @@
+
+
+<div id="ModalRelatorio" class="modal fade">
+ 
+      <div class="modal-dialog modal-md modal-dialog-vertical-center" role="document">
+        <div class="modal-content bd-0 tx-14">
+          <form method="post" action="views/menu_relatorios/pdf/movimentacao-produto.php" target="_blank"> 
+          <div class="modal-header" >
+            <h6 class="tx-12 mg-b-0 tx-uppercase ">RELATÓRIO DE ESTOQUE</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body pd-15">
+            <h5 class="lh-3 mg-b-20 mg-t-10"><a href="" class="tx-inverse hover-primary">INFORME O PERÍODO:</a></h5>
+            
+            <input type="hidden" name="id" id="id_relatorio_produto">
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">DE:&nbsp;</span>
+                </div>
+                <input type="date" class="form-control" name="data1" required>
+                
+              </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">ATÉ:</span>
+                </div>
+                <input type="date" class="form-control" name="data2" required>
+                
+              </div><!-- input-group -->
+            </div><!-- form-group -->
+
+           
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btn_salva_ingrediente">GERAR</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
+          </div>
+          </form>  
+        </div>
+      </div><!-- modal-dialog -->
+    
+</div><!-- modal -->
+
+
+
+
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 

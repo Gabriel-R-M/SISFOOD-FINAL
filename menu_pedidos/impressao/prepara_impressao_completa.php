@@ -294,16 +294,15 @@ require("../../diversos/funcoes_diversas.php");
 
 						$keba = ($corte_inicio*($dados_configuracoes['colunas_impressora']-4));
 						$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-						. ajusta_caracteres_impressao(substr($item[7],$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
+						. ajusta_caracteres_impressao(substr(retira_acentos($item[7]),$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
 					
 						$corte_inicio++;
 						$xp++;
-					}
-					
+					}					
 				} else {
 
 					$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-        		.ajusta_caracteres_impressao($item[7], 'F', -4);
+					.ajusta_caracteres_impressao(retira_acentos($item[7]), 'F', -4);
 
 				}	
 
@@ -329,7 +328,7 @@ require("../../diversos/funcoes_diversas.php");
      // DESCONTO //
 	$txt_valor_desconto ='';
     if($dados_venda['valor_desconto']!='0.00'){
-	    $aux_valor_total = 'DESCONTO (-)';
+	    $aux_valor_total = 'DESCONTO';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_desconto'],2,",",".");
 		$txt_valor_desconto = ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
 		$txt_valor_desconto .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2))."\r\n";	
@@ -346,7 +345,7 @@ require("../../diversos/funcoes_diversas.php");
     // ENTREGA //
     $txt_valor_entrega='';
     if($dados_venda['entrega']!=0){
-    	$aux_valor_total = 'TX DE ENTREGA (+)';
+    	$aux_valor_total = 'TX DE ENTREGA';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_entrega'],2,",",".");
 		$txt_valor_entrega .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
 		$txt_valor_entrega .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));			
@@ -357,7 +356,7 @@ require("../../diversos/funcoes_diversas.php");
     // TAXA GARÇOM //
     $txt_valor_garcom='';
     if($dados_venda['valor_garcom']!='0.00'){
-    	$aux_valor_total = 'TX ATENDIMENTO (+)';
+    	$aux_valor_total = 'TX ATENDIMENTO';
 		$aux_valor_total2 = 'R$ '.number_format($dados_venda['valor_garcom'],2,",",".");
 		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total,'F',($numero_colunas/2));
 		$txt_valor_garcom .= ajusta_caracteres_impressao($aux_valor_total2,'I',($numero_colunas/2));			
@@ -442,7 +441,33 @@ require("../../diversos/funcoes_diversas.php");
 
 		$dados_entrega = "\r\n".ajusta_caracteres_impressao(retira_acentos($dados_cliente['nome']),'F')."\r\n";
 		$dados_entrega .=  ajusta_caracteres_impressao('FONE: ('.$dados_cliente['ddd'].') '.$dados_cliente['telefone'],'F')."\r\n";
-		$dados_entrega .=  ajusta_caracteres_impressao(retira_acentos($dados_cliente['endereco'].', '.$dados_cliente['numero']),'F')."\r\n";
+		
+    	
+
+				///QUEBRA LINHAS DE IMPRESSAO DO ENDERECO///
+				$endd = $dados_cliente['endereco'].', '.$dados_cliente['numero'];
+				$count = strlen($endd);
+				if($count>($dados_configuracoes['colunas_impressora'])){							
+					$um_menos = ceil(($count/($dados_configuracoes['colunas_impressora'])));
+					$xp = 1;
+					$corte_inicio=0;
+					while ($xp<=$um_menos) {
+
+						$keba = ($corte_inicio*($dados_configuracoes['colunas_impressora']));
+						$dados_entrega .= ajusta_caracteres_impressao(substr(retira_acentos($endd),$keba,($dados_configuracoes['colunas_impressora'])), 'F', 0)."\r\n";			    	
+					
+						$corte_inicio++;
+						$xp++;
+					}					
+				} else {
+
+					$dados_entrega .=  ajusta_caracteres_impressao(retira_acentos($dados_cliente['endereco'].', '.$dados_cliente['numero']),'F')."\r\n";
+
+				}
+				///QUEBRA LINHAS DE IMPRESSAO DO ENDERECO///
+
+
+
 		$dados_entrega .= ajusta_caracteres_impressao(retira_acentos($dados_cliente['bairro']),'F')."\r\n";
 		if(!empty($dados_cliente['complemento'])){	
 			$dados_entrega .= ajusta_caracteres_impressao(retira_acentos($dados_cliente['complemento']),'F')."\r\n";

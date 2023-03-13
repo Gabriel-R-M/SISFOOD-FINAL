@@ -142,7 +142,9 @@
                 <li><a href="relatorio-produtos-vendidos">PRODUTOS VENDIDOS</a></li>
                 <li><a href="relatorio-vendas-consolidadas">VENDAS CONSOLIDADAS</a></li>
                 <li><a href="relatorio-clientes-devedores">CLIENTES DEVEDORES</a></li>
-                               
+                
+
+                <li><a href="relatorio-controle-estoque">CONTROLE DE ESTOQUE</a></li>                
               </ul>
             </div><!-- dropdown-menu -->
           </li>

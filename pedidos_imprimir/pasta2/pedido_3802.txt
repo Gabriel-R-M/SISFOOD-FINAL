@@ -1,0 +1,36 @@
+  Casa de Rango/Big Burg Gourmet  
+         28 DE ABRIL, 239         
+   (14) 3278-2818 / 99830-0807   
+          PEDIDO: #3802          
+       19/07/2019 AS 10:53       
+----------------------------------
+              MESA 1              
+----------------------------------
+Qtd CAT/Produto     V. UN   Total
+----------------------------------
+01  REFEICAO         8,50    8,50
+    BOINHA N1                              
+
+    [ATENCAO]                              
+    diogo fff                              
+----------------------------------
+01  REFEICAO        14,90   14,90
+    SELF-SERVICE                              
+
+    [ATENCAO]                              
+    diogo mastrangelo de moura                              
+----------------------------------
+SUBTOTAL                  R$ 23,40
+TX ATENDIMENTO             R$ 2,34
+TOTAL A RECEBER           R$ 25,74
+----------------------------------
+         DADOS DO CLIENTE         
+----------------------------------
+CLIENTE AVULSO                    
+----------------------------------
+TOTAL DE ITENS DO PEDIDO: 2       
+----------------------------------
+PEDIDO CONTENDO:                  
+REFEICAO                          
+----------------------------------
+ATENDENTE: DIOGO                  

@@ -48,7 +48,7 @@ if($total_recebido_venda!=0){
 
     		<div class="col-12 top10">
         	<div class="col-12">	
-        		<a href="javascript:void(0)" class="qdx">NOME CLIENTE</a><br>
+        		<a href="javascript:void(0)" class="qdx">RESPONSÁVEL GERAL DO PEDIDO</a><br>
         			<input class="form-control top2" id="nome_cliente_mobile" value="<?php echo $nome_cliente; ?>">																
         	</div>    
         	</div>	

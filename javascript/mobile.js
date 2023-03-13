@@ -1,3 +1,10 @@
+function nova_submesa(){
+	$(".ja_nome_mesa").hide();		
+	$("#novo_nome_mesa").show();
+	$("#nome_submesa_escrito").focus();	
+}
+
+
 function confere_pedido_mobile(){
 	$(".botoes-insercao-itens-pedido").hide();
 	$("#exibicao_produtos_pedido").hide();

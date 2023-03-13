@@ -4,7 +4,7 @@ require_once("../../admin/class/class.db.php");
 require_once("../../admin/class/class.seguranca.php");
 require_once("../../includes/verifica_session.php");
 require_once("../../includes/verifica_venda_aberta.php");
-//require_once("../../includes/verifica_configuracoes_loja.php");
+require_once("../../includes/verifica_configuracoes_loja.php");
 
 $total_item_final=0;
 $total_final_pedido =0;
@@ -37,10 +37,11 @@ echo '<hr></div></div>';
 		//APENAS UM PRODUTO
 		if(is_numeric($row['id_produtos'])){
 
-			$pg = $db->select("SELECT produto, codigo, categoria FROM lanches WHERE id='$id_produto' LIMIT 1");
+			$pg = $db->select("SELECT produto, codigo, categoria, estoque FROM lanches WHERE id='$id_produto' LIMIT 1");
 			$var = $db->expand($pg);
 			$categoria_produto = $var['categoria'];
 			$nome_produto= $var['produto'];
+			$estoque_produto = $var['estoque'];
 
 		//MEIO A MEIO	
 		} else {	
@@ -54,6 +55,7 @@ echo '<hr></div></div>';
 		    	$pg = $db->select("SELECT produto, codigo, categoria FROM lanches WHERE id='$id_produto' LIMIT 1");
 				$var = $db->expand($pg);
 				$categoria_produto = $var['categoria'];
+				$estoque_produto=0;
 
 				$nome_produto= $nome_produto.$var['produto'].'/';
 			}
@@ -66,7 +68,7 @@ echo '<hr></div></div>';
 			$nome_produto = substr($nome_produto,0, $size-1);
 		}
 
-		$sun = $db->select("SELECT categoria FROM categorias WHERE id='$categoria_produto' LIMIT 1");
+		$sun = $db->select("SELECT categoria, meio_meio FROM categorias WHERE id='$categoria_produto' LIMIT 1");
         $type = $db->expand($sun);
 
         $nome_tamanho='';
@@ -104,6 +106,10 @@ echo '<hr></div></div>';
 		$link_edita_qtd='';
 		if($dados_venda['finalizada']==0){
 			$link_edita_qtd='ondblclick="javascript:edita_quantidade_item('.$id_controle.');"';
+		}
+
+		if($type['meio_meio']==0 && $dados_configuracoes['controla_estoque']==1 && $estoque_produto<=0){
+			echo '<span  style="color:#990000; font-weight:400">SEM ESTOQUE</span><BR>';						
 		}
 
 		echo '<span  style="color:#333" '.$link_edita_qtd.'>';			

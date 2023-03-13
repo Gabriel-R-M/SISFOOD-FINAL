@@ -8,10 +8,10 @@
           
           <li class="sidebar-nav-item">
             
-            <a href="javascript:void(0);" tabindex="-1" class="sidebar-nav-link" id="impressao_menu" style="background-color: black; display: none;">    
+            <a href="javascript:void(0);" data-toggle="modal" data-target="#ModalConsultaPreco" tabindex="-1" class="sidebar-nav-link" id="impressao_menu" style="background-color: black; display: none;">    
               <i class="icofont-printer"  style="margin-left: -4px;"></i>
             </a>       
-            <a href="javascript:void(0);" tabindex="-1" class="sidebar-nav-link upper" id="logo_icone_menu" ><img src="img/icone.png"></a>  
+            <a href="javascript:void(0);" data-toggle="modal" data-target="#ModalConsultaPreco"  tabindex="-1" class="sidebar-nav-link upper" id="logo_icone_menu" ><img src="img/icone.png"></a>  
           </li>
 
           

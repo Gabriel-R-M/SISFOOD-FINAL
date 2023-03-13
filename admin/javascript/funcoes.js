@@ -1,5 +1,51 @@
 // JavaScript Document
 
+
+function modal_relatorio(id){
+	$("#id_relatorio_produto").val(id);
+	$("#ModalRelatorio").modal();
+}
+
+
+
+function ajuste_estoque(tipo, id){
+	var estoque_atual = parseFloat($("#estoque_"+id).val());	
+	var valor = parseFloat($("#novo_estoque_"+id).val());	
+
+	//soma	
+	if(tipo==1){
+		var est_fim = (estoque_atual+valor);
+	//diminui	
+	} else {
+		var est_fim = (estoque_atual-valor);
+	}
+
+	$.post("controlers/ajax/ajuste_estoque.php",{id:id, est:valor, tipo:tipo},function(resposta){
+		
+	});
+
+	$("#estoque_"+id).val(est_fim);	
+	$("#novo_estoque_"+id).val('');
+}
+
+
+function soma_estoque(tipo){
+	
+	var estoque = parseFloat($("#estoque").val());	
+
+	//soma	
+	if(tipo==1){
+		var est_fim = (estoque+1);
+	//diminui	
+	} else {
+		var est_fim = (estoque-1);
+	}
+
+	$("#estoque").val(est_fim);
+
+}
+
+
 function marca_todos_checkbox(){
 	if($("#checa_todos").is(':checked')) {
 		$(".ompa").prop("checked", true);		

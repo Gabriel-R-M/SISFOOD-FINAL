@@ -64,7 +64,7 @@ if($pontos_emdia>0){
 	$final = ($pontos_ganhos-$pontuacao_usada);	
 
 	if($final>$pontos_emdia){
-		$final=0;
+		$final=$pontos_emdia;
 	}
 
 	

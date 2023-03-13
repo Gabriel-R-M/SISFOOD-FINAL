@@ -27,6 +27,11 @@ $(document).ready(function(){
 });
 
 
+function recebe_conta_cliente_divisao(val){
+	$("#valor_recebe").val(val.toFixed(2));
+	$("#ModalCompartilhamentoMesaRecebimento").modal('hide');
+}
+
 
 function historico_resgate_pontos(){
 	var id_cliente = $("#id_cliente").val();	

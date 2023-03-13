@@ -17,6 +17,14 @@
   		if($ln['id']==3){
   			$ativo_crediario = $ln['ativo'];	
   		}
+
+      if($ln['id']==10){
+        $ativo_aiqfome = $ln['ativo'];  
+      }
+
+      if($ln['id']==11){
+        $ativo_ifood = $ln['ativo'];  
+      }
   		
   }
 ?> 
@@ -84,11 +92,55 @@
         <div class="col-md-4">
            <div class="form-group">
                 <label for="exampleInputEmail1">
-                	Receber no: <b>Crediário</b>
+                  Receber no: <b>Crediário</b>
                 </label>
                 <select class="form-control" name="crediario" required="required">
                     <?php
                       if($ativo_crediario==1){
+                        echo '<option value="1" selected>SIM</option>';
+                        echo '<option value="0">NÃO</option>';
+                      } else {
+                        echo '<option value="0" selected>NÃO</option>';
+                        echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div> 
+
+
+        <div class="col-md-12"><hr></div>
+
+
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">
+                	Receber com: <b>APP AiqFome</b>
+                </label>
+                <select class="form-control" name="aiqfome" required="required">
+                    <?php
+                      if($ativo_aiqfome==1){
+                        echo '<option value="1" selected>SIM</option>';
+                        echo '<option value="0">NÃO</option>';
+                      } else {
+                        echo '<option value="0" selected>NÃO</option>';
+                        echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select>  
+           </div>
+        </div> 
+
+
+
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">
+                  Receber com: <b>APP Ifood</b>
+                </label>
+                <select class="form-control" name="ifood" required="required">
+                    <?php
+                      if($ativo_ifood==1){
                         echo '<option value="1" selected>SIM</option>';
                         echo '<option value="0">NÃO</option>';
                       } else {

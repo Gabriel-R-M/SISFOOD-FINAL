@@ -111,11 +111,6 @@ function mesas_pedidos(){
 }
 
 
-function mesas_pedidos(){
-	carregando();
-	abre_menu('menu_pedidos/telas/mesas_pedidos.php');	
-}
-
 
 function novo_pedido(){
 	carregando();

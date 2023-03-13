@@ -84,6 +84,9 @@
 	RewriteRule ^relatorio-vendas-consolidadas?$ views/menu_relatorios/vendas-consolidadas.php [L,QSA]
 	RewriteRule ^caixa-detalhes/(.*)?$ views/menu_relatorios/pdf/caixa-detalhes.php?id=$1 [L,QSA]
 
+	RewriteRule ^relatorio-controle-estoque?$ views/menu_relatorios/relatorio-controle-estoque.php [L,QSA]
+	
+
 	RewriteRule ^profile?$ views/menu_usuarios/profile.php [L,QSA]
 	RewriteRule ^mensagens?$ views/menu_usuarios/mensagens.php [L,QSA]
 

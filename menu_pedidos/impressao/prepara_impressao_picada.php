@@ -47,7 +47,7 @@ if($impressao!='pasta1'){
         
         $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha01']);         
         $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha02']);         
-		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);   
+		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);     
 		$txt_cabecalho[] = ajusta_caracteres_impressao('PEDIDO: #'.$id_venda);    
 		$txt_cabecalho[] = ajusta_caracteres_impressao(data_mysql_para_user($dados_venda['data_pedido']).' AS '.substr($dados_venda['pedido_inicio'],0,5));
        	
@@ -334,17 +334,19 @@ if($impressao!='pasta1'){
 
 									$keba = ($corte_inicio*($dados_configuracoes['colunas_impressora']-4));
 									$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-									. ajusta_caracteres_impressao(substr($item[7],$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
+									. ajusta_caracteres_impressao(substr(retira_acentos($item[7]),$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
 								
 									$corte_inicio++;
 									$xp++;
-								}
-								
+								}					
 							} else {
+
 								$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-        		.ajusta_caracteres_impressao($item[7], 'F', -4);
-							}
-						}	
+								.ajusta_caracteres_impressao(retira_acentos($item[7]), 'F', -4);
+
+							}	
+
+						}		
 						
 
 			        	$itens[] .= ajusta_caracteres_impressao('');

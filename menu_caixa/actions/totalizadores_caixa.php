@@ -37,6 +37,8 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 	$db=new DB();
 	$totais_dinheiro=0;
 	$totais_cartao=0;
+	$totais_aiqfome=0;
+	$totais_ifood=0;
 	$totais_recebimento_convenio=0;
 
 	//DINHEIRO OU CARTAO	
@@ -56,6 +58,16 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 						//CARTÃO
 						if($row2['forma_pagamento']==2){
 							$totais_cartao = ($totais_cartao+$row2['valor_caixa_real']);
+						}
+
+						//AIQFOME
+						if($row2['forma_pagamento']==10){
+							$totais_aiqfome = ($totais_cartao+$row2['valor_caixa_real']);
+						}
+
+						//IFOOD
+						if($row2['forma_pagamento']==11){
+							$totais_ifood = ($totais_cartao+$row2['valor_caixa_real']);
 						}
 
 				}
@@ -89,9 +101,19 @@ function devolve_valores_caixa($id_caixa_aberto,$tipo){
 			return $totais_recebimento_convenio;
 		}
 
+		//AIQFOME
+		if($tipo==10){
+			return $totais_aiqfome;
+		}
+
+		//IFOOD
+		if($tipo==11){
+			return $totais_ifood;
+		}
+
 		//TOTAIS
 		if($tipo==0){
-			$subtotal_vendas = ($totais_dinheiro+$totais_cartao+$totais_recebimento_convenio);
+			$subtotal_vendas = ($totais_dinheiro+$totais_cartao+$totais_recebimento_convenio+$totais_aiqfome+$totais_ifood);
 			return $subtotal_vendas;
 		}
 

@@ -203,12 +203,12 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 		<div class="box-nome-cliente bottom10">
 			<div class="row row-xs">	
 				<div class="col-md-6">
-					<input type="text" class="form-control input-block" placeholder="NOME DO CLIENTE" id="nome-cliente-produto">
+					<input type="text" class="form-control input-block upper" placeholder="NOME DO CLIENTE" id="nome-cliente-produto">
 					<i class="icofont-users-alt-4"></i>
 			    </div>
 
 			    <div class="col-md-6" >
-					<input type="text" class="form-control input-block" placeholder="OBSERVAÇÕES" id="observacoes-produto">
+					<input type="text" class="form-control input-block upper" placeholder="OBSERVAÇÕES" id="observacoes-produto">
 					<i class="icofont-pencil-alt-1"></i>
 			    </div>
 			</div>    

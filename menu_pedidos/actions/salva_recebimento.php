@@ -77,8 +77,34 @@ if($valor_final_receber==0){
 
 	} else {
 
-		$sql = $db->select("UPDATE aguarda_venda SET baixado='0', finalizada='1', id_mesa='0', ocupou_mesa='$id_mesa_ocupou'  WHERE id='$id_venda' LIMIT 1");
+		$baixado=0;
+		if($dados_venda['pedido_entregue']!='00:00:00'){
+			$baixado=1;
+		}
+
+		$sql = $db->select("UPDATE aguarda_venda SET baixado='$baixado', finalizada='1', id_mesa='0', ocupou_mesa='$id_mesa_ocupou'  WHERE id='$id_venda' LIMIT 1");
 	}
+
+
+	///BAIXA NO ESTOQUE////
+	$sql_estoque = $db->select("SELECT id_produtos, quantidade FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
+	if($db->rows($sql_estoque)){
+		while($estoque = $db->expand($sql_estoque)){
+
+			$qtd_baixa = $estoque['quantidade'];
+			$prod_baixa = $estoque['id_produtos'];
+
+			if(is_numeric($prod_baixa)){
+
+				$sql = $db->select("UPDATE lanches SET estoque=estoque-$qtd_baixa WHERE id='$prod_baixa' LIMIT 1");		
+
+				$sel = $db->select("INSERT INTO estoque_movimentacao (id_produto, quantidade, data, hora, tipo, id_venda, id_usuario) VALUES ('$prod_baixa', '$qtd_baixa', '$data', '$hora', '0', '$id_venda', '$id_usuario')");		
+			}
+
+		}
+	}
+
+
 
 
 	@session_start();

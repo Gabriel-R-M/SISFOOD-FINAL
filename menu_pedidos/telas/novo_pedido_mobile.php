@@ -148,6 +148,50 @@ require("../../diversos/funcoes_diversas.php");
 	
 	</div>
 
+
+
+	<div class="row row-xs">	
+
+		<div class="col-12"><hr style="margin-top: 0"></div>
+
+		<div class="col-md-12 hide" id="novo_nome_mesa" style="margin-bottom: 20px">
+			<input type="text" id="nome_submesa_escrito" class="form-control" placeholder="Responsável ou identificação da mesa">
+		</div>	
+
+		<div class="col-8 ja_nome_mesa">
+			
+			
+
+			<select class="form-control upper thin text-center" id="nome_submesa" style="margin-bottom: 20px">
+				<option value="">ESCOLHA A SUBMESA</option>
+				<?php
+				  	$sel = $db->select("SELECT nome_cliente_divisao FROM produtos_venda WHERE id_venda='$id_venda' AND nome_cliente_divisao!='' GROUP BY nome_cliente_divisao ORDER BY nome_cliente_divisao");	
+				  	if($db->rows($sel)){
+				  		while($row = $db->expand($sel)){	
+				  						  	
+					  		echo '<option value="'.$row['nome_cliente_divisao'].'">'.$row['nome_cliente_divisao'].'</option>';				  			
+					  		
+				  		}
+				  	} else {
+				  		echo '<option value="">--NENHUMA SUBMESA ENCONTRADA--</option>';				  			
+				  	}
+				  	
+				 ?>			
+			</select>
+
+		</div>
+
+		<div class="col-4 ja_nome_mesa" style="margin-bottom: 20px">
+			<button class="btn bd btn-block bd-l-0 btn-info" type="button" onclick="javascript:nova_submesa();">
+				NOVA SUBMESA
+			</button>
+
+		</div>	
+
+	
+	</div>
+
+
 	
 	<div class="col-md-12 text-center" id="informacao_qtd_itens_pedido" >
 		<br><br>
@@ -272,6 +316,8 @@ require("../../diversos/funcoes_diversas.php");
 <input type="hidden" id="tela-mobile" value="1">
 <input type="hidden" id="pedido_aguarda_venda" value="<?php echo $dados_venda['aguarde']; ?>">
 <input type="hidden" id="avanca-pedido-enter" value="1">
+
+<input type="hidden" id="id_venda_mobile" value="<?php echo $id; ?>">
 
 <script>
 	window.clearTimeout(atualiza_pedidos);	

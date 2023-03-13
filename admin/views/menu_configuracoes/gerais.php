@@ -127,6 +127,25 @@
         </div> 
 
 
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="exampleInputEmail1">Controlar Estoque dos produtos</label>
+                <select class="form-control" name="controla_estoque" required="required">
+                    <?php
+                      if($ln['controla_estoque']==1){
+                        echo '<option value="1" selected>SIM</option>';
+                        echo '<option value="0">NÃO</option>';
+                      } else {
+                        echo '<option value="0" selected>NÃO</option>';
+                        echo '<option value="1">SIM</option>';                        
+                      }
+                    ?>
+                </select> 
+           </div>
+        </div> 
+
+
+
             </div><!-- row -->
 
             <div class="form-layout-footer">

@@ -1,4 +1,41 @@
 
+--
+-- Estrutura para tabela `estoque_movimentacao`
+--
+
+CREATE TABLE `estoque_movimentacao` (
+  `id` int(10) NOT NULL,
+  `id_produto` int(10) NOT NULL,
+  `id_venda` int(10) NOT NULL,
+  `quantidade` int(10) NOT NULL,
+  `data` date NOT NULL,
+  `hora` time NOT NULL,
+  `id_usuario` int(10) NOT NULL,
+  `tipo` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `estoque_movimentacao`
+--
+ALTER TABLE `estoque_movimentacao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `estoque_movimentacao`
+--
+ALTER TABLE `estoque_movimentacao`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
 
 CREATE TABLE IF NOT EXISTS `arquivos_imprimir` (
   `id` int(10) NOT NULL AUTO_INCREMENT,

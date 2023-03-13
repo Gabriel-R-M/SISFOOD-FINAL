@@ -3,6 +3,7 @@ require("../../admin/class/class.db.php");
 require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
 require("../../includes/verifica_venda_aberta.php");
+require("../../includes/verifica_configuracoes_loja.php");
 ?>
 
 <div class="table-responsive">
@@ -141,9 +142,31 @@ require("../../includes/verifica_venda_aberta.php");
 
 			
 			echo '<tr>';
-				echo '<td></td>';		        		      			     
-				echo '<td></td>';		        		      			     
-		        echo '<td><h4 style="margin:0; padding:0">R$ '.number_format(($soma_cliente+$total_adicionais),2,",",".").'</h4></td>';		        
+				echo '<td colspan="2">';
+					echo '<span style="font-size:12px">';
+						echo '<a style="text-decoration:underline" href="javascript:void(0);" onclick="javascript:recebe_conta_cliente_divisao('.($soma_cliente+$total_adicionais).')">RECEBER</a>';
+
+						if($dados_configuracoes['porcentagem_garcom']!='0.00'){
+
+							$dados_pp = (($dados_configuracoes['porcentagem_garcom']*($soma_cliente+$total_adicionais))/100);
+							$dados_pp = ($dados_pp+($soma_cliente+$total_adicionais));
+
+							$per = explode('.', $dados_configuracoes['porcentagem_garcom']);
+
+							echo '&nbsp;&nbsp;|&nbsp;&nbsp;';
+							echo '<a style="text-decoration:underline" href="javascript:void(0);" onclick="javascript:recebe_conta_cliente_divisao('.$dados_pp.')">RECEBER C/ '.$per[0].'%</a>';
+
+						}
+
+					echo '</span>';	
+				echo '</td>';		        		      			     
+				        		      			    
+		        echo '<td>';
+		        	
+		        	echo '<h4 style="margin:0; padding:0">R$ '.number_format(($soma_cliente+$total_adicionais),2,",",".").'</h4>';		        
+
+		        echo '</td>';	
+
 		    echo '</tr>';
 
 
