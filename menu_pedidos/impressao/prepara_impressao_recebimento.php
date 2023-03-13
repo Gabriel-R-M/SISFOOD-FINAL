@@ -18,7 +18,7 @@ require("../../diversos/funcoes_diversas.php");
         
         $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha01']);         
         $txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha02']);         
-		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']);     
+		$txt_cabecalho[] = ajusta_caracteres_impressao($dados_loja['cabecalho_linha03']); 
 		$txt_cabecalho[] = ajusta_caracteres_impressao('PEDIDO: #'.$id_venda);   
 		$txt_cabecalho[] = ajusta_caracteres_impressao('');
 		$txt_cabecalho[] = ajusta_caracteres_impressao('COMPROVANTE DE RECEBIMENTO');

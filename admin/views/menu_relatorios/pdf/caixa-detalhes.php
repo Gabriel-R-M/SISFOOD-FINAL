@@ -67,6 +67,11 @@ $pdf->Cell(20, 6, 'R$ TOTAL',1, 0, 'R',true);
 $pdf->Cell(22, 6, 'R$ RECEBIDO',1, 0, 'R',true);		
 $pdf->Ln(6);
 
+
+$tot_cartao = 0;
+$tot_dinheiro = 0;
+$tot_crediario = 0;
+
 //DADOS DA VENDA
 $total_vendas=0;
 $sql = $db->select("SELECT aguarda_venda.*, usuarios.nome AS atendente, clientes.nome FROM aguarda_venda 
@@ -90,7 +95,17 @@ if($db->rows($sql)){
 			while($row2 = $db->expand($sel2)){
 				$valor_recebido_venda = ($valor_recebido_venda+$row2['valor_caixa_real']);
 
+				//echo $id_venda.'<br>';
+
 				//echo $row2['valor_caixa_real'].' - '.$row2['forma_pagamento'].' - '.$id_venda.'<br>';
+
+				if($row2['forma_pagamento']==2){
+					$tot_cartao = ($tot_cartao+$row2['valor_caixa_real']);
+				}
+
+				if($row2['forma_pagamento']==1){
+					$tot_dinheiro = ($tot_dinheiro+$row2['valor_caixa_real']);
+				}
 
 			}
 		} else {
@@ -111,6 +126,15 @@ if($db->rows($sql)){
 			
 		} else {			
 			$total_vendas = ($total_vendas+$row['valor_final_venda']);
+
+
+		}
+
+		$sel2_po = $db->select("SELECT valor_caixa_real, forma_pagamento FROM pagamentos_vendas WHERE id_venda='$id_venda' AND forma_pagamento='3'");
+		if($db->rows($sel2_po)){
+			while($row2_po = $db->expand($sel2_po)){
+				$tot_crediario = ($tot_crediario+$row2_po['valor_caixa_real']);
+			}
 		}
 
 
@@ -143,13 +167,48 @@ if($db->rows($sql)){
 		
 	}
 
+
+
 	$pdf->SetTextColor(0,0,0);
 	$pdf->Ln(4);
 	$pdf->SetFont("MyriadPro-Semibold", "", 11);
 	
 	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
-	$pdf->Cell(24, 6, 'TOTAL VENDAS:',0, 0, 'R',false);	
-	$pdf->Cell(28, 6, 'R$ '.number_format($total_vendas,2,".",","),0, 0, 'R',false);	
+	$pdf->Cell(24, 6, 'TOTAL VENDAS GERAL:',0, 0, 'R',false);	
+	$pdf->Cell(28, 6, 'R$ '.number_format($total_vendas,2,".",","),0, 0, 'R',false);
+	$pdf->Ln(7);
+	
+	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
+	$pdf->Cell(24, 6, 'VENDAS CARTÃO:',0, 0, 'R',false);	
+	$pdf->Cell(28, 6, 'R$ '.number_format($tot_cartao,2,".",","),0, 0, 'R',false);	
+	$pdf->Ln(7);
+
+	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
+	$pdf->Cell(24, 6, 'VENDAS DINHEIRO:',0, 0, 'R',false);	
+	$pdf->Cell(28, 6, 'R$ '.number_format($tot_dinheiro,2,".",","),0, 0, 'R',false);
+	$pdf->Ln(7);
+
+			
+	$pdf->Cell(190, 0, '',1, 0, 'L',false);	
+	$pdf->Ln(7);
+	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
+	$pdf->Cell(24, 6, 'VENDAS CREDIÁRIO NÃO SOMADAS AO CAIXA:',0, 0, 'R',false);	
+	$pdf->Cell(28, 6, 'R$ '.number_format($tot_crediario,2,".",","),0, 0, 'R',false);
+
+
+	$totais_entregas = 0;
+	$sel_kk = $db->select("SELECT COUNT(*) AS total_entregas FROM aguarda_venda WHERE id_caixa='$id' AND entrega!='0' ORDER BY id DESC");
+	if($db->rows($sel_kk)){
+
+		$row = $db->expand($sel_kk);
+		$totais_entregas = $row['total_entregas'];
+	}
+
+
+	$pdf->Ln(7);
+	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
+	$pdf->Cell(24, 6, 'TOTAL DE ENTREGAS:',0, 0, 'R',false);	
+	$pdf->Cell(28, 6, $totais_entregas,0, 0, 'R',false);
 
 
 } else {
@@ -172,7 +231,7 @@ $pdf->SetFont("MyriadPro-Semibold", "", 9);
 
 $pdf->Cell(32, 6, 'DATA/HORA',1, 0, 'L',true);	
 $pdf->Cell(139, 6, 'MOTIVO DA SAÍDA',1, 0, 'L',true);
-$pdf->Cell(20, 6, 'R$ VALOR',1, 0, 'R',true);		
+$pdf->Cell(20, 6, 'R$ VALOR',1, 0, 'L',true);		
 $pdf->Ln(6);
 $sql = $db->select("SELECT saidas_caixa.*, usuarios.nome AS atendente FROM saidas_caixa 
 	LEFT JOIN usuarios ON saidas_caixa.id_usuario=usuarios.id	
@@ -198,7 +257,7 @@ if($db->rows($sql)){
 	
 	$pdf->Cell(139, 6, '',0, 0, 'L',false);	
 	$pdf->Cell(24, 6, 'TOTAL SAÍDAS:',0, 0, 'R',false);	
-	$pdf->Cell(28, 6, 'R$ '.number_format($total_saidas,2,".",","),0, 0, 'R',false);	
+	$pdf->Cell(28, 6, 'R$ '.number_format($total_saidas,2,".",","),0, 0, 'L',false);	
 
 } else {
 	$pdf->Cell(191, 6, 'NENHUMA SAÍDA ENCONTRADA.',1, 0, 'C',0);

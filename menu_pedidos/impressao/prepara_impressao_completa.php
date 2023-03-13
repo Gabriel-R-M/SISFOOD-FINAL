@@ -2,11 +2,19 @@
 require("../../admin/class/class.db.php");
 require("../../admin/class/class.seguranca.php");
 require("../../includes/verifica_session.php");
+
+if(isset($reimprimi_id) && $reimprimi_id!=0){
+	//$id_venda = $reimprimi_id;
+	$_SESSION['id_venda_erp_sis'] = $reimprimi_id;
+}
+
+
 require("../../includes/verifica_venda_aberta.php");
 require("../../includes/verifica_dados_loja.php");
 require("../../includes/verifica_configuracoes_loja.php");
 require("../../diversos/funcoes_impressao.php");
 require("../../diversos/funcoes_diversas.php");
+
 
 	
 	$tamanho_campo_nome_produto = $dados_configuracoes['colunas_produto'];
@@ -72,6 +80,10 @@ require("../../diversos/funcoes_diversas.php");
 	
 		
 		$total_itens_pedido=0;
+
+
+
+
 		$sel = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY categoria_produto, id DESC");	
 		
 		if($db->rows($sel)){
@@ -273,8 +285,28 @@ require("../../diversos/funcoes_diversas.php");
 				$itens[] .= "\r\n".ajusta_caracteres_impressao(' ', 'F', 4)
 					. ajusta_caracteres_impressao('[ATENCAO]', 'F', -4);
 
-				$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
-			    . ajusta_caracteres_impressao($item[7], 'F', -4);			    
+				$count = strlen($item[7]);
+				if($count>($dados_configuracoes['colunas_impressora']-4)){
+					$um_menos = ceil(($count/($dados_configuracoes['colunas_impressora']-4)));
+					$xp = 1;
+					$corte_inicio=0;
+					while ($xp<=$um_menos) {
+
+						$keba = ($corte_inicio*($dados_configuracoes['colunas_impressora']-4));
+						$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+						. ajusta_caracteres_impressao(substr($item[7],$keba,($dados_configuracoes['colunas_impressora']-4)), 'F', -4);			    	
+					
+						$corte_inicio++;
+						$xp++;
+					}
+					
+				} else {
+
+					$itens[] .= ajusta_caracteres_impressao(' ', 'F', 4)
+        		.ajusta_caracteres_impressao($item[7], 'F', -4);
+
+				}	
+
 			}	
 			
 

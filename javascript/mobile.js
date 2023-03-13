@@ -6,9 +6,9 @@ function confere_pedido_mobile(){
 
 
 function exibe_produtos_atraves_categorias_mobile(categoria){
-	
+
 	if(categoria!=0){
-		
+	
 		$(".exibe_lanches_categoria").hide();	
 		$("#informacao_qtd_itens_pedido").hide();
 		$("#sucesso_salva_pedido_mobile").hide();

@@ -90,7 +90,7 @@ ini_set('max_execution_time','-1');
 
 	}
 
-	
+
 
 	//ENVIA PARA O WEBSERVICE
 	$post = [
@@ -110,7 +110,8 @@ ini_set('max_execution_time','-1');
 
 	$return = curl_exec($curl);
 
-	if($return){	
+	if($return){
+
 
 		$json_decoded = json_decode($return, false);    
 
@@ -142,6 +143,8 @@ ini_set('max_execution_time','-1');
 
 	curl_close($curl); 
 
+
+	
 
 
 ?>

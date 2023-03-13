@@ -17,9 +17,11 @@ include_once("../../diversos/funcoes_diversas.php");
           $busca = " AND (aguarda_venda.nome_cliente LIKE '%$busca%' OR clientes.nome LIKE '%$busca%' )";
         }
 
+          //
+
 	      $sel = $db->select("SELECT aguarda_venda.*, clientes.nome FROM aguarda_venda 	      	
 	      LEFT JOIN clientes ON aguarda_venda.id_cliente=clientes.id
-	      WHERE aguarda_venda.finalizada='0' AND aguarda_venda.aguarde='1' 
+	      WHERE aguarda_venda.baixado='0' AND aguarda_venda.aguarde='1' 
 	      AND aguarda_venda.id_caixa='$id_caixa_aberto' AND aguarda_venda.id_mesa='0' $busca
 	      ORDER BY 
         aguarda_venda.pedido_entregue ASC,
@@ -74,6 +76,15 @@ include_once("../../diversos/funcoes_diversas.php");
                       } else {
                           echo 'PEDIDO: '.($dados['id']);
                       }
+
+                      if($dados['finalizada']==1){
+                        echo '
+                          <button class="btn btn-teal pull-right btn-sm" style="font-weight: 300" onclick="javascript:finaliza_venda_final('.$dados['id'].');">
+                            ENTREGUE
+                          </button> 
+                        ';
+                      }
+
                     ?>
 
                     
@@ -110,6 +121,7 @@ include_once("../../diversos/funcoes_diversas.php");
                 			</div>	                		
               			</div>
                     <div class="<?php echo $entrega2; ?> top10"><?php echo $entrega; ?></div>
+          
             	</div>
            	  </div>
 

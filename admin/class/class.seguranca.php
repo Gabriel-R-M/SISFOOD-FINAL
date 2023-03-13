@@ -2,7 +2,7 @@
 ob_start();
 @session_start();
 @session_cache_expire(180000); 
-date_default_timezone_set('America/Sao_Paulo');
+date_default_timezone_set('America/Fortaleza');
 
 
 $db = new DB();

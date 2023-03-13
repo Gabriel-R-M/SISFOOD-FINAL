@@ -67,14 +67,27 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 	if($dados_venda['finalizada']==1){
 	?>
 
+	<?php
+	if($dados_venda['baixado']==0){
+	?>
+
+		<button class="btn btn-teal top10 " id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:finaliza_venda_final(<?php echo $id_venda; ?>);">
+			<i class="icofont-verification-check"></i>
+			&nbsp;FINALIZAR
+		</button>	
+
+	<?php
+	}
+	?>
+
 		<button class="btn btn-danger top10 " id="botao_cancela_venda_pgto" style="font-weight: 300" onclick="javascript:cancela_venda(<?php echo $id_venda; ?>);">
 			<i class="icofont-ui-close"></i>
 			&nbsp;CANCELAR (F4)
 		</button>	
  
-		<button class="btn btn-danger top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
+		<button class="btn btn-info top10 " style="font-weight: 300" id="botao_impressao_pedido" onclick="javascript:reimpressao_completa_pedido(<?php echo $id_venda; ?>);">
 			<i class="icofont-printer"></i>
-			&nbsp;REIIMPRIMIR (F3)
+			&nbsp;REIMPRIMIR (F3)
 		</button>
 
 		<?php
@@ -314,7 +327,9 @@ if($dados_configuracoes['modulo_entregas_pedidos']==0 && $dados_mesas['mesa']==0
 
 		
 		<input type="hidden" id="qtd_categorias" value="<?php echo $total_categorias; ?>">
-		<div class="top20 <?php echo $disabled; ?> <?php echo $hide_categorias; ?>" id="exibicao_categorias_pedido" >
+
+		<!-- exibicao_categorias_pedido -->
+		<div class="top20 <?php echo $disabled; ?> <?php echo $hide_categorias; ?>" id="" >
 			<select id="categoria_selecionada" class="form-control select_pedido_grande upper thin text-center" style="height: 60px; border-radius: 0" onchange="javascript:exibe_produtos_categorias_pedido(this.value)">
 				<?php
 				  	$sel = $db->select("SELECT * FROM categorias WHERE ativo='1' ORDER BY ordem");				  	

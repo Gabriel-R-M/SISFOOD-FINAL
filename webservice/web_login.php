@@ -4,14 +4,14 @@ require ("../admin/class/class.seguranca.php");
 require ("../includes/verifica_dados_loja.php");
 require ("../includes/verifica_dados_sistema.php");
 
-$curl = curl_init();                                                                      
-curl_setopt_array($curl, array(
-    CURLOPT_RETURNTRANSFER => 1,
-    CURLOPT_URL => $dados_sistema['url_servidor'].'login?cliente='.$dados_loja['cnpj'],
-    CURLOPT_USERAGENT => 'Request'
-));
 
-$return = curl_exec($curl);
+
+$cr = curl_init();
+curl_setopt($cr, CURLOPT_URL, $dados_sistema['url_servidor'].'login?cliente='.$dados_loja['cnpj']);
+curl_setopt($cr, CURLOPT_RETURNTRANSFER, 1);
+$return = curl_exec($cr);
+
+
 
 
 //SE FOR MOBILE.....ELE PULA A VERIFICACAO DE LICENÇA

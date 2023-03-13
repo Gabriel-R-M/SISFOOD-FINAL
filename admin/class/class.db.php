@@ -7,10 +7,10 @@
 	@session_start();
 	@session_cache_expire(180000); 
 	
-	date_default_timezone_set("America/Sao_Paulo");
+	date_default_timezone_set("America/Fortaleza");
 
 	define("HOST", "localhost");
-	define("DBNAME", "sheik");
+	define("DBNAME", "sisfood");
 	define("USER", "root");
 	define("PASSWORD", "");
 

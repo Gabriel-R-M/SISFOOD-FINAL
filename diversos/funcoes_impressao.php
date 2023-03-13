@@ -1,6 +1,6 @@
 <?php
 
-		$n_colunas = 34; // 40 colunas por linha
+		//$n_colunas = 34; // 40 colunas por linha
         $numero_colunas = $dados_configuracoes['colunas_impressora'];
 
         function ajusta_caracteres_impressao($string='',$tipo='M',$limite=0){

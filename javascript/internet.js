@@ -49,7 +49,6 @@ $(document).ready(function(){
 
 function atualiza_horarios_abre_fecha(){
 	
-
 		$("#resposta_sucesso_servidor").hide();
 
 		$(".altura_progresso").show();
@@ -58,14 +57,13 @@ function atualiza_horarios_abre_fecha(){
 		
 		$("#botao_atualiza_horarios").html('ATUALIZANDO, AGUARDE...');
 		var formdata = $("#FormHorariosFuncionamento").serialize();		
-
-			$.ajax({type: "POST", url:$("#FormHorariosFuncionamento").attr('action'), data:formdata, success: function(msg){										
+		$.ajax({type: "POST", url:$("#FormHorariosFuncionamento").attr('action'), data:formdata, success: function(msg){										
 				
 				$("#barra_progresso_servidor_web").css('width', 50+'%');				
 				$("#barra_progresso_servidor_web").html(50+'%');
 
 				$.post('menu_internet/actions/atualiza_horarios_servidor.php', function(resposta){	
-					
+
 					$("#barra_progresso_servidor_web").css('width', 100+'%');																		
 					$("#barra_progresso_servidor_web").html(100+'%');
 					$("#botao_atualiza_horarios").html('SALVAR HORÁRIOS');

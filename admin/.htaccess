@@ -21,6 +21,9 @@
 	#VIEWS**************************************************************
 
 	
+	RewriteRule ^relatorio-clientes-devedores?$ views/menu_relatorios/relatorio-clientes-devedores.php [L,QSA]
+
+	
 	RewriteRule ^home?$ views/menu_vendas/administracao.php [L,QSA]
 	RewriteRule ^acesso?$ index.php?logout=1 [L,QSA]
 	RewriteRule ^inicio?$ index.php [L,QSA]

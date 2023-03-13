@@ -13,9 +13,18 @@ $total_opcoes = 0;
 $qtd_itens_pedido=0;
 $itens_nao_impressos=0;
 
+$sql99 = $db->select("SELECT SUM(quantidade) AS qtdx FROM produtos_venda WHERE id_venda='$id_venda'");
+$pokpok = $db->expand($sql99);
+
+
 $sql = $db->select("SELECT * FROM produtos_venda WHERE id_venda='$id_venda' ORDER BY id DESC");
 $qtd_produtos_carrinho = $db->rows($sql);
 if($db->rows($sql)){
+
+	echo '<div class="row"><div class="col-md-12">';
+	echo '<b>TOTAL DE ÍTENS: </b>'.$pokpok['qtdx'];
+echo '<hr></div></div>';
+
 	while($row = $db->expand($sql)){
 
 		$qtd_itens_pedido = ($qtd_itens_pedido+$row['quantidade']);
